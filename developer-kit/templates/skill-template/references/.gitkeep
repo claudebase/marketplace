@@ -1,0 +1,18 @@
+# Reference Files Directory
+
+Add detailed reference documentation here. Reference files are loaded
+on-demand when the skill needs more detailed information.
+
+## Naming Convention
+
+Use kebab-case for reference file names:
+- `methodology-details.md`
+- `common-patterns.md`
+- `troubleshooting-guide.md`
+
+## Best Practices
+
+1. Keep SKILL.md under 300 lines - use references for details
+2. Reference files should be self-contained
+3. Use clear section headings for easy navigation
+4. Include practical examples with code snippets

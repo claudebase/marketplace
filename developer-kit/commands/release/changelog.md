@@ -1,0 +1,85 @@
+---
+name: changelog
+description: Generate changelog from git history using conventional commits
+delegates-to: document
+operation: changelog
+argument-hint: "[--since <tag|date>] [--format keep-a-changelog|conventional]"
+allowed-tools: Read, Write, Bash, Grep
+---
+
+Execute the **document** skill in changelog mode.
+
+## Delegation
+
+This command delegates to the `document` skill which provides:
+- Git history analysis and commit parsing
+- Conventional commit categorization
+- Keep-a-Changelog or Conventional format output
+- Breaking change extraction and highlighting
+
+## Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `--since` | Starting point (tag name, date, or commit) |
+| `--format` | Output format: keep-a-changelog (default) or conventional |
+| `--output` | Output file path (default: CHANGELOG.md) |
+
+## Conventional Commit Types
+
+| Type | Section | Included |
+|------|---------|----------|
+| `feat` | Added | Yes |
+| `fix` | Fixed | Yes |
+| `perf` | Performance | Yes |
+| `refactor` | Changed | Yes |
+| `docs` | Documentation | Yes |
+| `revert` | Reverted | Yes |
+| `style` | - | No |
+| `test` | - | No |
+| `chore` | - | No |
+| `ci` | - | No |
+
+## Output Formats
+
+### Keep a Changelog (default)
+
+```markdown
+## [Unreleased]
+
+### Added
+- New OAuth2 authentication support (#123)
+
+### Fixed
+- Handle null response from external service (#124)
+
+### Changed
+- Simplified error handling logic
+```
+
+### Conventional Changelog
+
+```markdown
+## [1.1.0](compare-url) (2025-01-15)
+
+### Features
+* **auth:** add OAuth2 support ([#123](issue-url))
+
+### Bug Fixes
+* **api:** handle null response ([#124](issue-url))
+```
+
+## Examples
+
+```bash
+changelog                          # Since last tag
+changelog --since v2.0.0           # Since specific tag
+changelog --since 2025-01-01       # Since date
+changelog --format conventional    # Conventional format
+```
+
+## Related
+
+- `document` skill - Documentation generation
+- `release` - Full release workflow
+- `git` - Git operations

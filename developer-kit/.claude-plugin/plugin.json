@@ -1,0 +1,25 @@
+{
+  "name": "developer-kit",
+  "description": "Comprehensive development assistant plugin with skills, agents, and workflows for the full SDLC",
+  "version": "4.0.0",
+  "author": {
+    "name": "Moshe Anconina",
+    "url": ""
+  },
+  "repository": "https://github.com/claudebase/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "development",
+    "sdlc",
+    "devops",
+    "testing",
+    "security",
+    "observability",
+    "database"
+  ],
+  "commands": "./commands/",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "lspServers": "./.lsp.json"
+}

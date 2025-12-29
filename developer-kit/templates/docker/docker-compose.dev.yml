@@ -1,0 +1,171 @@
+# Development Docker Compose Template
+# Usage: docker compose -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  # ============================================
+  # Application Service
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: app-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reload
+      - .:/app:cached
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+      # Or for Python:
+      # - /app/.venv
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://dev:devpass@db:5432/devdb
+      - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=debug
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app-network
+    # Enable debugging
+    # command: npm run debug
+    # For Python debugging:
+    # command: python -m debugpy --listen 0.0.0.0:5678 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # ============================================
+  # PostgreSQL Database
+  # ============================================
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: Initialize with seed data
+      # - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: devdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev -d devdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  # ============================================
+  # Redis Cache
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: redis-dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - app-network
+
+  # ============================================
+  # Adminer (Database UI)
+  # ============================================
+  adminer:
+    image: adminer:latest
+    container_name: adminer-dev
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  # ============================================
+  # Redis Commander (Redis UI)
+  # ============================================
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander-dev
+    ports:
+      - "8081:8081"
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
+  # ============================================
+  # MailHog (Email Testing)
+  # ============================================
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog-dev
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - app-network
+
+  # ============================================
+  # MinIO (S3-compatible Storage)
+  # ============================================
+  # minio:
+  #   image: minio/minio:latest
+  #   container_name: minio-dev
+  #   ports:
+  #     - "9000:9000"
+  #     - "9001:9001"
+  #   volumes:
+  #     - minio_data:/data
+  #   environment:
+  #     MINIO_ROOT_USER: minioadmin
+  #     MINIO_ROOT_PASSWORD: minioadmin
+  #   command: server /data --console-address ":9001"
+  #   networks:
+  #     - app-network
+
+  # ============================================
+  # Elasticsearch (Optional)
+  # ============================================
+  # elasticsearch:
+  #   image: elasticsearch:8.11.0
+  #   container_name: elasticsearch-dev
+  #   ports:
+  #     - "9200:9200"
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   volumes:
+  #     - elasticsearch_data:/usr/share/elasticsearch/data
+  #   networks:
+  #     - app-network
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  app-network:
+    driver: bridge
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  postgres_data:
+  redis_data:
+  # minio_data:
+  # elasticsearch_data:

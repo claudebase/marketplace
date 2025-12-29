@@ -1,0 +1,14 @@
+{
+  "name": "claudebase",
+  "owner": {
+    "name": "Moshe Anconina",
+    "email": "anconina@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "developer-kit",
+      "source": "./developer-kit",
+      "description": "Comprehensive development assistant plugin with skills, agents, and workflows for the full SDLC"
+    }
+  ]
+}

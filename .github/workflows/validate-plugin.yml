@@ -1,0 +1,71 @@
+name: Validate Developer Kit Plugin
+
+on:
+  push:
+    paths:
+      - 'developer-kit/**'
+  pull_request:
+    paths:
+      - 'developer-kit/**'
+
+jobs:
+  validate:
+    name: Comprehensive Plugin Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON files..."
+          python3 -c "import json; json.load(open('developer-kit/hooks/hooks.json'))"
+          python3 -c "import json; json.load(open('developer-kit/.mcp.json'))"
+          python3 -c "import json; json.load(open('developer-kit/.lsp.json'))"
+          python3 -c "import json; json.load(open('developer-kit/.claude-plugin/plugin.json'))"
+          echo "All JSON files valid"
+
+      - name: Validate Python syntax
+        run: |
+          echo "Validating Python files..."
+          python3 -m py_compile developer-kit/hooks/security_reminder_hook.py
+          echo "All Python files valid"
+
+      - name: Check frontmatter
+        run: ./developer-kit/scripts/check-frontmatter.sh
+
+      - name: Validate skill descriptions
+        run: ./developer-kit/scripts/validate-skill-descriptions.sh
+
+      - name: Validate agent required fields
+        run: ./developer-kit/scripts/validate-agent-fields.sh
+
+      - name: Validate reference file links
+        run: ./developer-kit/scripts/validate-references.sh
+
+      - name: Check script executability
+        run: |
+          echo "Checking script permissions..."
+          for script in developer-kit/scripts/*.sh; do
+            if [ -f "$script" ] && [ ! -x "$script" ]; then
+              echo "ERROR: $script is not executable"
+              exit 1
+            fi
+          done
+          echo "All scripts are executable"
+
+      - name: Count components
+        run: |
+          echo "=== Component Counts ==="
+          echo "Skills: $(find developer-kit/skills -name 'SKILL.md' | wc -l)"
+          echo "Agents: $(find developer-kit/agents -name '*.md' | wc -l)"
+          echo "Commands: $(find developer-kit/commands -name '*.md' | wc -l)"
+          echo "Reference files: $(find developer-kit -path '*/references/*.md' | wc -l)"
+          echo ""
+          echo "=== Plugin Version ==="
+          python3 -c "import json; print(json.load(open('developer-kit/.claude-plugin/plugin.json'))['version'])"

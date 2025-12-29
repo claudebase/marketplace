@@ -1,0 +1,214 @@
+# Automated Release Pipeline Template
+# Usage: Copy to .github/workflows/release.yml
+# Triggers on version tags (v1.0.0, v2.1.3, etc.)
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  # ============================================
+  # Build Release Artifacts
+  # ============================================
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for changelog
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - name: Create release archive
+        run: |
+          cd dist
+          tar -czvf ../release-${{ github.ref_name }}.tar.gz .
+          cd ..
+          zip -r release-${{ github.ref_name }}.zip dist/
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: |
+            release-*.tar.gz
+            release-*.zip
+
+  # ============================================
+  # Generate Changelog
+  # ============================================
+  changelog:
+    name: Generate Changelog
+    runs-on: ubuntu-latest
+
+    outputs:
+      changelog: ${{ steps.changelog.outputs.changelog }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        id: changelog
+        uses: orhun/git-cliff-action@v3
+        with:
+          config: cliff.toml
+          args: --latest --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Output changelog
+        run: |
+          echo "Changelog for ${{ github.ref_name }}:"
+          cat CHANGELOG.md
+
+  # ============================================
+  # Create GitHub Release
+  # ============================================
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [build, changelog]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          body: ${{ needs.changelog.outputs.changelog }}
+          draft: false
+          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+          files: |
+            release-*.tar.gz
+            release-*.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ============================================
+  # Publish to npm (optional)
+  # ============================================
+  # publish-npm:
+  #   name: Publish to npm
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   environment:
+  #     name: npm
+  #     url: https://www.npmjs.com/package/your-package
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.x'
+  #         registry-url: 'https://registry.npmjs.org'
+  #
+  #     - name: Install dependencies
+  #       run: npm ci
+  #
+  #     - name: Publish to npm
+  #       run: npm publish --access public
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # ============================================
+  # Build and Push Docker Image
+  # ============================================
+  docker:
+    name: Build Docker Release
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.version.outputs.VERSION }}
+            ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ============================================
+  # Notify (optional)
+  # ============================================
+  # notify:
+  #   name: Send Notifications
+  #   runs-on: ubuntu-latest
+  #   needs: [release]
+  #   if: always()
+  #
+  #   steps:
+  #     - name: Notify Slack
+  #       uses: slackapi/slack-github-action@v1
+  #       with:
+  #         payload: |
+  #           {
+  #             "text": "Release ${{ github.ref_name }} published! :rocket:",
+  #             "blocks": [
+  #               {
+  #                 "type": "section",
+  #                 "text": {
+  #                   "type": "mrkdwn",
+  #                   "text": "*Release ${{ github.ref_name }}* has been published!\n<${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}|View Release>"
+  #                 }
+  #               }
+  #             ]
+  #           }
+  #       env:
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
