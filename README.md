@@ -1,5 +1,7 @@
 # Claude Code Plugin Marketplace
 
+<img src="assets/hero.png" alt="Supercharge Claude Code with specialized plugins" width="400">
+
 A curated collection of plugins for Claude Code extending its capabilities with specialized skills, agents, and commands.
 
 ## Installation
@@ -33,11 +35,11 @@ claude plugin uninstall <plugin-name> # Remove a plugin
 
 Comprehensive development assistant with 24 skills, 14 agents, and 21 commands.
 
-| Component | Description |
-|-----------|-------------|
-| Commands | `agent`, `build`, `git`, `workflow`, `release`, `analyze`, `start`, `check`, etc. |
-| Skills | `analyze`, `debug`, `design`, `implement`, `security`, `devops`, `test`, `a11y`, etc. |
-| Agents | `architect`, `code-reviewer`, `database-admin`, `security-expert`, etc. |
+| Component | Description                                                                           |
+| --------- | ------------------------------------------------------------------------------------- |
+| Commands  | `agent`, `build`, `git`, `workflow`, `release`, `analyze`, `start`, `check`, etc.     |
+| Skills    | `analyze`, `debug`, `design`, `implement`, `security`, `devops`, `test`, `a11y`, etc. |
+| Agents    | `architect`, `code-reviewer`, `database-admin`, `security-expert`, etc.               |
 
 See [developer-kit/README.md](./developer-kit/README.md) for full documentation.
 
@@ -80,7 +82,6 @@ allowed-tools:
   - Grep
   - Glob
 ---
-
 # My Skill
 
 Instructions for the skill.
@@ -91,9 +92,8 @@ Instructions for the skill.
 ```yaml
 ---
 description: "What this command does"
-delegates-to: skill-name  # Optional
+delegates-to: skill-name # Optional
 ---
-
 # Command Name
 
 Instructions. Use $ARGUMENTS for user input.
@@ -108,7 +108,6 @@ description: "Agent description and triggers"
 tools: Read, Grep, Glob, Write
 model: sonnet
 ---
-
 # My Agent
 
 Agent instructions and focus areas.
@@ -130,11 +129,11 @@ Agent instructions and focus areas.
 
 ## Installation Scopes
 
-| Scope | Location | Use Case |
-|-------|----------|----------|
-| `user` | `~/.claude/settings.json` | Personal (default) |
-| `project` | `.claude/settings.json` | Team (version controlled) |
-| `local` | `.claude/settings.local.json` | Project-specific (gitignored) |
+| Scope     | Location                      | Use Case                      |
+| --------- | ----------------------------- | ----------------------------- |
+| `user`    | `~/.claude/settings.json`     | Personal (default)            |
+| `project` | `.claude/settings.json`       | Team (version controlled)     |
+| `local`   | `.claude/settings.local.json` | Project-specific (gitignored) |
 
 ## Debugging
 
