@@ -1,6 +1,6 @@
 # Claude Code Plugin Marketplace
 
-<img src="assets/hero.png" alt="Supercharge Claude Code with specialized plugins">
+<img src="assets/hero1.png" alt="Supercharge Claude Code with specialized plugins">
 
 A curated collection of plugins for Claude Code extending its capabilities with specialized skills, agents, and commands.
 
