@@ -1,0 +1,139 @@
+name: Documentation Improvement
+description: Report missing, unclear, or incorrect documentation
+title: "[Docs]: "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation! Clear docs make the project accessible to everyone.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs improvement?
+      options:
+        - README
+        - Getting Started Guide
+        - Skill Documentation
+        - Agent Documentation
+        - Command Documentation
+        - Hook Documentation
+        - MCP Server Documentation
+        - Architecture Documentation
+        - Contributing Guidelines
+        - Workflow Guide
+        - Template Documentation
+        - Code Comments
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Documentation Location
+      description: Which file or section needs improvement?
+      placeholder: "e.g., developer-kit/docs/SKILLS.md, README.md section 3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What kind of documentation issue is this?
+      options:
+        - Missing - Information doesn't exist
+        - Unclear - Information exists but is confusing
+        - Incorrect - Information is wrong or outdated
+        - Incomplete - Information is partial
+        - Typo/Grammar - Writing errors
+        - Formatting - Markdown or structure issues
+        - Examples Needed - Need more examples
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Description
+      description: What is unclear, missing, or incorrect?
+      placeholder: Describe what you were trying to understand and what was confusing or missing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Information
+      description: What information were you expecting to find?
+      placeholder: What should the documentation explain?
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How would you improve this documentation?
+      placeholder: |
+        Provide your suggested text, structure, or examples.
+        You can use markdown formatting.
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: What were you trying to accomplish when you found this issue?
+      placeholder: I was trying to [accomplish X] and needed to know [Y].
+    validations:
+      required: false
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Target Audience
+      description: Who would benefit most from this improvement?
+      options:
+        - New Users
+        - Plugin Contributors
+        - Skill Developers
+        - Advanced Users
+        - All Users
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or related links
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation
+      options:
+        - label: I would be willing to submit a PR with this improvement
+        - label: I can provide additional examples or use cases
+        - label: I can help review documentation changes
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have checked the latest documentation in the main branch
+          required: true
+        - label: I have read the [CONTRIBUTING.md](../CONTRIBUTING.md) guidelines
+          required: true

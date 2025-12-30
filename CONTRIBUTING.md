@@ -5,6 +5,7 @@ Thank you for your interest in contributing to the Claude Code Plugin Marketplac
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
+- [Security](#security)
 - [Getting Started](#getting-started)
 - [Development Setup](#development-setup)
 - [How to Contribute](#how-to-contribute)
@@ -16,6 +17,10 @@ Thank you for your interest in contributing to the Claude Code Plugin Marketplac
 ## Code of Conduct
 
 This project adheres to a Code of Conduct that all contributors are expected to follow. Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
+
+## Security
+
+If you discover a security vulnerability, please follow our [Security Policy](SECURITY.md) for responsible disclosure. **Do not report security issues through public GitHub issues.**
 
 ## Getting Started
 
@@ -82,8 +87,7 @@ Run validation before submitting:
 ### Reporting Bugs
 
 1. **Check existing issues** to avoid duplicates
-2. **Use the bug report template** when creating an issue
-3. **Include**:
+2. **[Create a bug report](.github/ISSUE_TEMPLATE/bug_report.yml)** - The template will guide you through providing:
    - Clear description of the bug
    - Steps to reproduce
    - Expected vs actual behavior
@@ -93,12 +97,17 @@ Run validation before submitting:
 ### Suggesting Features
 
 1. **Check existing feature requests** to avoid duplicates
-2. **Use the feature request template**
-3. **Describe**:
+2. **[Create a feature request](.github/ISSUE_TEMPLATE/feature_request.yml)** - The template will guide you through describing:
    - The problem you're trying to solve
    - Your proposed solution
    - Alternative solutions considered
    - Use cases and benefits
+
+### Improving Documentation
+
+Found unclear or missing documentation?
+
+1. **[Create a documentation issue](.github/ISSUE_TEMPLATE/documentation.yml)** - The template will help you specify what needs improvement
 
 ### Contributing Code
 
@@ -124,7 +133,7 @@ Run validation before submitting:
    git push origin feature/your-feature-name
    ```
 
-6. **Open a Pull Request** using the PR template
+6. **[Open a Pull Request](../../compare)** - The PR template will guide you through the submission process
 
 ## Plugin Development Guidelines
 
