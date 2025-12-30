@@ -1,17 +1,32 @@
 #!/usr/bin/env python3
 """
 Security Reminder Hook for Claude Code
+
 This hook checks for security patterns in file edits and warns about potential vulnerabilities.
+Runs on PostToolUse after Write/Edit/MultiEdit operations.
+
+Cross-platform compatible: works on Windows, macOS, and Linux.
 """
 
 import json
 import os
 import random
 import sys
+import tempfile
 from datetime import datetime
 
-# Debug log file
-DEBUG_LOG_FILE = "/tmp/security-warnings-log.txt"
+# Add lib directory to path for cross-platform utilities
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
+
+try:
+    from platform_utils import PlatformInfo
+
+    HAS_PLATFORM_UTILS = True
+except ImportError:
+    HAS_PLATFORM_UTILS = False
+
+# Debug log file - cross-platform temp directory
+DEBUG_LOG_FILE = os.path.join(tempfile.gettempdir(), "security-warnings-log.txt")
 
 
 def debug_log(message):
@@ -127,14 +142,32 @@ Only use exec() if you absolutely need shell features and the input is guarantee
 
 
 def get_state_file(session_id):
-    """Get session-specific state file path."""
-    return os.path.expanduser(f"~/.claude/security_warnings_state_{session_id}.json")
+    """Get session-specific state file path (cross-platform)."""
+    if HAS_PLATFORM_UTILS:
+        config_dir = str(PlatformInfo.get_user_config_dir())
+    else:
+        # Fallback for cross-platform config directory
+        if sys.platform == "win32":
+            base = os.environ.get("APPDATA", os.path.expanduser("~"))
+            config_dir = os.path.join(base, ".claude")
+        else:
+            config_dir = os.path.expanduser("~/.claude")
+    return os.path.join(config_dir, f"security_warnings_state_{session_id}.json")
 
 
 def cleanup_old_state_files():
     """Remove state files older than 30 days."""
     try:
-        state_dir = os.path.expanduser("~/.claude")
+        if HAS_PLATFORM_UTILS:
+            state_dir = str(PlatformInfo.get_user_config_dir())
+        else:
+            # Fallback for cross-platform config directory
+            if sys.platform == "win32":
+                base = os.environ.get("APPDATA", os.path.expanduser("~"))
+                state_dir = os.path.join(base, ".claude")
+            else:
+                state_dir = os.path.expanduser("~/.claude")
+
         if not os.path.exists(state_dir):
             return
 
@@ -280,11 +313,15 @@ def main():
 
             # Return JSON with security warning as systemMessage
             # Truncate reminder if too long for JSON
-            short_reminder = reminder.split('\n')[0][:200] if '\n' in reminder else reminder[:200]
-            output_json({
-                "continue": True,
-                "systemMessage": f"Security Warning ({rule_name}): {short_reminder}"
-            })
+            short_reminder = (
+                reminder.split("\n")[0][:200] if "\n" in reminder else reminder[:200]
+            )
+            output_json(
+                {
+                    "continue": True,
+                    "systemMessage": f"Security Warning ({rule_name}): {short_reminder}",
+                }
+            )
 
     # Allow tool to proceed silently
     output_json({"continue": True, "suppressOutput": True})

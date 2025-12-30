@@ -4,9 +4,13 @@
 
 **Version 4.0.0** | [Repository](https://github.com/claudebase/marketplace) | [Changelog](./CHANGELOG.md) | MIT License
 
+**Multi-Platform Support**: Windows, macOS, Linux, WSL
+
 ---
 
 ## Quick Start
+
+### Installation
 
 ```bash
 # Install from marketplace
@@ -19,7 +23,28 @@ claude plugin install ./marketplace/developer-kit
 
 ### Environment Setup
 
-Add your API keys to `~/.claude/settings.json`:
+Configure API keys in your platform-specific settings file:
+
+| Platform | Settings Location |
+|----------|------------------|
+| **macOS/Linux** | `~/.claude/settings.json` |
+| **Windows** | `%APPDATA%\.claude\settings.json` |
+| **WSL** | `~/.claude/settings.json` (inside WSL) |
+
+Use the appropriate template from `templates/settings/`:
+
+```bash
+# macOS/Linux
+cp templates/settings/unix-settings.json ~/.claude/settings.json
+
+# Windows PowerShell
+copy templates\settings\windows-settings.json $env:APPDATA\.claude\settings.json
+
+# WSL
+cp templates/settings/wsl-settings.json ~/.claude/settings.json
+```
+
+**Minimal required configuration:**
 
 ```json
 {
@@ -42,6 +67,13 @@ Get your API keys:
 ```bash
 claude --debug  # Check for loading errors
 ```
+
+### Windows-Specific Notes
+
+- Ensure Python 3.8+ is installed and in your PATH
+- The plugin automatically detects Windows and uses PowerShell-compatible commands
+- All hooks use Python scripts for cross-platform compatibility
+- WSL is auto-detected; Unix commands work seamlessly in WSL environments
 
 ---
 
@@ -240,9 +272,21 @@ developer-kit/
 │   └── plugin.json          # Plugin manifest
 ├── .mcp.json                 # MCP server configuration
 ├── .lsp.json                 # LSP server configuration
-├── hooks/
-│   └── hooks.json            # Hook definitions
-├── scripts/                  # Validation and utility scripts
+├── hooks/                    # Event-driven automation
+│   ├── hooks.json            # Hook definitions
+│   ├── platform_instructions_hook.py  # Platform detection
+│   ├── validate_bash_command.py
+│   ├── format_file_hook.py
+│   ├── security_reminder_hook.py
+│   ├── validate_env_vars.py
+│   ├── restore_session_context.py
+│   └── save_session_state.py
+├── lib/                      # Cross-platform utilities
+│   ├── __init__.py
+│   └── platform_utils.py     # PlatformInfo, CommandRunner, FileUtils
+├── scripts/                  # Validation scripts (Python)
+│   ├── test_components.py    # Full test suite (124 tests)
+│   └── validate.py           # Unified validation
 ├── commands/                 # 21 commands by category
 │   ├── development/
 │   ├── planning/
@@ -258,7 +302,11 @@ developer-kit/
 │   ├── ci-cd/
 │   ├── docker/
 │   ├── kubernetes/
-│   └── adr/
+│   ├── adr/
+│   └── settings/             # Platform-specific settings
+│       ├── windows-settings.json
+│       ├── unix-settings.json
+│       └── wsl-settings.json
 └── docs/                     # Documentation
     └── workflows/            # Workflow guides
 ```
@@ -267,32 +315,47 @@ developer-kit/
 
 ## Hooks
 
-The plugin includes automated hooks:
+The plugin includes automated hooks that run on specific events:
 
-| Event | Action |
-|-------|--------|
-| `PostToolUse` (Write/Edit) | Auto-format code, security reminder |
-| `PreToolUse` (Bash) | Block dangerous commands |
-| `SessionStart` | Display welcome, restore context |
-| `Stop` | Save session state |
+| Event | Hook | Action |
+|-------|------|--------|
+| `SessionStart` | `platform_instructions_hook.py` | Injects platform-specific instructions |
+| `SessionStart` | `validate_env_vars.py` | Checks required API keys |
+| `SessionStart` | `restore_session_context.py` | Restores previous session context |
+| `PostToolUse` | `format_file_hook.py` | Auto-formats edited files |
+| `PostToolUse` | `security_reminder_hook.py` | Warns about security patterns |
+| `PreToolUse` | `validate_bash_command.py` | Blocks dangerous commands |
+| `Stop` | `save_session_state.py` | Saves session state |
+
+### Platform Detection
+
+At session start, the plugin automatically detects your platform (Windows/macOS/Linux/WSL) and injects appropriate instructions for Claude to use the correct commands.
 
 ---
 
 ## Validation
 
-```bash
-# Full test suite (89+ tests)
-./scripts/test-components.sh
+All validation scripts are Python-based for cross-platform compatibility:
 
-# Quick validation
-./scripts/validate-components.sh
+```bash
+# Full test suite (99+ tests)
+python3 scripts/test_components.py
+
+# With verbose output
+python3 scripts/test_components.py --verbose
+
+# Quick validation (all checks)
+python3 scripts/validate.py
 
 # Individual validators
-./scripts/validate-skill-descriptions.sh
-./scripts/validate-agent-fields.sh
-./scripts/validate-references.sh
-./scripts/check-frontmatter.sh
+python3 scripts/validate.py --skills      # Skill descriptions
+python3 scripts/validate.py --agents      # Agent fields
+python3 scripts/validate.py --refs        # Reference files
+python3 scripts/validate.py --frontmatter # Frontmatter syntax
+python3 scripts/validate.py --json        # JSON configs
 ```
+
+**Windows users**: Use `python` instead of `python3` if `python3` is not in PATH.
 
 ---
 
@@ -321,13 +384,42 @@ claude plugin list  # Verify enabled
 ### MCP Servers Not Working
 ```bash
 /mcp  # Check server status
-# Ensure API keys are set in ~/.claude/settings.json under "env"
+# Ensure API keys are set in settings.json under "env"
 ```
 
 ### Skills Not Activating
 - Use explicit trigger phrases: "use the security skill to..."
 - Check skill descriptions for activation triggers
 - See [TRIGGER-REFERENCE.md](./skills/TRIGGER-REFERENCE.md)
+
+### Windows-Specific Issues
+
+**Python not found:**
+```powershell
+# Check Python installation
+python --version
+# Or try python3
+python3 --version
+
+# Install Python from https://www.python.org/downloads/
+# Ensure "Add Python to PATH" is checked during installation
+```
+
+**Hooks not executing:**
+```powershell
+# Verify hooks.json uses Python commands
+# Check that CLAUDE_PLUGIN_ROOT is set correctly
+echo $env:CLAUDE_PLUGIN_ROOT
+```
+
+**Path issues:**
+- Use forward slashes `/` or escaped backslashes `\\` in paths
+- Avoid spaces in directory names
+- Settings file: `%APPDATA%\.claude\settings.json`
+
+**WSL Detection:**
+- The plugin auto-detects WSL and uses Unix commands
+- To force Windows mode, set `WSL_INTEROP=0` in settings.json
 
 ---
 

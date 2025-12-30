@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-settings",
+  "_description": "Windows-specific Claude Code settings for Developer Kit plugin",
+  "_instructions": [
+    "Copy this file to %APPDATA%\\.claude\\settings.json",
+    "Replace placeholder values with your actual API keys",
+    "Restart Claude Code after making changes"
+  ],
+  "enabledPlugins": {
+    "developer-kit@claudebase": true
+  },
+  "env": {
+    "TAVILY_API_KEY": "your-actual-tavily-api-key",
+    "GITHUB_TOKEN": "your-actual-github-token",
+    "ENABLE_SECURITY_REMINDER": "1",
+    "ENABLE_FORMAT_ON_SAVE": "1"
+  },
+  "hooks": {
+    "enabled": true
+  },
+  "terminal": {
+    "shell": "powershell.exe",
+    "shellArgs": ["-NoLogo", "-NoProfile"]
+  },
+  "mcp": {
+    "timeout": 60000
+  }
+}

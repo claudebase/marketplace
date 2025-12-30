@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-settings",
+  "_description": "WSL (Windows Subsystem for Linux) settings for Developer Kit plugin",
+  "_instructions": [
+    "For WSL: Copy to ~/.claude/settings.json inside your WSL distribution",
+    "For Windows host: Copy to %APPDATA%\\.claude\\settings.json",
+    "Replace placeholder values with your actual API keys",
+    "Restart Claude Code after making changes"
+  ],
+  "enabledPlugins": {
+    "developer-kit@claudebase": true
+  },
+  "env": {
+    "TAVILY_API_KEY": "your-actual-tavily-api-key",
+    "GITHUB_TOKEN": "your-actual-github-token",
+    "ENABLE_SECURITY_REMINDER": "1",
+    "ENABLE_FORMAT_ON_SAVE": "1",
+    "WSL_INTEROP": "1"
+  },
+  "hooks": {
+    "enabled": true
+  },
+  "terminal": {
+    "shell": "/bin/bash",
+    "shellArgs": ["-l"]
+  },
+  "mcp": {
+    "timeout": 60000
+  }
+}

@@ -7,65 +7,120 @@ on:
   pull_request:
     paths:
       - 'developer-kit/**'
+  workflow_dispatch:
 
 jobs:
   validate:
-    name: Comprehensive Plugin Validation
-    runs-on: ubuntu-latest
+    name: Validate on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11']
+        include:
+          - os: ubuntu-latest
+            python-cmd: python3
+          - os: macos-latest
+            python-cmd: python3
+          - os: windows-latest
+            python-cmd: python
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
 
-      - name: Validate JSON files
+      - name: Display Python version
+        run: ${{ matrix.python-cmd }} --version
+
+      - name: Run comprehensive test suite
+        working-directory: developer-kit
+        run: ${{ matrix.python-cmd }} scripts/test_components.py --verbose
+
+      - name: Run unified validation
+        working-directory: developer-kit
+        run: ${{ matrix.python-cmd }} scripts/validate.py
+
+      - name: Validate Python hook syntax
+        working-directory: developer-kit
         run: |
-          echo "Validating JSON files..."
-          python3 -c "import json; json.load(open('developer-kit/hooks/hooks.json'))"
-          python3 -c "import json; json.load(open('developer-kit/.mcp.json'))"
-          python3 -c "import json; json.load(open('developer-kit/.lsp.json'))"
-          python3 -c "import json; json.load(open('developer-kit/.claude-plugin/plugin.json'))"
-          echo "All JSON files valid"
+          ${{ matrix.python-cmd }} -m py_compile hooks/validate_bash_command.py
+          ${{ matrix.python-cmd }} -m py_compile hooks/format_file_hook.py
+          ${{ matrix.python-cmd }} -m py_compile hooks/restore_session_context.py
+          ${{ matrix.python-cmd }} -m py_compile hooks/save_session_state.py
+          ${{ matrix.python-cmd }} -m py_compile hooks/security_reminder_hook.py
+          ${{ matrix.python-cmd }} -m py_compile hooks/validate_env_vars.py
+          ${{ matrix.python-cmd }} -m py_compile lib/platform_utils.py
 
-      - name: Validate Python syntax
+      - name: Test platform detection
+        working-directory: developer-kit
         run: |
-          echo "Validating Python files..."
-          python3 -m py_compile developer-kit/hooks/security_reminder_hook.py
-          echo "All Python files valid"
+          ${{ matrix.python-cmd }} -c "
+          import sys
+          sys.path.insert(0, 'lib')
+          from platform_utils import PlatformInfo
+          print(f'Platform: {sys.platform}')
+          print(f'is_windows: {PlatformInfo.is_windows()}')
+          print(f'is_macos: {PlatformInfo.is_macos()}')
+          print(f'is_linux: {PlatformInfo.is_linux()}')
+          print(f'is_wsl: {PlatformInfo.is_wsl()}')
+          print(f'python_cmd: {PlatformInfo.get_python_command()}')
+          print(f'temp_dir: {PlatformInfo.get_temp_dir()}')
+          print(f'config_dir: {PlatformInfo.get_user_config_dir()}')
+          "
 
-      - name: Check frontmatter
-        run: ./developer-kit/scripts/check-frontmatter.sh
-
-      - name: Validate skill descriptions
-        run: ./developer-kit/scripts/validate-skill-descriptions.sh
-
-      - name: Validate agent required fields
-        run: ./developer-kit/scripts/validate-agent-fields.sh
-
-      - name: Validate reference file links
-        run: ./developer-kit/scripts/validate-references.sh
-
-      - name: Check script executability
+      - name: Test hook JSON parsing
+        working-directory: developer-kit
         run: |
-          echo "Checking script permissions..."
-          for script in developer-kit/scripts/*.sh; do
-            if [ -f "$script" ] && [ ! -x "$script" ]; then
-              echo "ERROR: $script is not executable"
-              exit 1
-            fi
-          done
-          echo "All scripts are executable"
+          ${{ matrix.python-cmd }} -c "
+          import sys
+          sys.path.insert(0, 'lib')
+          from platform_utils import HookIO
 
-      - name: Count components
+          # Test JSON parsing
+          test_input = '{\"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"echo hello\"}}'
+          import io
+          sys.stdin = io.StringIO(test_input)
+          data = HookIO.read_input()
+          assert data['tool_name'] == 'Bash', 'Tool name parsing failed'
+          print('HookIO JSON parsing: OK')
+          "
+
+      - name: Component counts
+        working-directory: developer-kit
         run: |
-          echo "=== Component Counts ==="
-          echo "Skills: $(find developer-kit/skills -name 'SKILL.md' | wc -l)"
-          echo "Agents: $(find developer-kit/agents -name '*.md' | wc -l)"
-          echo "Commands: $(find developer-kit/commands -name '*.md' | wc -l)"
-          echo "Reference files: $(find developer-kit -path '*/references/*.md' | wc -l)"
-          echo ""
-          echo "=== Plugin Version ==="
-          python3 -c "import json; print(json.load(open('developer-kit/.claude-plugin/plugin.json'))['version'])"
+          ${{ matrix.python-cmd }} -c "
+          from pathlib import Path
+          skills = len(list(Path('skills').glob('*/SKILL.md')))
+          agents = len(list(Path('agents').glob('*.md')))
+          commands = len(list(Path('commands').rglob('*.md')))
+          refs = len(list(Path('.').rglob('references/*.md')))
+          print(f'Skills: {skills}')
+          print(f'Agents: {agents}')
+          print(f'Commands: {commands}')
+          print(f'Reference files: {refs}')
+
+          import json
+          version = json.load(open('.claude-plugin/plugin.json'))['version']
+          print(f'Plugin version: {version}')
+          "
+
+  # Summary job that requires all matrix jobs to pass
+  validation-summary:
+    name: Validation Summary
+    needs: validate
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check validation results
+        run: |
+          if [ "${{ needs.validate.result }}" != "success" ]; then
+            echo "Validation failed on one or more platforms"
+            exit 1
+          fi
+          echo "All platform validations passed successfully!"

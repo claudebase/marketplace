@@ -1,0 +1,124 @@
+# Cross-Platform Python CI Template
+#
+# This template provides a GitHub Actions workflow for testing Python projects
+# on Windows, macOS, and Linux simultaneously.
+#
+# Features:
+# - Matrix testing across 3 operating systems
+# - Platform-specific Python command handling (python vs python3)
+# - Comprehensive validation steps
+# - Summary job for clear pass/fail status
+#
+# Usage:
+# 1. Copy this file to .github/workflows/ci.yml
+# 2. Modify the paths and commands for your project
+# 3. Adjust Python version as needed
+
+name: Cross-Platform CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11']
+        include:
+          # Use python3 on Unix, python on Windows
+          - os: ubuntu-latest
+            python-cmd: python3
+            pip-cmd: pip3
+          - os: macos-latest
+            python-cmd: python3
+            pip-cmd: pip3
+          - os: windows-latest
+            python-cmd: python
+            pip-cmd: pip
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display Python info
+        run: |
+          ${{ matrix.python-cmd }} --version
+          ${{ matrix.pip-cmd }} --version
+
+      # Uncomment if you have dependencies
+      # - name: Install dependencies
+      #   run: ${{ matrix.pip-cmd }} install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          ${{ matrix.python-cmd }} -m pytest tests/ -v
+        # Or for simple test script:
+        # run: ${{ matrix.python-cmd }} scripts/test.py
+
+      - name: Validate Python syntax
+        run: |
+          ${{ matrix.python-cmd }} -m py_compile src/**/*.py
+        # Windows alternative (PowerShell):
+        # run: Get-ChildItem -Recurse -Filter *.py src | ForEach-Object { python -m py_compile $_.FullName }
+
+      - name: Test platform detection
+        run: |
+          ${{ matrix.python-cmd }} -c "
+          import sys
+          import platform
+          print(f'Python: {sys.version}')
+          print(f'Platform: {sys.platform}')
+          print(f'Machine: {platform.machine()}')
+          print(f'System: {platform.system()}')
+          "
+
+  # Summary job for branch protection rules
+  ci-summary:
+    name: CI Summary
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check test results
+        run: |
+          if [ "${{ needs.test.result }}" != "success" ]; then
+            echo "Tests failed on one or more platforms"
+            exit 1
+          fi
+          echo "All platform tests passed!"
+
+# Tips for cross-platform compatibility:
+#
+# 1. Use pathlib.Path instead of string paths:
+#    from pathlib import Path
+#    config_path = Path.home() / '.config' / 'app'
+#
+# 2. Use os.path.expanduser for home directory:
+#    import os
+#    home = os.path.expanduser('~')
+#
+# 3. Use tempfile for temporary directories:
+#    import tempfile
+#    temp_dir = tempfile.gettempdir()
+#
+# 4. Use forward slashes in paths (Python handles conversion):
+#    path = 'src/utils/helper.py'  # Works on all platforms
+#
+# 5. Handle line endings:
+#    with open(file, 'r', newline='') as f:  # Preserves line endings
+#
+# 6. Use subprocess with list arguments:
+#    subprocess.run(['git', 'status'], check=True)  # Not shell=True
