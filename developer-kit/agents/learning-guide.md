@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: explain, document
+expertise: "Progressive learning methodology with practical examples and educational scaffolding."
 ---
 
 # Learning Guide

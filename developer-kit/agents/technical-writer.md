@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: document, explain
+expertise: "Audience-focused documentation using Diátaxis framework with accessibility standards."
 ---
 
 # Technical Writer

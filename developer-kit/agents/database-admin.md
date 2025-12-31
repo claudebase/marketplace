@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: database, migration, analyze
+expertise: "Deep database expertise across SQL, NoSQL, and ORMs with migration and optimization authority."
 ---
 
 # Database Admin Agent

@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: security, analyze, improve
+expertise: "OWASP-aligned implementation authority. Unlike read-only security skill, can modify code to fix vulnerabilities."
 ---
 
 # Security Expert Agent

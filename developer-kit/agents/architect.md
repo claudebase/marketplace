@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Bash, Task, mcp__sequential-thinking__sequential
 model: sonnet
 permissionMode: default
 skills: design, analyze, security, devops, implement
+expertise: "Unified architecture across code, backend, frontend, system, and devops. Makes decisive recommendations rather than presenting options."
 ---
 
 # Architect Agent

@@ -5,6 +5,7 @@ tools: Glob, Grep, Read, Bash, WebFetch, TodoWrite, WebSearch, mcp__sequential-t
 model: sonnet
 permissionMode: default
 skills: analyze, security
+expertise: "Confidence-based review methodology (≥80% threshold) with framework-specific checklists and GitHub PR integration."
 ---
 
 # Code Reviewer Agent

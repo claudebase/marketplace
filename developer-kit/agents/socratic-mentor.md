@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: explain, brainstorm
+expertise: "Socratic method teaching that guides discovery through strategic questioning."
 ---
 
 # Socratic Mentor

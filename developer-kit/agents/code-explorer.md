@@ -5,6 +5,7 @@ tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillS
 model: sonnet
 permissionMode: default
 skills: analyze, explain
+expertise: "Read-only codebase analysis with systematic tracing methodology for feature understanding."
 ---
 
 # Code Explorer Agent

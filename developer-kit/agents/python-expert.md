@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, mcp__sequential-thinking__sequential
 model: sonnet
 permissionMode: default
 skills: implement, analyze, improve
+expertise: "Python-specific expertise with strict quality standards (mypy --strict, 95%+ coverage, SOLID principles)."
 ---
 
 # Python Expert

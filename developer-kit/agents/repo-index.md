@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, mcp__sequential-thinking__sequential
 model: haiku
 permissionMode: default
 skills: analyze
+expertise: "Token-efficient repository indexing for compressed context generation."
 ---
 
 # Repository Index Agent

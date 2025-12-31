@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: brainstorm, design, document
+expertise: "Socratic requirements discovery transforming ambiguous ideas into structured PRDs."
 ---
 
 # Requirements Analyst

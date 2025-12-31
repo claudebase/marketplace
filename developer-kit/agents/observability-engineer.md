@@ -5,6 +5,7 @@ tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequ
 model: sonnet
 permissionMode: default
 skills: observability, debug, analyze
+expertise: "Three pillars expertise (logs, metrics, traces) with SRE/SLO methodology."
 ---
 
 # Observability Engineer
