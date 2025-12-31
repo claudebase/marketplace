@@ -6,12 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/format_file_hook.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/format_file_hook.py\"",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.py\""
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.py\""
           }
         ]
       }
@@ -22,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_bash_command.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_bash_command.py\"",
             "timeout": 5
           }
         ]
@@ -34,17 +34,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/platform_instructions_hook.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/platform_instructions_hook.py\"",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_env_vars.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_env_vars.py\"",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/restore_session_context.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/restore_session_context.py\"",
             "timeout": 5
           }
         ]
@@ -55,7 +55,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/save_session_state.py\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/save_session_state.py\"",
             "timeout": 10
           }
         ]
