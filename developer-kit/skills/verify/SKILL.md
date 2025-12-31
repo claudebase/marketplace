@@ -1,6 +1,8 @@
 ---
 name: verify
 description: "Evidence-based validation with two modes: --review (pre-commit checklist) and --complete (iron law verification). This skill should be used when the user asks to 'verify this works', 'check before commit', 'prove it's fixed', 'validate changes', or 'ready to commit'. Also use when user mentions self-review, confirming implementation, or checking changes. READ-ONLY."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep

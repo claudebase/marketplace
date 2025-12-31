@@ -1,6 +1,8 @@
 ---
 name: containers
 description: "Create Dockerfiles, compose configurations, and Kubernetes manifests. This skill should be used when the user asks to 'create Dockerfile', 'docker compose', 'containerize app', or 'Kubernetes manifest'. Also use when user mentions k8s deployment, Helm chart, pod configuration, or container orchestration."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Write

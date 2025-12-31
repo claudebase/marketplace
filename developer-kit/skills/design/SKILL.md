@@ -1,6 +1,8 @@
 ---
 name: design
 description: "Design system architecture, APIs, database schemas, and component interfaces with concrete specifications. This skill should be used when the user asks to 'design a system', 'architect this', 'create API spec', or 'design database'. Also use when user mentions component design, architecture planning, or interface definitions."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Grep

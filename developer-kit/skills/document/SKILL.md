@@ -1,6 +1,8 @@
 ---
 name: document
 description: "Create documentation artifacts (README, API docs, JSDoc/docstrings, guides). This skill should be used when the user asks to 'document this', 'create API docs', 'generate README', or 'add documentation'. Also use when user mentions writing JSDoc, adding docstrings, or creating guides. For explanations, use explain skill; for professional writing, use technical-writer agent."
+composable: true
+mode: read-write
 allowed-tools:
   # Core Analysis
   - Read

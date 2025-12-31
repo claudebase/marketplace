@@ -17,6 +17,8 @@ allowed-tools:
   - mcp__sequential-thinking__sequentialthinking
   - mcp__github__search_code
   - mcp__github__search_repositories
+composable: true
+mode: read-only
 ---
 
 # Research Skill

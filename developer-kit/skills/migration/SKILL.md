@@ -1,6 +1,8 @@
 ---
 name: migration
 description: "Plan and execute zero-downtime migrations for databases, APIs, and services. This skill should be used when the user asks to 'migrate database', 'upgrade API', 'deprecate endpoint', or 'data migration'. Also use when user mentions breaking changes, backward compatibility, or zero-downtime requirements."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Grep

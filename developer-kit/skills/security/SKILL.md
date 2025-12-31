@@ -12,6 +12,8 @@ allowed-tools:
   - mcp__context7__resolve-library-id
   - mcp__context7__query-docs
   - mcp__sequential-thinking__sequentialthinking
+composable: true
+mode: read-only
 ---
 
 # Security Skill

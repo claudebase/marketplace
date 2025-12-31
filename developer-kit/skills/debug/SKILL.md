@@ -16,6 +16,8 @@ allowed-tools:
   - mcp__tavily__tavily-search
   - mcp__tavily__tavily-extract
   - mcp__sequential-thinking__sequentialthinking
+composable: true
+mode: read-write
 ---
 
 # Debug Skill

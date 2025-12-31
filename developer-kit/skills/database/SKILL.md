@@ -1,6 +1,8 @@
 ---
 name: database
 description: "Design schemas, optimize queries, manage migrations, and configure database connections. This skill should be used when the user asks to 'design database schema', 'optimize query', 'create migration', or 'fix slow query'. Also use when user mentions PostgreSQL, MySQL, MongoDB, Redis, ORM setup, or SQL help."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Grep

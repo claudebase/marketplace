@@ -2,6 +2,8 @@
 name: sequential-thinking
 description: "Systematic step-by-step reasoning with revision and branching capabilities. This skill should be used when the user asks to 'think through this', 'step by step', 'break down problem', or 'analyze systematically'. Also use when user mentions complex reasoning, planning approach, or working through problems carefully."
 license: MIT
+composable: true
+mode: meta
 ---
 
 # Sequential Thinking

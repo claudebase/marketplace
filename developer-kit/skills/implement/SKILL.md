@@ -21,6 +21,8 @@ allowed-tools:
   - mcp__playwright__browser_navigate
   - mcp__playwright__browser_snapshot
   - mcp__sequential-thinking__sequentialthinking
+composable: true
+mode: read-write
 ---
 
 # Implement Skill

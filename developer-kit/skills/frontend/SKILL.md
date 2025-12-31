@@ -1,6 +1,8 @@
 ---
 name: frontend
 description: "Frontend development with UI/UX, accessibility, and distinctive design philosophy. This skill should be used when the user asks to 'create component', 'build UI', 'design interface', or 'frontend page'. Also use when user mentions React component, Vue component, landing page, dashboard, or web application UI."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Grep
