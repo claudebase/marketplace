@@ -15,9 +15,6 @@
     "ENABLE_SECURITY_REMINDER": "1",
     "ENABLE_FORMAT_ON_SAVE": "1"
   },
-  "hooks": {
-    "enabled": true
-  },
   "terminal": {
     "shell": "powershell.exe",
     "shellArgs": ["-NoLogo", "-NoProfile"]

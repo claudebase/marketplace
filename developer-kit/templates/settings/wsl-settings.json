@@ -17,9 +17,6 @@
     "ENABLE_FORMAT_ON_SAVE": "1",
     "WSL_INTEROP": "1"
   },
-  "hooks": {
-    "enabled": true
-  },
   "terminal": {
     "shell": "/bin/bash",
     "shellArgs": ["-l"]
