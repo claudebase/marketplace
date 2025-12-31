@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/claude-settings",
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "_description": "Windows-specific Claude Code settings for Developer Kit plugin",
   "_instructions": [
     "Copy this file to %APPDATA%\\.claude\\settings.json",
