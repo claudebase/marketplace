@@ -15,11 +15,10 @@ Usage:
 """
 
 import argparse
-import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Tuple
 
 # Add lib directory to path for cross-platform utilities
 SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -167,9 +166,18 @@ def validate_agent_fields(plugin_dir: Path) -> Tuple[int, int]:
     return errors, warnings
 
 
+def _remove_code_blocks(content: str) -> str:
+    """Remove fenced code blocks from markdown content."""
+    # Remove fenced code blocks (```...```)
+    return re.sub(r"```[\s\S]*?```", "", content)
+
+
 def validate_references(plugin_dir: Path) -> Tuple[int, int]:
     """
     Validate that referenced files exist.
+
+    Handles both local references (references/file.md) and relative paths
+    (../../lib/shared-references/file.md). Ignores links inside code blocks.
 
     Returns:
         Tuple of (error_count, warning_count).
@@ -192,22 +200,35 @@ def validate_references(plugin_dir: Path) -> Tuple[int, int]:
             continue
 
         content = FileUtils.read_text(skill_file)
+        # Remove code blocks to avoid false positives from example templates
+        content_no_code = _remove_code_blocks(content)
         skill_name = skill_dir.name
         skills_checked += 1
 
-        # Find references to files
-        refs = re.findall(r"references/[a-zA-Z0-9_-]+\.md", content)
+        # Find markdown links to .md files: [text](path/to/file.md)
+        # This captures the full relative path including ../ prefixes
+        refs = re.findall(r"\]\(([^)]+\.md)\)", content_no_code)
         skill_errors = 0
+        valid_refs = 0
 
         for ref in set(refs):
+            # Skip external URLs
+            if ref.startswith("http://") or ref.startswith("https://"):
+                continue
+
             refs_checked += 1
-            ref_path = skill_dir / ref
+
+            # Resolve the path relative to the skill directory
+            ref_path = (skill_dir / ref).resolve()
+
             if not ref_path.exists():
                 print_error(f"{skill_name} - Missing reference file: {ref}")
                 skill_errors += 1
+            else:
+                valid_refs += 1
 
-        if skill_errors == 0 and refs:
-            print_ok(f"{skill_name} ({len(set(refs))} references)")
+        if skill_errors == 0 and valid_refs > 0:
+            print_ok(f"{skill_name} ({valid_refs} references)")
 
         errors += skill_errors
 
