@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Feature and code implementation with framework-specific best practices. Use for building components, APIs, services, or complete features. Activates for: implement, create, build feature, add functionality, code this, make a, develop."
+description: "Feature and code implementation with framework-specific best practices. Auto-invoke when user asks to 'implement', 'create', 'build', or 'develop' something. Auto-invoke when user requests 'code this', 'add functionality', 'make a component', or 'build feature'. Do NOT load for analysis-only, debugging, or review tasks."
 allowed-tools:
   - Read
   - Grep

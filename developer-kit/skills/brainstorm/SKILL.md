@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: "Interactive requirements discovery through Socratic dialogue and exploration. Use when users have vague ideas, uncertain requirements, or need to explore before implementation. Activates for: I want to build, thinking about, maybe we could, not sure how to, explore ideas, help me figure out. Exploratory only."
+description: "Interactive requirements discovery through Socratic dialogue. Auto-invoke when user has vague ideas or uncertain requirements. Auto-invoke when user says 'I want to build', 'thinking about', 'maybe we could', 'not sure how to', 'explore ideas', or 'help me figure out'. Exploratory only - does not implement, just discovers requirements."
 allowed-tools:
   # Core Analysis
   - Read

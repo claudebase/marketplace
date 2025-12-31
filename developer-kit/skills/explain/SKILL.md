@@ -1,6 +1,6 @@
 ---
 name: explain
-description: "Educational explanations of code, concepts, and system behavior (READ-ONLY - teaches understanding without modifying code). For creating documentation artifacts, use 'document' skill. Activates for: what does this do, how does this work, explain this, teach me about, help me understand, walk me through."
+description: "Educational explanations of code, concepts, and system behavior. This skill should be used when the user asks 'what does this do', 'how does this work', 'explain this', 'teach me about', or 'help me understand'. Also use when user mentions walkthrough, understanding code, or learning concepts. READ-ONLY - for documentation artifacts, use document skill."
 allowed-tools:
   - Read
   - Grep

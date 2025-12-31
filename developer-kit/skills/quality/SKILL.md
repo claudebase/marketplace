@@ -1,6 +1,6 @@
 ---
 name: quality
-description: "Testing strategy design and quality assessment for comprehensive test coverage. Use for test planning, coverage analysis, or testing recommendations. Activates for: design tests for, test strategy, improve coverage, what tests needed, quality assessment, how should I test this. READ-ONLY."
+description: "Testing strategy design and quality assessment for comprehensive test coverage. This skill should be used when the user asks to 'design tests for', 'create test strategy', 'improve coverage', or 'what tests are needed'. Also use when user mentions quality assessment, testing recommendations, or coverage analysis. READ-ONLY."
 allowed-tools:
   # Core Analysis
   - Read

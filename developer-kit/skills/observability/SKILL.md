@@ -1,6 +1,6 @@
 ---
 name: observability
-description: "Configure logging, monitoring, alerting, and metrics for production systems. Activates for: 'add logging', 'setup monitoring', 'create alerts', 'add metrics', 'distributed tracing', 'build dashboard', 'APM setup'."
+description: "Configure logging, monitoring, alerting, and metrics for production systems. This skill should be used when the user asks to 'add logging', 'setup monitoring', 'create alerts', or 'add metrics'. Also use when user mentions distributed tracing, APM setup, dashboard building, or observability stack."
 allowed-tools:
   - Read
   - Grep

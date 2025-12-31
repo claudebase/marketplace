@@ -1,6 +1,6 @@
 ---
 name: improve
-description: "Apply systematic improvements to code quality, performance, and maintainability. Use for enhancing working code through refactoring or optimization. Activates for: improve this code, optimize this, refactor, make this better, enhance performance, clean up code, reduce complexity, apply best practices. For broken code use debug."
+description: "Apply systematic improvements to code quality, performance, and maintainability. This skill should be used when the user asks to 'improve this code', 'optimize this', 'refactor', 'make this better', or 'clean up code'. Also use when user mentions performance enhancement, reducing complexity, or applying best practices. For broken code, use debug skill instead."
 allowed-tools:
   - Read
   - Grep

@@ -1,6 +1,6 @@
 ---
 name: confidence-check
-description: "Pre-implementation confidence assessment (≥90% required). Activates for: 'am I ready to implement', 'check my confidence', 'verify before coding', 'confidence check', 'ready to start', 'pre-implementation check'. Required before any significant implementation."
+description: "Pre-implementation confidence assessment requiring ≥90% confidence. PROACTIVELY activate before significant implementations. This skill should be used when the user asks 'am I ready to implement', 'check my confidence', 'verify before coding', or 'ready to start'. Also use when user mentions pre-implementation validation or readiness check."
 ---
 
 # Confidence Check Skill
@@ -12,6 +12,7 @@ Prevents wrong-direction execution by assessing confidence **BEFORE** starting i
 **Requirement**: ≥90% confidence to proceed with implementation.
 
 **Test Results** (2025-10-21):
+
 - Precision: 1.000 (no false positives)
 - Recall: 1.000 (no false negatives)
 - 8/8 test cases passed
@@ -19,6 +20,7 @@ Prevents wrong-direction execution by assessing confidence **BEFORE** starting i
 ## When to Use
 
 Use this skill BEFORE implementing any task to ensure:
+
 - No duplicate implementations exist
 - Architecture compliance verified
 - Official documentation reviewed

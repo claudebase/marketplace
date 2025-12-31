@@ -1,6 +1,6 @@
 ---
 name: security
-description: "Security audit and vulnerability analysis (READ-ONLY - reports issues but does NOT fix them). Use security-expert agent to implement fixes. Activates for: security audit, find vulnerabilities, OWASP, threat model, security review, is this secure, check security."
+description: "PROACTIVELY activate for: (1) security audit requests (2) vulnerability analysis (3) OWASP compliance checks. This skill should be used when the user asks to 'check security', 'find vulnerabilities', 'security review', or 'is this secure'. Also use when user mentions OWASP, threat model, or CVE. READ-ONLY - use security-expert agent for fixes."
 allowed-tools:
   - Read
   - Grep

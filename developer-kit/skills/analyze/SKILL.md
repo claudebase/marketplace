@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: "Comprehensive code analysis for quality, security, performance, and architecture. Use for code review, security scanning, performance assessment, architecture review, or technical debt evaluation. Activates for: analyze this code, review for bugs, check code quality, assess architecture, find issues. READ-ONLY."
+description: "Comprehensive code analysis for quality, security, performance, and architecture. This skill should be used when the user asks to 'analyze this code', 'review for bugs', 'check code quality', 'assess architecture', or 'find issues'. Also use when user mentions code review, technical debt, or architecture assessment. READ-ONLY - reports findings without modifying code."
 allowed-tools:
   - Read
   - Grep

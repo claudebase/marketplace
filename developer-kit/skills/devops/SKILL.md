@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "DevOps operations for build, test, git, and cleanup workflows. Use for building projects, running tests, git operations, or code cleanup. Activates for: build, test, run tests, commit, git status, cleanup, remove dead code, CI/CD."
+description: "DevOps operations for build, test, git, and cleanup workflows. This skill should be used when the user asks to 'build the project', 'run tests', 'commit changes', 'git status', or 'cleanup dead code'. Also use when user mentions CI/CD, build pipeline, or repository operations."
 allowed-tools:
   - Read
   - Grep

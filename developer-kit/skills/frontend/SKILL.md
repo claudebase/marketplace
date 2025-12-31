@@ -1,6 +1,6 @@
 ---
 name: frontend
-description: "Frontend development with UI/UX, accessibility, and distinctive design. Activates for: 'create component', 'build UI', 'design interface', 'frontend page', 'React component', 'Vue component', 'web application', 'user interface', 'landing page', 'dashboard'."
+description: "Frontend development with UI/UX, accessibility, and distinctive design philosophy. This skill should be used when the user asks to 'create component', 'build UI', 'design interface', or 'frontend page'. Also use when user mentions React component, Vue component, landing page, dashboard, or web application UI."
 allowed-tools:
   - Read
   - Grep

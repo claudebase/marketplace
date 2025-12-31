@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Web research with adaptive planning and intelligent search. Supports depth levels (quick/standard/deep/exhaustive) and modes (--docs for documentation, --web for general). Activates for: 'research [topic]', 'find information about', 'look up', 'search for', 'what's the latest on', 'find best practices', 'find docs for [library]'."
+description: "Web research with adaptive planning and intelligent search. Supports depth levels (quick/standard/deep/exhaustive) and modes (--docs, --web). This skill should be used when the user asks to 'research [topic]', 'find information about', 'look up', 'search for', or 'find docs for [library]'. Also use when user mentions finding best practices or latest updates."
 allowed-tools:
   - Read
   - Grep

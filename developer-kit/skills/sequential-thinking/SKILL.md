@@ -1,6 +1,6 @@
 ---
 name: sequential-thinking
-description: "Systematic step-by-step reasoning with revision and branching. Activates for: 'think through this', 'step by step', 'break down problem', 'analyze systematically', 'complex reasoning', 'plan approach', 'work through this carefully'."
+description: "Systematic step-by-step reasoning with revision and branching capabilities. This skill should be used when the user asks to 'think through this', 'step by step', 'break down problem', or 'analyze systematically'. Also use when user mentions complex reasoning, planning approach, or working through problems carefully."
 license: MIT
 ---
 
@@ -19,6 +19,7 @@ Enables structured problem-solving through iterative reasoning with revision and
 ## When to Use
 
 Use `mcp__reasoning__sequentialthinking` when:
+
 - Problem requires multiple interconnected reasoning steps
 - Initial scope or approach is uncertain
 - Need to filter through complexity to find core issues
@@ -81,6 +82,7 @@ The MCP tool `mcp__reasoning__sequentialthinking` accepts these parameters:
 ## Advanced Features
 
 For revision patterns, branching strategies, and complex workflows, see:
+
 - [Advanced Usage](references/advanced.md) - Revision and branching patterns
 - [Examples](references/examples.md) - Real-world use cases
 

@@ -1,6 +1,6 @@
 ---
 name: test
-description: "Test execution and analysis: run tests, measure coverage, identify gaps, suggest missing tests. Activates for: 'run tests', 'test coverage', 'what tests are missing', 'test this', 'check tests', 'run test suite'."
+description: "Test execution and analysis: run tests, measure coverage, identify gaps, suggest missing tests. This skill should be used when the user asks to 'run tests', 'check test coverage', 'what tests are missing', or 'run test suite'. Also use when user mentions test gaps, coverage analysis, or running the test suite."
 allowed-tools:
   - Read
   - Grep

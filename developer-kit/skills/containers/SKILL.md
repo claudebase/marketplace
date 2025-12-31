@@ -1,6 +1,6 @@
 ---
 name: containers
-description: "Create Dockerfiles, compose configurations, and Kubernetes manifests. Activates for: 'create Dockerfile', 'docker compose', 'containerize app', 'Kubernetes manifest', 'k8s deployment', 'Helm chart', 'pod configuration'."
+description: "Create Dockerfiles, compose configurations, and Kubernetes manifests. This skill should be used when the user asks to 'create Dockerfile', 'docker compose', 'containerize app', or 'Kubernetes manifest'. Also use when user mentions k8s deployment, Helm chart, pod configuration, or container orchestration."
 allowed-tools:
   - Read
   - Write

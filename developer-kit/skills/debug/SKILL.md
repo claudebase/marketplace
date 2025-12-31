@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "Unified debugging skill with tiered methodology. Activates for: 'fix this bug', 'debug this', 'why is this failing', 'troubleshoot', 'find the root cause', 'not working', 'crashes when', 'build failing'. Tier 1 for quick fixes, Tier 2 for complex issues, Tier 3 for recurring problems."
+description: "Unified debugging with tiered methodology (Tier 1: quick fixes, Tier 2: complex issues, Tier 3: recurring problems). Auto-invoke when user says 'fix this bug', 'debug this', 'why is this failing', 'troubleshoot', 'not working', 'crashes when', or 'build failing'. Also use when user mentions error messages, stack traces, or unexpected behavior."
 allowed-tools:
   - Read
   - Grep
