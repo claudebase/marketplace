@@ -1,7 +1,8 @@
 ---
 name: business-panel
 description: "AI facilitated panel discussion between renowned business thought leaders analyzing documents through distinct frameworks. Use for multi-expert business analysis, strategic planning, market assessment, and competitive analysis with discussion, debate, or socratic inquiry modes."
-argument-hint: "[document_path|content] [--mode discussion|debate|socratic] [--experts \"name1,name2\"]"
+argument-hint: '[document_path|content] [--mode discussion|debate|socratic] [--experts "name1,name2"]'
+delegates-to: brainstorm
 allowed-tools: Read, Grep, Glob, Write, Task, WebSearch, TodoWrite
 ---
 
@@ -14,6 +15,7 @@ AI facilitated panel discussion between renowned business thought leaders analyz
 ## Expert Panel
 
 ### Available Experts
+
 - **Clayton Christensen**: Disruption Theory, Jobs-to-be-Done
 - **Michael Porter**: Competitive Strategy, Five Forces
 - **Peter Drucker**: Management Philosophy, MBO
@@ -27,22 +29,27 @@ AI facilitated panel discussion between renowned business thought leaders analyz
 ## Analysis Modes
 
 ### Phase 1: DISCUSSION (Default)
+
 Collaborative analysis where experts build upon each other's insights through their frameworks.
 
 ### Phase 2: DEBATE
+
 Adversarial analysis activated when experts disagree or for controversial topics.
 
 ### Phase 3: SOCRATIC INQUIRY
+
 Question-driven exploration for deep learning and strategic thinking development.
 
 ## Usage
 
 ### Basic Usage
+
 ```bash
 business-panel [document_path_or_content]
 ```
 
 ### Advanced Options
+
 ```bash
 business-panel [content] --experts "porter,christensen,meadows"
 business-panel [content] --mode debate
@@ -51,23 +58,27 @@ business-panel [content] --synthesis-only
 ```
 
 ### Mode Commands
+
 - `--mode discussion` - Collaborative analysis (default)
 - `--mode debate` - Challenge and stress-test ideas
 - `--mode socratic` - Question-driven exploration
 - `--mode adaptive` - System selects based on content
 
 ### Expert Selection
+
 - `--experts "name1,name2,name3"` - Select specific experts
 - `--focus domain` - Auto-select experts for domain
 - `--all-experts` - Include all 9 experts
 
 ### Output Options
+
 - `--synthesis-only` - Skip detailed analysis, show synthesis
 - `--structured` - Use symbol system for efficiency
 - `--verbose` - Full detailed analysis
 - `--questions` - Focus on strategic questions
 
 ## Tool Coordination
+
 - **Read**: Document and context analysis
 - **Grep/Glob**: Pattern and file discovery
 - **Write**: Report and synthesis generation
@@ -76,6 +87,7 @@ business-panel [content] --synthesis-only
 - **TodoWrite**: Analysis progress tracking
 
 ## Integration Notes
+
 - Compatible with all thinking flags (--think, --think-hard, --ultrathink)
 - Supports comprehensive business analysis workflows
 - Integrates with analysis and research skills

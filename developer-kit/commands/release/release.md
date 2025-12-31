@@ -2,6 +2,7 @@
 name: release
 description: "Automate semantic versioning, changelog generation, and release tagging"
 argument-hint: "<major|minor|patch> [--dry-run] [--no-tag] [--no-changelog]"
+delegates-to: devops
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
@@ -25,6 +26,7 @@ release patch --no-changelog  # Skip changelog update
 ### 1. Pre-Release Checks
 
 Before releasing, verify:
+
 - [ ] All tests pass
 - [ ] No uncommitted changes
 - [ ] On correct branch (main/master or release branch)
@@ -41,13 +43,14 @@ git log --oneline -5
 
 Determine version increment based on changes:
 
-| Change Type | Version Bump | Example |
-|-------------|--------------|---------|
-| Bug fixes, patches | `patch` | 1.0.0 → 1.0.1 |
-| New features, backward compatible | `minor` | 1.0.0 → 1.1.0 |
-| Breaking changes | `major` | 1.0.0 → 2.0.0 |
+| Change Type                       | Version Bump | Example       |
+| --------------------------------- | ------------ | ------------- |
+| Bug fixes, patches                | `patch`      | 1.0.0 → 1.0.1 |
+| New features, backward compatible | `minor`      | 1.0.0 → 1.1.0 |
+| Breaking changes                  | `major`      | 1.0.0 → 2.0.0 |
 
 Update version in:
+
 - `package.json` (Node.js)
 - `pyproject.toml` / `setup.py` (Python)
 - `Cargo.toml` (Rust)
@@ -62,13 +65,16 @@ Use `changelog` or generate manually:
 ## [1.1.0] - 2025-01-15
 
 ### Added
+
 - New feature X
 - Support for Y
 
 ### Changed
+
 - Improved performance of Z
 
 ### Fixed
+
 - Bug in component A
 ```
 
@@ -93,18 +99,21 @@ git push origin main --tags
 ## Semantic Versioning Rules
 
 ### MAJOR (Breaking Changes)
+
 - Removing public API
 - Changing function signatures
 - Removing configuration options
 - Database schema changes requiring migration
 
 ### MINOR (New Features)
+
 - Adding new endpoints/functions
 - New optional parameters
 - New configuration options
 - Backward-compatible enhancements
 
 ### PATCH (Bug Fixes)
+
 - Security patches
 - Bug fixes
 - Documentation updates
@@ -121,6 +130,7 @@ git push origin main --tags
 ## Release Checklist
 
 ### Before Release
+
 - [ ] All tests passing
 - [ ] Documentation updated
 - [ ] CHANGELOG.md updated
@@ -129,6 +139,7 @@ git push origin main --tags
 - [ ] Migration guide (if needed)
 
 ### Release Steps
+
 - [ ] Create release commit
 - [ ] Create git tag
 - [ ] Push to remote
@@ -136,6 +147,7 @@ git push origin main --tags
 - [ ] Publish to package registry (optional)
 
 ### After Release
+
 - [ ] Verify deployment
 - [ ] Monitor for issues
 - [ ] Announce release (if applicable)
