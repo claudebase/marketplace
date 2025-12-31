@@ -5,6 +5,23 @@ All notable changes to the Developer Kit plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Command Namespace**: Re-added `dk:` prefix to all 21 commands for namespace clarity
+  - Commands now appear as `/dk:analyze`, `/dk:build`, `/dk:check`, etc.
+  - Distinguishes developer-kit commands from other plugins in autocomplete
+  - Reverts v4.0.0 change based on user feedback
+
+### Fixed
+
+- **Reference Files**: Moved command reference patterns out of `commands/` directory
+  - `build-patterns.md`, `cleanup-patterns.md`, `estimate-patterns.md` no longer appear as slash commands
+  - Relocated to `lib/shared-references/` (internal use only)
+
+---
+
 ## [5.0.0] - 2025-12-31
 
 ### Breaking Changes
