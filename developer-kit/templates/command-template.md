@@ -20,12 +20,12 @@ command-name <required> --option value     # With option
 
 ## Parameters
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `<required-arg>` | Yes | [Description of this parameter] |
-| `[optional-arg]` | No | [Description, default behavior if omitted] |
-| `--flag` | No | [What this flag enables] |
-| `--option` | No | [Description, default: X] |
+| Parameter        | Required | Description                                |
+| ---------------- | -------- | ------------------------------------------ |
+| `<required-arg>` | Yes      | [Description of this parameter]            |
+| `[optional-arg]` | No       | [Description, default behavior if omitted] |
+| `--flag`         | No       | [What this flag enables]                   |
+| `--option`       | No       | [Description, default: X]                  |
 
 ## What It Does
 
@@ -39,17 +39,21 @@ Describe the command's behavior step by step:
 ## Output Format
 
 **Success:**
+
 ```markdown
 ## [Output Title]
 
 ### [Section 1]
+
 [Expected output content]
 
 ### [Section 2]
+
 [Expected output content]
 ```
 
 **Error:**
+
 ```markdown
 ## Error: [Error Type]
 
@@ -79,6 +83,7 @@ command-name my-feature optional-value --option custom
 If this command delegates to a skill or agent, document it:
 
 This command delegates to the `[skill-name]` skill, which provides:
+
 - [Capability 1]
 - [Capability 2]
 
@@ -89,3 +94,7 @@ See `skills/[skill-name]/SKILL.md` for detailed methodology.
 - `[skill-name]` skill - [Relationship]
 - `[agent-name]` agent - [Relationship]
 - `[other-command]` - [Relationship or when to use instead]
+
+---
+
+**Target**: 30-50 lines | **Max**: 100 lines

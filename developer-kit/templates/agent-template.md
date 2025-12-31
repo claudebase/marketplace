@@ -40,8 +40,8 @@ If your agent has specialized knowledge, document it here.
 
 ### [Domain 1]
 
-| Topic | Guidance |
-|-------|----------|
+| Topic     | Guidance       |
+| --------- | -------------- |
 | [Topic 1] | [Key guidance] |
 | [Topic 2] | [Key guidance] |
 
@@ -81,8 +81,29 @@ What this agent produces:
 - [Limitation or out-of-scope item]
 - [Limitation or out-of-scope item]
 
+## Tool Integration
+
+For MCP library IDs and query patterns, see:
+
+- [MCP Resources](../lib/shared-references/mcp-resources.md)
+- [Tool Patterns](../lib/shared-references/tool-integration-patterns.md)
+
+### Primary MCP Tools
+
+| Tool                                           | Purpose                        |
+| ---------------------------------------------- | ------------------------------ |
+| `mcp__context7__resolve-library-id`            | Resolve library to Context7 ID |
+| `mcp__context7__query-docs`                    | Query library documentation    |
+| `mcp__github__search_code`                     | Search code patterns           |
+| `mcp__tavily__tavily-search`                   | Research best practices        |
+| `mcp__sequential-thinking__sequentialthinking` | Complex reasoning              |
+
 ## Related
 
 - `[skill-name]` skill - [Relationship to this skill]
 - `[command]` command - [Relationship to this command]
 - `[agent-name]` agent - [Relationship to other agent]
+
+---
+
+**Target**: 300-400 lines | **Max**: 500 lines

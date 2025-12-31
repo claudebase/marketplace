@@ -5,6 +5,100 @@ All notable changes to the Developer Kit plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2025-12-31
+
+### Breaking Changes
+
+- **BREAKING**: Restructured all skills for progressive disclosure pattern
+  - SKILL.md files reduced to <100 lines (compact startup)
+  - Detailed content moved to `references/` directories
+  - References loaded on-demand when skill activates
+
+- **BREAKING**: Restructured all agents for token efficiency
+  - Agent files reduced to <300 lines
+  - MCP resource tables consolidated to shared references
+  - Agent-specific patterns moved to `agents/references/`
+
+### Token Optimization Summary
+
+| Component                   | Before       | After        | Reduction |
+| --------------------------- | ------------ | ------------ | --------- |
+| Skills (Critical)           | ~8,000 lines | ~1,400 lines | **82%**   |
+| Agents (Critical + Warning) | ~8,500 lines | ~2,000 lines | **76%**   |
+| Commands (Bloated)          | ~2,200 lines | ~340 lines   | **85%**   |
+
+### Changed
+
+#### Skills Refactored (16 skills)
+
+- `containers` (1,055 → 83 lines)
+- `observability` (1,010 → 91 lines)
+- `database` (965 → 85 lines)
+- `migration` (892 → 88 lines)
+- `implement` (811 → 85 lines)
+- `devops` (766 → 98 lines)
+- `research` (738 → 88 lines)
+- `test` (680 → 90 lines)
+- `security` (653 → 86 lines)
+- `performance` (536 → 81 lines)
+- `improve` (564 → 91 lines)
+- `explain` (553 → 90 lines)
+- `debug` (551 → 91 lines)
+- `design` (486 → 86 lines)
+- `analyze` (472 → 91 lines)
+- `frontend` (445 → 87 lines)
+
+#### Agents Refactored (9 agents)
+
+- `python-expert` (2,457 → 222 lines)
+- `observability-engineer` (1,093 → 277 lines)
+- `technical-writer` (1,025 → 249 lines)
+- `learning-guide` (978 → 254 lines)
+- `security-expert` (940 → 210 lines)
+- `requirements-analyst` (917 → 200 lines)
+- `database-admin` (872 → 192 lines)
+- `socratic-mentor` (765 → 188 lines)
+- `architect` (710 → 200 lines)
+
+#### Commands Refactored (3 commands)
+
+- `cleanup` (989 → 113 lines)
+- `build` (758 → 113 lines)
+- `estimate` (453 → 112 lines)
+
+### Added
+
+#### Shared Reference Infrastructure
+
+- `lib/shared-references/mcp-resources.md` - Consolidated MCP library tables
+- `lib/shared-references/tool-integration-patterns.md` - Common tool patterns
+
+#### Agent Reference Files
+
+- `agents/references/python-patterns.md` - FastAPI, Django, testing patterns
+- `agents/references/security-patterns.md` - OWASP fixes, auth patterns
+- `agents/references/requirements-patterns.md` - PRD templates, user stories
+- `agents/references/database-patterns.md` - Schema, migration patterns
+- `agents/references/socratic-patterns.md` - Question techniques
+- `agents/references/architect-patterns.md` - C4, ADR templates
+- `agents/references/learning-patterns.md` - Tutorial patterns
+- `agents/references/technical-writing-patterns.md` - Doc templates
+- `agents/references/observability-patterns.md` - Logging, metrics
+
+#### Command Reference Files
+
+- `commands/references/cleanup-patterns.md` - Language examples, tools
+- `commands/references/build-patterns.md` - Build systems, CI configs
+- `commands/references/estimate-patterns.md` - Estimation methods
+
+### Migration Notes
+
+- All functionality preserved - content moved to references, not deleted
+- Reference files loaded automatically when skills/agents activate
+- Existing workflows and integrations unchanged
+
+---
+
 ## [4.0.0] - 2025-12-29
 
 ### Breaking Changes
@@ -18,14 +112,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 To update your scripts and documentation:
 
-| Old Format | New Format |
-|------------|------------|
-| `/dk:analyze` | `analyze` |
-| `/dk:start` | `start` |
-| `/dk:check` | `check` |
-| `/dk:prep-pr` | `prep-pr` |
-| `/dk:ship` | `ship` |
-| `/dk:git` | `git` |
+| Old Format        | New Format    |
+| ----------------- | ------------- |
+| `/dk:analyze`     | `analyze`     |
+| `/dk:start`       | `start`       |
+| `/dk:check`       | `check`       |
+| `/dk:prep-pr`     | `prep-pr`     |
+| `/dk:ship`        | `ship`        |
+| `/dk:git`         | `git`         |
 | `/dk:code-review` | `code-review` |
 
 All 21 commands follow this pattern - simply remove the `/dk:` prefix.
@@ -45,6 +139,7 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 ### Added
 
 #### New Skills (2)
+
 - **`test`** - Comprehensive test execution and analysis skill
   - Framework detection (Jest, Vitest, Pytest, Go, Rust, RSpec, PHPUnit)
   - Coverage analysis and reporting
@@ -60,6 +155,7 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
   - References: wcag-checklist.md, testing-tools.md, common-fixes.md
 
 #### MCP Server Integrations (2)
+
 - **GitHub MCP** - Direct GitHub API integration
   - Issue creation and management
   - Pull request operations
@@ -73,12 +169,14 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
   - Persistent context across Claude Code sessions
 
 #### Hook Scripts
+
 - **`run-affected-tests.sh`** - Optional PostToolUse hook for running affected tests
   - Detects test files for modified source files
   - Supports JS/TS, Python, Go, Rust, Ruby
   - Returns JSON status per Claude Code spec
 
 ### Changed
+
 - **`devops` skill** - Added GitHub MCP tools for repository operations
 - **`research` skill** - Added GitHub MCP tools for issue/PR research
 - **`pm-agent`** - Enhanced with Memory MCP for knowledge persistence
@@ -86,6 +184,7 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
   - Cross-session pattern retention
 
 ### Component Counts
+
 - Skills: 22 → 24 (+2: test, a11y)
 - MCP Servers: 5 → 7 (+2: github, memory)
 - Reference Files: 69 → 76 (+7)
@@ -97,18 +196,21 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 ### Added
 
 #### New Commands (4)
+
 - **`/dk:start`** - Feature development initialization with branch setup, session context, and task tracking
 - **`/dk:prep-pr`** - Pull request preparation with validation, code review, and PR description generation
 - **`/dk:ship`** - Release shipping with version bump, changelog generation, and git operations
 - **`/dk:analyze`** - Unified analysis command with mode selection (broad, security, perf, quality, review, explore)
 
 #### Session Management
+
 - **SessionStart hook** - Automatic context restoration from `docs/session/current-context.md`
 - **Stop hook** - Automatic session state persistence to `docs/session/last-session.md`
 - **`restore-session-context.sh`** - Hook script for context restoration
 - **`save-session-state.sh`** - Hook script for state persistence
 
 #### Workflow Documentation
+
 - **`docs/workflows/README.md`** - Workflow overview and quick reference
 - **`docs/workflows/feature-development.md`** - Complete feature lifecycle guide
 - **`docs/workflows/bug-fixing.md`** - Tiered debugging workflow
@@ -117,10 +219,12 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 - **`docs/workflows/session-management.md`** - PM Agent PDCA workflow
 
 ### Changed
+
 - **hooks.json** - Added SessionStart context restoration and Stop state persistence
 - **SessionStart message** - Now shows all component counts and quick-start hint
 
 ### Developer Experience
+
 - Quick-start workflow: `/dk:start` → develop → `/dk:prep-pr` → `/dk:ship`
 - Automatic session context across Claude Code sessions
 - Comprehensive workflow documentation for common development processes
@@ -130,10 +234,12 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 ## [3.3.1] - 2025-12-29
 
 ### Added
+
 - **`/dk:check` command** - Unified validation command for lint, type-check, test, and security scan
 - **`skills/README.md`** - Logical grouping reference for all 22 skills with categories
 
 ### Changed
+
 - **Hook scripts** - Now return proper JSON responses per Claude Code spec
   - `format-file.sh` - Returns JSON with formatting status
   - `security_reminder_hook.py` - Returns JSON with security warnings
@@ -144,6 +250,7 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 - **`security-expert` agent** - Description clarifies it CAN modify code (unlike security skill)
 
 ### Fixed
+
 - SessionStart message now shows command count (17)
 
 ---
@@ -153,10 +260,12 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 ### Added
 
 #### Content Optimization
+
 - **security-common.md** - Shared security reference consolidating OWASP Top 10, authentication patterns, and secure coding examples
 - **Templates** - Added skill, agent, and command templates in `templates/` directory
 
 #### CI/CD Enhancements
+
 - **validate-skill-descriptions.sh** - Validates skills have name, description, and trigger phrases
 - **validate-agent-fields.sh** - Validates agents have required frontmatter fields
 - **validate-references.sh** - Validates all skill reference file links exist
@@ -185,6 +294,7 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 ### Changed
 
 #### Skill Consolidation (27 → 22 skills)
+
 - **BREAKING**: Consolidated debugging skills into unified `debug` skill
   - `troubleshoot` → `debug` (Tier 1: quick fixes)
   - `systematic-debugging` → `debug` (Tier 2: systematic investigation)
@@ -224,14 +334,14 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 
 If you have scripts or prompts referencing old skill names:
 
-| Old | New |
-|-----|-----|
-| `troubleshoot` | `debug` |
-| `systematic-debugging` | `debug` |
-| `root-cause` | `debug` |
-| `verification` | `verify` |
-| `self-review` | `verify` |
-| `code-review` (skill) | `code-reviewer` (agent) |
+| Old                    | New                     |
+| ---------------------- | ----------------------- |
+| `troubleshoot`         | `debug`                 |
+| `systematic-debugging` | `debug`                 |
+| `root-cause`           | `debug`                 |
+| `verification`         | `verify`                |
+| `self-review`          | `verify`                |
+| `code-review` (skill)  | `code-reviewer` (agent) |
 
 ---
 
@@ -240,15 +350,18 @@ If you have scripts or prompts referencing old skill names:
 ### Added
 
 #### Documentation
+
 - **CONTRIBUTING.md** - Comprehensive guide for extending the plugin
 - **skills/TRIGGER-REFERENCE.md** - Quick reference for skill activation phrases
 
 #### Hook Events (3 new)
+
 - **Stop** - `completion_validator.py` validates task completion
 - **SubagentStop** - `subagent_validator.py` validates subagent completion
 - **UserPromptSubmit** - Ready for context injection
 
 #### Research Skill Enhancement
+
 - **Documentation Mode** (`--docs`) - Specialized for library/framework docs
 - Merged `docs-seeker` functionality into `research` skill
 - Added `docs-sources.md` and `docs-workflows.md` references
@@ -256,7 +369,9 @@ If you have scripts or prompts referencing old skill names:
 ### Changed
 
 #### Command Delegation Pattern (8 commands converted)
+
 Commands now delegate to skills for DRY implementation:
+
 - `/dk:code-review` → code-review skill
 - `/dk:estimate` → orchestration skill
 - `/dk:changelog` → document skill
@@ -267,10 +382,12 @@ Commands now delegate to skills for DRY implementation:
 - `/dk:reflect` → document skill
 
 #### Skill Descriptions
+
 - Updated all 26 skills with explicit "Activates for:" trigger phrases
 - Consistent format across all skills for better activation accuracy
 
 #### Hook System
+
 - Hook events utilized: 3/8 → 6/8 (75%)
 - Updated SessionStart message to v3.1.0
 
@@ -280,12 +397,12 @@ Commands now delegate to skills for DRY implementation:
 
 ### Metrics
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Skills | 27 | 26 |
-| Commands using delegation | 3/16 (19%) | 11/16 (69%) |
-| Hook events utilized | 3/8 (38%) | 6/8 (75%) |
-| Skills with explicit triggers | ~50% | 100% |
+| Metric                        | Before     | After       |
+| ----------------------------- | ---------- | ----------- |
+| Skills                        | 27         | 26          |
+| Commands using delegation     | 3/16 (19%) | 11/16 (69%) |
+| Hook events utilized          | 3/8 (38%)  | 6/8 (75%)   |
+| Skills with explicit triggers | ~50%       | 100%        |
 
 ---
 
@@ -294,6 +411,7 @@ Commands now delegate to skills for DRY implementation:
 ### Changed
 
 #### Major Consolidation
+
 - **Unified Architect** - Consolidated 5 architect agents into 1 with domain modes
   - Archived: code-architect, backend-architect, frontend-architect, system-architect, devops-architect
 - **Systematic Debugging** - Merged 4 debugging skills into unified methodology
@@ -301,6 +419,7 @@ Commands now delegate to skills for DRY implementation:
 - **Flat Skill Structure** - All skills at root level for better discoverability
 
 ### Documentation
+
 - Updated for v3.0.0 release
 
 ---
@@ -310,6 +429,7 @@ Commands now delegate to skills for DRY implementation:
 ### Added
 
 #### New Skills (4)
+
 - **observability** - Logging, monitoring, alerting, and dashboard patterns
   - References: logging-patterns, monitoring-setup, alerting-strategies, dashboard-templates
 - **database** - Schema design, query optimization, and migration management
@@ -320,22 +440,26 @@ Commands now delegate to skills for DRY implementation:
   - References: dockerfile-patterns, compose-patterns, kubernetes-patterns, helm-patterns
 
 #### New Agents (3)
+
 - **database-admin** - Database schema, query optimization, and migration specialist
 - **observability-engineer** - Logging, metrics, alerting, and dashboard specialist
 - **security-expert** - Security audits, authentication, and OWASP compliance
 
 #### New Commands (3)
+
 - `/dk:release` - Semantic versioning and release automation
 - `/dk:changelog` - Generate changelogs from git commits
 - `/dk:migrate` - Database migration management
 
 #### Templates (10 new files)
+
 - **GitHub Actions**: node-ci.yml, python-ci.yml, docker-build.yml, release.yml
 - **Docker**: node.Dockerfile, python.Dockerfile, docker-compose.dev.yml
 - **Kubernetes**: deployment.yaml (full stack with HPA, PDB, Ingress)
 - **ADR**: template.md, example-database-selection.md
 
 #### Reference Material Expansion
+
 - **devops**: container-patterns.md, github-actions.md, gitlab-ci.md
 - **security-engineer**: security-headers.md, secrets-management.md
 - **performance-engineer**: caching-strategies.md, database-performance.md
@@ -343,6 +467,7 @@ Commands now delegate to skills for DRY implementation:
 - **design**: event-sourcing.md
 
 #### Infrastructure
+
 - **Hooks System** - Automated workflows via hooks.json
   - PostToolUse: Auto-format code after Write/Edit
   - PreToolUse: Block dangerous Bash commands
@@ -391,7 +516,7 @@ Commands now delegate to skills for DRY implementation:
 ## Summary
 
 | Version | Skills | Agents | Commands | Templates | Reference Files |
-|---------|--------|--------|----------|-----------|-----------------|
+| ------- | ------ | ------ | -------- | --------- | --------------- |
 | 2.0.0   | 22     | 15     | 15       | 10        | 60+             |
 | 1.8.0   | 18     | 12     | 12       | 0         | 54              |
 

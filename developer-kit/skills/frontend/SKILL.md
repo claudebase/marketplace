@@ -2,16 +2,13 @@
 name: frontend
 description: "Frontend development with UI/UX, accessibility, and distinctive design. Activates for: 'create component', 'build UI', 'design interface', 'frontend page', 'React component', 'Vue component', 'web application', 'user interface', 'landing page', 'dashboard'."
 allowed-tools:
-  # Codebase Analysis
   - Read
   - Grep
   - Glob
-  # Implementation
   - Write
   - Edit
   - Bash
   - TodoWrite
-  # Shadcn MCP (Component Library)
   - mcp__shadcn__search_items_in_registries
   - mcp__shadcn__list_items_in_registries
   - mcp__shadcn__view_items_in_registries
@@ -19,268 +16,72 @@ allowed-tools:
   - mcp__shadcn__get_add_command_for_items
   - mcp__shadcn__get_audit_checklist
   - mcp__shadcn__get_project_registries
-  # Framework Documentation
   - mcp__context7__resolve-library-id
   - mcp__context7__query-docs
-  # Visual Validation
   - mcp__playwright__browser_navigate
   - mcp__playwright__browser_snapshot
   - mcp__playwright__browser_click
-  # Complex UI Planning
   - mcp__sequential-thinking__sequentialthinking
 ---
 
 # Frontend Skill
 
-Create distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Leverage component libraries for rapid development while applying unique design principles for memorable results.
+Create distinctive, production-grade frontend interfaces. Leverage component libraries for rapid development while applying unique design principles.
 
-## Activation Triggers
+**Core Principle**: "Components provide structure; design provides soul. Avoid generic AI slop aesthetics."
+
+## When to Use
 
 - Component creation ("create a button", "build a card")
 - Page development ("landing page", "dashboard", "settings page")
 - UI patterns ("navigation menu", "sidebar", "modal")
 - Framework-specific ("React component", "Vue component", "Next.js page")
-- Application types ("web application", "admin panel", "e-commerce")
 
-## Behavioral Flow
+## When NOT to Use
 
-```
-┌─────────────┬─────────────┬─────────────┬───────────┬──────────┐
-│  UNDERSTAND │   DISCOVER  │    DESIGN   │ IMPLEMENT │ VALIDATE │
-├─────────────┼─────────────┼─────────────┼───────────┼──────────┤
-│ Analyze     │ Search      │ Apply       │ Install   │ Visual   │
-│ requirements│ Shadcn      │ aesthetic   │ components│ test     │
-│             │             │ principles  │           │          │
-│ Detect      │ View        │ Plan UX     │ Customize │ Audit    │
-│ framework   │ examples    │ flow        │ styling   │ checklist│
-│             │             │             │           │          │
-│ Identify    │ Check       │ Motion &    │ Add       │ A11y     │
-│ patterns    │ blocks      │ animation   │ animations│ check    │
-└─────────────┴─────────────┴─────────────┴───────────┴──────────┘
-```
+- Backend logic → use `implement` skill
+- Architecture decisions → use `design` skill
+- Accessibility audit → use `a11y` skill
 
-### Phase 1: UNDERSTAND
-
-Analyze requirements and detect project context:
-
-1. **Read existing code** to understand patterns, framework, styling approach
-2. **Detect framework**: React, Vue, Next.js, Astro, etc.
-3. **Identify styling**: Tailwind, CSS Modules, styled-components
-4. **Check for shadcn/ui**: Look for `components.json` or existing shadcn components
-
-### Phase 2: DISCOVER
-
-Search for reusable components before building from scratch:
+## Quick Workflow
 
 ```
-# Check available registries
-mcp__shadcn__get_project_registries
-
-# Search for relevant components
-mcp__shadcn__search_items_in_registries(["@shadcn"], "dashboard sidebar")
-
-# View component details and dependencies
-mcp__shadcn__view_items_in_registries(["@shadcn/sidebar", "@shadcn/card"])
-
-# Get usage examples
-mcp__shadcn__get_item_examples_from_registries(["@shadcn"], "sidebar-demo")
+UNDERSTAND → DISCOVER → DESIGN → IMPLEMENT → VALIDATE
+   Read       Shadcn    Apply     Install     Playwright
+   Glob       Context7  aesthetics  Edit      Audit
 ```
 
-**Available Block Categories:**
-| Category | Examples | Use Case |
-|----------|----------|----------|
-| Dashboard | `dashboard-01` | Admin panels, analytics |
-| Auth | `login-01-05`, `signup-01-05`, `otp-01-05` | Authentication flows |
-| Sidebar | `sidebar-01-16` | Navigation, collapsible menus |
-| Calendar | `calendar-01-32` | Date pickers, scheduling |
-| Charts | `chart-area-*`, `chart-bar-*`, `chart-line-*` | Data visualization |
-| Forms | `form-rhf-*`, `form-tanstack-*` | Validated forms |
+1. **Understand** - Analyze requirements, detect framework
+2. **Discover** - Search Shadcn for components (438+ available)
+3. **Design** - Apply distinctive aesthetic principles
+4. **Implement** - Install and customize components
+5. **Validate** - Visual test with Playwright, run audit
 
-### Phase 3: DESIGN
+## Tool Integration
 
-Apply distinctive aesthetic principles. Components provide structure; design provides soul.
+For library IDs and patterns, see:
 
-**Design Thinking Questions:**
+- [MCP Resources](../../lib/shared-references/mcp-resources.md)
+- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
 
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: What aesthetic direction? (minimalist, maximalist, brutalist, editorial, etc.)
-- **Differentiation**: What makes this UNFORGETTABLE?
+### Key Resources
 
-**CRITICAL**: Choose a clear conceptual direction and execute with precision. Bold maximalism and refined minimalism both work - intentionality matters, not intensity.
+| Resource   | Tool/Library                | Use Case            |
+| ---------- | --------------------------- | ------------------- |
+| Shadcn     | MCP: shadcn                 | Component discovery |
+| React      | `/facebook/react`           | React patterns      |
+| Next.js    | `/vercel/next.js`           | Next.js patterns    |
+| Tailwind   | `/tailwindlabs/tailwindcss` | Utility classes     |
+| Playwright | MCP: playwright             | Visual validation   |
 
-### Phase 4: IMPLEMENT
+## References
 
-Install components and customize:
-
-```bash
-# Get installation command
-mcp__shadcn__get_add_command_for_items(["@shadcn/sidebar", "@shadcn/card"])
-
-# Run installation
-npx shadcn@latest add sidebar card
-```
-
-Then apply customizations per design guidelines below.
-
-### Phase 5: VALIDATE
-
-```
-# Run audit checklist
-mcp__shadcn__get_audit_checklist
-
-# Visual testing with Playwright
-mcp__playwright__browser_navigate → navigate to page
-mcp__playwright__browser_snapshot → capture accessibility tree
-```
-
-## MCP Integration
-
-### Shadcn MCP (Primary Component Source)
-
-**ALWAYS check Shadcn first** before building components from scratch:
-
-```
-# Discovery workflow
-mcp__shadcn__search_items_in_registries - Find components by keyword
-mcp__shadcn__list_items_in_registries   - Browse all available (438+ items)
-mcp__shadcn__view_items_in_registries   - Get details, dependencies, files
-
-# Learning workflow
-mcp__shadcn__get_item_examples_from_registries - See usage patterns
-
-# Installation workflow
-mcp__shadcn__get_add_command_for_items - Get CLI command
-
-# Validation workflow
-mcp__shadcn__get_audit_checklist - Post-implementation checks
-```
-
-### Context7 (Framework Documentation)
-
-For framework-specific patterns (React hooks, Vue composables, etc.):
-
-```
-mcp__context7__resolve-library-id - Resolve "react" → "/facebook/react"
-mcp__context7__query-docs         - Get official documentation
-```
-
-### Playwright (Visual Validation)
-
-Test implementations visually:
-
-```
-mcp__playwright__browser_navigate - Load the page
-mcp__playwright__browser_snapshot - Capture accessibility tree
-mcp__playwright__browser_click    - Test interactions
-```
-
-## Design Guidelines
-
-Components provide the 70% foundation. These guidelines create the distinctive 30%.
-
-### Typography
-
-- **Avoid generic fonts**: Inter, Roboto, Arial, system fonts
-- **Choose distinctive fonts**: Pair a characterful display font with refined body font
-- **Create hierarchy**: Clear visual distinction between heading levels
-- **Consider context**: Editorial needs different typography than dashboard
-
-### Color & Theme
-
-- **Commit to an aesthetic**: Dark mode, light mode, or something unique
-- **Use CSS variables**: Enable easy theme switching
-- **Dominant + accent**: Strong primary with sharp accents outperforms evenly-distributed palettes
-- **Shadcn themes**: Consider `theme-stone`, `theme-zinc`, `theme-neutral`, `theme-slate`
-
-### Motion & Animation
-
-- **Prioritize impact**: One well-orchestrated page load beats scattered micro-interactions
-- **Staggered reveals**: Use `animation-delay` for sequential entrance
-- **Hover states**: Subtle transforms, color shifts
-- **CSS-first**: Prefer CSS animations; use Motion library for complex sequences
-- **Scroll triggers**: Reveal on scroll for long pages
-
-### Spatial Composition
-
-- **Break the grid**: Asymmetry, overlap, diagonal flow
-- **Generous whitespace**: Or controlled density - commit to one
-- **Unexpected layouts**: Not every page needs header-content-footer
-
-### Visual Details
-
-- **Backgrounds**: Gradient meshes, noise textures, geometric patterns
-- **Depth**: Layered transparencies, dramatic shadows
-- **Polish**: Custom cursors, grain overlays, decorative borders
-
-## Anti-Patterns to Avoid
-
-**Generic "AI Slop" Aesthetics:**
-
-- Purple gradients on white backgrounds
-- Overused font families (Inter, Space Grotesk)
-- Predictable layouts
-- Cookie-cutter components without customization
-- Same aesthetic across different contexts
-
-**Technical Anti-Patterns:**
-
-- Building from scratch when Shadcn has it
-- Ignoring existing project patterns
-- Over-engineering simple components
-- Missing accessibility basics
-
-## Component Customization Patterns
-
-### After Installing Shadcn Components
-
-```tsx
-// 1. Extend with variants
-const Button = ({ variant = "default", ...props }) => {
-  // Add custom variants beyond shadcn defaults
-}
-
-// 2. Override CSS variables in globals.css
-:root {
-  --primary: 220 90% 56%;      /* Custom brand color */
-  --radius: 0.75rem;           /* Rounder corners */
-}
-
-// 3. Add motion
-import { motion } from "framer-motion"
-const AnimatedCard = motion(Card)
-```
-
-### Responsive Considerations
-
-- Mobile-first approach
-- Use `use-mobile` hook from Shadcn when needed
-- Test at multiple breakpoints
-- Consider touch targets on mobile
-
-## Handoffs
-
-| Scenario                      | Hand off to         |
-| ----------------------------- | ------------------- |
-| Need accessibility audit      | `a11y` skill        |
-| Need API integration          | `implement` skill   |
-| Need system architecture      | `design` skill      |
-| Need security review          | `security` skill    |
-| Need performance optimization | `performance` skill |
+- [Detailed Guide](references/guide.md) - Full workflow, phases, and MCP integration
+- [Design Guidelines](references/guide.md#design-guidelines) - Typography, color, motion
+- [Anti-Patterns](references/guide.md#anti-patterns-to-avoid) - What to avoid
 
 ## Boundaries
 
-**Will:**
+**Will**: Create distinctive UI, use Shadcn components, apply aesthetic principles, validate visually
 
-- Create distinctive UI with component libraries
-- Apply aesthetic principles for memorable design
-- Implement responsive, accessible interfaces
-- Use Shadcn MCP for component discovery
-- Validate visually with Playwright
-
-**Will Not:**
-
-- Build components from scratch when libraries have them
-- Use generic aesthetics without intentional design
-- Skip accessibility considerations
-- Implement backend logic (use `implement` skill)
-- Make architectural decisions (use `design` skill)
+**Will Not**: Build from scratch when libraries exist, use generic aesthetics, implement backend logic
