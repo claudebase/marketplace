@@ -88,7 +88,7 @@ estimate "Add search feature" --json
 
 ## References
 
-- [Estimate Patterns](../references/estimate-patterns.md) - Methods, output formats, complexity factors
+- [Estimate Patterns](../../lib/shared-references/estimate-patterns.md) - Methods, output formats, complexity factors
 
 ## Boundaries
 

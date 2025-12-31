@@ -89,7 +89,7 @@ cleanup src/ --aggressive
 
 ## References
 
-- [Cleanup Patterns](../references/cleanup-patterns.md) - Language examples, tools, output formats
+- [Cleanup Patterns](../../lib/shared-references/cleanup-patterns.md) - Language examples, tools, output formats
 
 ## Boundaries
 

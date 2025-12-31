@@ -88,7 +88,7 @@ build --type prod --analyze
 
 ## References
 
-- [Build Patterns](../references/build-patterns.md) - Language examples, CI configs, output formats
+- [Build Patterns](../../lib/shared-references/build-patterns.md) - Language examples, CI configs, output formats
 
 ## Boundaries
 
