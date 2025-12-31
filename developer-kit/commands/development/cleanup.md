@@ -189,6 +189,8 @@ cleanup --aggressive
 
 ## Language-Specific Patterns
 
+> **Note**: The examples below are illustrative. This skill auto-detects your project type and adapts to **any language or framework** by analyzing project files, using Context7 for framework-specific patterns, and invoking appropriate tooling (Roslyn analyzers for C#, SpotBugs for Java, etc.).
+
 ### JavaScript/TypeScript
 
 ```javascript
@@ -300,6 +302,178 @@ func main() {
 }
 ```
 
+### C# / .NET
+
+```csharp
+// BEFORE: Unused imports and dead code
+using System;
+using System.Collections.Generic;
+using System.Linq;           // unused
+using System.Threading.Tasks; // unused
+using Newtonsoft.Json;        // unused
+
+namespace MyApp
+{
+    public class UserService
+    {
+        private readonly string _unusedField = "never read";
+        private readonly ILogger _logger;
+
+        private void UnusedMethod()
+        {
+            Console.WriteLine("dead code");
+        }
+
+        public User GetUser(int id)
+        {
+            return _repository.Find(id);
+        }
+    }
+}
+```
+
+```csharp
+// AFTER: Clean code
+using System;
+using System.Collections.Generic;
+
+namespace MyApp
+{
+    public class UserService
+    {
+        private readonly ILogger _logger;
+
+        public User GetUser(int id)
+        {
+            return _repository.Find(id);
+        }
+    }
+}
+```
+
+Roslyn analyzer codes:
+
+```
+IDE0051: Remove unused private members
+IDE0052: Remove unread private members
+CS0169: Field is never used
+CS0414: Field assigned but never used
+CS8019: Unnecessary using directive
+```
+
+### Java
+
+```java
+// BEFORE: Unused imports and dead code
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;     // unused
+import java.util.stream.*;    // unused
+import org.apache.commons.lang3.StringUtils; // unused
+
+public class UserService {
+    private static final String UNUSED_CONSTANT = "never used";
+    private String unusedField;
+
+    private void unusedMethod() {
+        System.out.println("dead code");
+    }
+
+    public User getUser(int id) {
+        return repository.findById(id);
+    }
+}
+```
+
+```java
+// AFTER: Clean code
+import java.util.List;
+import java.util.ArrayList;
+
+public class UserService {
+    public User getUser(int id) {
+        return repository.findById(id);
+    }
+}
+```
+
+Common dead code warnings:
+
+```
+// IntelliJ IDEA / SpotBugs / PMD
+UPM_UNCALLED_PRIVATE_METHOD: Uncalled private method
+URF_UNREAD_FIELD: Unread field
+DLS_DEAD_LOCAL_STORE: Dead store to local variable
+UC_USELESS_CONDITION: Useless condition (always true/false)
+```
+
+### Ruby
+
+```ruby
+# BEFORE: Unused requires and dead code
+require 'json'
+require 'yaml'      # unused
+require 'net/http'  # unused
+
+UNUSED_CONSTANT = 'never used'.freeze
+
+def unused_method
+  puts 'dead code'
+end
+
+def fetch_user(id)
+  User.find(id)
+end
+```
+
+```ruby
+# AFTER: Clean code
+require 'json'
+
+def fetch_user(id)
+  User.find(id)
+end
+```
+
+### PHP
+
+```php
+<?php
+// BEFORE: Unused imports and dead code
+use App\Models\User;
+use App\Models\Order;      // unused
+use Illuminate\Support\Str; // unused
+
+class UserController
+{
+    private $unusedProperty;
+
+    private function unusedMethod()
+    {
+        return 'dead code';
+    }
+
+    public function show($id)
+    {
+        return User::find($id);
+    }
+}
+```
+
+```php
+<?php
+// AFTER: Clean code
+use App\Models\User;
+
+class UserController
+{
+    public function show($id)
+    {
+        return User::find($id);
+    }
+}
+```
+
 ## Detection Tools Integration
 
 ### ESLint (JavaScript/TypeScript)
@@ -343,6 +517,47 @@ go build  # Compilation fails on unused imports
 
 ```bash
 cargo clippy -- -D dead_code
+```
+
+### C# / .NET (Roslyn Analyzers)
+
+```xml
+<!-- .editorconfig -->
+[*.cs]
+dotnet_diagnostic.IDE0051.severity = error  # Unused private members
+dotnet_diagnostic.IDE0052.severity = error  # Unread private members
+dotnet_diagnostic.CS8019.severity = error   # Unnecessary using
+```
+
+```bash
+# Run analyzers
+dotnet build /p:TreatWarningsAsErrors=true
+
+# Use dotnet-format for auto-cleanup
+dotnet format analyzers --diagnostics IDE0051 IDE0052
+```
+
+### Java (SpotBugs / PMD)
+
+```xml
+<!-- pom.xml - SpotBugs plugin -->
+<plugin>
+  <groupId>com.github.spotbugs</groupId>
+  <artifactId>spotbugs-maven-plugin</artifactId>
+  <version>4.8.0</version>
+  <configuration>
+    <effort>Max</effort>
+    <threshold>Low</threshold>
+  </configuration>
+</plugin>
+```
+
+```bash
+# Run SpotBugs
+mvn spotbugs:check
+
+# Run PMD
+mvn pmd:check
 ```
 
 ## Output Examples

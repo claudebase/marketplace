@@ -45,11 +45,17 @@ Detect project type:
 ├── pyproject.toml    → Python (poetry/pip)
 ├── Cargo.toml        → Rust (cargo)
 ├── go.mod            → Go (go build)
-├── Makefile          → Make
+├── *.csproj          → C# / .NET (dotnet)
+├── *.sln             → .NET Solution (dotnet/msbuild)
 ├── build.gradle      → Java/Kotlin (Gradle)
 ├── pom.xml           → Java (Maven)
+├── Gemfile           → Ruby (bundler)
+├── composer.json     → PHP (composer)
+├── Makefile          → Make
 └── Dockerfile        → Container build
 ```
+
+> **Note**: The examples below are illustrative. This skill auto-detects your project type and adapts to **any language or framework** by analyzing project files, using Context7 for framework-specific patterns, and invoking appropriate tooling.
 
 ### 2. Environment Validation
 
@@ -191,6 +197,172 @@ build cmd/server              # go build ./cmd/server
 build                          # docker build -t app:latest .
 build --type prod             # docker build --target production -t app:prod .
 build --ci                     # docker build --no-cache --pull .
+```
+
+### C# / .NET
+
+```bash
+# Detected: *.csproj or *.sln
+build                          # dotnet build
+build --type prod             # dotnet build -c Release
+build --type prod --optimize   # dotnet publish -c Release -o ./publish
+build backend                  # dotnet build ./src/Backend/Backend.csproj
+```
+
+Build configurations:
+
+```xml
+<!-- MyApp.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+</Project>
+```
+
+Common commands:
+
+```bash
+# Restore dependencies
+dotnet restore
+
+# Build specific configuration
+dotnet build -c Debug
+dotnet build -c Release
+
+# Publish for deployment
+dotnet publish -c Release -r win-x64 --self-contained
+dotnet publish -c Release -r linux-x64 --self-contained
+
+# Clean build artifacts
+dotnet clean
+```
+
+### Java (Maven)
+
+```bash
+# Detected: pom.xml
+build                          # mvn compile
+build --type prod             # mvn package -DskipTests
+build --type test              # mvn test-compile
+build --clean                  # mvn clean compile
+```
+
+Build configuration:
+
+```xml
+<!-- pom.xml -->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
+Common commands:
+
+```bash
+# Full build lifecycle
+mvn clean install
+
+# Skip tests for faster builds
+mvn package -DskipTests
+
+# Build specific module
+mvn -pl module-name compile
+
+# Generate executable JAR
+mvn package shade:shade
+```
+
+### Java (Gradle)
+
+```bash
+# Detected: build.gradle or build.gradle.kts
+build                          # ./gradlew build
+build --type prod             # ./gradlew build -Pprofile=prod
+build --type test              # ./gradlew testClasses
+build --clean                  # ./gradlew clean build
+```
+
+Build configuration:
+
+```kotlin
+// build.gradle.kts
+plugins {
+    java
+    application
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+application {
+    mainClass.set("com.example.Main")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com.example.Main"
+    }
+}
+```
+
+Common commands:
+
+```bash
+# Build with Gradle wrapper
+./gradlew build
+
+# Continuous build (watch mode)
+./gradlew build --continuous
+
+# Build specific subproject
+./gradlew :subproject:build
+
+# Create distribution
+./gradlew distZip
+```
+
+### Ruby
+
+```bash
+# Detected: Gemfile
+build                          # bundle exec rake build
+build --type prod             # RAILS_ENV=production bundle exec rake assets:precompile
+build assets                   # bundle exec rake assets:compile
+```
+
+### PHP
+
+```bash
+# Detected: composer.json
+build                          # composer install && npm run build
+build --type prod             # composer install --no-dev --optimize-autoloader
+build --clean                  # rm -rf vendor && composer install
 ```
 
 ## CI/CD Integration
