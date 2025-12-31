@@ -40,6 +40,74 @@ Perform comprehensive security audits with a zero-trust mindset. Identify vulner
 - User wants to fix security issues → use `security-expert` agent
 - User wants performance analysis → use `performance` skill
 
+## MCP Integration
+
+### Context7 Security Resources
+
+| Resource              | Library ID                               | Snippets | Use For                         |
+| --------------------- | ---------------------------------------- | -------- | ------------------------------- |
+| OWASP Cheat Sheets    | `/owasp/cheatsheetseries`                | 963      | Vulnerability prevention guides |
+| OWASP Top 10          | `/owasp/top10`                           | 98       | Top 10 vulnerability reference  |
+| OWASP Developer Guide | `/owasp/devguide`                        | 67       | Secure development practices    |
+| Helmet.js             | `/helmetjs/helmet`                       | 93       | Security headers configuration  |
+| jsonwebtoken          | `/auth0/node-jsonwebtoken`               | 70       | JWT security patterns           |
+| bcrypt.js             | `/dcodeio/bcrypt.js`                     | 47       | Password hashing                |
+| Snyk CLI              | `/snyk/cli`                              | 6,237    | Vulnerability scanning          |
+| Auth0 Node.js         | `/auth0/node-auth0`                      | 4,770    | Authentication patterns         |
+| Passport OAuth2       | `/jaredhanson/passport-oauth2`           | 32       | OAuth security                  |
+| Passport JWT          | `/mikenicholson/passport-jwt`            | 11       | JWT authentication              |
+| Express Rate Limit    | `/express-rate-limit/express-rate-limit` | 86       | Rate limiting patterns          |
+| ESLint                | `/websites/eslint`                       | 1,899    | Security linting rules          |
+
+### Context7 Query Patterns
+
+```
+# Get OWASP prevention guidance
+mcp__context7__resolve-library-id(query="OWASP security cheat sheets", libraryName="OWASP")
+mcp__context7__query-docs(libraryId="/owasp/cheatsheetseries", query="SQL injection prevention parameterized queries")
+
+# Get security header configuration
+mcp__context7__query-docs(libraryId="/helmetjs/helmet", query="Content-Security-Policy CSP headers")
+
+# Get JWT security best practices
+mcp__context7__query-docs(libraryId="/auth0/node-jsonwebtoken", query="JWT verification algorithm restriction")
+
+# Get password hashing guidance
+mcp__context7__query-docs(libraryId="/dcodeio/bcrypt.js", query="password hashing salt rounds security")
+
+# Get vulnerability scanning commands
+mcp__context7__query-docs(libraryId="/snyk/cli", query="vulnerability scanning dependency audit")
+```
+
+### Tavily Security Research
+
+```
+# CVE and vulnerability research
+mcp__tavily__tavily-search(query="CVE [package] [version] vulnerability 2024", search_depth="advanced")
+
+# Security advisory lookup
+mcp__tavily__tavily-search(query="[framework] security advisory disclosure", topic="news", days=30)
+
+# Attack technique research
+mcp__tavily__tavily-search(query="[attack-type] mitigation techniques OWASP")
+
+# Extract security bulletin details
+mcp__tavily__tavily-extract(urls=["https://nvd.nist.gov/vuln/detail/CVE-2024-XXXXX"])
+```
+
+### GitHub Security Research
+
+```
+# Find vulnerability fix patterns
+mcp__github__search_code(q="fix CVE sql injection parameterized query language:javascript")
+
+# Research security issues in similar projects
+mcp__github__list_issues(owner="org", repo="project", labels=["security"])
+
+# Study security-focused PRs
+mcp__github__get_pull_request(owner="org", repo="project", pull_number=123)
+```
+
 ## Behavioral Flow
 
 ```
@@ -74,16 +142,36 @@ Understand the attack surface before scanning:
 
 Gather threat intelligence before analysis:
 
-```
-# Research CVEs for dependencies
-mcp__tavily__tavily-search("CVE express.js 4.18 vulnerabilities 2024")
+```javascript
+// Research CVEs for dependencies
+mcp__tavily__tavily -
+  search({
+    query: "CVE express.js 4.18 vulnerabilities 2024",
+    search_depth: "advanced",
+    max_results: 10,
+  });
 
-# Get OWASP guidance for specific vulnerability types
-mcp__context7__resolve-library-id → "/owasp/cheat-sheet-series"
-mcp__context7__query-docs("SQL injection prevention")
+// Get OWASP guidance for specific vulnerability types
+mcp__context7__resolve -
+  library -
+  id({
+    query: "OWASP security vulnerability prevention",
+    libraryName: "OWASP",
+  });
+// Returns: /owasp/cheatsheetseries
 
-# Extract details from security advisories
-mcp__tavily__tavily-extract(["https://nvd.nist.gov/vuln/detail/CVE-2024-XXXXX"])
+mcp__context7__query -
+  docs({
+    libraryId: "/owasp/cheatsheetseries",
+    query: "SQL injection prevention parameterized queries",
+  });
+
+// Extract details from security advisories
+mcp__tavily__tavily -
+  extract({
+    urls: ["https://nvd.nist.gov/vuln/detail/CVE-2024-XXXXX"],
+    extract_depth: "advanced",
+  });
 ```
 
 **Tools**: Tavily (CVE/advisory lookup), Context7 (OWASP/security docs)
@@ -97,12 +185,15 @@ Scan code for vulnerability patterns:
 3. **Identify unsafe patterns** - eval(), innerHTML, SQL concatenation
 4. **Analyze authentication** - Session handling, JWT, OAuth issues
 
-```
+```bash
 # Search for common vulnerability patterns
 Grep: password\s*=\s*["'][^"']+["']    # Hardcoded passwords
 Grep: eval\(|exec\(                     # Code injection risks
 Grep: innerHTML\s*=                     # XSS vulnerabilities
 Grep: \+\s*["'].*SELECT|INSERT|UPDATE   # SQL injection
+Grep: process\.env\.\w+                 # Environment variable usage
+Grep: crypto\.createCipher\(            # Deprecated crypto (use createCipheriv)
+Grep: Math\.random\(\).*password|token  # Weak randomness for secrets
 ```
 
 **Tools**: Grep, GitHub MCP (for pattern research)
@@ -111,22 +202,26 @@ Grep: \+\s*["'].*SELECT|INSERT|UPDATE   # SQL injection
 
 Use structured reasoning for complex threats:
 
-```
-mcp__sequential-thinking__sequentialthinking
-- Apply STRIDE to each component
-- Model multi-step attack chains
-- Assess likelihood and impact
-- Prioritize by risk score
+```javascript
+mcp__sequential -
+  thinking__sequentialthinking({
+    thought: "Applying STRIDE to authentication component...",
+    thoughtNumber: 1,
+    totalThoughts: 6,
+    nextThoughtNeeded: true,
+  });
 ```
 
 **STRIDE Framework:**
 
-- **S**poofing - Can attackers impersonate users?
-- **T**ampering - Can data be modified in transit/storage?
-- **R**epudiation - Can actions be traced and audited?
-- **I**nformation Disclosure - Can sensitive data leak?
-- **D**enial of Service - Can availability be impacted?
-- **E**levation of Privilege - Can users gain unauthorized access?
+| Threat                     | Question                                 | Detection                               |
+| -------------------------- | ---------------------------------------- | --------------------------------------- |
+| **S**poofing               | Can attackers impersonate users?         | Check auth mechanisms, session handling |
+| **T**ampering              | Can data be modified in transit/storage? | Check integrity controls, signatures    |
+| **R**epudiation            | Can actions be traced and audited?       | Check logging, audit trails             |
+| **I**nformation Disclosure | Can sensitive data leak?                 | Check encryption, access controls       |
+| **D**enial of Service      | Can availability be impacted?            | Check rate limiting, resource limits    |
+| **E**levation of Privilege | Can users gain unauthorized access?      | Check authorization, role validation    |
 
 **Tools**: Sequential Thinking, GitHub MCP (research similar threats)
 
@@ -139,86 +234,269 @@ Document findings with actionable remediation:
 3. **Reference standards** - Link to OWASP, CWE, NIST
 4. **Suggest next steps** - Hand off to security-expert agent
 
-## MCP Integration
+## OWASP Top 10 (2021) Detection Patterns
 
-### Tavily (Security Research)
+| ID  | Vulnerability             | Grep Patterns                                       | Context7 Query                                                  |
+| --- | ------------------------- | --------------------------------------------------- | --------------------------------------------------------------- |
+| A01 | Broken Access Control     | `@Public\|@AllowAnonymous`, missing auth middleware | `/owasp/cheatsheetseries` → "access control authorization"      |
+| A02 | Cryptographic Failures    | `MD5\|SHA1\|DES\|createCipher\(`                    | `/owasp/cheatsheetseries` → "cryptographic failures encryption" |
+| A03 | Injection                 | `eval\|\$\{.*\}\|concat.*SELECT`                    | `/owasp/cheatsheetseries` → "SQL injection prevention"          |
+| A04 | Insecure Design           | Architecture review needed                          | `/owasp/cheatsheetseries` → "secure design principles"          |
+| A05 | Security Misconfiguration | `DEBUG.*true\|default.*password`                    | `/helmetjs/helmet` → "security headers configuration"           |
+| A06 | Vulnerable Components     | Check package.json/lock files                       | `/snyk/cli` → "vulnerability scanning dependency"               |
+| A07 | Auth Failures             | `session.*cookie\|jwt.*none`                        | `/auth0/node-jsonwebtoken` → "JWT verification security"        |
+| A08 | Data Integrity Failures   | `deserialize\|pickle\|unserialize`                  | `/owasp/cheatsheetseries` → "deserialization prevention"        |
+| A09 | Logging Failures          | Missing audit logs                                  | `/owasp/cheatsheetseries` → "logging monitoring security"       |
+| A10 | SSRF                      | `fetch\|axios\|request` with user input             | `/owasp/cheatsheetseries` → "SSRF prevention"                   |
 
-**Primary tool for threat intelligence:**
+## Vulnerability Detection Patterns
 
-```
-mcp__tavily__tavily-search - Research CVEs, security advisories, attack techniques
-mcp__tavily__tavily-extract - Extract details from security bulletins
-```
+### SQL Injection Prevention
 
-**Use cases:**
+**Detection Pattern:**
 
-- "Find CVEs for lodash version 4.17.0"
-- "Research latest JWT vulnerabilities"
-- "What are common GraphQL security issues?"
-- "Get security advisories for Django packages"
-
-**Search patterns:**
-
-```
-CVE [package] [version] vulnerability
-[framework] security advisory 2024
-OWASP [vulnerability-type] prevention
-[attack-type] mitigation techniques
-```
-
-### Context7 (Security Documentation)
-
-**Get official security guidance:**
-
-```
-mcp__context7__resolve-library-id - Resolve security libraries/frameworks
-mcp__context7__query-docs - Get OWASP, NIST, security library docs
+```bash
+# Find SQL concatenation vulnerabilities
+Grep: \+\s*["'].*SELECT|INSERT|UPDATE|DELETE
+Grep: \`SELECT.*\$\{
+Grep: query\(.*\+.*\)
+Grep: execute\(.*%s
 ```
 
-**Known security resources:**
+**OWASP Remediation (from Context7):**
 
-- OWASP Cheat Sheet Series
-- Helmet.js (Node.js security headers)
-- CORS configuration guides
-- JWT best practices
+```java
+// UNSAFE: String concatenation allows SQL injection
+String query = "SELECT * FROM users WHERE name = " + customerName;
 
-**Use cases:**
-
-- "Get OWASP SQL injection prevention guide"
-- "Look up Content-Security-Policy best practices"
-- "Find NIST password guidelines"
-
-### GitHub MCP (Vulnerability Pattern Research)
-
-**Research real-world vulnerabilities:**
-
-```
-mcp__github__search_code - Find vulnerable patterns in codebases
-mcp__github__list_issues - Research known security issues
-mcp__github__get_pull_request - Study security-focused fixes
+// SAFE: Parameterized query with PreparedStatement
+String query = "SELECT * FROM users WHERE name = ?";
+PreparedStatement pstmt = connection.prepareStatement(query);
+pstmt.setString(1, customerName);
+ResultSet results = pstmt.executeQuery();
 ```
 
-**Use cases:**
+```javascript
+// UNSAFE: Template literal in query
+const query = `SELECT * FROM users WHERE id = ${userId}`;
 
-- Search for how others fixed similar CVEs
-- Find examples of secure implementations
-- Research vulnerability disclosure patterns
-- Study security PR reviews
-
-### Sequential Thinking (Threat Modeling)
-
-**Systematic threat analysis:**
-
-```
-mcp__sequential-thinking__sequentialthinking - Multi-step threat reasoning
+// SAFE: Parameterized query
+const query = "SELECT * FROM users WHERE id = $1";
+const result = await db.query(query, [userId]);
 ```
 
-**Use for:**
+### XSS Prevention
 
-- STRIDE analysis of complex systems
-- Multi-step exploit chain modeling
-- Risk assessment across components
-- Architecture security decisions
+**Detection Pattern:**
+
+```bash
+# Find XSS vulnerabilities
+Grep: innerHTML\s*=
+Grep: document\.write\(
+Grep: dangerouslySetInnerHTML
+Grep: \{\{.*\}\}.*\|safe  # Django/Jinja unsafe filter
+```
+
+**OWASP Remediation (from Context7):**
+
+```javascript
+// UNSAFE: innerHTML allows script execution
+document.getElementById("output").innerHTML = userInput;
+
+// SAFE: textContent automatically encodes
+document.getElementById("output").textContent = userInput;
+
+// SAFE: Use DOMPurify for HTML content
+import DOMPurify from "dompurify";
+element.innerHTML = DOMPurify.sanitize(userInput);
+```
+
+```php
+<!-- UNSAFE: Direct variable insertion -->
+<div><?php echo $userInput; ?></div>
+
+<!-- SAFE: HTML entity encoding -->
+<div><?php echo htmlspecialchars($userInput, ENT_QUOTES, 'UTF-8'); ?></div>
+```
+
+### JWT Security
+
+**Detection Pattern:**
+
+```bash
+# Find JWT vulnerabilities
+Grep: algorithm.*none
+Grep: verify.*false
+Grep: jwt\.decode\(  # decode without verify
+Grep: expiresIn.*[0-9]+d  # Very long expiration
+```
+
+**Secure JWT Verification (from Context7):**
+
+```javascript
+const jwt = require("jsonwebtoken");
+
+// UNSAFE: No algorithm restriction
+const decoded = jwt.verify(token, secret);
+
+// SAFE: Explicit algorithm restriction
+const decoded = jwt.verify(token, publicKey, {
+  algorithms: ["RS256"], // Only allow RS256
+  audience: "my-api",
+  issuer: "my-app",
+  clockTolerance: 5, // 5 seconds tolerance
+  maxAge: "1h", // Token must not be older than 1 hour
+});
+
+// SAFE: Multiple allowed algorithms (explicit list)
+jwt.verify(token, key, {
+  algorithms: ["RS256", "RS384", "RS512", "ES256"],
+});
+```
+
+### Password Hashing
+
+**Detection Pattern:**
+
+```bash
+# Find weak password handling
+Grep: MD5\|SHA1\|SHA256.*password
+Grep: createHash.*password
+Grep: password.*=.*password  # Plaintext comparison
+```
+
+**Secure Password Hashing (from Context7):**
+
+```javascript
+import bcrypt from "bcryptjs";
+
+// Hash password with appropriate rounds (10-12 recommended)
+const hash = bcrypt.hashSync(password, 12);
+
+// Verify password
+const isValid = await bcrypt.compare(inputPassword, storedHash);
+
+// Check if rehashing needed (upgrade security over time)
+const currentRounds = bcrypt.getRounds(storedHash);
+if (currentRounds < 12) {
+  const newHash = await bcrypt.hash(password, 12);
+  // Update database with newHash
+}
+```
+
+### Security Headers (Helmet.js)
+
+**Detection Pattern:**
+
+```bash
+# Check for missing security headers
+Grep -v: helmet\(
+Grep -v: Content-Security-Policy
+Grep -v: X-Frame-Options
+```
+
+**Secure Configuration (from Context7):**
+
+```javascript
+import express from "express";
+import helmet from "helmet";
+
+const app = express();
+
+// Apply all security headers
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://cdn.example.com"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com"],
+        imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'", "https://api.example.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        objectSrc: ["'none'"],
+        frameSrc: ["'none'"],
+      },
+    },
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+  }),
+);
+```
+
+### Dependency Vulnerability Scanning
+
+**Using Snyk CLI (from Context7):**
+
+```bash
+# Test current project for vulnerabilities
+snyk test
+
+# Test with severity filtering
+snyk test --severity-threshold=high
+
+# Test all projects in monorepo
+snyk test --all-projects --detection-depth=3
+
+# Output JSON for CI/CD integration
+snyk test --json --json-file-output=results.json
+
+# Scan source code (SAST)
+snyk code test
+
+# Scan and report to Snyk UI
+snyk code test --report --project-name=my-app
+```
+
+**npm audit alternative:**
+
+```bash
+# Check for vulnerabilities
+npm audit
+
+# Fix automatically where possible
+npm audit fix
+
+# Generate detailed report
+npm audit --json > audit-report.json
+```
+
+### Rate Limiting
+
+**Detection Pattern:**
+
+```bash
+# Check for missing rate limiting
+Grep -v: rateLimit\|rate-limit\|throttle
+```
+
+**Secure Configuration:**
+
+```javascript
+import rateLimit from "express-rate-limit";
+
+// General API rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests, please try again later." },
+});
+
+// Strict limiting for auth endpoints
+const authLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5, // 5 attempts per hour
+  skipSuccessfulRequests: true,
+});
+
+app.use("/api/", apiLimiter);
+app.use("/api/auth/", authLimiter);
+```
 
 ## Security Mindset
 
@@ -232,44 +510,14 @@ mcp__sequential-thinking__sequentialthinking - Multi-step threat reasoning
 - **Fail Secure** - Default to secure state on errors
 - **Security by Design** - Build security in, don't bolt on
 
-## Focus Areas
+## CVSS Severity Classification
 
-### OWASP Top 10 (2021)
-
-| ID  | Vulnerability             | Detection Pattern                  |
-| --- | ------------------------- | ---------------------------------- |
-| A01 | Broken Access Control     | Missing auth checks, IDOR patterns |
-| A02 | Cryptographic Failures    | Weak algorithms, plaintext storage |
-| A03 | Injection                 | SQL concat, eval(), exec()         |
-| A04 | Insecure Design           | Missing threat modeling            |
-| A05 | Security Misconfiguration | Debug enabled, default creds       |
-| A06 | Vulnerable Components     | Outdated dependencies              |
-| A07 | Auth Failures             | Weak passwords, session issues     |
-| A08 | Data Integrity Failures   | Deserialization, unsigned updates  |
-| A09 | Logging Failures          | Missing audit logs                 |
-| A10 | SSRF                      | URL fetching without validation    |
-
-### Code-Level Vulnerabilities
-
-- Hardcoded secrets and credentials
-- Unsafe deserialization
-- Path traversal vulnerabilities
-- Race conditions
-- Buffer overflows (in applicable languages)
-
-### Authentication & Authorization
-
-- Session management issues
-- Privilege escalation risks
-- JWT/token vulnerabilities
-- OAuth implementation flaws
-
-### Data Protection
-
-- Encryption weaknesses
-- Sensitive data exposure
-- PII handling violations
-- Insecure data storage
+| Score    | Severity | Response Time | Example                             |
+| -------- | -------- | ------------- | ----------------------------------- |
+| 9.0-10.0 | Critical | Immediate     | Remote code execution, auth bypass  |
+| 7.0-8.9  | High     | 24-48 hours   | SQL injection, privilege escalation |
+| 4.0-6.9  | Medium   | 1-2 weeks     | XSS, information disclosure         |
+| 0.1-3.9  | Low      | Next release  | Minor information leak              |
 
 ## Output Format
 
@@ -323,6 +571,50 @@ mcp__sequential-thinking__sequentialthinking - Multi-step threat reasoning
 3. **Long-term** - Implement security training, automated scanning
 
 ```
+
+## Common Vulnerability Checklist
+
+### Authentication & Session Management
+- [ ] Passwords hashed with bcrypt/Argon2 (cost factor ≥10)
+- [ ] JWT tokens have expiration and algorithm restriction
+- [ ] Session tokens are cryptographically random
+- [ ] Logout invalidates session server-side
+- [ ] Password reset tokens expire quickly
+- [ ] Multi-factor authentication for sensitive operations
+
+### Input Validation
+- [ ] All user input validated on server-side
+- [ ] Parameterized queries for all database operations
+- [ ] File uploads validated by type and size
+- [ ] URL parameters sanitized
+- [ ] JSON/XML parsing with entity expansion limits
+
+### Output Encoding
+- [ ] HTML output encoded to prevent XSS
+- [ ] JSON responses have proper Content-Type
+- [ ] Error messages don't expose sensitive info
+- [ ] Stack traces disabled in production
+
+### Access Control
+- [ ] Authorization checked on every request
+- [ ] Direct object references validated
+- [ ] Admin functions protected
+- [ ] API endpoints require authentication
+- [ ] CORS configured restrictively
+
+### Cryptography
+- [ ] TLS 1.2+ enforced
+- [ ] Strong cipher suites only
+- [ ] Secrets stored in environment/vault
+- [ ] No hardcoded credentials
+- [ ] Cryptographic randomness from secure source
+
+### Security Headers
+- [ ] Content-Security-Policy configured
+- [ ] X-Frame-Options set (clickjacking)
+- [ ] X-Content-Type-Options: nosniff
+- [ ] Strict-Transport-Security (HSTS)
+- [ ] Referrer-Policy configured
 
 ## Reference Files
 
