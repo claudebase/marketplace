@@ -3,7 +3,8 @@ name: code-explorer
 description: Deeply analyzes existing codebase features by tracing execution paths, mapping architecture layers, understanding patterns and abstractions, and documenting dependencies to inform new development
 tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__get_file_contents, mcp__github__search_code
 model: sonnet
-color: yellow
+permissionMode: default
+skills: analyze, explain
 ---
 
 # Code Explorer Agent

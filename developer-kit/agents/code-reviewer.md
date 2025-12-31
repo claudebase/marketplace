@@ -3,6 +3,8 @@ name: code-reviewer
 description: "Comprehensive code reviewer for PRs and local changes. Uses confidence-based filtering (≥80%) to report only high-priority issues. Invoke for: 'review my code', 'code review', 'check my changes', 'review this PR', 'review before merge'."
 tools: Glob, Grep, Read, Bash, WebFetch, TodoWrite, WebSearch, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__get_pull_request, mcp__github__get_pull_request_files, mcp__github__create_pull_request_review, mcp__playwright__browser_snapshot
 model: sonnet
+permissionMode: default
+skills: analyze, security
 ---
 
 # Code Reviewer Agent
