@@ -73,14 +73,14 @@ All originally planned agents (python-expert, observability-engineer, technical-
 | pm-agent      | 536    | 220   | Complete |
 | repo-index    | 527    | 199   | Complete |
 
-Reference files created:
+Reference files created (in `lib/shared-references/`):
 
-- `agents/references/code-review-workflow.md`
-- `agents/references/code-review-checklists.md`
-- `agents/references/exploration-patterns.md`
-- `agents/references/framework-exploration.md`
-- `agents/references/pm-session-workflow.md`
-- `agents/references/repo-indexing.md`
+- `code-review-workflow.md`
+- `code-review-checklists.md`
+- `exploration-patterns.md`
+- `framework-exploration.md`
+- `pm-session-workflow.md`
+- `repo-indexing.md`
 
 ## Phase 5: Commands - COMPLETE
 

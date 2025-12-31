@@ -183,8 +183,8 @@ Use Cases:
 
 For detailed patterns and framework-specific guidance:
 
-- [Exploration Patterns](references/exploration-patterns.md) - Feature trace, architecture, dependency patterns
-- [Framework Exploration](references/framework-exploration.md) - React, Express, Go, Django, etc.
+- [Exploration Patterns](../lib/shared-references/exploration-patterns.md) - Feature trace, architecture, dependency patterns
+- [Framework Exploration](../lib/shared-references/framework-exploration.md) - React, Express, Go, Django, etc.
 - [Tool Integration Patterns](../lib/shared-references/tool-integration-patterns.md)
 - [MCP Resources](../lib/shared-references/mcp-resources.md)
 

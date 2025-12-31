@@ -186,7 +186,7 @@ Example:
 
 For detailed workflows:
 
-- [Session Workflow](references/pm-session-workflow.md) - Full PDCA cycle, session lifecycle
+- [Session Workflow](../lib/shared-references/pm-session-workflow.md) - Full PDCA cycle, session lifecycle
 - [Tool Integration Patterns](../lib/shared-references/tool-integration-patterns.md)
 - [MCP Resources](../lib/shared-references/mcp-resources.md)
 

@@ -155,7 +155,7 @@ Enhancement:
 
 For templates and strategies:
 
-- [Repo Indexing Reference](references/repo-indexing.md) - Templates, strategies, framework patterns
+- [Repo Indexing Reference](../lib/shared-references/repo-indexing.md) - Templates, strategies, framework patterns
 - [Tool Integration Patterns](../lib/shared-references/tool-integration-patterns.md)
 - [MCP Resources](../lib/shared-references/mcp-resources.md)
 

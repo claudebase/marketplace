@@ -175,8 +175,8 @@ READ → UNDERSTAND → VERIFY → EVALUATE → RESPOND → IMPLEMENT
 
 For detailed workflows and checklists:
 
-- [Code Review Workflow](references/code-review-workflow.md) - PR workflow, local diff, focus modes
-- [Framework Checklists](references/code-review-checklists.md) - React, Vue, Express, Go, etc.
+- [Code Review Workflow](../lib/shared-references/code-review-workflow.md) - PR workflow, local diff, focus modes
+- [Framework Checklists](../lib/shared-references/code-review-checklists.md) - React, Vue, Express, Go, etc.
 - [Tool Integration Patterns](../lib/shared-references/tool-integration-patterns.md)
 - [MCP Resources](../lib/shared-references/mcp-resources.md)
 
