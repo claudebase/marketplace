@@ -4,6 +4,8 @@ description: "Systematic step-by-step reasoning with revision and branching capa
 license: MIT
 composable: true
 mode: meta
+allowed-tools:
+  - mcp__sequential-thinking__sequentialthinking
 ---
 
 # Sequential Thinking

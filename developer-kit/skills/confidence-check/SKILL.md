@@ -3,6 +3,15 @@ name: confidence-check
 description: "Pre-implementation confidence assessment requiring ≥90% confidence. PROACTIVELY activate before significant implementations. This skill should be used when the user asks 'am I ready to implement', 'check my confidence', 'verify before coding', or 'ready to start'. Also use when user mentions pre-implementation validation or readiness check."
 composable: true
 mode: read-only
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - WebFetch
+  - WebSearch
+  - mcp__context7__resolve-library-id
+  - mcp__context7__query-docs
+  - mcp__tavily__tavily-search
 ---
 
 # Confidence Check Skill

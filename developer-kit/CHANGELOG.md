@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [5.1.0] - 2025-12-31
+
 ### Changed
 
 - **Command Namespace**: Re-added `dk:` prefix to all 21 commands for namespace clarity
@@ -14,11 +18,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Distinguishes developer-kit commands from other plugins in autocomplete
   - Reverts v4.0.0 change based on user feedback
 
+- **Additional Agent Migrations**: Migrated 4 agents to <300 lines
+  - `code-reviewer`: 696 → 204 lines (70% reduction)
+  - `code-explorer`: 617 → 212 lines (66% reduction)
+  - `pm-agent`: 536 → 220 lines (59% reduction)
+  - `repo-index`: 527 → 199 lines (62% reduction)
+
+- **Command Condensing**: Reduced `analyze.md` from 277 → 148 lines
+
+### Added
+
+- **Agent Reference Files**: Created 6 shared reference files in `agents/references/`
+  - `code-review-workflow.md` - PR workflow, focus modes, false positive prevention
+  - `code-review-checklists.md` - React, Vue, Express, Go, Python framework checklists
+  - `exploration-patterns.md` - Feature trace, architecture, dependency patterns
+  - `framework-exploration.md` - Framework-specific exploration guide
+  - `pm-session-workflow.md` - PDCA cycle, session lifecycle
+  - `repo-indexing.md` - Index templates, strategies
+
 ### Fixed
 
 - **Reference Files**: Moved command reference patterns out of `commands/` directory
   - `build-patterns.md`, `cleanup-patterns.md`, `estimate-patterns.md` no longer appear as slash commands
   - Relocated to `lib/shared-references/` (internal use only)
+
+- **Skill Frontmatter**: Added missing `allowed-tools` to `confidence-check` and `sequential-thinking` skills
 
 ---
 
