@@ -180,7 +180,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources - Security](../lib/shared-references/mcp-resources.md#security) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage patterns
-- [Security Patterns](references/security-patterns.md) - Implementation examples
+- [Security Patterns](../lib/shared-references/security-patterns.md) - Implementation examples
 
 ## Boundaries
 

@@ -160,7 +160,7 @@ Q: [Question leading to insight]
 
 - [MCP Resources](../lib/shared-references/mcp-resources.md) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
-- [Socratic Patterns](references/socratic-patterns.md) - Question sequences and techniques
+- [Socratic Patterns](../lib/shared-references/socratic-patterns.md) - Question sequences and techniques
 
 ## Boundaries
 

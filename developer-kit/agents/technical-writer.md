@@ -222,7 +222,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources - Documentation](../lib/shared-references/mcp-resources.md#documentation) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage patterns
-- [Technical Writing Patterns](references/technical-writing-patterns.md) - Templates and examples
+- [Technical Writing Patterns](../lib/shared-references/technical-writing-patterns.md) - Templates and examples
 
 ## Boundaries
 

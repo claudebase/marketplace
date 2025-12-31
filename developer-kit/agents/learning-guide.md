@@ -223,7 +223,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources](../lib/shared-references/mcp-resources.md) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
-- [Learning Patterns](references/learning-patterns.md) - Analogies, templates, exercises
+- [Learning Patterns](../lib/shared-references/learning-patterns.md) - Analogies, templates, exercises
 
 ## Boundaries
 

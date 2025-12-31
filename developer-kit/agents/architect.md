@@ -170,7 +170,7 @@ For each component:
 
 - [MCP Resources](../lib/shared-references/mcp-resources.md) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
-- [Architect Patterns](references/architect-patterns.md) - C4 diagrams, ADR templates
+- [Architect Patterns](../lib/shared-references/architect-patterns.md) - C4 diagrams, ADR templates
 
 ## Boundaries
 

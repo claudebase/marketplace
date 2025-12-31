@@ -194,7 +194,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources - Python](../lib/shared-references/mcp-resources.md#python-ecosystem) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage patterns
-- [Python Patterns](references/python-patterns.md) - Implementation patterns
+- [Python Patterns](../lib/shared-references/python-patterns.md) - Implementation patterns
 
 ## Boundaries
 

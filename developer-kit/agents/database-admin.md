@@ -164,7 +164,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources - Databases](../lib/shared-references/mcp-resources.md#databases) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
-- [Database Patterns](references/database-patterns.md) - Schema examples and workflows
+- [Database Patterns](../lib/shared-references/database-patterns.md) - Schema examples and workflows
 
 ## Boundaries
 

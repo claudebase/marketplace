@@ -248,7 +248,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources - Observability](../lib/shared-references/mcp-resources.md#observability) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage patterns
-- [Observability Patterns](references/observability-patterns.md) - Implementation examples
+- [Observability Patterns](../lib/shared-references/observability-patterns.md) - Implementation examples
 
 ## Boundaries
 

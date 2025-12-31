@@ -173,7 +173,7 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 - [MCP Resources](../lib/shared-references/mcp-resources.md) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
-- [Requirements Patterns](references/requirements-patterns.md) - Templates and techniques
+- [Requirements Patterns](../lib/shared-references/requirements-patterns.md) - Templates and techniques
 
 ## Boundaries
 
