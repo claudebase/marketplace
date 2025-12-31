@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: dk:code-review
 description: Comprehensive code review for PRs or local changes
 argument-hint: "<pr-url|pr-number|path> [--strict] [--focus security|bugs|style]"
 delegates-to: code-reviewer

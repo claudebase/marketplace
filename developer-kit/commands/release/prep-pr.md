@@ -1,5 +1,5 @@
 ---
-name: prep-pr
+name: dk:prep-pr
 description: "Prepare changes for pull request: validate, review, generate PR description"
 argument-hint: "[--base <branch>] [--draft] [--skip-review] [--create]"
 delegates-to: orchestration
@@ -18,16 +18,17 @@ prep-pr [options]
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--base <branch>` | main | Target branch for PR |
-| `--draft` | false | Create as draft PR |
-| `--skip-review` | false | Skip code review step |
-| `--create` | false | Actually create the PR via gh CLI |
+| Option            | Default | Description                       |
+| ----------------- | ------- | --------------------------------- |
+| `--base <branch>` | main    | Target branch for PR              |
+| `--draft`         | false   | Create as draft PR                |
+| `--skip-review`   | false   | Skip code review step             |
+| `--create`        | false   | Actually create the PR via gh CLI |
 
 ## What This Does
 
 ### 1. Pre-flight Checks
+
 ```bash
 # Verify clean state
 git status
@@ -38,7 +39,9 @@ git log origin/<base>..HEAD
 ```
 
 ### 2. Validation (check)
+
 Runs the full validation pipeline:
+
 ```
 [1/5] Formatting      ✓ PASS
 [2/5] Linting         ✓ PASS (2 warnings)
@@ -48,41 +51,51 @@ Runs the full validation pipeline:
 ```
 
 ### 3. Code Review (unless --skip-review)
+
 Invokes `code-reviewer` agent for:
+
 - Code quality assessment
 - Security review (via security skill)
 - Performance analysis (via performance skill)
 - Test coverage check (via quality skill)
 
 ### 4. Change Analysis
+
 Analyzes git diff to generate:
+
 - Files changed summary
 - Key modifications by category
 - Breaking changes detection
 - Migration requirements
 
 ### 5. PR Description Generation
+
 Creates comprehensive PR description:
 
 ```markdown
 ## Summary
+
 Brief description of changes based on commits and diff analysis.
 
 ## Changes
+
 - **Added**: New features and files
 - **Changed**: Modified functionality
 - **Fixed**: Bug fixes
 - **Removed**: Deleted code/features
 
 ## Testing
+
 - Unit tests: 47/47 passing
 - Coverage: 98%
 - E2E tests: Verified
 
 ## Screenshots
+
 [If UI changes detected]
 
 ## Checklist
+
 - [x] Tests pass
 - [x] Documentation updated
 - [x] No breaking changes
@@ -168,6 +181,7 @@ gh pr create \
 ```
 
 Output:
+
 ```
 Creating PR via GitHub CLI...
 ✓ PR created: https://github.com/org/repo/pull/123
@@ -212,6 +226,7 @@ ship             # Release (after PR merged)
 ## Boundaries
 
 **Will:**
+
 - Run full validation pipeline
 - Perform automated code review
 - Generate comprehensive PR description
@@ -219,6 +234,7 @@ ship             # Release (after PR merged)
 - Detect breaking changes and migrations
 
 **Will Not:**
+
 - Push changes without confirmation
 - Force push or rebase automatically
 - Merge the PR (review required)

@@ -1,5 +1,5 @@
 ---
-name: analyze
+name: dk:analyze
 description: "Unified code analysis with mode selection: broad, security, performance, quality, review, explore"
 argument-hint: "[--mode <type>] [--target <path>] [--output json|text] [--severity <level>]"
 delegates-to: analyze
@@ -18,32 +18,34 @@ analyze [--mode <type>] [--target <path>] [options]
 
 ## Modes
 
-| Mode | Skill/Agent | Focus |
-|------|-------------|-------|
-| `--mode broad` | analyze skill | Full codebase analysis (default) |
-| `--mode security` | security skill | OWASP, vulnerabilities, threats |
-| `--mode perf` | performance skill | Bottlenecks, optimization |
-| `--mode quality` | quality skill | Test coverage, strategy |
-| `--mode review` | code-reviewer agent | PR/change review |
-| `--mode explore` | code-explorer agent | Deep feature tracing |
+| Mode              | Skill/Agent         | Focus                            |
+| ----------------- | ------------------- | -------------------------------- |
+| `--mode broad`    | analyze skill       | Full codebase analysis (default) |
+| `--mode security` | security skill      | OWASP, vulnerabilities, threats  |
+| `--mode perf`     | performance skill   | Bottlenecks, optimization        |
+| `--mode quality`  | quality skill       | Test coverage, strategy          |
+| `--mode review`   | code-reviewer agent | PR/change review                 |
+| `--mode explore`  | code-explorer agent | Deep feature tracing             |
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--target <path>` | `.` | Specific file or directory |
-| `--output <format>` | text | Output format: text, json, markdown |
-| `--severity <level>` | info | Minimum severity: info, warning, error, critical |
-| `--deep` | false | Enable deep analysis (slower) |
+| Option               | Default | Description                                      |
+| -------------------- | ------- | ------------------------------------------------ |
+| `--target <path>`    | `.`     | Specific file or directory                       |
+| `--output <format>`  | text    | Output format: text, json, markdown              |
+| `--severity <level>` | info    | Minimum severity: info, warning, error, critical |
+| `--deep`             | false   | Enable deep analysis (slower)                    |
 
 ## Mode Details
 
 ### Broad Analysis (default)
+
 ```bash
 analyze
 ```
 
 Comprehensive analysis covering:
+
 - Code quality and style
 - Security basics
 - Performance overview
@@ -51,11 +53,13 @@ Comprehensive analysis covering:
 - Documentation coverage
 
 ### Security Analysis
+
 ```bash
 analyze --mode security
 ```
 
 Focused security audit:
+
 - OWASP Top 10 vulnerabilities
 - Authentication/authorization issues
 - Input validation
@@ -63,11 +67,13 @@ Focused security audit:
 - Dependency vulnerabilities
 
 ### Performance Analysis
+
 ```bash
 analyze --mode perf
 ```
 
 Performance investigation:
+
 - Bottleneck identification
 - N+1 query detection
 - Memory leak patterns
@@ -75,11 +81,13 @@ Performance investigation:
 - Resource usage
 
 ### Quality Analysis
+
 ```bash
 analyze --mode quality
 ```
 
 Test quality assessment:
+
 - Coverage analysis
 - Test strategy evaluation
 - Edge case identification
@@ -87,11 +95,13 @@ Test quality assessment:
 - Missing test detection
 
 ### Code Review
+
 ```bash
 analyze --mode review
 ```
 
 Change-focused review:
+
 - Recent changes analysis
 - Quality assessment
 - Security review
@@ -99,11 +109,13 @@ Change-focused review:
 - Test coverage delta
 
 ### Deep Exploration
+
 ```bash
 analyze --mode explore
 ```
 
 Deep feature analysis:
+
 - Execution path tracing
 - Component dependencies
 - Data flow mapping
@@ -134,6 +146,7 @@ analyze --mode review
 ## Output Format
 
 ### Text Output (default)
+
 ```
 ═══════════════════════════════════════════════════════════════
   Code Analysis Report
@@ -175,6 +188,7 @@ Files: 47 analyzed
 ```
 
 ### JSON Output
+
 ```bash
 analyze --output json
 ```
@@ -208,6 +222,7 @@ analyze --output json
 ## Integration
 
 ### With check
+
 ```bash
 # Quick validation
 check
@@ -217,6 +232,7 @@ analyze --mode security --deep
 ```
 
 ### With prep-pr
+
 ```bash
 # Analyze changes before PR
 analyze --mode review
@@ -226,6 +242,7 @@ prep-pr
 ```
 
 ### Pipeline Usage
+
 ```bash
 # CI/CD integration
 analyze --output json --severity error > analysis.json
@@ -234,24 +251,26 @@ analyze --output json --severity error > analysis.json
 
 ## When to Use Each Mode
 
-| Scenario | Mode |
-|----------|------|
-| General code health check | `broad` |
+| Scenario                         | Mode       |
+| -------------------------------- | ---------- |
+| General code health check        | `broad`    |
 | Before security-sensitive deploy | `security` |
-| Investigating slow performance | `perf` |
-| Planning test improvements | `quality` |
-| Before submitting PR | `review` |
-| Understanding unfamiliar code | `explore` |
+| Investigating slow performance   | `perf`     |
+| Planning test improvements       | `quality`  |
+| Before submitting PR             | `review`   |
+| Understanding unfamiliar code    | `explore`  |
 
 ## Boundaries
 
 **Will:**
+
 - Analyze code thoroughly in selected mode
 - Report issues with severity and location
 - Provide actionable recommendations
 - Support multiple output formats
 
 **Will Not:**
+
 - Automatically fix issues (use specific skills for fixes)
 - Modify code during analysis
 - Certify compliance (provides guidance only)

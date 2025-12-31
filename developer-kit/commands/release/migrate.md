@@ -1,5 +1,5 @@
 ---
-name: migrate
+name: dk:migrate
 description: Plan and execute database or system migrations
 delegates-to: migration
 argument-hint: "<create|up|down|status|plan> [name] [--dry-run] [--rollback-plan]"
@@ -11,6 +11,7 @@ Execute the **migration** skill for database and system migrations.
 ## Delegation
 
 This command delegates to the `migration` skill which provides:
+
 - Zero-downtime migration strategies
 - Expand-contract pattern guidance
 - Rollback plan generation
@@ -18,26 +19,27 @@ This command delegates to the `migration` skill which provides:
 
 ## Operations
 
-| Operation | Description |
-|-----------|-------------|
-| `create` | Generate new migration file |
-| `up` | Run pending migrations |
-| `down` | Rollback last migration |
-| `status` | Show migration status |
-| `plan` | Generate migration plan without executing |
+| Operation | Description                               |
+| --------- | ----------------------------------------- |
+| `create`  | Generate new migration file               |
+| `up`      | Run pending migrations                    |
+| `down`    | Rollback last migration                   |
+| `status`  | Show migration status                     |
+| `plan`    | Generate migration plan without executing |
 
 ## Parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| `name` | Migration name (for create) |
-| `--dry-run` | Show what would happen |
-| `--rollback-plan` | Include rollback procedures |
-| `--steps N` | Number of migrations to rollback |
+| Parameter         | Description                      |
+| ----------------- | -------------------------------- |
+| `name`            | Migration name (for create)      |
+| `--dry-run`       | Show what would happen           |
+| `--rollback-plan` | Include rollback procedures      |
+| `--steps N`       | Number of migrations to rollback |
 
 ## Migration Types
 
 ### Database Migrations
+
 ```bash
 migrate create add_users_table
 migrate up
@@ -46,25 +48,27 @@ migrate status
 ```
 
 ### API Migrations
+
 ```bash
 migrate plan "deprecate v1 endpoints" --rollback-plan
 ```
 
 ### Infrastructure Migrations
+
 ```bash
 migrate plan "move to kubernetes" --dry-run
 ```
 
 ## Safe Operations Guide
 
-| Operation | Safety | Notes |
-|-----------|--------|-------|
-| Add nullable column | Safe | Always safe |
-| Add column with default | Safe | PG 11+ |
-| Add index | Caution | Use CONCURRENTLY |
-| Drop column | Caution | Ensure no references |
-| Rename column | Risky | Use expand-contract |
-| Change column type | Risky | Use expand-contract |
+| Operation               | Safety  | Notes                |
+| ----------------------- | ------- | -------------------- |
+| Add nullable column     | Safe    | Always safe          |
+| Add column with default | Safe    | PG 11+               |
+| Add index               | Caution | Use CONCURRENTLY     |
+| Drop column             | Caution | Ensure no references |
+| Rename column           | Risky   | Use expand-contract  |
+| Change column type      | Risky   | Use expand-contract  |
 
 ## Expand-Contract Pattern
 

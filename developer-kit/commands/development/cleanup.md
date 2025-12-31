@@ -1,5 +1,5 @@
 ---
-name: cleanup
+name: dk:cleanup
 description: "Code cleanup and dead code removal - delegates to devops skill"
 argument-hint: "[target] [--type code|imports|files|all] [--safe|--aggressive]"
 delegates-to: devops

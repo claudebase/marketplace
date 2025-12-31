@@ -1,5 +1,5 @@
 ---
-name: git
+name: dk:git
 description: "Git operations with smart commit messages - delegates to devops skill"
 argument-hint: "[operation] [args] [--smart-commit]"
 delegates-to: devops
@@ -11,6 +11,7 @@ operation: git
 Invokes the `devops` skill with the `git` operation.
 
 ## Usage
+
 ```
 git [operation] [args] [--smart-commit]
 ```
@@ -40,11 +41,13 @@ See `skills/devops/SKILL.md` for complete git methodology.
 ## Boundaries
 
 **Will:**
+
 - Execute Git operations with intelligent automation
 - Generate conventional commit messages from change analysis
 - Provide workflow optimization guidance
 
 **Will Not:**
+
 - Modify repository configuration without authorization
 - Execute destructive operations without confirmation
 - Handle complex merges requiring manual intervention

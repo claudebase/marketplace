@@ -1,5 +1,5 @@
 ---
-name: build
+name: dk:build
 description: "Build, compile, and package projects - delegates to devops skill"
 argument-hint: "[target] [--type dev|prod|test] [--clean] [--optimize] [--ci]"
 delegates-to: devops

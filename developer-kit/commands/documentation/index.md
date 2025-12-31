@@ -1,5 +1,5 @@
 ---
-name: index
+name: dk:index
 description: Index and understand the codebase structure
 delegates-to: research
 operation: index
@@ -12,6 +12,7 @@ Execute the **research** skill in codebase indexing mode.
 ## Delegation
 
 This command delegates to the `research` skill which provides:
+
 - Directory structure scanning
 - Key file identification (README, configs, entry points)
 - Dependency mapping
@@ -19,12 +20,12 @@ This command delegates to the `research` skill which provides:
 
 ## Parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| `path` | Directory to index (default: current directory) |
-| `--depth` | Analysis depth: shallow (structure) or deep (with summaries) |
-| `--output` | Save index to file (default: stdout) |
-| `--type` | Focus: docs, api, structure, or all |
+| Parameter  | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| `path`     | Directory to index (default: current directory)              |
+| `--depth`  | Analysis depth: shallow (structure) or deep (with summaries) |
+| `--output` | Save index to file (default: stdout)                         |
+| `--type`   | Focus: docs, api, structure, or all                          |
 
 ## Indexing Methodology
 
@@ -42,17 +43,20 @@ The research skill:
 # Project Index: [Project Name]
 
 ## Overview
+
 [Brief project description from README]
 
 ## Structure
 ```
+
 project/
 ├── src/
-│   ├── components/  # UI components
-│   ├── services/    # Business logic
-│   └── utils/       # Helper functions
+│ ├── components/ # UI components
+│ ├── services/ # Business logic
+│ └── utils/ # Helper functions
 ├── tests/
 └── docs/
+
 ```
 
 ## Key Files

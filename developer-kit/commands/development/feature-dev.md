@@ -1,5 +1,5 @@
 ---
-name: feature-dev
+name: dk:feature-dev
 description: Guided feature development with 7-phase workflow
 delegates-to: orchestration
 operation: feature
@@ -12,6 +12,7 @@ Execute the **orchestration** skill in feature development mode.
 ## Delegation
 
 This command delegates to the `orchestration` skill which coordinates:
+
 - Multi-phase structured workflow
 - Agent coordination (explorer, architect, reviewer)
 - Skill activation (brainstorm, design, implement) + code-reviewer agent
@@ -20,6 +21,7 @@ This command delegates to the `orchestration` skill which coordinates:
 ## 7-Phase Workflow
 
 ### Phase 1: Discovery
+
 **Goal**: Understand what needs to be built
 
 - Create todo list with all phases
@@ -27,6 +29,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Confirm understanding with user
 
 ### Phase 2: Codebase Exploration
+
 **Goal**: Understand existing code and patterns
 
 - Launch 2-3 code-explorer agents in parallel
@@ -35,6 +38,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Present summary of patterns discovered
 
 ### Phase 3: Clarifying Questions
+
 **Goal**: Fill in gaps before designing
 
 **CRITICAL - DO NOT SKIP**
@@ -44,6 +48,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Wait for answers before proceeding
 
 ### Phase 4: Architecture Design
+
 **Goal**: Design implementation approaches
 
 - Launch architect agents with different focuses:
@@ -54,6 +59,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Ask user which approach they prefer
 
 ### Phase 5: Implementation
+
 **Goal**: Build the feature
 
 **Requires explicit user approval**
@@ -64,6 +70,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Update todos as you progress
 
 ### Phase 6: Quality Review
+
 **Goal**: Ensure code quality
 
 - Launch 3 code-reviewer agents:
@@ -74,6 +81,7 @@ This command delegates to the `orchestration` skill which coordinates:
 - Address issues based on user decision
 
 ### Phase 7: Summary
+
 **Goal**: Document what was accomplished
 
 - Mark all todos complete

@@ -1,5 +1,5 @@
 ---
-name: release
+name: dk:release
 description: "Automate semantic versioning, changelog generation, and release tagging"
 argument-hint: "<major|minor|patch> [--dry-run] [--no-tag] [--no-changelog]"
 delegates-to: devops

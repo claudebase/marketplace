@@ -1,5 +1,5 @@
 ---
-name: recommend
+name: dk:recommend
 description: Get recommendations for libraries, tools, patterns, or approaches
 delegates-to: research
 operation: recommend
@@ -12,6 +12,7 @@ Execute the **research** skill in recommendation mode.
 ## Delegation
 
 This command delegates to the `research` skill which provides:
+
 - Multi-source information gathering
 - Feature comparison and analysis
 - Community health assessment
@@ -19,12 +20,12 @@ This command delegates to the `research` skill which provides:
 
 ## Parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| `topic` | What to get recommendations for |
-| `--criteria` | Optimization focus: performance, simplicity, popularity, or balanced |
-| `--alternatives` | Include multiple options with trade-offs |
-| `--expertise` | Target level: beginner, intermediate, or expert |
+| Parameter        | Description                                                          |
+| ---------------- | -------------------------------------------------------------------- |
+| `topic`          | What to get recommendations for                                      |
+| `--criteria`     | Optimization focus: performance, simplicity, popularity, or balanced |
+| `--alternatives` | Include multiple options with trade-offs                             |
+| `--expertise`    | Target level: beginner, intermediate, or expert                      |
 
 ## Recommendation Methodology
 
@@ -38,7 +39,7 @@ The research skill:
 
 ## Output Format
 
-```markdown
+````markdown
 ## Recommendation: [Topic]
 
 ### Top Pick: [Library/Tool Name]
@@ -46,29 +47,35 @@ The research skill:
 **Why**: [Rationale]
 
 **Pros**:
+
 - [Advantage 1]
 - [Advantage 2]
 
 **Cons**:
+
 - [Limitation 1]
 
 **Quick Start**:
+
 ```bash
 npm install [package]
 ```
+````
 
 ### Alternatives
 
-| Option | Best For | Trade-off |
-|--------|----------|-----------|
+| Option  | Best For   | Trade-off   |
+| ------- | ---------- | ----------- |
 | [Alt 1] | [Use case] | [Trade-off] |
 | [Alt 2] | [Use case] | [Trade-off] |
 
 ### Community Health
+
 - GitHub Stars: X
 - Last Updated: [date]
 - Maintainer: [active/inactive]
-```
+
+````
 
 ## Examples
 
@@ -77,7 +84,7 @@ recommend "state management for React"
 recommend "testing framework for Node.js" --criteria simplicity
 recommend "database for serverless" --alternatives
 recommend "authentication library" --expertise beginner
-```
+````
 
 ## Related
 

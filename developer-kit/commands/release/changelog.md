@@ -1,5 +1,5 @@
 ---
-name: changelog
+name: dk:changelog
 description: Generate changelog from git history using conventional commits
 delegates-to: document
 operation: changelog
@@ -12,6 +12,7 @@ Execute the **document** skill in changelog mode.
 ## Delegation
 
 This command delegates to the `document` skill which provides:
+
 - Git history analysis and commit parsing
 - Conventional commit categorization
 - Keep-a-Changelog or Conventional format output
@@ -19,26 +20,26 @@ This command delegates to the `document` skill which provides:
 
 ## Parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| `--since` | Starting point (tag name, date, or commit) |
+| Parameter  | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| `--since`  | Starting point (tag name, date, or commit)                |
 | `--format` | Output format: keep-a-changelog (default) or conventional |
-| `--output` | Output file path (default: CHANGELOG.md) |
+| `--output` | Output file path (default: CHANGELOG.md)                  |
 
 ## Conventional Commit Types
 
-| Type | Section | Included |
-|------|---------|----------|
-| `feat` | Added | Yes |
-| `fix` | Fixed | Yes |
-| `perf` | Performance | Yes |
-| `refactor` | Changed | Yes |
-| `docs` | Documentation | Yes |
-| `revert` | Reverted | Yes |
-| `style` | - | No |
-| `test` | - | No |
-| `chore` | - | No |
-| `ci` | - | No |
+| Type       | Section       | Included |
+| ---------- | ------------- | -------- |
+| `feat`     | Added         | Yes      |
+| `fix`      | Fixed         | Yes      |
+| `perf`     | Performance   | Yes      |
+| `refactor` | Changed       | Yes      |
+| `docs`     | Documentation | Yes      |
+| `revert`   | Reverted      | Yes      |
+| `style`    | -             | No       |
+| `test`     | -             | No       |
+| `chore`    | -             | No       |
+| `ci`       | -             | No       |
 
 ## Output Formats
 
@@ -48,12 +49,15 @@ This command delegates to the `document` skill which provides:
 ## [Unreleased]
 
 ### Added
+
 - New OAuth2 authentication support (#123)
 
 ### Fixed
+
 - Handle null response from external service (#124)
 
 ### Changed
+
 - Simplified error handling logic
 ```
 
@@ -63,10 +67,12 @@ This command delegates to the `document` skill which provides:
 ## [1.1.0](compare-url) (2025-01-15)
 
 ### Features
-* **auth:** add OAuth2 support ([#123](issue-url))
+
+- **auth:** add OAuth2 support ([#123](issue-url))
 
 ### Bug Fixes
-* **api:** handle null response ([#124](issue-url))
+
+- **api:** handle null response ([#124](issue-url))
 ```
 
 ## Examples

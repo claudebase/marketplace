@@ -1,5 +1,5 @@
 ---
-name: workflow
+name: dk:workflow
 description: "Generate structured implementation workflows from PRDs and feature requirements. Use for systematic workflow generation, multi-persona coordination, implementation planning, and dependency mapping."
 argument-hint: "[prd-file|feature-description] [--strategy systematic|agile|enterprise] [--depth shallow|normal|deep]"
 delegates-to: orchestration

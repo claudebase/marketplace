@@ -1,5 +1,5 @@
 ---
-name: ship
+name: dk:ship
 description: "Ship a release: validate, version bump, changelog, tag, and optionally deploy"
 argument-hint: "<version|major|minor|patch> [--dry-run] [--no-tag] [--no-push] [--deploy <env>]"
 delegates-to: orchestration
@@ -18,23 +18,24 @@ ship <version> [options]
 
 ## Arguments
 
-| Argument | Description |
-|----------|-------------|
+| Argument  | Description                                                       |
+| --------- | ----------------------------------------------------------------- |
 | `version` | Semantic version (e.g., 1.2.0) or bump type (major, minor, patch) |
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--dry-run` | false | Preview changes without executing |
-| `--no-tag` | false | Skip git tag creation |
-| `--no-push` | false | Skip pushing to remote |
-| `--deploy <env>` | none | Deploy after release (staging, production) |
-| `--prerelease <id>` | none | Create prerelease (alpha, beta, rc) |
+| Option              | Default | Description                                |
+| ------------------- | ------- | ------------------------------------------ |
+| `--dry-run`         | false   | Preview changes without executing          |
+| `--no-tag`          | false   | Skip git tag creation                      |
+| `--no-push`         | false   | Skip pushing to remote                     |
+| `--deploy <env>`    | none    | Deploy after release (staging, production) |
+| `--prerelease <id>` | none    | Create prerelease (alpha, beta, rc)        |
 
 ## What This Does
 
 ### 1. Pre-flight Checks
+
 ```bash
 # Ensure clean working tree
 git status --porcelain
@@ -51,6 +52,7 @@ check --strict
 ```
 
 ### 2. Version Calculation
+
 ```
 Current: 1.2.3
 
@@ -64,36 +66,43 @@ ship minor --prerelease beta  → 1.3.0-beta.1
 ```
 
 ### 3. Version Bump
+
 Updates version in detected files:
 
-| File | Project Type |
-|------|--------------|
-| `package.json` | Node.js |
-| `package-lock.json` | Node.js |
-| `pyproject.toml` | Python |
-| `setup.py` | Python |
-| `Cargo.toml` | Rust |
-| `go.mod` | Go |
-| `version.txt` | Generic |
+| File                         | Project Type       |
+| ---------------------------- | ------------------ |
+| `package.json`               | Node.js            |
+| `package-lock.json`          | Node.js            |
+| `pyproject.toml`             | Python             |
+| `setup.py`                   | Python             |
+| `Cargo.toml`                 | Rust               |
+| `go.mod`                     | Go                 |
+| `version.txt`                | Generic            |
 | `.claude-plugin/plugin.json` | Claude Code Plugin |
 
 ### 4. Changelog Generation
+
 Invokes `changelog` to generate:
+
 ```markdown
 ## [1.3.0] - 2025-01-15
 
 ### Added
+
 - User notification system (#123)
 - Email template customization (#125)
 
 ### Changed
+
 - Improved notification delivery speed (#124)
 
 ### Fixed
+
 - Fixed notification duplication bug (#126)
 ```
 
 ### 5. Git Operations
+
 ```bash
 # Stage all changes
 git add -A
@@ -109,7 +118,9 @@ git push origin HEAD --tags
 ```
 
 ### 6. Optional Deployment
+
 If `--deploy` specified:
+
 ```bash
 # Deploy to specified environment
 ./deploy.sh <env>  # or detected deployment method
@@ -232,13 +243,14 @@ ship             ←── You are here
 
 ## Semantic Versioning Guide
 
-| Change Type | Version Bump | Example |
-|-------------|--------------|---------|
-| Bug fixes, patches | `patch` | 1.2.3 → 1.2.4 |
-| New features (backward compatible) | `minor` | 1.2.3 → 1.3.0 |
-| Breaking changes | `major` | 1.2.3 → 2.0.0 |
+| Change Type                        | Version Bump | Example       |
+| ---------------------------------- | ------------ | ------------- |
+| Bug fixes, patches                 | `patch`      | 1.2.3 → 1.2.4 |
+| New features (backward compatible) | `minor`      | 1.2.3 → 1.3.0 |
+| Breaking changes                   | `major`      | 1.2.3 → 2.0.0 |
 
 ### Breaking Changes Include:
+
 - Removing public API methods
 - Changing method signatures
 - Removing configuration options
@@ -248,6 +260,7 @@ ship             ←── You are here
 ## Boundaries
 
 **Will:**
+
 - Run full validation before release
 - Bump version in all detected files
 - Generate changelog from commits
@@ -256,6 +269,7 @@ ship             ←── You are here
 - Deploy to specified environment
 
 **Will Not:**
+
 - Release with failing tests
 - Force push or rewrite history
 - Skip validation steps

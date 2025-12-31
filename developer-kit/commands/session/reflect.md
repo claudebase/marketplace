@@ -1,5 +1,5 @@
 ---
-name: reflect
+name: dk:reflect
 description: Reflect on session progress and capture learnings
 delegates-to: document
 operation: reflect
@@ -12,6 +12,7 @@ Execute the **document** skill in reflection mode.
 ## Delegation
 
 This command delegates to the `document` skill which provides:
+
 - Session activity summarization
 - Decision documentation
 - Learning capture
@@ -19,12 +20,12 @@ This command delegates to the `document` skill which provides:
 
 ## Parameters
 
-| Parameter | Description |
-|-----------|-------------|
-| `--summary` | Focus on work summary |
-| `--decisions` | Focus on key decisions |
-| `--next` | Focus on next steps |
-| `--save` | Save reflection to file |
+| Parameter     | Description             |
+| ------------- | ----------------------- |
+| `--summary`   | Focus on work summary   |
+| `--decisions` | Focus on key decisions  |
+| `--next`      | Focus on next steps     |
+| `--save`      | Save reflection to file |
 
 ## When to Use
 
@@ -48,35 +49,43 @@ The document skill:
 ## Session Reflection
 
 ### Work Completed
+
 - [Task 1 with outcome]
 - [Task 2 with outcome]
 
 ### Key Decisions
-| Decision | Rationale | Alternatives |
-|----------|-----------|--------------|
-| [Choice] | [Why] | [Other options] |
+
+| Decision | Rationale | Alternatives    |
+| -------- | --------- | --------------- |
+| [Choice] | [Why]     | [Other options] |
 
 ### Files Changed
+
 - `path/to/file` - [purpose of change]
 
 ### Challenges Encountered
+
 - [Challenge and how resolved]
 
 ### Lessons Learned
+
 - [Insight 1]
 - [Insight 2]
 
 ### Follow-up Items
+
 - [ ] [Next task]
 - [ ] [Technical debt]
 
 ### Context for Next Session
+
 [Key information needed to continue]
 ```
 
 ## Session State Storage
 
 Reflections can be saved to:
+
 ```
 docs/session/
 ├── current-context.md    # Current working context

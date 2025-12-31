@@ -1,5 +1,5 @@
 ---
-name: estimate
+name: dk:estimate
 description: "Estimate implementation effort for tasks, features, or projects"
 delegates-to: orchestration
 operation: estimate

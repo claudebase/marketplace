@@ -1,5 +1,5 @@
 ---
-name: business-panel
+name: dk:business-panel
 description: "AI facilitated panel discussion between renowned business thought leaders analyzing documents through distinct frameworks. Use for multi-expert business analysis, strategic planning, market assessment, and competitive analysis with discussion, debate, or socratic inquiry modes."
 argument-hint: '[document_path|content] [--mode discussion|debate|socratic] [--experts "name1,name2"]'
 delegates-to: brainstorm

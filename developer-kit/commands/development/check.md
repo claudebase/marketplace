@@ -1,5 +1,5 @@
 ---
-name: check
+name: dk:check
 description: "Run comprehensive project validation: lint, type-check, test, security scan"
 argument-hint: "[--fix] [--quick] [--strict]"
 delegates-to: devops
@@ -18,11 +18,11 @@ check [--fix] [--quick] [--strict]
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--fix` | Auto-fix issues where possible (lint, format) |
-| `--quick` | Skip slow checks (full test suite, security scan) |
-| `--strict` | Fail on warnings, not just errors |
+| Option     | Description                                       |
+| ---------- | ------------------------------------------------- |
+| `--fix`    | Auto-fix issues where possible (lint, format)     |
+| `--quick`  | Skip slow checks (full test suite, security scan) |
+| `--strict` | Fail on warnings, not just errors                 |
 
 ## What This Does
 
@@ -77,6 +77,7 @@ check --fix --quick      # Quick validation with auto-fix
 ## Integration
 
 Use before creating pull requests:
+
 ```bash
 check --fix           # Validate and fix issues
 prep-pr               # Then prepare PR
@@ -89,12 +90,14 @@ See `skills/devops/SKILL.md` for complete validation methodology.
 ## Boundaries
 
 **Will:**
+
 - Run all validation tools configured for the project
 - Auto-fix issues when --fix is specified
 - Report detailed findings with severity levels
 - Detect project type and run appropriate tools
 
 **Will Not:**
+
 - Install missing validation tools automatically
 - Modify code beyond auto-fixable formatting/lint issues
 - Skip failing tests to produce clean output

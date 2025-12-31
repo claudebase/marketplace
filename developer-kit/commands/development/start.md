@@ -1,5 +1,5 @@
 ---
-name: start
+name: dk:start
 description: "Start new feature development: create branch, setup todos, initialize session tracking"
 argument-hint: "<feature-name> [--no-branch] [--from <branch>] [--type feature|bugfix|hotfix]"
 delegates-to: orchestration
@@ -18,21 +18,22 @@ start <feature-name> [options]
 
 ## Arguments
 
-| Argument | Required | Description |
-|----------|----------|-------------|
-| `feature-name` | Yes | Name for the feature (used in branch name) |
+| Argument       | Required | Description                                |
+| -------------- | -------- | ------------------------------------------ |
+| `feature-name` | Yes      | Name for the feature (used in branch name) |
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--no-branch` | false | Skip git branch creation |
-| `--from <branch>` | main | Base branch to create from |
-| `--type <type>` | feature | Branch type: feature, bugfix, hotfix, refactor |
+| Option            | Default | Description                                    |
+| ----------------- | ------- | ---------------------------------------------- |
+| `--no-branch`     | false   | Skip git branch creation                       |
+| `--from <branch>` | main    | Base branch to create from                     |
+| `--type <type>`   | feature | Branch type: feature, bugfix, hotfix, refactor |
 
 ## What This Does
 
 ### 1. Git Branch Setup
+
 ```bash
 git checkout <base-branch>
 git pull origin <base-branch>
@@ -41,14 +42,18 @@ git checkout -b <type>/<feature-name>
 ```
 
 ### 2. Session Context Initialization
+
 Creates or updates `docs/session/current-context.md`:
+
 ```markdown
 # Current Context: <feature-name>
 
 ## Goal
+
 [To be defined - use brainstorm skill to clarify]
 
 ## Status
+
 - [x] Branch created: <type>/<feature-name>
 - [ ] Requirements gathered
 - [ ] Design completed
@@ -58,12 +63,15 @@ Creates or updates `docs/session/current-context.md`:
 - [ ] PR ready
 
 ## Started
+
 Date: YYYY-MM-DD HH:MM
 Base: <base-branch>
 ```
 
 ### 3. TodoWrite Initialization
+
 Sets up initial task list:
+
 ```
 1. [ ] Gather requirements (brainstorm skill)
 2. [ ] Design solution (design skill)
@@ -75,7 +83,9 @@ Sets up initial task list:
 ```
 
 ### 4. PM Agent Activation
+
 Enables session tracking via pm-agent for:
+
 - Progress documentation in `docs/session/`
 - Mistake capture in `docs/mistakes/`
 - Pattern extraction to `docs/patterns/`
@@ -160,12 +170,14 @@ docs/
 ## Boundaries
 
 **Will:**
+
 - Create feature branch from specified base
 - Initialize session tracking files
 - Set up TodoWrite with standard workflow
 - Provide clear next steps
 
 **Will Not:**
+
 - Start implementation without requirements
 - Skip branch creation in shared repos (use --no-branch explicitly)
 - Override existing session context without confirmation

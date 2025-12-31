@@ -1,5 +1,5 @@
 ---
-name: agent
+name: dk:agent
 description: "DK Agent - session controller that orchestrates investigation, implementation, and review. Use for complex task orchestration and multi-phase workflows."
 argument-hint: "[task-description]"
 delegates-to: orchestration
