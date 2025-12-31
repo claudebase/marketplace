@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "DevOps operations for build, test, git, and cleanup workflows. This skill should be used when the user asks to 'build the project', 'run tests', 'commit changes', 'git status', or 'cleanup dead code'. Also use when user mentions CI/CD, build pipeline, or repository operations."
+description: "MUST USE for build, test, and git workflows. Triggers: 'build', 'compile', 'git', 'commit', 'CI/CD', 'pipeline', 'deploy', 'cleanup', 'dead code', 'lint'. Provides structured DevOps workflows with proper sequencing. DO NOT run ad-hoc build/git commands - this skill ensures consistent workflows and proper commit messages."
 composable: true
 mode: read-write
 allowed-tools:

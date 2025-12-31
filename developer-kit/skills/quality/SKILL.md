@@ -1,6 +1,6 @@
 ---
 name: quality
-description: "Testing strategy design and quality assessment for comprehensive test coverage. This skill should be used when the user asks to 'design tests for', 'create test strategy', 'improve coverage', or 'what tests are needed'. Also use when user mentions quality assessment, testing recommendations, or coverage analysis. READ-ONLY."
+description: "MUST USE for test strategy design. Triggers: 'test strategy', 'what tests needed', 'testing approach', 'coverage strategy', 'test plan', 'how to test', 'testing pyramid'. Provides comprehensive testing strategy with coverage recommendations. DO NOT write tests without strategy - this skill ensures proper test distribution (unit/integration/e2e). READ-ONLY."
 composable: true
 mode: read-only
 allowed-tools:

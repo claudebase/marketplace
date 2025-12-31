@@ -1,6 +1,6 @@
 ---
 name: improve
-description: "Apply systematic improvements to code quality, performance, and maintainability. This skill should be used when the user asks to 'improve this code', 'optimize this', 'refactor', 'make this better', or 'clean up code'. Also use when user mentions performance enhancement, reducing complexity, or applying best practices. For broken code, use debug skill instead."
+description: "MUST USE for code improvements on WORKING code. Triggers: 'improve', 'optimize', 'refactor', 'make better', 'clean up', 'simplify', 'reduce complexity', 'best practices', 'modernize'. Provides systematic improvement methodology. DO NOT make ad-hoc changes - this skill ensures measurable improvements. For BROKEN code, use debug skill."
 allowed-tools:
   - Read
   - Grep

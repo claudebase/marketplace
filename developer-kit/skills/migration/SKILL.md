@@ -1,6 +1,6 @@
 ---
 name: migration
-description: "Plan and execute zero-downtime migrations for databases, APIs, and services. This skill should be used when the user asks to 'migrate database', 'upgrade API', 'deprecate endpoint', or 'data migration'. Also use when user mentions breaking changes, backward compatibility, or zero-downtime requirements."
+description: "MUST USE for any migration or breaking change. Triggers: 'migrate', 'migration', 'upgrade API', 'deprecate', 'breaking change', 'backward compatibility', 'zero-downtime', 'data migration', 'schema change'. Provides zero-downtime migration strategies with rollback plans. DO NOT make breaking changes without this skill - ensures safe, reversible migrations."
 composable: true
 mode: read-write
 allowed-tools:

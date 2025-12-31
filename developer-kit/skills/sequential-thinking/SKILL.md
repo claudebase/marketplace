@@ -1,6 +1,6 @@
 ---
 name: sequential-thinking
-description: "Systematic step-by-step reasoning with revision and branching capabilities. This skill should be used when the user asks to 'think through this', 'step by step', 'break down problem', or 'analyze systematically'. Also use when user mentions complex reasoning, planning approach, or working through problems carefully."
+description: "MUST USE for complex reasoning problems. Triggers: 'think through', 'step by step', 'break down', 'analyze systematically', 'reason about', 'figure out', 'work through'. Provides structured reasoning with revision and branching. DO NOT solve complex problems in one shot - this skill ensures thorough analysis with course correction."
 license: MIT
 composable: true
 mode: meta

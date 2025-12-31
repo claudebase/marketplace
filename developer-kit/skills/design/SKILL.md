@@ -1,6 +1,6 @@
 ---
 name: design
-description: "Design system architecture, APIs, database schemas, and component interfaces with concrete specifications. This skill should be used when the user asks to 'design a system', 'architect this', 'create API spec', or 'design database'. Also use when user mentions component design, architecture planning, or interface definitions."
+description: "MUST USE before implementing significant features. Triggers: 'design', 'architect', 'API spec', 'schema design', 'system design', 'how should I structure', 'plan the architecture', 'component interface'. Provides concrete specifications and diagrams. DO NOT start implementing without architecture - this skill prevents costly rewrites."
 composable: true
 mode: read-write
 allowed-tools:

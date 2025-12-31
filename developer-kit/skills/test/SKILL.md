@@ -1,6 +1,6 @@
 ---
 name: test
-description: "Test execution and analysis: run tests, measure coverage, identify gaps, suggest missing tests. This skill should be used when the user asks to 'run tests', 'check test coverage', 'what tests are missing', or 'run test suite'. Also use when user mentions test gaps, coverage analysis, or running the test suite."
+description: "MUST USE for test execution and coverage analysis. Triggers: 'run tests', 'test coverage', 'what tests missing', 'test suite', 'run specs', 'check tests', 'test this', 'coverage report'. Provides execution + gap analysis + suggestions. DO NOT run test commands directly - this skill ensures coverage tracking and gap identification."
 composable: true
 mode: read-write
 allowed-tools:

@@ -1,6 +1,6 @@
 ---
 name: a11y
-description: "Accessibility audit and WCAG 2.1 AA compliance. This skill should be used when the user asks about 'accessibility', 'a11y', 'WCAG compliance', 'screen reader', or 'keyboard navigation'. Also use when user mentions color contrast, ARIA attributes, or accessibility testing. READ-ONLY - audits without modifying code."
+description: "MUST USE for accessibility concerns. Triggers: 'accessibility', 'a11y', 'WCAG', 'screen reader', 'keyboard navigation', 'color contrast', 'ARIA', 'alt text', 'focus management'. Provides WCAG 2.1 AA compliance auditing. DO NOT manually check a11y - this skill ensures comprehensive coverage of all WCAG criteria. READ-ONLY."
 composable: true
 mode: read-only
 allowed-tools:

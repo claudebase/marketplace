@@ -1,6 +1,6 @@
 ---
 name: explain
-description: "Educational explanations of code, concepts, and system behavior. This skill should be used when the user asks 'what does this do', 'how does this work', 'explain this', 'teach me about', or 'help me understand'. Also use when user mentions walkthrough, understanding code, or learning concepts. READ-ONLY - for documentation artifacts, use document skill."
+description: "MUST USE for understanding code or concepts. Triggers: 'explain', 'what does this do', 'how does this work', 'teach me', 'help me understand', 'why does', 'walk me through', 'what is', 'how is this'. Provides educational explanations with examples and analogies. DO NOT just read and summarize - this skill ensures pedagogical approach. READ-ONLY."
 allowed-tools:
   - Read
   - Grep

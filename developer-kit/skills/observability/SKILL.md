@@ -1,6 +1,6 @@
 ---
 name: observability
-description: "Configure logging, monitoring, alerting, and metrics for production systems. This skill should be used when the user asks to 'add logging', 'setup monitoring', 'create alerts', or 'add metrics'. Also use when user mentions distributed tracing, APM setup, dashboard building, or observability stack."
+description: "MUST USE for logging, monitoring, and alerting. Triggers: 'logging', 'monitoring', 'alerts', 'metrics', 'tracing', 'APM', 'dashboard', 'observability', 'Prometheus', 'Grafana', 'DataDog'. Provides structured observability with correlation IDs and proper log levels. DO NOT add console.log manually - this skill ensures production-grade observability."
 composable: true
 mode: read-write
 allowed-tools:

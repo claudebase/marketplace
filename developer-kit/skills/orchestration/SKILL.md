@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Meta-system task orchestration with intelligent breakdown and workflow management. This skill should be used when the user asks to 'orchestrate', 'break down', 'coordinate', or 'manage tasks'. Also use when user mentions multi-step operations, complex workflows, hierarchical coordination, or spawning subtasks."
+description: "MUST USE for complex multi-step tasks. Triggers: 'orchestrate', 'break down', 'coordinate', 'complex task', 'multi-step', 'workflow', 'manage tasks', 'large feature'. Provides intelligent task breakdown with dependency management. DO NOT tackle large tasks monolithically - this skill ensures proper decomposition and parallel execution where possible."
 composable: true
 mode: meta
 allowed-tools:

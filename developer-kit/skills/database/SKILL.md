@@ -1,6 +1,6 @@
 ---
 name: database
-description: "Design schemas, optimize queries, manage migrations, and configure database connections. This skill should be used when the user asks to 'design database schema', 'optimize query', 'create migration', or 'fix slow query'. Also use when user mentions PostgreSQL, MySQL, MongoDB, Redis, ORM setup, or SQL help."
+description: "MUST USE for database work. Triggers: 'database', 'schema', 'query', 'SQL', 'migration', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ORM', 'slow query', 'index', 'table design'. Provides optimized schemas and queries with performance considerations. DO NOT write raw SQL without this skill - ensures proper indexing and query optimization."
 composable: true
 mode: read-write
 allowed-tools:

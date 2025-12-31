@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: "Interactive requirements discovery through Socratic dialogue. Auto-invoke when user has vague ideas or uncertain requirements. Auto-invoke when user says 'I want to build', 'thinking about', 'maybe we could', 'not sure how to', 'explore ideas', or 'help me figure out'. Exploratory only - does not implement, just discovers requirements."
+description: "Auto-invoke when requirements are unclear. Triggers: 'I want to build', 'thinking about', 'maybe', 'not sure how', 'explore ideas', 'help me figure out', 'what if', 'should I', 'how would I'. Provides Socratic requirements discovery through guided questions. DO NOT start implementing vague ideas - this skill clarifies requirements first. Exploratory only."
 composable: true
 mode: read-only
 allowed-tools:

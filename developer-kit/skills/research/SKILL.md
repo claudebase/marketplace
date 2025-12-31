@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Web research with adaptive planning and intelligent search. Supports depth levels (quick/standard/deep/exhaustive) and modes (--docs, --web). This skill should be used when the user asks to 'research [topic]', 'find information about', 'look up', 'search for', or 'find docs for [library]'. Also use when user mentions finding best practices or latest updates."
+description: "MUST USE for any web research or information gathering. Triggers: 'find information', 'research', 'look up', 'search for', 'what is', 'tell me about', 'find docs', 'documentation for', 'how does X work', 'best practices', 'latest updates', 'compare X vs Y'. Provides multi-source verification and citations. DO NOT use WebSearch/Tavily directly - this skill ensures proper source evaluation."
 allowed-tools:
   - Read
   - Grep

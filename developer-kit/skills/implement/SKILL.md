@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Feature and code implementation with framework-specific best practices. Auto-invoke when user asks to 'implement', 'create', 'build', or 'develop' something. Auto-invoke when user requests 'code this', 'add functionality', 'make a component', or 'build feature'. Do NOT load for analysis-only, debugging, or review tasks."
+description: "Auto-invoke for any code implementation task. Triggers: 'implement', 'create', 'build', 'develop', 'code this', 'add feature', 'make component', 'write function', 'add endpoint', 'create class'. Provides framework-specific patterns and best practices. DO NOT start coding without this skill - ensures consistent architecture. Skip for: analysis, debugging, review."
 allowed-tools:
   - Read
   - Grep

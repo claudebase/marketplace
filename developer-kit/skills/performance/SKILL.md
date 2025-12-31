@@ -1,6 +1,6 @@
 ---
 name: performance
-description: "Performance analysis through measurement-driven profiling. This skill should be used when the user asks 'why is this slow', 'find bottlenecks', 'profile performance', or 'optimize speed'. Also use when user mentions response time improvement, performance analysis, or speed optimization. READ-ONLY - identifies issues without modifying code."
+description: "MUST USE for performance concerns. Triggers: 'slow', 'performance', 'bottleneck', 'optimize speed', 'latency', 'response time', 'profiling', 'benchmark'. Provides measurement-driven analysis - profile first, then identify bottlenecks. DO NOT guess at performance issues - this skill ensures data-driven optimization. READ-ONLY. Use improve skill for fixes."
 allowed-tools:
   - Read
   - Grep

@@ -4,13 +4,12 @@ Quick reference for skill activation. Skills use "This skill should be used when
 
 ## Triggering Mechanism
 
-Skills are triggered via three patterns in their YAML frontmatter descriptions:
+Skills are triggered via semantic matching against their YAML frontmatter descriptions. Strong descriptions use:
 
-1. **Standard Pattern**: `This skill should be used when the user asks to '[trigger]'`
-2. **Proactive Pattern**: `Auto-invoke when user says '[trigger]'`
-3. **High-Priority Pattern**: `PROACTIVELY activate for: (1) [case]`
-
-Additionally, a `skill_eval_hook.py` runs on every user prompt to remind Claude to evaluate skill relevance.
+1. **Imperative Pattern**: `MUST USE for: '[trigger]'` - Forces action
+2. **Trigger List Pattern**: `Triggers: 'phrase1', 'phrase2', ...` - Clear matching
+3. **Negative Pattern**: `DO NOT use [tool] directly` - Prevents bypass
+4. **Value Pattern**: `Provides X that direct tools cannot` - Explains why
 
 ## Analysis & Review
 
@@ -26,11 +25,11 @@ Additionally, a `skill_eval_hook.py` runs on every user prompt to remind Claude 
 
 ## Research & Discovery
 
-| Skill          | Trigger Phrases                                                                    |
-| -------------- | ---------------------------------------------------------------------------------- |
-| **research**   | 'research [topic]', 'find information about', 'look up', 'find docs for [library]' |
-| **brainstorm** | 'I want to build', 'thinking about', 'maybe we could', 'not sure how to' (auto)    |
-| **explain**    | 'what does this do', 'how does this work', 'explain this', 'teach me about'        |
+| Skill          | Trigger Phrases                                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **research**   | 'find information', 'research', 'look up', 'search for', 'what is', 'tell me about', 'find docs', 'how does X work' |
+| **brainstorm** | 'I want to build', 'thinking about', 'maybe we could', 'not sure how to' (auto)                                     |
+| **explain**    | 'what does this do', 'how does this work', 'explain this', 'teach me about'                                         |
 
 ## Design & Implementation
 
@@ -68,11 +67,11 @@ Additionally, a `skill_eval_hook.py` runs on every user prompt to remind Claude 
 
 ## Usage Tips
 
-1. **Use quoted phrases**: Skills trigger on specific phrases like 'analyze this code'
-2. **Be explicit**: Include trigger words from the tables above in your request
+1. **Natural language works**: Skills use semantic matching, not exact keywords
+2. **Be direct**: "find information about X" triggers research skill automatically
 3. **Override with skill name**: Say "use the [skill] skill" or "/[skill]" to explicitly invoke
 4. **Auto-invoke skills**: Some skills (implement, debug, brainstorm) trigger proactively
-5. **Forced evaluation**: The skill_eval_hook ensures Claude considers skills on every prompt
+5. **Strong descriptions**: Skills with MUST USE and DO NOT patterns trigger more reliably
 
 ## Skill Count
 

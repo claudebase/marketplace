@@ -1,6 +1,6 @@
 ---
 name: frontend
-description: "Frontend development with UI/UX, accessibility, and distinctive design philosophy. This skill should be used when the user asks to 'create component', 'build UI', 'design interface', or 'frontend page'. Also use when user mentions React component, Vue component, landing page, dashboard, or web application UI."
+description: "MUST USE for UI/frontend development. Triggers: 'create component', 'build UI', 'frontend', 'React component', 'Vue component', 'landing page', 'dashboard', 'form', 'modal', 'button', 'layout'. Provides UI/UX best practices with accessibility built-in. DO NOT build UI without this skill - ensures consistent design patterns and a11y compliance."
 composable: true
 mode: read-write
 allowed-tools:

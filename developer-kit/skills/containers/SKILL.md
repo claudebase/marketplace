@@ -1,6 +1,6 @@
 ---
 name: containers
-description: "Create Dockerfiles, compose configurations, and Kubernetes manifests. This skill should be used when the user asks to 'create Dockerfile', 'docker compose', 'containerize app', or 'Kubernetes manifest'. Also use when user mentions k8s deployment, Helm chart, pod configuration, or container orchestration."
+description: "MUST USE for containerization. Triggers: 'Docker', 'Dockerfile', 'docker-compose', 'container', 'Kubernetes', 'k8s', 'Helm', 'pod', 'deployment', 'containerize'. Provides production-ready configurations with security best practices. DO NOT write container configs without this skill - ensures multi-stage builds, security scanning, and proper resource limits."
 composable: true
 mode: read-write
 allowed-tools:

@@ -1,6 +1,6 @@
 ---
 name: security
-description: "PROACTIVELY activate for: (1) security audit requests (2) vulnerability analysis (3) OWASP compliance checks. This skill should be used when the user asks to 'check security', 'find vulnerabilities', 'security review', or 'is this secure'. Also use when user mentions OWASP, threat model, or CVE. READ-ONLY - use security-expert agent for fixes."
+description: "PROACTIVELY activate for ANY security concern. Triggers: 'security', 'vulnerabilities', 'is this secure', 'OWASP', 'CVE', 'injection', 'XSS', 'authentication', 'authorization', 'secrets', 'credentials'. Provides OWASP-based audit methodology. DO NOT grep for security patterns manually - this skill ensures comprehensive coverage. READ-ONLY. Use security-expert agent for fixes."
 allowed-tools:
   - Read
   - Grep
