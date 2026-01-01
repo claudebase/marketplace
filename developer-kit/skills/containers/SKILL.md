@@ -1,6 +1,6 @@
 ---
 name: containers
-description: "Docker and Kubernetes configurations. Activates for: Docker, Dockerfile, container, Kubernetes, k8s, Helm, pod, deployment."
+description: "Creates and optimizes Docker configurations, Kubernetes manifests, Helm charts, and container orchestration setups. Use when the user needs to containerize applications, create Dockerfiles, or set up Kubernetes deployments. Triggers on requests like 'create a Dockerfile', 'dockerize this', 'set up Kubernetes', 'write a k8s manifest', 'create a Helm chart', 'containerize this app', 'deploy to k8s', or 'optimize my Docker image'. NOT for general deployment pipelines (use devops) or cloud infrastructure (use design)."
 composable: true
 mode: read-write
 allowed-tools:

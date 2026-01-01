@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "Build, test, git, and cleanup workflows. Activates for: build, compile, git, commit, CI/CD, deploy, cleanup."
+description: "Handles build processes, git operations, CI/CD pipelines, deployments, and code cleanup workflows. Use when the user needs to build their project, commit changes, set up CI/CD, deploy, or clean up the codebase. Triggers on requests like 'build the project', 'set up CI/CD', 'help me commit this', 'deploy this', 'create a pipeline', 'clean up dead code', 'compile this', 'run the build', or 'set up GitHub Actions'. NOT for writing application code (use implement) or containerization (use containers)."
 composable: true
 mode: read-write
 allowed-tools:

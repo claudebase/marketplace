@@ -1,6 +1,6 @@
 ---
 name: frontend
-description: "UI/frontend development with accessibility. Activates for: create component, build UI, React, Vue, dashboard, form, modal."
+description: "Develops UI components and frontend features with built-in accessibility, using React, Vue, or other frameworks. Use when the user needs frontend components, UI elements, forms, dashboards, or interactive features built. Triggers on requests like 'create a component', 'build this UI', 'make a form', 'create a modal', 'build a dashboard', 'add a button that', 'create this page', 'build the frontend for', or 'make this responsive'. Includes accessibility by default. NOT for backend logic (use implement) or API design (use design)."
 composable: true
 mode: read-write
 allowed-tools:

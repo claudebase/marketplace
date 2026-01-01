@@ -1,6 +1,6 @@
 ---
 name: performance
-description: "Measurement-driven performance analysis. Activates for: slow, performance, bottleneck, latency, profiling, benchmark."
+description: "Analyzes performance through measurement, profiling, and benchmarking to identify bottlenecks and optimization opportunities. Use when the user reports slowness, wants to find performance issues, or needs to optimize response times. Triggers on requests like 'why is this slow', 'find the bottleneck', 'profile this code', 'benchmark this', 'improve performance', 'check latency', 'optimize speed', 'this is taking too long', or 'performance analysis'. This skill is READ-ONLY for analysis - for implementing optimizations, use improve skill."
 allowed-tools:
   - Read
   - Grep

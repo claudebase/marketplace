@@ -1,6 +1,6 @@
 ---
 name: observability
-description: "Logging, monitoring, and alerting setup. Activates for: logging, monitoring, alerts, metrics, tracing, Prometheus, Grafana."
+description: "Sets up logging, monitoring, alerting, metrics collection, and distributed tracing using tools like Prometheus, Grafana, and OpenTelemetry. Use when the user needs to add observability to their system, track metrics, or set up alerts. Triggers on requests like 'add logging', 'set up monitoring', 'create alerts for', 'track metrics', 'add tracing', 'set up Prometheus', 'create a Grafana dashboard', 'instrument this code', or 'I need to monitor'. NOT for debugging specific issues (use debug) or performance profiling (use performance)."
 composable: true
 mode: read-write
 allowed-tools:

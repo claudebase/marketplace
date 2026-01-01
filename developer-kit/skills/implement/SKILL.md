@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Code implementation with framework patterns. Activates for: implement, create, build, develop, add feature, write function."
+description: "Implements features, components, and functionality following framework-specific patterns and best practices. Use when the user wants to add new functionality, create components, build APIs, or write new code. Triggers on requests like 'implement X', 'create a component for Y', 'build this feature', 'add a function that', 'write code to', 'develop this', 'code this for me', 'make a new endpoint', or 'add this functionality'. NOT for fixing bugs (use debug) or improving existing code (use improve)."
 allowed-tools:
   - Read
   - Grep

@@ -1,6 +1,6 @@
 ---
 name: quality
-description: "Test strategy design with coverage recommendations. Activates for: test strategy, what tests needed, test plan, testing pyramid."
+description: "Designs comprehensive test strategies with coverage recommendations, edge case identification, and testing pyramid guidance. Use when the user needs to plan what tests to write, identify edge cases, or create a testing strategy. Triggers on requests like 'what tests should I write', 'design a test strategy', 'what edge cases', 'create a test plan', 'how should I test this', 'what coverage do I need', or 'plan my testing approach'. This skill PLANS test strategy - for running tests, use test skill; for writing tests, use implement."
 composable: true
 mode: read-only
 allowed-tools:

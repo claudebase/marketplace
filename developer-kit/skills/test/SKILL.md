@@ -1,6 +1,6 @@
 ---
 name: test
-description: "Test execution and coverage analysis. Activates for: run tests, test coverage, test suite, run specs, check tests, coverage report."
+description: "Executes test suites, analyzes coverage, and helps write tests for code. Use when the user wants to run their tests, check coverage, write new tests, or troubleshoot failing tests. Triggers on requests like 'run the tests', 'check test coverage', 'write tests for this', 'why is this test failing', 'add unit tests', 'run the test suite', 'check if tests pass', 'create tests for', or 'improve test coverage'. NOT for designing test strategy (use quality) or implementing features (use implement)."
 composable: true
 mode: read-write
 allowed-tools:

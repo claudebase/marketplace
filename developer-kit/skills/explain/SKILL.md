@@ -1,6 +1,6 @@
 ---
 name: explain
-description: "Educational code/concept explanations with examples. Activates for: explain, what does this do, how does this work, teach me."
+description: "Provides clear, educational explanations of code, concepts, and system behavior with examples and analogies. Use when the user wants to understand how something works, learn about a concept, or needs clarification on code behavior. Triggers on requests like 'explain this code', 'what does this do', 'how does this work', 'teach me about', 'help me understand', 'walk me through', 'what is the purpose of', 'why is this written this way', or 'can you clarify'. NOT for creating documentation files (use document) or analyzing code quality (use analyze)."
 allowed-tools:
   - Read
   - Grep

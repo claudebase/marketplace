@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Complex task breakdown with dependency management. Activates for: orchestrate, break down, complex task, multi-step, workflow."
+description: "Breaks down complex multi-step tasks into manageable subtasks with dependency tracking and intelligent coordination. Use when the user has a large, complex task that needs systematic breakdown and execution across multiple domains. Triggers on requests like 'break this down', 'plan this complex task', 'orchestrate this project', 'help me with this multi-step task', 'coordinate these changes', or 'manage this workflow'. This is a meta-skill for complex coordination - for single-domain tasks, use the specific skill directly."
 composable: true
 mode: meta
 allowed-tools:

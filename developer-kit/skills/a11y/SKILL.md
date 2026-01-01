@@ -1,6 +1,6 @@
 ---
 name: a11y
-description: "WCAG accessibility auditing. Activates for: a11y, WCAG, accessibility, screen reader, ARIA."
+description: "Audits applications for WCAG 2.1 AA accessibility compliance, checking screen reader support, keyboard navigation, and ARIA usage. Use when the user wants to check accessibility, ensure their app works for all users, or fix accessibility issues. Triggers on requests like 'check accessibility', 'is this accessible', 'audit for WCAG', 'make this accessible', 'check screen reader support', 'fix a11y issues', 'add ARIA labels', or 'ensure keyboard navigation'. For implementing accessibility fixes in frontend components, use frontend skill."
 composable: true
 mode: read-only
 allowed-tools:

@@ -1,6 +1,6 @@
 ---
 name: document
-description: "Structured documentation artifacts (README, API docs, JSDoc). Activates for: document, README, API docs, write docs, docstring."
+description: "Creates structured documentation artifacts including READMEs, API documentation, JSDoc comments, and technical guides. Use when the user needs documentation files created or updated for their code, APIs, or projects. Triggers on requests like 'write a README', 'document this API', 'add JSDoc comments', 'create documentation for', 'write docs for this', 'generate API docs', 'add docstrings', or 'create a technical guide'. NOT for explaining code verbally (use explain) or inline code comments during implementation."
 composable: true
 mode: read-write
 allowed-tools:

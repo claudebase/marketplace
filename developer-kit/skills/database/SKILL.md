@@ -1,6 +1,6 @@
 ---
 name: database
-description: "Schema design and query optimization. Activates for: database, schema, SQL, migration, PostgreSQL, MySQL, MongoDB, ORM."
+description: "Designs database schemas, optimizes queries, and creates migrations for PostgreSQL, MySQL, MongoDB, and ORMs like Prisma or TypeORM. Use when the user needs help with database structure, slow queries, or data modeling. Triggers on requests like 'design a schema for', 'optimize this query', 'create a migration', 'help with my database', 'write SQL for', 'set up the database', 'model this data', 'fix this slow query', or 'add a table for'. NOT for application logic (use implement) or data migrations between systems (use migration)."
 composable: true
 mode: read-write
 allowed-tools:

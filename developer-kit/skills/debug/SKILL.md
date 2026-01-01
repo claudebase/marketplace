@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "Tiered debugging methodology (quick→systematic→RCA). Activates for: debug, fix bug, not working, error, broken, troubleshoot."
+description: "Investigates and fixes bugs using tiered debugging methodology from quick fixes to root cause analysis. Use when the user reports something is broken, not working, throwing errors, or behaving unexpectedly. Triggers on requests like 'fix this bug', 'why is this not working', 'I'm getting an error', 'this is broken', 'help me troubleshoot', 'something is wrong with', 'it crashes when', 'debug this issue', 'why does this fail', or 'figure out what's wrong'. NOT for improving working code (use improve) or code analysis (use analyze)."
 composable: true
 mode: read-write
 allowed-tools:

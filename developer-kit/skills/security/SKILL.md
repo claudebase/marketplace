@@ -1,6 +1,6 @@
 ---
 name: security
-description: "OWASP-based security auditing. Activates for: security, vulnerabilities, OWASP, CVE, injection, XSS, authentication."
+description: "Performs OWASP-based security audits to identify vulnerabilities, authentication issues, and security risks without modifying code. Use when the user is concerned about security, wants to check for vulnerabilities, or needs a security review before deployment. Triggers on requests like 'check for security issues', 'is this secure', 'find vulnerabilities', 'security audit', 'check for XSS', 'look for injection risks', 'review authentication', 'is this safe', or 'security review this code'. This skill is READ-ONLY - for implementing security fixes, use implement or improve skills."
 allowed-tools:
   - Read
   - Grep

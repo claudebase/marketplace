@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: "Requirements discovery via Socratic dialogue. Activates for: thinking about, not sure, explore ideas, help me figure out."
+description: "Transforms vague ideas into concrete requirements through Socratic questioning and structured exploration. Use when the user has an unclear idea, isn't sure what they need, or wants to explore possibilities before committing to an approach. Triggers on requests like 'I'm thinking about', 'I'm not sure how to', 'help me figure out', 'explore ideas for', 'what should I consider', 'brainstorm with me', 'I have this vague idea', or 'help me clarify'. NOT for implementation (use implement) or research (use research)."
 composable: true
 mode: read-only
 allowed-tools:

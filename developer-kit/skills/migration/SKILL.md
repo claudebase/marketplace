@@ -1,6 +1,6 @@
 ---
 name: migration
-description: "Zero-downtime migrations with rollback plans. Activates for: migrate, migration, breaking change, data migration, schema change."
+description: "Plans and executes zero-downtime migrations with rollback strategies for databases, APIs, and system changes. Use when the user needs to migrate data, handle breaking changes, or transition between systems safely. Triggers on requests like 'migrate this data', 'plan a migration', 'handle this breaking change', 'migrate to the new system', 'create rollback plan', 'upgrade without downtime', or 'transition from X to Y'. NOT for database schema design (use database) or simple database migrations (use database for schema changes)."
 composable: true
 mode: read-write
 allowed-tools:

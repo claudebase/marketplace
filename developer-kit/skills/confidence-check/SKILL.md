@@ -1,6 +1,6 @@
 ---
 name: confidence-check
-description: "Pre-implementation confidence gate (≥90% required). Activates for: ready to implement, confident enough, before I start."
+description: "Validates readiness before implementation by checking understanding, requirements clarity, and potential blockers. Use when about to start coding and want to verify all prerequisites are met. Triggers on requests like 'am I ready to start', 'should I begin implementing', 'do I have everything I need', 'confidence check', 'ready to code', 'before I start', or 'validate my understanding'. This skill gates implementation - if confidence is below 90%, it identifies what's missing."
 composable: true
 mode: read-only
 allowed-tools:

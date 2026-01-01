@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: "Multi-dimensional code analysis (quality, security, performance). Activates for: analyze, review code, check quality, find issues."
+description: "Performs comprehensive code analysis covering quality, security, performance, and architecture without modifying code. Use when the user wants a code review, quality assessment, or to identify potential issues in their codebase. Triggers on requests like 'analyze this code', 'review my code', 'check the quality of', 'find issues in', 'what's wrong with this code', 'assess this', 'audit this code', 'look for problems', or 'evaluate this implementation'. NOT for fixing issues (use debug/improve) or security-focused audits (use security)."
 composable: true
 mode: read-only
 allowed-tools:

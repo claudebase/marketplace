@@ -1,6 +1,6 @@
 ---
 name: improve
-description: "Systematic code improvements on working code. Activates for: improve, optimize, refactor, clean up, simplify, modernize."
+description: "Systematically improves working code through refactoring, optimization, and modernization while preserving functionality. Use when the user has working code that needs to be cleaner, faster, more readable, or more maintainable. Triggers on requests like 'improve this code', 'refactor this', 'clean up this code', 'optimize this', 'make this more readable', 'simplify this', 'modernize this code', 'reduce complexity', or 'make this better'. NOT for fixing broken code (use debug) or adding new features (use implement)."
 composable: true
 mode: read-write
 allowed-tools:

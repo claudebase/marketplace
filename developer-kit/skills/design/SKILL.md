@@ -1,6 +1,6 @@
 ---
 name: design
-description: "Architecture and API design before implementation. Activates for: design, architect, API spec, system design, schema design."
+description: "Creates architecture designs, API specifications, and system blueprints before implementation begins. Use when the user needs to plan system architecture, design APIs, or create technical specifications. Triggers on requests like 'design an architecture for', 'plan this system', 'create an API spec', 'how should I structure this', 'design the schema', 'architect this solution', 'plan the API endpoints', or 'what's the best architecture for'. This skill plans and designs - for implementing the designs, use implement skill."
 composable: true
 mode: read-write
 allowed-tools:

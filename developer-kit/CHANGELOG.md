@@ -9,6 +9,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.5.8] - 2026-01-01
+
+### Changed
+
+- **Skill Descriptions**: Enhanced all 24 skill descriptions with detailed trigger patterns and use cases
+  - Descriptions now explain what each skill does, when to use it, and provide trigger phrase examples
+  - Clarifies skill boundaries and suggests alternative skills where appropriate
+  - Improves Claude's ability to select the correct skill based on user requests
+
+### Fixed
+
+- **Validation Hook**: Replace Unicode emojis with ASCII in `validate_delegation.py` for cross-platform compatibility
+
+### Removed
+
+- Deleted obsolete `GAP-ANALYSIS-REPORT.md` and `REFACTORING-PLAN.md` files (completed work)
+
+---
+
+## [5.5.0] - 2026-01-01
+
+### Added
+
+- **Delegation Directives**: Added delegation metadata to all 21 commands and 14 agents
+  - Commands now specify which skill they delegate to (e.g., `analyze` -> `analyze` skill)
+  - Agents document their tool access and capabilities
+  - Enables better routing and understanding of component relationships
+
+### Changed
+
+- **Documentation Enhancement**: Improved command and agent documentation with delegation context
+  - Commands include "Delegates to" section showing target skill
+  - Agents include "Tools Available" section listing accessible tools
+
+---
+
 ## [5.4.0] - 2026-01-01
 
 ### Changed

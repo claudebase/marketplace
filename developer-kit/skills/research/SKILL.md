@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Web research with multi-source verification. Activates for: research, find information, look up, find docs, best practices."
+description: "Performs comprehensive web research on ANY topic with multi-source verification and structured analysis. Use for ALL research requests regardless of domain - technical documentation, market analysis, product comparisons, industry trends, financial research, competitive analysis, or learning about unfamiliar concepts. Triggers on: 'research [topic]', 'deep research', 'find information about', 'look up', 'what is X', 'how does Y work', 'what's the latest on', 'analyze [topic]', 'compare X vs Y'. This is the DEFAULT skill for any research or information gathering task."
 allowed-tools:
   - Read
   - Grep
@@ -27,7 +27,7 @@ Web research with adaptive planning, intelligent search, and multi-source verifi
 
 ## Quick Reference
 
-**Activates for**: research, find information, look up, find docs, best practices, compare
+**Activates for**: research, deep research, find information, look up, analyze, compare X vs Y, what is, how does X work, what's the latest on, market analysis, find docs
 **Mode**: read-only
 **Output**: Verified findings with citations
 
@@ -39,10 +39,12 @@ PLAN → SEARCH → EVALUATE → SYNTHESIZE → DELIVER
 
 ## When to Use
 
-- Research ("research [topic]", "find information about")
-- Documentation ("find docs for [library]", "get documentation")
-- Best practices ("what's the latest on", "find best practices")
-- Comparisons ("compare X vs Y", "which is better")
+- **Any research request** ("research [topic]", "deep research", "find information about")
+- Technical documentation ("find docs for [library]", "get documentation")
+- Market/financial research ("analyze stock", "market trends", "investment research")
+- Product/technology comparisons ("compare X vs Y", "which is better")
+- Industry analysis ("what's the latest on", "trends in [field]")
+- Learning ("what is X", "how does Y work", "explain [concept]")
 
 ## When NOT to Use
 
@@ -59,5 +61,5 @@ PLAN → SEARCH → EVALUATE → SYNTHESIZE → DELIVER
 
 ## Boundaries
 
-**Will**: Research topics, find documentation, compare technologies, cite sources
+**Will**: Research ANY topic (technical, financial, market, industry), find documentation, compare options, analyze data, cite sources
 **Will Not**: Implement code, fix bugs, explore codebases

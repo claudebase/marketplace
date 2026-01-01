@@ -1,6 +1,6 @@
 ---
 name: sequential-thinking
-description: "Structured reasoning with revision and branching. Activates for: think through, step by step, analyze systematically, reason about."
+description: "Enables structured problem-solving through iterative reasoning with revision and branching for complex decisions. Use when facing a complex problem that requires systematic thinking, multiple considerations, or careful analysis. Triggers on requests like 'think through this', 'step by step analysis', 'reason about', 'analyze systematically', 'break down this problem', 'consider all angles', or 'help me think through'. This is a reasoning meta-skill that can be combined with other skills."
 license: MIT
 composable: true
 mode: meta

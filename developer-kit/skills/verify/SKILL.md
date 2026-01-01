@@ -1,6 +1,6 @@
 ---
 name: verify
-description: "Evidence-based validation before completion claims. Activates for: verify, validate, ready to commit, check my work."
+description: "Validates completed work through evidence-based checklists before marking tasks as done or committing code. Use when the user thinks they're finished and wants to verify everything is actually complete and working. Triggers on requests like 'verify this is done', 'check my work', 'is this ready to commit', 'validate I'm finished', 'did I miss anything', 'review before committing', or 'prove this works'. This skill validates completion - for fixing issues found, use debug or improve skills."
 composable: true
 mode: read-only
 allowed-tools:
