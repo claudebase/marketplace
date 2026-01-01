@@ -199,16 +199,16 @@ def main() -> int:
             print(f"  ... and {len(phase3_errors) - 5} more")
 
     if critical_errors:
-        print(f"\n\u274c Validation FAILED: {len(critical_errors)} critical errors")
+        print(f"\n[FAIL] Validation FAILED: {len(critical_errors)} critical errors")
         return 1
 
     if phase2_errors or phase3_errors:
         print(
-            f"\n\u26a0\ufe0f Phase 1 complete. Pending: Phase 2 ({len(phase2_errors)}), Phase 3 ({len(phase3_errors)})"
+            f"\n[WARN] Phase 1 complete. Pending: Phase 2 ({len(phase2_errors)}), Phase 3 ({len(phase3_errors)})"
         )
         return 0  # Not a failure, just pending work
 
-    print(f"\n\u2705 All delegation checks passed!")
+    print("\n[PASS] All delegation checks passed!")
     return 0
 
 
