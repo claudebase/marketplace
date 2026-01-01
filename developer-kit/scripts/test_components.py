@@ -12,11 +12,9 @@ Usage:
 """
 
 import argparse
-import os
 import re
 import sys
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 # Add lib directory to path for cross-platform utilities
 SCRIPT_DIR = Path(__file__).parent.resolve()

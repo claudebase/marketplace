@@ -20,7 +20,7 @@ from typing import Optional, Tuple
 # Add lib directory to path for cross-platform utilities
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 
-from platform_utils import HookIO, CommandRunner, PlatformInfo
+from platform_utils import HookIO, CommandRunner
 
 # File extensions and their formatters
 # Format: extension -> (formatter_name, base_command)

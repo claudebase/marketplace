@@ -15,7 +15,7 @@ import sys
 # Add lib directory to path for cross-platform utilities
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 
-from platform_utils import HookIO, PlatformInfo
+from platform_utils import HookIO
 
 # Dangerous patterns that should be blocked - both Unix and Windows
 DANGEROUS_PATTERNS = [

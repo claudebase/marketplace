@@ -15,7 +15,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Tuple
 
 # Add lib directory to path for cross-platform utilities
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
