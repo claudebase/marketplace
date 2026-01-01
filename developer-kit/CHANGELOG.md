@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.2.0] - 2026-01-01
+
+### Changed
+
+- **Skill Descriptions**: Improved skill triggering reliability with stronger, more explicit trigger descriptions
+- **Code Quality**: Removed unused imports from Python hook and script files (ruff auto-fix)
+
+### Fixed
+
+- **Agent References**: Moved agent reference patterns to `lib/shared-references/` directory for proper organization
+- **Migration Validation**: Phase 6 complete - all validation checks passing
+
+### Added
+
+- **Expertise Fields**: Added `expertise:` frontmatter field to all 14 agents
+- **Composable Fields**: Added `composable:` and `mode:` fields to all 24 skills for standardization
+- **Skill Evaluation Hook**: New hook for standardized skill trigger pattern evaluation
+
+---
+
 ## [5.1.0] - 2025-12-31
 
 ### Changed
