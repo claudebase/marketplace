@@ -265,6 +265,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill      | Invocation                                                | Use Case                  |
+| ---------- | --------------------------------------------------------- | ------------------------- |
+| explain    | `Skill(skill: "developer-kit:explain", args: "$TASK")`    | Concept explanations      |
+| document   | `Skill(skill: "developer-kit:document", args: "$TASK")`   | Tutorial creation         |
+| brainstorm | `Skill(skill: "developer-kit:brainstorm", args: "$TASK")` | Learning path exploration |
+
+### Invocation Pattern
+
+```
+# For explaining concepts
+Skill(skill: "developer-kit:explain", args: "explain React hooks to beginners")
+
+# For creating tutorials
+Skill(skill: "developer-kit:document", args: "create tutorial for async/await")
+
+# For exploring learning paths
+Skill(skill: "developer-kit:brainstorm", args: "design learning path for TypeScript")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

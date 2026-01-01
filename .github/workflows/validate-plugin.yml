@@ -61,6 +61,10 @@ jobs:
         working-directory: developer-kit
         run: ${{ matrix.python-cmd }} scripts/ci_tests.py
 
+      - name: Validate delegation compliance
+        working-directory: developer-kit
+        run: ${{ matrix.python-cmd }} scripts/validate_delegation.py
+
   # Summary job that requires all matrix jobs to pass
   validation-summary:
     name: Validation Summary

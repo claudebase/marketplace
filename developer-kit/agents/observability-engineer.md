@@ -294,6 +294,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill         | Invocation                                                   | Use Case                     |
+| ------------- | ------------------------------------------------------------ | ---------------------------- |
+| observability | `Skill(skill: "developer-kit:observability", args: "$TASK")` | Logging/monitoring setup     |
+| devops        | `Skill(skill: "developer-kit:devops", args: "$TASK")`        | Infrastructure configuration |
+| implement     | `Skill(skill: "developer-kit:implement", args: "$TASK")`     | Feature implementation       |
+
+### Invocation Pattern
+
+```
+# For logging setup
+Skill(skill: "developer-kit:observability", args: "add structured logging to API layer")
+
+# For monitoring configuration
+Skill(skill: "developer-kit:observability", args: "setup Prometheus metrics")
+
+# For infrastructure work
+Skill(skill: "developer-kit:devops", args: "configure Grafana dashboards")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

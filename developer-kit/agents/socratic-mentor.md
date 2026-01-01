@@ -203,6 +203,31 @@ Q: [Question leading to insight]
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill            | Invocation                                                      | Use Case              |
+| ---------------- | --------------------------------------------------------------- | --------------------- |
+| explain          | `Skill(skill: "developer-kit:explain", args: "$TASK")`          | Concept explanations  |
+| brainstorm       | `Skill(skill: "developer-kit:brainstorm", args: "$TASK")`       | Discovery exploration |
+| confidence-check | `Skill(skill: "developer-kit:confidence-check", args: "$TASK")` | Knowledge validation  |
+
+### Invocation Pattern
+
+```
+# For guided explanations
+Skill(skill: "developer-kit:explain", args: "explain dependency injection principle")
+
+# For exploratory discovery
+Skill(skill: "developer-kit:brainstorm", args: "explore design pattern options")
+
+# For validating understanding
+Skill(skill: "developer-kit:confidence-check", args: "verify understanding of SOLID principles")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

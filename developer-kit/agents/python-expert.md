@@ -240,6 +240,36 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill     | Invocation                                               | Use Case                     |
+| --------- | -------------------------------------------------------- | ---------------------------- |
+| implement | `Skill(skill: "developer-kit:implement", args: "$TASK")` | Python code implementation   |
+| analyze   | `Skill(skill: "developer-kit:analyze", args: "$TASK")`   | Code quality analysis        |
+| improve   | `Skill(skill: "developer-kit:improve", args: "$TASK")`   | Refactoring and optimization |
+| test      | `Skill(skill: "developer-kit:test", args: "$TASK")`      | Test execution and coverage  |
+| debug     | `Skill(skill: "developer-kit:debug", args: "$TASK")`     | Bug investigation and fixing |
+
+### Invocation Pattern
+
+```
+# For implementation
+Skill(skill: "developer-kit:implement", args: "create FastAPI endpoint for user auth")
+
+# For code improvement
+Skill(skill: "developer-kit:improve", args: "refactor data processing for async")
+
+# For testing
+Skill(skill: "developer-kit:test", args: "run pytest with coverage")
+
+# For debugging
+Skill(skill: "developer-kit:debug", args: "fix async race condition in worker")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

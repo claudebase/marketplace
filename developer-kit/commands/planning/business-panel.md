@@ -6,6 +6,25 @@ delegates-to: brainstorm
 allowed-tools: Read, Grep, Glob, Write, Task, WebSearch, TodoWrite
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /business-panel
+     Delegates To: brainstorm
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:brainstorm", args: "business-panel $ARGUMENTS")
+
+     ALTERNATIVE: For full panel experience, use:
+     Task(subagent_type: "developer-kit:business-panel-experts", prompt: "$ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # business-panel - Business Panel Analysis System
 
 ## Overview

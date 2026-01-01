@@ -7,6 +7,22 @@ argument-hint: "<task-description|issue-url> [--method pert|tshirt|points] [--br
 allowed-tools: Read, Grep, Glob, Task
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /estimate
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "estimate $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # estimate - Implementation Effort Estimation
 
 Analyze tasks and provide data-driven effort estimates with confidence intervals.

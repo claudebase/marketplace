@@ -6,6 +6,22 @@ delegates-to: orchestration
 operation: release-ship
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /ship
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "ship $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # ship - Release Shipping
 
 Ship a new version with full release workflow automation.

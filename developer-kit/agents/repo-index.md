@@ -217,6 +217,27 @@ Index Usage:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill    | Invocation                                              | Use Case           |
+| -------- | ------------------------------------------------------- | ------------------ |
+| analyze  | `Skill(skill: "developer-kit:analyze", args: "$TASK")`  | Structure analysis |
+| document | `Skill(skill: "developer-kit:document", args: "$TASK")` | Index generation   |
+
+### Invocation Pattern
+
+```
+# For analyzing repository structure
+Skill(skill: "developer-kit:analyze", args: "analyze project structure")
+
+# For generating documentation
+Skill(skill: "developer-kit:document", args: "generate PROJECT_INDEX.md")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

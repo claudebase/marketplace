@@ -6,6 +6,22 @@ delegates-to: devops
 operation: validate
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /check
+     Delegates To: devops
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:devops", args: "check $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # check - Unified Validation Command
 
 Run comprehensive validation on the current project.

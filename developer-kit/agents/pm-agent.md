@@ -230,6 +230,32 @@ For detailed workflows:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill         | Invocation                                                   | Use Case               |
+| ------------- | ------------------------------------------------------------ | ---------------------- |
+| document      | `Skill(skill: "developer-kit:document", args: "$TASK")`      | Documentation creation |
+| analyze       | `Skill(skill: "developer-kit:analyze", args: "$TASK")`       | Session analysis       |
+| verify        | `Skill(skill: "developer-kit:verify", args: "$TASK")`        | Task verification      |
+| orchestration | `Skill(skill: "developer-kit:orchestration", args: "$TASK")` | Workflow coordination  |
+
+### Invocation Pattern
+
+```
+# For documenting learnings
+Skill(skill: "developer-kit:document", args: "capture session learnings")
+
+# For verifying completion
+Skill(skill: "developer-kit:verify", args: "verify task completion")
+
+# For coordinating workflows
+Skill(skill: "developer-kit:orchestration", args: "manage session state")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

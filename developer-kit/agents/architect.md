@@ -213,6 +213,33 @@ For each component:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill     | Invocation                                               | Use Case                          |
+| --------- | -------------------------------------------------------- | --------------------------------- |
+| design    | `Skill(skill: "developer-kit:design", args: "$TASK")`    | System/API/database schema design |
+| analyze   | `Skill(skill: "developer-kit:analyze", args: "$TASK")`   | Codebase pattern analysis         |
+| security  | `Skill(skill: "developer-kit:security", args: "$TASK")`  | Security architecture review      |
+| devops    | `Skill(skill: "developer-kit:devops", args: "$TASK")`    | Infrastructure/CI-CD design       |
+| implement | `Skill(skill: "developer-kit:implement", args: "$TASK")` | Implementation guidance           |
+
+### Invocation Pattern
+
+```
+# For architecture design
+Skill(skill: "developer-kit:design", args: "microservices architecture for e-commerce")
+
+# For security review of design
+Skill(skill: "developer-kit:security", args: "review authentication architecture")
+
+# For infrastructure planning
+Skill(skill: "developer-kit:devops", args: "design CI/CD pipeline")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

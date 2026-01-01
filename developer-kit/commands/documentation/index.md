@@ -7,6 +7,25 @@ argument-hint: "[path] [--depth shallow|deep] [--output <file>]"
 allowed-tools: Read, Grep, Glob, Write
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /index
+     Delegates To: research
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:research", args: "index $ARGUMENTS")
+
+     ALTERNATIVE: For full indexing, use:
+     Task(subagent_type: "developer-kit:repo-index", prompt: "$ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **research** skill in codebase indexing mode.
 
 ## Delegation

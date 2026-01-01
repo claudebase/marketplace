@@ -6,6 +6,22 @@ delegates-to: orchestration
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, TodoWrite, Task
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /agent
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "agent $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # DK Agent Activation
 
 🚀 **DK Agent online** — this plugin launches `agent` automatically at session start.

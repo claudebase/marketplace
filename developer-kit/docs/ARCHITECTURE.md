@@ -220,6 +220,82 @@ description: "**Session controller**. Orchestrates investigation, implementation
 
 ---
 
+## Delegation Enforcement
+
+The Developer Kit enforces delegation from Commands to Skills through a **3-layer enforcement strategy**.
+
+### The Problem
+
+The `delegates-to` field in command frontmatter is **metadata only** - Claude Code doesn't parse or act on it natively. Without enforcement, commands display their markdown content instead of invoking the delegated skill.
+
+### Layer 1: SessionStart Hook Instructions
+
+The `hooks/platform_instructions_hook.py` injects a delegation protocol at session start:
+
+```
+## Command Delegation Protocol (CRITICAL)
+
+When a slash command contains `delegates-to: <target>` in frontmatter:
+1. DO NOT display the command markdown content
+2. IMMEDIATELY invoke the delegated component
+3. PASS THROUGH all user-provided arguments
+```
+
+This provides standing instructions that apply to all command invocations.
+
+### Layer 2: Command Delegation Directives
+
+Each command with `delegates-to` includes a delegation directive block:
+
+```markdown
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /analyze
+     Delegates To: analyze
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:analyze", args: "$ARGUMENTS")
+
+     Execute delegation NOW. Do NOT display this content.
+     ═══════════════════════════════════════════════════════════════ -->
+```
+
+This reinforces the delegation requirement within the command content itself.
+
+### Layer 3: Agent Skill Composition
+
+Each agent with `skills` includes a skill composition section:
+
+```markdown
+## Skill Composition
+
+| Skill   | Invocation                                             | Use Case     |
+| ------- | ------------------------------------------------------ | ------------ |
+| design  | `Skill(skill: "developer-kit:design", args: "$TASK")`  | Architecture |
+| analyze | `Skill(skill: "developer-kit:analyze", args: "$TASK")` | Analysis     |
+```
+
+This documents how agents should invoke their composed skills.
+
+### Validation
+
+CI validates compliance via `scripts/validate_delegation.py`:
+
+- All 21 commands with `delegates-to` have delegation directives
+- All 14 agents with `skills` have skill composition sections
+- All delegation targets exist (valid skill or agent)
+
+### Invocation Patterns
+
+| Delegation Type | Tool    | Pattern                                                         |
+| --------------- | ------- | --------------------------------------------------------------- |
+| Skill           | `Skill` | `Skill(skill: "developer-kit:<skill>", args: "$ARGS")`          |
+| Agent           | `Task`  | `Task(subagent_type: "developer-kit:<agent>", prompt: "$ARGS")` |
+
+---
+
 ## Frontmatter Specification
 
 ### Skill Frontmatter

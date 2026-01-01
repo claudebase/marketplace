@@ -7,6 +7,22 @@ argument-hint: "<topic> [--criteria performance|simplicity|popularity] [--altern
 allowed-tools: Read, Grep, Glob, WebSearch, Task
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /recommend
+     Delegates To: research
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:research", args: "recommend $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **research** skill in recommendation mode.
 
 ## Delegation

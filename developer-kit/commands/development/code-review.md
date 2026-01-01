@@ -6,6 +6,22 @@ delegates-to: code-reviewer
 allowed-tools: Bash(gh:*), Read, Grep, Glob, Task
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /code-review
+     Delegates To: code-reviewer
+     Type: Agent (NOT a skill!)
+
+     INVOCATION:
+     Task(subagent_type: "developer-kit:code-reviewer", prompt: "$ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # code-review
 
 Invoke the `code-reviewer` agent for comprehensive code review with confidence-based filtering.

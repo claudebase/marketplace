@@ -6,6 +6,22 @@ delegates-to: orchestration
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, TodoWrite, Task, WebSearch
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /workflow
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "workflow $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # workflow - Implementation Workflow Generator
 
 ## Triggers

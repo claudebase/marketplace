@@ -223,6 +223,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill      | Invocation                                                | Use Case                 |
+| ---------- | --------------------------------------------------------- | ------------------------ |
+| brainstorm | `Skill(skill: "developer-kit:brainstorm", args: "$TASK")` | Requirements exploration |
+| research   | `Skill(skill: "developer-kit:research", args: "$TASK")`   | Market research          |
+| design     | `Skill(skill: "developer-kit:design", args: "$TASK")`     | Specification design     |
+
+### Invocation Pattern
+
+```
+# For requirements discovery
+Skill(skill: "developer-kit:brainstorm", args: "explore user authentication requirements")
+
+# For market research
+Skill(skill: "developer-kit:research", args: "competitor analysis for project management tools")
+
+# For specification design
+Skill(skill: "developer-kit:design", args: "design PRD structure for e-commerce platform")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

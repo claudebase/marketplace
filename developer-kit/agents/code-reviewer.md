@@ -220,6 +220,32 @@ For detailed workflows and checklists:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill    | Invocation                                              | Use Case                    |
+| -------- | ------------------------------------------------------- | --------------------------- |
+| analyze  | `Skill(skill: "developer-kit:analyze", args: "$TASK")`  | Code quality analysis       |
+| security | `Skill(skill: "developer-kit:security", args: "$TASK")` | Security vulnerability scan |
+| quality  | `Skill(skill: "developer-kit:quality", args: "$TASK")`  | Test coverage assessment    |
+| test     | `Skill(skill: "developer-kit:test", args: "$TASK")`     | Run and verify tests        |
+
+### Invocation Pattern
+
+```
+# For security-focused review
+Skill(skill: "developer-kit:security", args: "audit changes in src/api/")
+
+# For test coverage check
+Skill(skill: "developer-kit:quality", args: "assess test coverage for user module")
+
+# For running tests after review
+Skill(skill: "developer-kit:test", args: "run tests for changed files")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

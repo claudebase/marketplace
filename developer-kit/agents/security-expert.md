@@ -225,6 +225,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill    | Invocation                                              | Use Case                          |
+| -------- | ------------------------------------------------------- | --------------------------------- |
+| security | `Skill(skill: "developer-kit:security", args: "$TASK")` | Security audit and analysis       |
+| analyze  | `Skill(skill: "developer-kit:analyze", args: "$TASK")`  | Code analysis for vulnerabilities |
+| improve  | `Skill(skill: "developer-kit:improve", args: "$TASK")`  | Security improvements             |
+
+### Invocation Pattern
+
+```
+# For security audit
+Skill(skill: "developer-kit:security", args: "audit authentication module")
+
+# For vulnerability analysis
+Skill(skill: "developer-kit:analyze", args: "--mode security src/api/")
+
+# For implementing security fixes
+Skill(skill: "developer-kit:improve", args: "fix SQL injection in user queries")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

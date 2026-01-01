@@ -6,6 +6,22 @@ delegates-to: brainstorm
 allowed-tools: Read, Grep, Glob, Write, TodoWrite
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /spec-panel
+     Delegates To: brainstorm
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:brainstorm", args: "spec-panel $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # spec-panel - Expert Specification Review Panel
 
 ## Triggers

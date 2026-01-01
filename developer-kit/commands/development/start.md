@@ -6,6 +6,22 @@ delegates-to: orchestration
 operation: feature-start
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /start
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "start $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # start - Feature Development Starter
 
 Initialize a new feature development workflow with proper setup.

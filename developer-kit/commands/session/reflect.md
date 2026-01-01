@@ -7,6 +7,22 @@ argument-hint: "[--summary] [--decisions] [--next] [--save <path>]"
 allowed-tools: Read, Grep, Glob, Write, TodoWrite
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /reflect
+     Delegates To: document
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:document", args: "reflect $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **document** skill in reflection mode.
 
 ## Delegation

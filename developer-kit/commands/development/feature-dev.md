@@ -7,6 +7,22 @@ argument-hint: "<feature-description|issue-url> [--phase discovery|design|implem
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /feature-dev
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "feature-dev $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **orchestration** skill in feature development mode.
 
 ## Delegation

@@ -301,6 +301,28 @@ analysis_framework:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill      | Invocation                                                | Use Case                    |
+| ---------- | --------------------------------------------------------- | --------------------------- |
+| research   | `Skill(skill: "developer-kit:research", args: "$TASK")`   | Market/competitive research |
+| analyze    | `Skill(skill: "developer-kit:analyze", args: "$TASK")`    | Business document analysis  |
+| brainstorm | `Skill(skill: "developer-kit:brainstorm", args: "$TASK")` | Strategic ideation          |
+
+### Invocation Pattern
+
+```
+# For market research
+Skill(skill: "developer-kit:research", args: "competitor analysis SaaS market")
+
+# For strategic brainstorming
+Skill(skill: "developer-kit:brainstorm", args: "explore business model options")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

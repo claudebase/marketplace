@@ -6,6 +6,22 @@ delegates-to: devops
 operation: cleanup
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /cleanup
+     Delegates To: devops
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:devops", args: "cleanup $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # cleanup - Code Cleanup and Dead Code Removal
 
 Remove unused code, imports, and files with safety validation.

@@ -6,6 +6,22 @@ argument-hint: "<create|up|down|status|plan> [name] [--dry-run] [--rollback-plan
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /migrate
+     Delegates To: migration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:migration", args: "$ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **migration** skill for database and system migrations.
 
 ## Delegation

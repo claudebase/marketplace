@@ -208,6 +208,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill     | Invocation                                               | Use Case                          |
+| --------- | -------------------------------------------------------- | --------------------------------- |
+| database  | `Skill(skill: "developer-kit:database", args: "$TASK")`  | Schema design, query optimization |
+| implement | `Skill(skill: "developer-kit:implement", args: "$TASK")` | ORM model implementation          |
+| migration | `Skill(skill: "developer-kit:migration", args: "$TASK")` | Database migrations               |
+
+### Invocation Pattern
+
+```
+# For schema design
+Skill(skill: "developer-kit:database", args: "design schema for multi-tenant SaaS")
+
+# For migration planning
+Skill(skill: "developer-kit:migration", args: "create migration for adding user roles")
+
+# For ORM implementation
+Skill(skill: "developer-kit:implement", args: "create Prisma models for user management")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

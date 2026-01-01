@@ -7,6 +7,22 @@ argument-hint: "[--since <tag|date>] [--format keep-a-changelog|conventional]"
 allowed-tools: Read, Write, Bash, Grep
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /changelog
+     Delegates To: document
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:document", args: "changelog $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 Execute the **document** skill in changelog mode.
 
 ## Delegation

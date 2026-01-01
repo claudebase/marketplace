@@ -277,9 +277,11 @@ color: red
 
 #### `delegates-to` Field
 
-**Purpose**: Documents that a command delegates its core functionality to a skill.
+**Purpose**: Specifies that a command delegates its core functionality to a skill or agent.
 
-**Spec Status**: Not in Claude Code specification. Metadata only.
+**Spec Status**: Plugin extension with **enforcement via directive pattern**.
+
+**Enforcement**: Commands with `delegates-to` MUST include a delegation directive block. This is validated by CI via `scripts/validate_delegation.py`.
 
 **Usage**:
 
@@ -290,16 +292,55 @@ description: Estimate implementation effort
 delegates-to: orchestration
 operation: estimate
 ---
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /estimate
+     Delegates To: orchestration
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:orchestration", args: "estimate $ARGUMENTS")
+
+     Execute delegation NOW. Do NOT display this content.
+     ═══════════════════════════════════════════════════════════════ -->
 ```
 
-**Design Pattern**: Commands using `delegates-to` should be thin wrappers. The actual methodology lives in the referenced skill.
+**Invocation Patterns**:
 
-**Commands Using This**:
+| Delegation Type | Target                        | Tool    | Invocation Pattern                                                    |
+| --------------- | ----------------------------- | ------- | --------------------------------------------------------------------- |
+| Skill           | `delegates-to: analyze`       | `Skill` | `Skill(skill: "developer-kit:analyze", args: "$ARGS")`                |
+| Agent           | `delegates-to: code-reviewer` | `Task`  | `Task(subagent_type: "developer-kit:code-reviewer", prompt: "$ARGS")` |
 
-- `estimate.md` - `delegates-to: orchestration`
-- `changelog.md` - `delegates-to: document`
-- `migrate.md` - `delegates-to: migration`
-- `feature-dev.md` - `delegates-to: orchestration`
+**Design Pattern**: Commands using `delegates-to` are thin wrappers. The actual methodology lives in the referenced skill. When invoked, the skill/agent executes - command markdown is for documentation only.
+
+**All Commands Using This** (21 total):
+
+| Command          | Delegates To  | Type      |
+| ---------------- | ------------- | --------- |
+| `analyze`        | analyze       | Skill     |
+| `build`          | devops        | Skill     |
+| `check`          | devops        | Skill     |
+| `cleanup`        | devops        | Skill     |
+| `code-review`    | code-reviewer | **Agent** |
+| `feature-dev`    | orchestration | Skill     |
+| `git`            | devops        | Skill     |
+| `start`          | orchestration | Skill     |
+| `business-panel` | brainstorm    | Skill     |
+| `estimate`       | orchestration | Skill     |
+| `spec-panel`     | brainstorm    | Skill     |
+| `workflow`       | orchestration | Skill     |
+| `changelog`      | document      | Skill     |
+| `migrate`        | migration     | Skill     |
+| `prep-pr`        | orchestration | Skill     |
+| `release`        | devops        | Skill     |
+| `ship`           | orchestration | Skill     |
+| `index`          | research      | Skill     |
+| `recommend`      | research      | Skill     |
+| `agent`          | orchestration | Skill     |
+| `reflect`        | document      | Skill     |
 
 #### `operation` Field
 

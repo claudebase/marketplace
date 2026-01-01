@@ -6,6 +6,22 @@ delegates-to: devops
 operation: build
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /build
+     Delegates To: devops
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:devops", args: "build $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # build - Project Building
 
 Build, compile, and package projects with automatic build system detection.

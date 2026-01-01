@@ -6,6 +6,29 @@ delegates-to: analyze
 operation: unified-analysis
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /analyze
+     Delegates To: analyze
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:analyze", args: "$ARGUMENTS")
+
+     MODE ROUTING:
+     - --mode security → Also invoke: Skill(skill: "developer-kit:security")
+     - --mode perf → Also invoke: Skill(skill: "developer-kit:performance")
+     - --mode quality → Also invoke: Skill(skill: "developer-kit:quality")
+     - --mode review → Invoke: Task(subagent_type: "developer-kit:code-reviewer")
+     - --mode explore → Invoke: Task(subagent_type: "developer-kit:code-explorer")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # analyze - Unified Analysis Command
 
 Single entry point for all code analysis operations with mode-based specialization.

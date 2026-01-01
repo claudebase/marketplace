@@ -267,6 +267,31 @@ Use mcp**sequential-thinking**sequentialthinking:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill    | Invocation                                              | Use Case               |
+| -------- | ------------------------------------------------------- | ---------------------- |
+| document | `Skill(skill: "developer-kit:document", args: "$TASK")` | Documentation creation |
+| explain  | `Skill(skill: "developer-kit:explain", args: "$TASK")`  | Concept explanations   |
+| a11y     | `Skill(skill: "developer-kit:a11y", args: "$TASK")`     | Accessibility review   |
+
+### Invocation Pattern
+
+```
+# For documentation creation
+Skill(skill: "developer-kit:document", args: "create README for user authentication module")
+
+# For explaining code concepts
+Skill(skill: "developer-kit:explain", args: "explain the middleware chain")
+
+# For accessibility review of docs
+Skill(skill: "developer-kit:a11y", args: "review documentation accessibility")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

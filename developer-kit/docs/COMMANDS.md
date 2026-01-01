@@ -4,6 +4,8 @@ Commands are the **interface layer** in Developer Kit's skill-centric architectu
 
 The Developer Kit includes 21 commands organized by category.
 
+> **Important**: All commands delegate to skills or agents. When invoked, the delegated component executes immediately - command markdown content is for documentation only and should not be displayed to users.
+
 ---
 
 ## How Commands Work

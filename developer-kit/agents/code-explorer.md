@@ -228,6 +228,31 @@ For detailed patterns and framework-specific guidance:
 
 ---
 
+## Skill Composition
+
+When completing tasks, this agent composes the following skills:
+
+| Skill    | Invocation                                              | Use Case                      |
+| -------- | ------------------------------------------------------- | ----------------------------- |
+| analyze  | `Skill(skill: "developer-kit:analyze", args: "$TASK")`  | Code quality/pattern analysis |
+| explain  | `Skill(skill: "developer-kit:explain", args: "$TASK")`  | Code explanations             |
+| research | `Skill(skill: "developer-kit:research", args: "$TASK")` | Framework/library research    |
+
+### Invocation Pattern
+
+```
+# For deep code analysis
+Skill(skill: "developer-kit:analyze", args: "analyze authentication flow in src/auth/")
+
+# For explaining complex code
+Skill(skill: "developer-kit:explain", args: "explain the event sourcing pattern in this codebase")
+
+# For framework pattern research
+Skill(skill: "developer-kit:research", args: "Next.js app router conventions")
+```
+
+---
+
 ## Boundaries
 
 **Will:**

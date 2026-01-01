@@ -59,7 +59,7 @@ class TestRunner:
     EXPECTED_SKILLS = 24
     EXPECTED_AGENTS = 14
     EXPECTED_COMMANDS = 21
-    EXPECTED_VERSION = "4.0.0"
+    EXPECTED_VERSION = "5.4.0"
 
     def __init__(self, plugin_dir: Path, verbose: bool = False):
         self.plugin_dir = plugin_dir
@@ -416,9 +416,104 @@ class TestRunner:
             else:
                 self.fail_test(f"Missing hook script: {hook_name}")
 
+    def test_delegation_compliance(self):
+        """Test Suite 9: Delegation Compliance."""
+        print("\n--- Test Suite 9: Delegation Compliance ---")
+
+        commands_dir = self.plugin_dir / "commands"
+        skills_dir = self.plugin_dir / "skills"
+        agents_dir = self.plugin_dir / "agents"
+
+        # Get valid delegation targets
+        skills = [
+            d.name
+            for d in skills_dir.iterdir()
+            if d.is_dir() and (d / "SKILL.md").exists()
+        ]
+        agents = []
+        for f in agents_dir.glob("*.md"):
+            content = FileUtils.read_text(f)
+            match = re.search(r"^name:\s*(\S+)", content, re.MULTILINE)
+            if match:
+                agents.append(match.group(1))
+
+        commands_with_delegation = 0
+        commands_with_directive = 0
+
+        for cmd_file in sorted(commands_dir.rglob("*.md")):
+            content = FileUtils.read_text(cmd_file)
+            cmd_name = cmd_file.stem
+
+            # Check for delegates-to
+            delegates_match = re.search(
+                r"^delegates-to:\s*(\S+)", content, re.MULTILINE
+            )
+            if delegates_match:
+                commands_with_delegation += 1
+                target = delegates_match.group(1)
+
+                # Verify target exists
+                if target in skills or target in agents:
+                    self.debug(
+                        f"Command {cmd_name} delegates to valid target: {target}"
+                    )
+                else:
+                    self.fail_test(
+                        f"Command {cmd_name} delegates to unknown target: {target}"
+                    )
+
+                # Check for delegation directive
+                if "DELEGATION DIRECTIVE" in content:
+                    commands_with_directive += 1
+                    self.pass_test(f"Command has delegation directive: {cmd_name}")
+                else:
+                    self.fail_test(f"Command missing delegation directive: {cmd_name}")
+
+        if commands_with_delegation > 0:
+            if commands_with_directive == commands_with_delegation:
+                self.pass_test(
+                    f"All {commands_with_delegation} delegating commands have directives"
+                )
+            else:
+                missing = commands_with_delegation - commands_with_directive
+                self.fail_test(f"{missing} command(s) missing delegation directives")
+
+    def test_agent_skill_composition(self):
+        """Test Suite 10: Agent Skill Composition."""
+        print("\n--- Test Suite 10: Agent Skill Composition ---")
+
+        agents_dir = self.plugin_dir / "agents"
+        agents_with_skills = 0
+        agents_with_composition = 0
+
+        for agent_file in sorted(agents_dir.glob("*.md")):
+            content = FileUtils.read_text(agent_file)
+            agent_name = agent_file.stem
+
+            # Check for skills field
+            skills_match = re.search(r"^skills:\s*(.+)$", content, re.MULTILINE)
+            if skills_match:
+                agents_with_skills += 1
+
+                # Check for skill composition section
+                if "## Skill Composition" in content:
+                    agents_with_composition += 1
+                    self.pass_test(f"Agent has skill composition: {agent_name}")
+                else:
+                    self.fail_test(f"Agent missing skill composition: {agent_name}")
+
+        if agents_with_skills > 0:
+            if agents_with_composition == agents_with_skills:
+                self.pass_test(
+                    f"All {agents_with_skills} agents with skills have composition sections"
+                )
+            else:
+                missing = agents_with_skills - agents_with_composition
+                self.fail_test(f"{missing} agent(s) missing skill composition sections")
+
     def test_cross_platform(self):
-        """Test Suite 9: Cross-Platform Compatibility."""
-        print("\n--- Test Suite 9: Cross-Platform Compatibility ---")
+        """Test Suite 11: Cross-Platform Compatibility."""
+        print("\n--- Test Suite 11: Cross-Platform Compatibility ---")
 
         # Check that lib/platform_utils.py exists
         platform_utils = self.plugin_dir / "lib" / "platform_utils.py"
@@ -463,6 +558,8 @@ class TestRunner:
         self.test_configuration()
         self.test_references()
         self.test_hooks()
+        self.test_delegation_compliance()
+        self.test_agent_skill_composition()
         self.test_cross_platform()
 
         # Summary

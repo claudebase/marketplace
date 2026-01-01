@@ -6,6 +6,22 @@ delegates-to: devops
 operation: git
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /git
+     Delegates To: devops
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:devops", args: "git $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # git - Git Operations
 
 Invokes the `devops` skill with the `git` operation.

@@ -6,6 +6,22 @@ delegates-to: devops
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ⚡ DELEGATION DIRECTIVE ⚡
+
+     Command: /release
+     Delegates To: devops
+     Type: Skill
+
+     INVOCATION:
+     Skill(skill: "developer-kit:devops", args: "release $ARGUMENTS")
+
+     IMPORTANT:
+     - Do NOT display this markdown content to the user
+     - Execute the delegation IMMEDIATELY
+     - Pass through ALL user arguments
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
 # release - Release Automation
 
 Automate the release process with semantic versioning, changelog generation, and git tagging.
