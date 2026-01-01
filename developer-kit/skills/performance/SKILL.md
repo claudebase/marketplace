@@ -1,6 +1,6 @@
 ---
 name: performance
-description: "MUST USE for performance concerns. Triggers: 'slow', 'performance', 'bottleneck', 'optimize speed', 'latency', 'response time', 'profiling', 'benchmark'. Provides measurement-driven analysis - profile first, then identify bottlenecks. DO NOT guess at performance issues - this skill ensures data-driven optimization. READ-ONLY. Use improve skill for fixes."
+description: "Measurement-driven performance analysis. Activates for: slow, performance, bottleneck, latency, profiling, benchmark."
 allowed-tools:
   - Read
   - Grep
@@ -20,18 +20,27 @@ mode: read-only
 
 # Performance Skill
 
-Identify performance bottlenecks through measurement-driven analysis. Provide data-backed optimization recommendations.
+Measurement-driven performance analysis with data-backed optimization recommendations.
 
-**Core Principle**: "Measure first, optimize second. Never assume where performance problems lie."
+**Note**: This skill ANALYZES performance (read-only). For implementing optimizations, use `improve` skill.
 
-**Note**: This skill ANALYZES performance (read-only). For implementing optimizations, use the `improve` skill.
+## Quick Reference
+
+**Activates for**: slow, performance, bottleneck, latency, profiling, benchmark
+**Mode**: read-only (analyzes only, never modifies)
+**Output**: Baseline metrics, bottleneck analysis, optimization recommendations
+
+## Workflow
+
+```
+MEASURE → PROFILE → ANALYZE → RECOMMEND
+```
 
 ## When to Use
 
 - Speed issues ("why is this slow", "find bottlenecks")
 - Performance profiling ("profile performance", "optimize speed")
 - Web vitals ("Core Web Vitals", "LCP", "CLS", "INP")
-- Response times ("improve response time", "API is slow")
 - Resource usage ("memory leak", "high CPU")
 
 ## When NOT to Use
@@ -40,44 +49,14 @@ Identify performance bottlenecks through measurement-driven analysis. Provide da
 - General code analysis → use `analyze` skill
 - Database query optimization → use `database` skill
 
-## Analysis Areas
-
-| Area     | Metrics                   | Tools                   |
-| -------- | ------------------------- | ----------------------- |
-| Frontend | LCP, CLS, INP             | Lighthouse, Playwright  |
-| Backend  | Response time, throughput | Profilers, logs         |
-| Database | Query time, connections   | EXPLAIN, slow query log |
-| Memory   | Heap size, GC frequency   | Memory profilers        |
-
-## Quick Workflow
-
-```
-MEASURE → PROFILE → ANALYZE → RECOMMEND
-  Bash      Read     Sequential   Report
-  Playwright Grep    Thinking
-```
-
-1. **Measure** - Establish baseline metrics
-2. **Profile** - Identify hotspots and bottlenecks
-3. **Analyze** - Understand root causes
-4. **Recommend** - Suggest optimizations with expected impact
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
 ## References
 
+- [Full Guide](references/guide.md) - Complete workflow and profiling
 - [Profiling Guide](references/profiling-guide.md) - Profiling techniques
 - [Optimization Patterns](references/optimization-patterns.md) - Common fixes
-- [Database Performance](references/database-performance.md) - Query optimization
 - [Caching Strategies](references/caching-strategies.md) - Cache patterns
 
 ## Boundaries
 
 **Will**: Profile code, measure metrics, identify bottlenecks, recommend optimizations
-
 **Will Not**: Implement optimizations, modify code, fix performance issues

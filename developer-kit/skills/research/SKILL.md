@@ -1,6 +1,6 @@
 ---
 name: research
-description: "MUST USE for any web research or information gathering. Triggers: 'find information', 'research', 'look up', 'search for', 'what is', 'tell me about', 'find docs', 'documentation for', 'how does X work', 'best practices', 'latest updates', 'compare X vs Y'. Provides multi-source verification and citations. DO NOT use WebSearch/Tavily directly - this skill ensures proper source evaluation."
+description: "Web research with multi-source verification. Activates for: research, find information, look up, find docs, best practices."
 allowed-tools:
   - Read
   - Grep
@@ -25,7 +25,17 @@ mode: read-only
 
 Web research with adaptive planning, intelligent search, and multi-source verification.
 
-**Core Principle**: "Search smart, verify always, cite everything."
+## Quick Reference
+
+**Activates for**: research, find information, look up, find docs, best practices, compare
+**Mode**: read-only
+**Output**: Verified findings with citations
+
+## Workflow
+
+```
+PLAN → SEARCH → EVALUATE → SYNTHESIZE → DELIVER
+```
 
 ## When to Use
 
@@ -40,51 +50,14 @@ Web research with adaptive planning, intelligent search, and multi-source verifi
 - Implementation help → use `implement` skill
 - Bug fixing → use `debug` skill
 
-## Depth Levels
-
-| Level      | Queries | Time    | Use Case           |
-| ---------- | ------- | ------- | ------------------ |
-| quick      | 1-3     | <1min   | Quick facts        |
-| standard   | 5-10    | 2-5min  | General research   |
-| deep       | 10-20   | 5-10min | Comprehensive      |
-| exhaustive | 20+     | 15+min  | Full investigation |
-
-## Modes
-
-- `--docs`: Documentation focus (Context7, official docs)
-- `--web`: General web research (Tavily, WebSearch)
-
-## Quick Workflow
-
-```
-PLAN → SEARCH → EVALUATE → SYNTHESIZE → DELIVER
-Sequential   Tavily    Read/Verify   Write      Report
-Thinking    Context7
-            GitHub
-```
-
-1. **Plan** - Define search strategy based on depth
-2. **Search** - Execute multi-source queries
-3. **Evaluate** - Verify sources, check recency
-4. **Synthesize** - Combine findings, resolve conflicts
-5. **Deliver** - Present with citations
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
 ## References
 
+- [Full Guide](references/guide.md) - Complete workflow and depth levels
 - [Search Strategies](references/search-strategies.md) - Query patterns
 - [Source Evaluation](references/source-evaluation.md) - Verification
 - [Docs Sources](references/docs-sources.md) - Documentation lookup
-- [Multi-hop Patterns](references/multi-hop-patterns.md) - Complex research
 
 ## Boundaries
 
 **Will**: Research topics, find documentation, compare technologies, cite sources
-
 **Will Not**: Implement code, fix bugs, explore codebases

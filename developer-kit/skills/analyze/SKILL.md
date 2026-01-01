@@ -1,6 +1,8 @@
 ---
 name: analyze
-description: "MUST USE for code analysis and review. Triggers: 'analyze', 'review code', 'check quality', 'assess', 'find issues', 'code review', 'technical debt', 'what's wrong with'. Provides structured multi-dimensional analysis (quality, security, performance, architecture). DO NOT use Read + manual review - this skill ensures comprehensive coverage. READ-ONLY."
+description: "Multi-dimensional code analysis (quality, security, performance). Activates for: analyze, review code, check quality, find issues."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep
@@ -13,81 +15,43 @@ allowed-tools:
   - mcp__tavily__tavily-search
   - mcp__tavily__tavily-extract
   - mcp__sequential-thinking__sequentialthinking
-composable: true
-mode: read-only
 ---
 
-# Code Analysis Skill
+# Analyze Skill
 
-Perform comprehensive static code analysis across quality, security, performance, and architecture domains. Generate severity-rated findings with actionable recommendations.
+Comprehensive code analysis across quality, security, performance, and architecture.
 
-**Core Principle**: "Evidence-based analysis. Every finding references a specific rule or best practice."
+## Quick Reference
 
-**Key Guarantee**: Read-only operation - analyzes and reports, never modifies code.
+**Activates for**: analyze, review code, check quality, find issues, code review
+**Mode**: read-only (analyzes only, never modifies)
+**Output**: Severity-rated findings with recommendations
+
+## Workflow
+
+```
+DISCOVER → RESEARCH → ANALYZE → EVALUATE → REPORT
+```
 
 ## When to Use
 
 - Code review ("analyze this code", "review for bugs")
 - Quality assessment ("check code quality", "find issues")
 - Architecture review ("assess architecture", "evaluate design")
-- Pre-merge review ("review this PR", "check changes")
 
 ## When NOT to Use
 
-- Security audit → use `security` skill (OWASP focus)
+- Security audit → use `security` skill
 - Performance profiling → use `performance` skill
 - Fixing issues → use `improve` or `debug` skills
-- Explanation → use `explain` skill
-
-## Quick Workflow
-
-```
-DISCOVER → RESEARCH → ANALYZE → EVALUATE → REPORT
-  Read     Context7    Grep    Sequential  Summary
-  Glob     GitHub      Bash    Thinking
-           Tavily
-```
-
-1. **Discover** - Scan project structure, identify languages/frameworks
-2. **Research** - Lookup linting rules, clean code principles
-3. **Analyze** - Run static analysis, detect patterns
-4. **Evaluate** - Rate by severity, calculate metrics
-5. **Report** - Present structured findings
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource        | Library ID                                   | Use Case       |
-| --------------- | -------------------------------------------- | -------------- |
-| ESLint          | `/eslint/eslint`                             | JS/TS linting  |
-| TypeScript      | `/websites/typescriptlang`                   | Type checking  |
-| Clean Code TS   | `/labs42io/clean-code-typescript`            | Best practices |
-| Design Patterns | `/websites/refactoring_guru-design-patterns` | Architecture   |
-
-## Severity Levels
-
-| Level    | Description      | Examples                          |
-| -------- | ---------------- | --------------------------------- |
-| Critical | Immediate action | Security vulns, data loss         |
-| High     | Fix soon         | Memory leaks, unhandled errors    |
-| Medium   | Plan to fix      | Code smells, missing types        |
-| Low      | Nice to fix      | Style issues, minor optimizations |
 
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
-- [Analysis Domains](references/guide.md#analysis-domains) - Quality, Security, Performance, Architecture
-- [Issue Patterns](references/guide.md#common-issue-patterns) - Critical, High, Medium examples
-- [Output Format](references/guide.md#output-format) - Report structure
+- [Full Guide](references/guide.md) - Complete methodology and phases
+- [Analysis Domains](references/guide.md#analysis-domains) - Quality, Security, Performance
+- [Issue Patterns](references/guide.md#common-issue-patterns) - Finding examples
 
 ## Boundaries
 
 **Will**: Analyze code, run linting tools, rate findings, provide recommendations
-
 **Will Not**: Modify code, replace specialized audits, make architectural decisions

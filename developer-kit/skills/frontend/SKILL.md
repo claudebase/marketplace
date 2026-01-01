@@ -1,6 +1,6 @@
 ---
 name: frontend
-description: "MUST USE for UI/frontend development. Triggers: 'create component', 'build UI', 'frontend', 'React component', 'Vue component', 'landing page', 'dashboard', 'form', 'modal', 'button', 'layout'. Provides UI/UX best practices with accessibility built-in. DO NOT build UI without this skill - ensures consistent design patterns and a11y compliance."
+description: "UI/frontend development with accessibility. Activates for: create component, build UI, React, Vue, dashboard, form, modal."
 composable: true
 mode: read-write
 allowed-tools:
@@ -28,16 +28,26 @@ allowed-tools:
 
 # Frontend Skill
 
-Create distinctive, production-grade frontend interfaces. Leverage component libraries for rapid development while applying unique design principles.
+Create distinctive, production-grade frontend interfaces with accessibility.
 
-**Core Principle**: "Components provide structure; design provides soul. Avoid generic AI slop aesthetics."
+## Quick Reference
+
+**Activates for**: create component, build UI, React, Vue, dashboard, form, modal
+**Mode**: read-write
+**Output**: Production-ready UI components with accessibility
+
+## Workflow
+
+```
+UNDERSTAND → DISCOVER → DESIGN → IMPLEMENT → VALIDATE
+```
 
 ## When to Use
 
 - Component creation ("create a button", "build a card")
 - Page development ("landing page", "dashboard", "settings page")
 - UI patterns ("navigation menu", "sidebar", "modal")
-- Framework-specific ("React component", "Vue component", "Next.js page")
+- Framework-specific ("React component", "Vue component")
 
 ## When NOT to Use
 
@@ -45,45 +55,13 @@ Create distinctive, production-grade frontend interfaces. Leverage component lib
 - Architecture decisions → use `design` skill
 - Accessibility audit → use `a11y` skill
 
-## Quick Workflow
-
-```
-UNDERSTAND → DISCOVER → DESIGN → IMPLEMENT → VALIDATE
-   Read       Shadcn    Apply     Install     Playwright
-   Glob       Context7  aesthetics  Edit      Audit
-```
-
-1. **Understand** - Analyze requirements, detect framework
-2. **Discover** - Search Shadcn for components (438+ available)
-3. **Design** - Apply distinctive aesthetic principles
-4. **Implement** - Install and customize components
-5. **Validate** - Visual test with Playwright, run audit
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource   | Tool/Library                | Use Case            |
-| ---------- | --------------------------- | ------------------- |
-| Shadcn     | MCP: shadcn                 | Component discovery |
-| React      | `/facebook/react`           | React patterns      |
-| Next.js    | `/vercel/next.js`           | Next.js patterns    |
-| Tailwind   | `/tailwindlabs/tailwindcss` | Utility classes     |
-| Playwright | MCP: playwright             | Visual validation   |
-
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow, phases, and MCP integration
+- [Full Guide](references/guide.md) - Complete workflow and MCP integration
 - [Design Guidelines](references/guide.md#design-guidelines) - Typography, color, motion
 - [Anti-Patterns](references/guide.md#anti-patterns-to-avoid) - What to avoid
 
 ## Boundaries
 
 **Will**: Create distinctive UI, use Shadcn components, apply aesthetic principles, validate visually
-
 **Will Not**: Build from scratch when libraries exist, use generic aesthetics, implement backend logic

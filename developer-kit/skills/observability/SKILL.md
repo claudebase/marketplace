@@ -1,6 +1,6 @@
 ---
 name: observability
-description: "MUST USE for logging, monitoring, and alerting. Triggers: 'logging', 'monitoring', 'alerts', 'metrics', 'tracing', 'APM', 'dashboard', 'observability', 'Prometheus', 'Grafana', 'DataDog'. Provides structured observability with correlation IDs and proper log levels. DO NOT add console.log manually - this skill ensures production-grade observability."
+description: "Logging, monitoring, and alerting setup. Activates for: logging, monitoring, alerts, metrics, tracing, Prometheus, Grafana."
 composable: true
 mode: read-write
 allowed-tools:
@@ -21,73 +21,44 @@ allowed-tools:
 
 # Observability Skill
 
-Enable comprehensive system visibility through structured logging, proactive monitoring, intelligent alerting, metrics collection, and distributed tracing.
+System visibility through logging, monitoring, alerting, metrics, and tracing.
 
-**Core Principle**: "Measure everything, alert on symptoms, debug with traces."
+## Quick Reference
 
-## When to Use
+**Activates for**: logging, monitoring, alerts, metrics, tracing, Prometheus, Grafana
+**Mode**: read-write
+**Output**: Configured observability stack with dashboards
 
-- Logging setup ("add logging", "structured logging", "Pino/Winston")
-- Monitoring ("set up monitoring", "Prometheus metrics", "Datadog")
-- Alerting ("create alerts", "SLO alerts", "error rate alerts")
-- Tracing ("distributed tracing", "OpenTelemetry")
-- Dashboards ("build dashboard", "Grafana setup")
-
-## When NOT to Use
-
-- Simple console.log debugging → use `debug` skill
-- Performance optimization → use `performance` skill
-- Security logging requirements → use `security` skill
-
-## Quick Workflow
+## Workflow
 
 ```
 ASSESS → RESEARCH → DESIGN → IMPLEMENT → VALIDATE
- Read     Context7   Sequential   Write      Bash
- Grep     GitHub     Thinking     Edit       (test)
-          Tavily
 ```
-
-1. **Assess** - Identify existing logging, metrics, gaps
-2. **Research** - Query Context7 for tool docs, search patterns
-3. **Design** - Define SLIs/SLOs, plan metrics strategy
-4. **Implement** - Configure logging, add metrics, create alerts
-5. **Validate** - Verify data collection, test alerting
 
 ## Three Pillars
 
-| Pillar  | Purpose                | Tools                   |
-| ------- | ---------------------- | ----------------------- |
-| Logs    | What happened          | Pino, Winston           |
-| Metrics | Aggregate measurements | Prometheus, prom-client |
-| Traces  | Request flow           | OpenTelemetry           |
+- **Logs**: What happened (Pino, Winston)
+- **Metrics**: Aggregate measurements (Prometheus)
+- **Traces**: Request flow (OpenTelemetry)
 
-## Tool Integration
+## When to Use
 
-For library IDs and patterns, see:
+- Logging setup, monitoring, alerting, tracing, dashboards
 
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
+## When NOT to Use
 
-### Key Resources
-
-| Resource      | Library ID                     | Use Case   |
-| ------------- | ------------------------------ | ---------- |
-| OpenTelemetry | `/websites/opentelemetry_io`   | Tracing    |
-| Prometheus    | `/websites/prometheus_io-docs` | Metrics    |
-| Grafana       | `/websites/grafana`            | Dashboards |
-| Pino          | `/pinojs/pino`                 | Logging    |
+- Console.log debugging → use `debug` skill
+- Performance optimization → use `performance` skill
+- Security logging → use `security` skill
 
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
-- [Logging Patterns](references/logging-patterns.md) - Structured logging examples
+- [Full Guide](references/guide.md) - Complete workflow and phases
+- [Logging Patterns](references/logging-patterns.md) - Structured logging
 - [Monitoring Setup](references/monitoring-setup.md) - Tool configuration
-- [Alerting Strategies](references/alerting-strategies.md) - SLO-based alerting
-- [Dashboard Templates](references/dashboard-templates.md) - Grafana examples
+- [Alerting Strategies](references/alerting-strategies.md) - SLO-based alerts
 
 ## Boundaries
 
-**Will**: Configure logging, set up metrics, create alerts, add tracing, build dashboards
-
+**Will**: Configure logging, set up metrics, create alerts, add tracing
 **Will Not**: Choose vendors, configure billing, set up on-call rotations

@@ -1,6 +1,6 @@
 ---
 name: quality
-description: "MUST USE for test strategy design. Triggers: 'test strategy', 'what tests needed', 'testing approach', 'coverage strategy', 'test plan', 'how to test', 'testing pyramid'. Provides comprehensive testing strategy with coverage recommendations. DO NOT write tests without strategy - this skill ensures proper test distribution (unit/integration/e2e). READ-ONLY."
+description: "Test strategy design with coverage recommendations. Activates for: test strategy, what tests needed, test plan, testing pyramid."
 composable: true
 mode: read-only
 allowed-tools:
@@ -18,11 +18,21 @@ allowed-tools:
 
 # Quality Skill
 
-Design comprehensive testing strategies with focus on edge cases, boundary conditions, and risk-based prioritization.
+Design comprehensive testing strategies with edge cases and risk-based prioritization.
 
-**Core Principle**: "Think beyond the happy path. Find the failures before users do."
+**Note**: This skill DESIGNS strategy (read-only). To execute tests use `test`, to implement use `implement`.
 
-**Key Distinction**: This skill DESIGNS testing strategy (read-only). To execute tests, use `test` skill. To implement tests, use `implement` skill.
+## Quick Reference
+
+**Activates for**: test strategy, what tests needed, test plan, testing pyramid, coverage
+**Mode**: read-only (designs only, never implements)
+**Output**: Testing strategy with prioritized test cases
+
+## Workflow
+
+```
+ANALYZE → RESEARCH → DESIGN → PRIORITIZE → REPORT
+```
 
 ## When to Use
 
@@ -33,52 +43,19 @@ Design comprehensive testing strategies with focus on edge cases, boundary condi
 
 ## When NOT to Use
 
-- Run tests → use `test` skill or `devops` skill
+- Run tests → use `test` skill
 - General code analysis → use `analyze` skill
 - Implement tests → use `implement` skill
 - Security testing → use `security` skill
 
-## Quick Workflow
-
-```
-ANALYZE → RESEARCH → DESIGN → PRIORITIZE → REPORT
-  Read     Context7   Sequential   Sequential   Output
-  Grep     GitHub     Thinking     Thinking
-           Tavily
-```
-
-1. **Analyze** - Read code, map dependencies, identify critical paths
-2. **Research** - Query Context7 for testing docs, search GitHub patterns
-3. **Design** - Create test cases for all paths, edge cases, boundaries
-4. **Prioritize** - Rank by risk and impact, identify quick wins
-5. **Report** - Present strategy with implementation guidance
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource        | Library ID                  | Use Case          |
-| --------------- | --------------------------- | ----------------- |
-| Jest            | `/jestjs/jest`              | Unit testing      |
-| Vitest          | `/vitest-dev/vitest`        | Fast unit tests   |
-| Playwright      | `/microsoft/playwright`     | E2E testing       |
-| Testing Library | `/websites/testing-library` | Component testing |
-
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
+- [Full Guide](references/guide.md) - Complete workflow and phases
 - [Testing Strategies](references/testing-strategies.md) - Methodologies
 - [Coverage Patterns](references/coverage-patterns.md) - Coverage analysis
-- [API Testing](references/api-testing.md) - REST API, contract testing
 - [Mocking Patterns](references/mocking-patterns.md) - Mock and stub patterns
 
 ## Boundaries
 
-**Will**: Analyze code, design test cases, identify edge cases, prioritize by risk, recommend coverage targets
-
-**Will NOT**: Execute tests, implement test code, modify source code (use `test` or `implement` skills)
+**Will**: Analyze code, design test cases, identify edge cases, prioritize by risk
+**Will NOT**: Execute tests, implement test code, modify source code

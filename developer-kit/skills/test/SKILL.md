@@ -1,6 +1,6 @@
 ---
 name: test
-description: "MUST USE for test execution and coverage analysis. Triggers: 'run tests', 'test coverage', 'what tests missing', 'test suite', 'run specs', 'check tests', 'test this', 'coverage report'. Provides execution + gap analysis + suggestions. DO NOT run test commands directly - this skill ensures coverage tracking and gap identification."
+description: "Test execution and coverage analysis. Activates for: run tests, test coverage, test suite, run specs, check tests, coverage report."
 composable: true
 mode: read-write
 allowed-tools:
@@ -23,17 +23,26 @@ allowed-tools:
 
 # Test Skill
 
-Execute tests, analyze coverage, and identify testing gaps using testing framework documentation.
+Execute tests, analyze coverage, and identify testing gaps.
 
-**Core Principle**: "Run tests frequently, analyze failures thoroughly, improve coverage continuously."
+## Quick Reference
+
+**Activates for**: run tests, test coverage, test suite, run specs, check tests
+**Mode**: read-write
+**Output**: Test results, coverage reports, gap analysis
+
+## Workflow
+
+```
+DETECT → EXECUTE → ANALYZE → REPORT
+```
 
 ## When to Use
 
 - Test execution ("run tests", "test this", "run test suite")
 - Coverage analysis ("test coverage", "coverage report")
 - Test status ("check tests", "are tests passing")
-- Gap identification ("what tests are missing", "coverage gaps")
-- E2E testing ("test the UI", "browser test")
+- Gap identification ("what tests are missing")
 
 ## When NOT to Use
 
@@ -41,52 +50,14 @@ Execute tests, analyze coverage, and identify testing gaps using testing framewo
 - Writing tests for new features → use `implement` skill
 - Test performance → use `performance` skill
 
-## Quick Workflow
-
-```
-DETECT → EXECUTE → ANALYZE → REPORT
- Glob      Bash     Read      Summary
- Read      (test)   Grep
-```
-
-1. **Detect** - Find test framework, configuration, test files
-2. **Execute** - Run tests with appropriate command
-3. **Analyze** - Examine failures, coverage gaps
-4. **Report** - Summarize results, recommend improvements
-
-## Framework Detection
-
-| Framework | Config Files                 | Command       |
-| --------- | ---------------------------- | ------------- |
-| Jest      | jest.config.\*, package.json | npm test      |
-| Vitest    | vitest.config.\*             | npx vitest    |
-| Pytest    | pytest.ini, pyproject.toml   | pytest        |
-| Go        | \*\_test.go                  | go test ./... |
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource   | Library ID           | Use Case          |
-| ---------- | -------------------- | ----------------- |
-| Jest       | `/jestjs/jest`       | JS testing        |
-| Vitest     | `/vitest-dev/vitest` | Modern JS testing |
-| Pytest     | `/pytest-dev/pytest` | Python testing    |
-| Playwright | MCP: playwright      | E2E testing       |
-
 ## References
 
+- [Full Guide](references/guide.md) - Complete workflow and framework detection
 - [Coverage Analysis](references/coverage-analysis.md) - Coverage patterns
 - [E2E Patterns](references/e2e-patterns.md) - Browser testing
 - [Framework Detection](references/framework-detection.md) - Auto-detection
 
 ## Boundaries
 
-**Will**: Run tests, analyze coverage, detect frameworks, identify gaps, suggest improvements
-
+**Will**: Run tests, analyze coverage, detect frameworks, identify gaps
 **Will Not**: Design test strategies, implement new tests, optimize test performance

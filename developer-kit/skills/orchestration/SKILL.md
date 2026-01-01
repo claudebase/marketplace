@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "MUST USE for complex multi-step tasks. Triggers: 'orchestrate', 'break down', 'coordinate', 'complex task', 'multi-step', 'workflow', 'manage tasks', 'large feature'. Provides intelligent task breakdown with dependency management. DO NOT tackle large tasks monolithically - this skill ensures proper decomposition and parallel execution where possible."
+description: "Complex task breakdown with dependency management. Activates for: orchestrate, break down, complex task, multi-step, workflow."
 composable: true
 mode: meta
 allowed-tools:
@@ -21,17 +21,25 @@ allowed-tools:
 
 # Orchestration Skill
 
-Meta-system task orchestration with intelligent breakdown, dependency management, and workflow coordination.
+Meta-system task orchestration with intelligent breakdown and dependency management.
 
-**Core Principle**: "Break complex operations into coordinated hierarchies. Execute with optimal parallelism while respecting dependencies."
+## Quick Reference
 
-**Key Distinction**: This skill ORCHESTRATES complex multi-step operations. For simple implementations, use `implement` skill.
+**Activates for**: orchestrate, break down, complex task, multi-step, workflow
+**Mode**: meta (coordinates other skills/agents)
+**Output**: Executed workflow with tracked progress
+
+## Workflow
+
+```
+ANALYZE → RESEARCH → DECOMPOSE → EXECUTE → INTEGRATE
+```
 
 ## When to Use
 
-- Complex multi-domain operations requiring intelligent task breakdown
-- Large-scale system operations spanning multiple technical areas
-- Operations requiring parallel coordination and dependency management
+- Complex multi-domain operations requiring intelligent breakdown
+- Large-scale system operations spanning multiple areas
+- Operations requiring parallel coordination and dependencies
 - Projects needing structured workflow management
 
 ## When NOT to Use
@@ -41,47 +49,14 @@ Meta-system task orchestration with intelligent breakdown, dependency management
 - Test execution → use `test` skill
 - Code review → use `analyze` skill
 
-## Quick Workflow
-
-```
-ANALYZE → RESEARCH → DECOMPOSE → EXECUTE → INTEGRATE
-  Read     Context7   Sequential    Task      TodoWrite
-  Grep     GitHub     Thinking      TodoWrite  Output
-           Tavily
-```
-
-1. **Analyze** - Parse operation, identify domains and scope
-2. **Research** - Query Context7 for workflow patterns (Airflow, XState, BullMQ)
-3. **Decompose** - Break into task hierarchy, map dependencies
-4. **Execute** - Coordinate parallel/sequential execution via Task
-5. **Integrate** - Aggregate results, validate completeness
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource       | Library ID                                      | Use Case          |
-| -------------- | ----------------------------------------------- | ----------------- |
-| Apache Airflow | `/websites/airflow_apache_apache-airflow_3_1_1` | DAG patterns      |
-| XState         | `/websites/stately_ai`                          | State machines    |
-| BullMQ         | `/websites/bullmq_io`                           | Job queues        |
-| Restate        | `/restatedev/documentation`                     | Durable workflows |
-
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
+- [Full Guide](references/guide.md) - Complete workflow and phases
 - [Breakdown Patterns](references/breakdown-patterns.md) - Task decomposition
 - [Coordination Strategies](references/coordination-strategies.md) - Parallel vs sequential
 - [Failure Handling](references/failure-handling.md) - Retry and compensation
-- [Workflow Patterns](references/workflow-patterns.md) - Industry patterns
 
 ## Boundaries
 
-**Will**: Decompose complex operations, research workflow patterns, coordinate parallel execution, handle failures with retries, track progress with TodoWrite
-
-**Will NOT**: Replace simple commands, override user preferences, execute without dependency analysis
+**Will**: Decompose complex operations, coordinate parallel execution, track progress
+**Will NOT**: Replace simple commands, override user preferences, skip dependency analysis

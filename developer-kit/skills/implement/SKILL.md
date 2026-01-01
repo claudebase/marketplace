@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Auto-invoke for any code implementation task. Triggers: 'implement', 'create', 'build', 'develop', 'code this', 'add feature', 'make component', 'write function', 'add endpoint', 'create class'. Provides framework-specific patterns and best practices. DO NOT start coding without this skill - ensures consistent architecture. Skip for: analysis, debugging, review."
+description: "Code implementation with framework patterns. Activates for: implement, create, build, develop, add feature, write function."
 allowed-tools:
   - Read
   - Grep
@@ -27,15 +27,25 @@ mode: read-write
 
 # Implement Skill
 
-Feature and code implementation with framework-specific best practices using official documentation and real-world patterns.
+Feature and code implementation with framework-specific best practices.
 
-**Core Principle**: "Implement features that follow framework conventions, are type-safe, and integrate cleanly."
+## Quick Reference
+
+**Activates for**: implement, create, build, develop, add feature, write function
+**Mode**: read-write
+**Output**: Production-ready code following framework conventions
+
+## Workflow
+
+```
+UNDERSTAND → RESEARCH → PLAN → IMPLEMENT → VERIFY
+```
 
 ## When to Use
 
-- Feature implementation ("implement X", "create component", "build feature")
+- Feature implementation ("implement X", "create component")
 - API development ("add endpoint", "create API route")
-- UI components ("build form", "create page", "add component")
+- UI components ("build form", "create page")
 - Service development ("add functionality", "code this")
 
 ## When NOT to Use
@@ -45,43 +55,12 @@ Feature and code implementation with framework-specific best practices using off
 - Performance optimization → use `performance` skill
 - Bug fixing → use `debug` skill
 
-## Quick Workflow
-
-```
-UNDERSTAND → RESEARCH → PLAN → IMPLEMENT → VERIFY
-   Read        Context7   Sequential   Write      Bash
-   Grep        GitHub     Thinking     Edit       Playwright
-               shadcn
-```
-
-1. **Understand** - Read existing code, identify patterns
-2. **Research** - Query Context7 for framework docs, search examples
-3. **Plan** - Break down into tasks, identify components
-4. **Implement** - Write code following framework conventions
-5. **Verify** - Test implementation, validate UI
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource | Library ID                   | Use Case         |
-| -------- | ---------------------------- | ---------------- |
-| React    | `/facebook/react`            | UI components    |
-| Next.js  | `/vercel/next.js`            | Full-stack React |
-| FastAPI  | `/websites/fastapi_tiangolo` | Python APIs      |
-| shadcn   | MCP: shadcn                  | UI components    |
-
 ## References
 
+- [Full Guide](references/guide.md) - Complete workflow and patterns
 - [Implementation Patterns](references/implementation-patterns.md) - Framework patterns
 
 ## Boundaries
 
 **Will**: Implement features, create components, build APIs, integrate UI
-
 **Will Not**: Analyze code quality, orchestrate multi-domain tasks, optimize performance

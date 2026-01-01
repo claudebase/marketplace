@@ -1,6 +1,6 @@
 ---
 name: explain
-description: "MUST USE for understanding code or concepts. Triggers: 'explain', 'what does this do', 'how does this work', 'teach me', 'help me understand', 'why does', 'walk me through', 'what is', 'how is this'. Provides educational explanations with examples and analogies. DO NOT just read and summarize - this skill ensures pedagogical approach. READ-ONLY."
+description: "Educational code/concept explanations with examples. Activates for: explain, what does this do, how does this work, teach me."
 allowed-tools:
   - Read
   - Grep
@@ -16,20 +16,28 @@ composable: true
 mode: read-only
 ---
 
-# Code Explanation Skill
+# Explain Skill
 
-Provide clear, educational explanations of code, concepts, and system behavior using official documentation and progressive teaching.
+Clear, educational explanations of code, concepts, and system behavior.
 
-**Core Principle**: "Teach, don't just describe. Build understanding progressively."
+## Quick Reference
 
-**Key Distinction**: EXPLAINS concepts (read-only). For documentation files use `document`. For analysis use `analyze`.
+**Activates for**: explain, what does this do, how does this work, teach me, help me understand
+**Mode**: read-only (explains only, never modifies)
+**Output**: Progressive explanations with examples and analogies
+
+## Workflow
+
+```
+ANALYZE → RESEARCH → STRUCTURE → EXPLAIN → CONNECT
+```
 
 ## When to Use
 
 - Understanding ("what does this do", "how does this work")
 - Learning ("explain this", "teach me about")
 - Clarification ("help me understand", "walk me through")
-- Concepts ("what is", "why would I use", "what's the difference")
+- Concepts ("what is", "why would I use")
 
 ## When NOT to Use
 
@@ -38,55 +46,13 @@ Provide clear, educational explanations of code, concepts, and system behavior u
 - Finding bugs → use `debug` skill
 - Improving code → use `improve` skill
 
-## Quick Workflow
-
-```
-ANALYZE → RESEARCH → STRUCTURE → EXPLAIN → CONNECT
-  Read    Context7   Sequential   Output   References
-  Grep    GitHub     Thinking
-          Tavily
-```
-
-1. **Analyze** - Read code, identify key concepts
-2. **Research** - Lookup official docs, find examples
-3. **Structure** - Plan depth level, organize concepts
-4. **Explain** - Build understanding progressively
-5. **Connect** - Link to related concepts
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource        | Library ID                                   | Use Case       |
-| --------------- | -------------------------------------------- | -------------- |
-| MDN Web Docs    | `/mdn/content`                               | Web concepts   |
-| React           | `/reactjs/react.dev`                         | React patterns |
-| TypeScript      | `/websites/typescriptlang`                   | TS concepts    |
-| Design Patterns | `/websites/refactoring_guru-design-patterns` | Patterns       |
-| Node.js         | `/websites/nodejs_api`                       | Node concepts  |
-
-## Explanation Depth
-
-| Level        | Audience     | Focus                    |
-| ------------ | ------------ | ------------------------ |
-| Beginner     | New          | Why it exists, analogies |
-| Intermediate | Knows basics | How it works, patterns   |
-| Advanced     | Experienced  | Edge cases, internals    |
-
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
+- [Full Guide](references/guide.md) - Complete workflow and phases
 - [Explanation Styles](references/guide.md#explanation-styles) - Beginner, System, Deep-dive
 - [Teaching Techniques](references/guide.md#teaching-techniques) - Analogies, misconceptions
-- [Output Format](references/guide.md#output-format) - Structured explanation template
 
 ## Boundaries
 
 **Will**: Explain concepts, research docs, use analogies, adapt to user level
-
 **Will Not**: Create files, modify code, make architectural decisions

@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.4.0] - 2026-01-01
+
+### Changed
+
+- **Skill Token Optimization**: Refactored all 24 SKILL.md files to minimal format (~70% token reduction)
+  - Reduced total skill content from ~144,000 bytes to 43,418 bytes
+  - Estimated token savings: ~25,000 tokens at startup
+  - Average skill size reduced from ~92 lines to 62 lines
+  - Moved detailed content to `references/guide.md` files (loaded on-demand)
+
+### Added
+
+- **Reference Guides**: Created 13 new `references/guide.md` files for skills missing detailed documentation
+  - a11y, brainstorm, confidence-check, devops, implement, migration, performance
+  - research, security, sequential-thinking, test, verify
+  - Also added assessment-criteria.md and examples.md for confidence-check skill
+
+- **Optimization Plan**: Added `SKILL-TOKEN-OPTIMIZATION-PLAN.md` documenting the refactoring approach
+
+---
+
 ## [5.3.0] - 2026-01-01
 
 ### Changed

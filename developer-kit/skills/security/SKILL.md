@@ -1,6 +1,6 @@
 ---
 name: security
-description: "PROACTIVELY activate for ANY security concern. Triggers: 'security', 'vulnerabilities', 'is this secure', 'OWASP', 'CVE', 'injection', 'XSS', 'authentication', 'authorization', 'secrets', 'credentials'. Provides OWASP-based audit methodology. DO NOT grep for security patterns manually - this skill ensures comprehensive coverage. READ-ONLY. Use security-expert agent for fixes."
+description: "OWASP-based security auditing. Activates for: security, vulnerabilities, OWASP, CVE, injection, XSS, authentication."
 allowed-tools:
   - Read
   - Grep
@@ -18,9 +18,21 @@ mode: read-only
 
 # Security Skill
 
-Perform comprehensive security audits with a zero-trust mindset. Identify vulnerabilities and provide actionable remediation guidance.
+Comprehensive security audits with a zero-trust mindset.
 
-**CRITICAL GUARANTEE**: This skill is READ-ONLY. Security audits report findings - they NEVER modify code.
+**CRITICAL**: This skill is READ-ONLY. Security audits report findings - they NEVER modify code.
+
+## Quick Reference
+
+**Activates for**: security, vulnerabilities, OWASP, CVE, injection, XSS, authentication
+**Mode**: read-only (audit only, never modifies)
+**Output**: Severity-rated findings with remediation guidance
+
+## Workflow
+
+```
+SCOPE → SCAN → ANALYZE → REPORT
+```
 
 ## When to Use
 
@@ -28,7 +40,6 @@ Perform comprehensive security audits with a zero-trust mindset. Identify vulner
 - Vulnerability analysis ("find vulnerabilities", "is this secure")
 - OWASP compliance ("OWASP review", "Top 10 check")
 - Threat modeling ("threat model", "attack vectors")
-- CVE research ("check for CVEs")
 
 ## When NOT to Use
 
@@ -36,53 +47,14 @@ Perform comprehensive security audits with a zero-trust mindset. Identify vulner
 - Fixing security issues → use `security-expert` agent
 - Performance analysis → use `performance` skill
 
-## OWASP Top 10 (2021)
-
-| ID  | Category               | Priority |
-| --- | ---------------------- | -------- |
-| A01 | Broken Access Control  | Critical |
-| A02 | Cryptographic Failures | Critical |
-| A03 | Injection              | Critical |
-| A07 | XSS                    | High     |
-| A09 | Logging Failures       | Medium   |
-
-## Quick Workflow
-
-```
-SCOPE → SCAN → ANALYZE → REPORT
- Read    Grep    Sequential   Summary
- Glob    GitHub  Thinking
-         Tavily
-```
-
-1. **Scope** - Identify attack surface, entry points
-2. **Scan** - Search for vulnerability patterns
-3. **Analyze** - Assess risk, prioritize findings
-4. **Report** - Document findings with remediation steps
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource           | Library ID                | Use Case                |
-| ------------------ | ------------------------- | ----------------------- |
-| OWASP Cheat Sheets | `/owasp/cheatsheetseries` | Prevention guides       |
-| OWASP Top 10       | `/owasp/top10`            | Vulnerability reference |
-
 ## References
 
+- [Full Guide](references/guide.md) - Complete workflow and phases
 - [OWASP Top 10](references/owasp-top-10.md) - Vulnerability patterns
 - [Secrets Management](references/secrets-management.md) - Credential handling
 - [Security Headers](references/security-headers.md) - HTTP security
-- [Threat Modeling](references/threat-modeling.md) - Risk assessment
 
 ## Boundaries
 
 **Will**: Audit code, identify vulnerabilities, research CVEs, assess OWASP compliance
-
 **Will Not**: Modify code, fix vulnerabilities, implement security controls

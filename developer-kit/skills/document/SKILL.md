@@ -1,6 +1,6 @@
 ---
 name: document
-description: "MUST USE for creating documentation artifacts. Triggers: 'document', 'README', 'API docs', 'JSDoc', 'docstring', 'guide', 'write docs', 'add comments', 'documentation'. Provides structured, consistent documentation formats. DO NOT write docs inline - this skill ensures proper format and completeness. For explanations use explain skill; for professional docs use technical-writer agent."
+description: "Structured documentation artifacts (README, API docs, JSDoc). Activates for: document, README, API docs, write docs, docstring."
 composable: true
 mode: read-write
 allowed-tools:
@@ -19,11 +19,19 @@ allowed-tools:
 
 # Document Skill
 
-Generate focused, high-quality documentation for code components, APIs, and features.
+Generate focused, high-quality documentation for code, APIs, and features.
 
-**Core Principle**: "Good documentation is written for the reader, not the writer."
+## Quick Reference
 
-**Key Distinction**: This skill CREATES documentation artifacts. For explanations without files, use `explain` skill. For professional tech writing, use `technical-writer` agent.
+**Activates for**: document, README, API docs, write docs, docstring, JSDoc
+**Mode**: read-write
+**Output**: Documentation files (README, API docs, JSDoc/TSDoc)
+
+## Workflow
+
+```
+ANALYZE → RESEARCH → PLAN → GENERATE → INTEGRATE
+```
 
 ## When to Use
 
@@ -31,7 +39,6 @@ Generate focused, high-quality documentation for code components, APIs, and feat
 - README generation ("generate README", "create README")
 - API documentation ("create API docs", "document endpoints")
 - Code comments ("write JSDoc", "add docstrings")
-- Guides ("create guide", "write tutorial")
 
 ## When NOT to Use
 
@@ -40,45 +47,13 @@ Generate focused, high-quality documentation for code components, APIs, and feat
 - Design systems → use `design` skill
 - Professional tech writing → use `technical-writer` agent
 
-## Quick Workflow
-
-```
-ANALYZE → RESEARCH → PLAN → GENERATE → INTEGRATE
-  Read     Context7   Sequential   Write     Read
-  Grep     GitHub     Thinking     Edit      Grep
-           Tavily
-```
-
-1. **Analyze** - Read code, identify public API and exports
-2. **Research** - Query Context7 for JSDoc/TypeDoc standards
-3. **Plan** - Structure content, identify audience and purpose
-4. **Generate** - Write documentation with examples
-5. **Integrate** - Cross-reference and validate
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource   | Library ID               | Use Case         |
-| ---------- | ------------------------ | ---------------- |
-| JSDoc      | `/jsdoc/jsdoc.github.io` | JS documentation |
-| TypeDoc    | `/typestrong/typedoc`    | TS documentation |
-| TSDoc      | `/microsoft/tsdoc`       | TS doc standard  |
-| Docusaurus | `/facebook/docusaurus`   | Doc sites        |
-
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
+- [Full Guide](references/guide.md) - Complete workflow and phases
 - [Doc Templates](references/doc-templates.md) - README, API docs templates
 - [JSDoc Patterns](references/jsdoc-patterns.md) - JSDoc/TSDoc patterns
 
 ## Boundaries
 
-**Will**: Generate READMEs, write JSDoc/TSDoc, create API docs, document component props, apply consistent formatting
-
-**Will NOT**: Explain code without files (use `explain`), comprehensive doc sites (use `technical-writer`), design APIs (use `design`)
+**Will**: Generate READMEs, write JSDoc/TSDoc, create API docs, document props
+**Will NOT**: Explain code without files, comprehensive doc sites, design APIs

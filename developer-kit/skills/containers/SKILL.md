@@ -1,6 +1,6 @@
 ---
 name: containers
-description: "MUST USE for containerization. Triggers: 'Docker', 'Dockerfile', 'docker-compose', 'container', 'Kubernetes', 'k8s', 'Helm', 'pod', 'deployment', 'containerize'. Provides production-ready configurations with security best practices. DO NOT write container configs without this skill - ensures multi-stage builds, security scanning, and proper resource limits."
+description: "Docker and Kubernetes configurations. Activates for: Docker, Dockerfile, container, Kubernetes, k8s, Helm, pod, deployment."
 composable: true
 mode: read-write
 allowed-tools:
@@ -21,9 +21,19 @@ allowed-tools:
 
 # Containers Skill
 
-Create optimized Dockerfiles, development-friendly compose configurations, and production-ready Kubernetes manifests with best practices.
+Create optimized Dockerfiles, compose configurations, and Kubernetes manifests.
 
-**Core Principle**: "Build once, run anywhere. Optimize for security, size, and speed."
+## Quick Reference
+
+**Activates for**: Docker, Dockerfile, container, Kubernetes, k8s, Helm, pod, deployment
+**Mode**: read-write
+**Output**: Production-ready container configurations
+
+## Workflow
+
+```
+ANALYZE → RESEARCH → DESIGN → IMPLEMENT → VALIDATE
+```
 
 ## When to Use
 
@@ -36,50 +46,16 @@ Create optimized Dockerfiles, development-friendly compose configurations, and p
 
 - CI/CD pipelines → use `devops` skill
 - Container security scanning → use `security` skill
-- Cloud infrastructure → use `devops` skill
 - Monitoring setup → use `observability` skill
-
-## Quick Workflow
-
-```
-ANALYZE → RESEARCH → DESIGN → IMPLEMENT → VALIDATE
-  Read     Context7   Sequential   Write      Bash
-  Grep     GitHub     Thinking     Edit       (docker build)
-           Tavily
-```
-
-1. **Analyze** - Read code, check dependencies, identify runtime needs
-2. **Research** - Query Context7 for Docker/K8s docs, search GitHub patterns
-3. **Design** - Plan base images, multi-stage builds, resources
-4. **Implement** - Write Dockerfile, compose, K8s manifests
-5. **Validate** - Build image, test locally, verify size
-
-## Tool Integration
-
-For library IDs and patterns, see:
-
-- [MCP Resources](../../lib/shared-references/mcp-resources.md)
-- [Tool Patterns](../../lib/shared-references/tool-integration-patterns.md)
-
-### Key Resources
-
-| Resource   | Library ID                   | Use Case              |
-| ---------- | ---------------------------- | --------------------- |
-| Docker     | `/websites/docs_docker_com`  | Dockerfile, compose   |
-| Kubernetes | `/kubernetes/website`        | Deployments, services |
-| Helm       | `/websites/helm_sh`          | Chart templating      |
-| Kustomize  | `/kubernetes-sigs/kustomize` | Overlays              |
 
 ## References
 
-- [Detailed Guide](references/guide.md) - Full workflow and phases
-- [Dockerfile Patterns](references/dockerfile-patterns.md) - Multi-stage builds, optimization
+- [Full Guide](references/guide.md) - Complete workflow and phases
+- [Dockerfile Patterns](references/dockerfile-patterns.md) - Multi-stage builds
 - [Compose Patterns](references/compose-patterns.md) - Development and production
 - [Kubernetes Patterns](references/kubernetes-patterns.md) - Deployments, HPA, Ingress
-- [Helm Patterns](references/helm-patterns.md) - Chart structure and templating
 
 ## Boundaries
 
-**Will**: Create Dockerfiles, compose files, K8s manifests, Helm charts, configure resources/probes
-
-**Will Not**: Provision cloud infrastructure, configure CI/CD pipelines, perform security scans
+**Will**: Create Dockerfiles, compose files, K8s manifests, Helm charts
+**Will Not**: Provision cloud infrastructure, configure CI/CD, perform security scans
