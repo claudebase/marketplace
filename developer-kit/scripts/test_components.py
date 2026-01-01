@@ -59,7 +59,7 @@ class TestRunner:
     EXPECTED_SKILLS = 24
     EXPECTED_AGENTS = 14
     EXPECTED_COMMANDS = 21
-    EXPECTED_VERSION = "5.4.0"
+    EXPECTED_VERSION = "5.5.8"
 
     def __init__(self, plugin_dir: Path, verbose: bool = False):
         self.plugin_dir = plugin_dir

@@ -96,9 +96,16 @@ def validate_skill_descriptions(plugin_dir: Path) -> Tuple[int, int]:
             errors += 1
             continue
 
-        # Check for "Activates for:" in description
-        if "activates for:" not in content.lower():
-            print_warning(f"{skill_name} - Missing 'Activates for:' trigger phrases")
+        # Check for trigger phrases in description (accepts multiple formats)
+        has_triggers = (
+            "activates for:" in content.lower()
+            or "triggers on" in content.lower()
+            or "use when" in content.lower()
+        )
+        if not has_triggers:
+            print_warning(
+                f"{skill_name} - Missing trigger phrases (Activates for/Triggers on/Use when)"
+            )
             warnings += 1
         else:
             print_ok(f"{skill_name}")
