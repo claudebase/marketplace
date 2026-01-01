@@ -1,6 +1,6 @@
 ---
-name: dk:prep-pr
-description: "Prepare changes for pull request: validate, review, generate PR description"
+name: prep-pr
+description: "**Use before creating PRs**. Validate, review, and generate PR description. Delegates to: orchestration. Activates for: prepare PR, create pull request, PR description."
 argument-hint: "[--base <branch>] [--draft] [--skip-review] [--create]"
 delegates-to: orchestration
 operation: pr-preparation

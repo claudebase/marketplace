@@ -1,6 +1,6 @@
 ---
-name: dk:build
-description: "Build, compile, and package projects - delegates to devops skill"
+name: build
+description: "**Use for project builds**. Auto-detect build system, compile, and package. Delegates to: devops. Activates for: build project, compile, package."
 argument-hint: "[target] [--type dev|prod|test] [--clean] [--optimize] [--ci]"
 delegates-to: devops
 operation: build

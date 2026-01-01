@@ -1,17 +1,35 @@
 # Frontmatter Specification
 
-This document defines the standard frontmatter fields for all Developer Kit plugin components.
+This document defines the standard frontmatter fields for all Developer Kit plugin components based on the skill-centric architecture (v5.2.0).
+
+## Description Pattern (Emphatic Triggers)
+
+All components use the **emphatic trigger pattern** for descriptions:
+
+```
+**EMPHATIC TRIGGER**. Core purpose. Delegates to: [skill/agent]. Activates for: trigger1, trigger2.
+```
+
+This pattern ensures:
+
+- Clear visibility of when to activate (bold trigger)
+- Delegation path for discoverability
+- Trigger phrases for auto-activation
+
+---
 
 ## Skills
 
-Skills are context-aware capabilities that auto-activate based on trigger phrases.
+Skills are the **primary business logic layer** - core capabilities that auto-activate based on trigger phrases.
+
+**Target Size**: 50-100 lines per SKILL.md
 
 ### Required Fields
 
 ```yaml
 ---
-name: skill-name           # kebab-case, unique identifier
-description: "Purpose. Activates for: 'trigger1', 'trigger2', 'trigger3'..."
+name: skill-name # kebab-case, unique identifier
+description: "**EMPHATIC TRIGGER**. Purpose. Activates for: 'trigger1', 'trigger2', 'trigger3'..."
 ---
 ```
 
@@ -19,7 +37,7 @@ description: "Purpose. Activates for: 'trigger1', 'trigger2', 'trigger3'..."
 
 ```yaml
 ---
-allowed-tools:             # Restrict tool access (plugin-specific extension)
+allowed-tools: # Restrict tool access (plugin-specific extension)
   - Read
   - Grep
   - Glob
@@ -29,26 +47,26 @@ allowed-tools:             # Restrict tool access (plugin-specific extension)
 
 ### Field Guidelines
 
-| Field | Required | Format | Notes |
-|-------|----------|--------|-------|
-| `name` | Yes | kebab-case | Must be unique across all skills |
-| `description` | Yes | String | Include "Activates for:" with trigger phrases |
-| `allowed-tools` | No | YAML list | Restricts available tools for this skill |
+| Field           | Required | Format     | Notes                                         |
+| --------------- | -------- | ---------- | --------------------------------------------- |
+| `name`          | Yes      | kebab-case | Must be unique across all skills              |
+| `description`   | Yes      | String     | Include "Activates for:" with trigger phrases |
+| `allowed-tools` | No       | YAML list  | Restricts available tools for this skill      |
 
 ### Deprecated Fields (Do Not Use)
 
-| Field | Reason | Migration |
-|-------|--------|-----------|
-| `when_to_use` | Redundant | Merge content into `description` |
-| `version` | Not useful | Use plugin version instead |
-| `languages` | Not useful | Remove entirely |
+| Field         | Reason     | Migration                        |
+| ------------- | ---------- | -------------------------------- |
+| `when_to_use` | Redundant  | Merge content into `description` |
+| `version`     | Not useful | Use plugin version instead       |
+| `languages`   | Not useful | Remove entirely                  |
 
 ### Example
 
 ```yaml
 ---
 name: debug
-description: "Unified debugging skill with tiered methodology. Activates for: 'fix this bug', 'debug this', 'why is this failing', 'troubleshoot', 'find the root cause'."
+description: "**MUST USE for bug fixing**. Tiered debugging from quick fix to deep RCA. Activates for: 'fix this bug', 'debug this', 'why is this failing', 'troubleshoot'."
 allowed-tools:
   - Read
   - Grep
@@ -59,9 +77,13 @@ allowed-tools:
 ---
 ```
 
+---
+
 ## Agents
 
-Agents are specialized personas that run in separate context with specific tools.
+Agents are the **orchestration layer** - specialized domain experts that compose skills and run in isolated context.
+
+**Target Size**: 200-300 lines per agent
 
 ### Required Fields
 
@@ -69,8 +91,8 @@ Agents are specialized personas that run in separate context with specific tools
 ---
 name: agent-name
 description: "Purpose and when to invoke"
-tools: Read, Grep, Glob    # Comma-separated tool list
-model: sonnet              # sonnet | opus | haiku
+tools: Read, Grep, Glob # Comma-separated tool list
+model: sonnet # sonnet | opus | haiku
 ---
 ```
 
@@ -78,46 +100,50 @@ model: sonnet              # sonnet | opus | haiku
 
 ```yaml
 ---
-permissionMode: default    # Permission handling mode
-color: red                 # Display color for UI
-skills: skill1, skill2     # Plugin extension: associated skills
+permissionMode: default # Permission handling mode
+color: red # Display color for UI
+skills: skill1, skill2 # Plugin extension: associated skills
 ---
 ```
 
 ### Field Guidelines
 
-| Field | Required | Format | Notes |
-|-------|----------|--------|-------|
-| `name` | Yes | kebab-case | Must be unique across all agents |
-| `description` | Yes | String | Clear purpose and invocation triggers |
-| `tools` | Yes | Comma-separated | Available tools for this agent |
-| `model` | Yes | Enum | `sonnet`, `opus`, or `haiku` |
-| `permissionMode` | No | String | Permission handling behavior |
-| `color` | No | String | UI display color |
-| `skills` | No | Comma-separated | Plugin extension for skill associations |
+| Field            | Required | Format          | Notes                                   |
+| ---------------- | -------- | --------------- | --------------------------------------- |
+| `name`           | Yes      | kebab-case      | Must be unique across all agents        |
+| `description`    | Yes      | String          | Clear purpose and invocation triggers   |
+| `tools`          | Yes      | Comma-separated | Available tools for this agent          |
+| `model`          | Yes      | Enum            | `sonnet`, `opus`, or `haiku`            |
+| `permissionMode` | No       | String          | Permission handling behavior            |
+| `color`          | No       | String          | UI display color                        |
+| `skills`         | No       | Comma-separated | Plugin extension for skill associations |
 
 ### Example
 
 ```yaml
 ---
 name: code-reviewer
-description: "Comprehensive code reviewer for PRs and local changes. Uses confidence-based filtering."
+description: "**MUST BE USED after writing code**. Confidence-based review (≥80%) for PRs and local changes. Delegates to: analyze. Activates for: review code, check changes."
 tools: Glob, Grep, Read, Bash, WebFetch, TodoWrite, WebSearch
 model: sonnet
-color: red
+skills: analyze, security
 ---
 ```
 
+---
+
 ## Commands
 
-Commands are direct actions invoked by name.
+Commands are the **interface layer** - thin wrappers that route user intent and delegate to skills.
+
+**Target Size**: 20-80 lines per command
 
 ### Required Fields
 
 ```yaml
 ---
 name: command-name
-description: "What this command does"
+description: "**EMPHATIC TRIGGER**. Purpose. Delegates to: skill. Activates for: triggers."
 ---
 ```
 
@@ -125,31 +151,32 @@ description: "What this command does"
 
 ```yaml
 ---
-delegates-to: skill-name   # Skill this command invokes
-operation: mode            # Operation mode for delegated skill
-argument-hint: "[args]"    # Argument syntax hint for help
-allowed-tools: Read, Grep  # Tool restrictions
+delegates-to: skill-name # Skill this command invokes
+operation: mode # Operation mode for delegated skill
+argument-hint: "[args]" # Argument syntax hint for help
+allowed-tools: Read, Grep # Tool restrictions
 ---
 ```
 
 ### Field Guidelines
 
-| Field | Required | Format | Notes |
-|-------|----------|--------|-------|
-| `name` | Yes | kebab-case | Command name (unique identifier) |
-| `description` | Yes | String | Brief description of command purpose |
-| `delegates-to` | No | skill-name | If command delegates to a skill |
-| `operation` | No | String | Operation mode for delegated skill |
-| `argument-hint` | No | String | Shows in help: `<command> [hint]` |
-| `allowed-tools` | No | Comma-separated | Tool restrictions |
+| Field           | Required | Format          | Notes                                |
+| --------------- | -------- | --------------- | ------------------------------------ |
+| `name`          | Yes      | kebab-case      | Command name (unique identifier)     |
+| `description`   | Yes      | String          | Brief description of command purpose |
+| `delegates-to`  | No       | skill-name      | If command delegates to a skill      |
+| `operation`     | No       | String          | Operation mode for delegated skill   |
+| `argument-hint` | No       | String          | Shows in help: `<command> [hint]`    |
+| `allowed-tools` | No       | Comma-separated | Tool restrictions                    |
 
 ### Example
 
 ```yaml
 ---
 name: code-review
-description: Comprehensive code review for PRs or local changes
+description: "**MUST BE USED after writing code**. Confidence-based review for PRs and local changes. Delegates to: code-reviewer. Activates for: review code, check changes, PR review."
 argument-hint: "<pr-url|pr-number|path> [--strict] [--focus security|bugs|style]"
+delegates-to: code-reviewer
 allowed-tools: Bash(gh:*), Read, Grep, Glob, Task
 ---
 ```
@@ -182,13 +209,13 @@ See `scripts/check-frontmatter.sh` for comprehensive validation.
 The following fields are plugin-specific extensions not part of the Claude Code specification.
 See [Plugin Extensions (Detailed)](#plugin-extensions-detailed) below for full documentation.
 
-| Field | Component | Purpose | Spec Status |
-|-------|-----------|---------|-------------|
-| `allowed-tools` | Skills | Restrict available tools | In spec (enforcement unclear) |
-| `skills` | Agents | Associate skills with agent | Not in spec |
-| `delegates-to` | Commands | Delegation pattern | Not in spec |
-| `operation` | Commands | Operation mode | Not in spec |
-| `color` | Agents | UI display color | Not in spec |
+| Field           | Component | Purpose                     | Spec Status                   |
+| --------------- | --------- | --------------------------- | ----------------------------- |
+| `allowed-tools` | Skills    | Restrict available tools    | In spec (enforcement unclear) |
+| `skills`        | Agents    | Associate skills with agent | Not in spec                   |
+| `delegates-to`  | Commands  | Delegation pattern          | Not in spec                   |
+| `operation`     | Commands  | Operation mode              | Not in spec                   |
+| `color`         | Agents    | UI display color            | Not in spec                   |
 
 These extensions provide additional functionality but may be ignored by Claude Code core.
 
@@ -207,6 +234,7 @@ The following fields are **plugin-specific extensions** not part of the official
 **Spec Status**: Not in Claude Code specification. Likely ignored by runtime.
 
 **Usage**:
+
 ```yaml
 ---
 name: architect
@@ -220,6 +248,7 @@ skills: design, analyze, security, devops, implement
 **When to Use**: When an agent's behavior overlaps with specific skills, document the relationship here for maintainers.
 
 **Agents Using This**:
+
 - `architect.md` - `skills: design, analyze, security, devops, implement`
 - `security-expert.md` - `skills: security, analyze, improve`
 
@@ -230,6 +259,7 @@ skills: design, analyze, security, devops, implement
 **Spec Status**: Not in Claude Code specification. Behavior unknown.
 
 **Usage**:
+
 ```yaml
 ---
 name: code-reviewer
@@ -240,6 +270,7 @@ color: red
 **Recommendation**: Consider removing unless functionality is confirmed.
 
 **Agents Using This**:
+
 - `code-reviewer.md` - `color: red`
 
 ### Command Extensions
@@ -251,6 +282,7 @@ color: red
 **Spec Status**: Not in Claude Code specification. Metadata only.
 
 **Usage**:
+
 ```yaml
 ---
 name: estimate
@@ -263,6 +295,7 @@ operation: estimate
 **Design Pattern**: Commands using `delegates-to` should be thin wrappers. The actual methodology lives in the referenced skill.
 
 **Commands Using This**:
+
 - `estimate.md` - `delegates-to: orchestration`
 - `changelog.md` - `delegates-to: document`
 - `migrate.md` - `delegates-to: migration`
@@ -275,6 +308,7 @@ operation: estimate
 **Spec Status**: Not in Claude Code specification. Metadata only.
 
 **Usage**:
+
 ```yaml
 ---
 delegates-to: orchestration
@@ -283,6 +317,7 @@ operation: estimate
 ```
 
 **Commands Using This**:
+
 - `estimate.md` - `operation: estimate`
 - `feature-dev.md` - `operation: feature`
 

@@ -1,6 +1,6 @@
 ---
-name: dk:agent
-description: "DK Agent - session controller that orchestrates investigation, implementation, and review. Use for complex task orchestration and multi-phase workflows."
+name: agent
+description: "**Session controller**. Orchestrates investigation, implementation, and review workflows. Delegates to: orchestration. Activates for: complex task, multi-phase workflow, guided session."
 argument-hint: "[task-description]"
 delegates-to: orchestration
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, TodoWrite, Task

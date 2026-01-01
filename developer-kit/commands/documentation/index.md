@@ -1,6 +1,6 @@
 ---
-name: dk:index
-description: Index and understand the codebase structure
+name: index
+description: "**Use for codebase indexing**. Directory structure analysis and key file identification. Delegates to: research. Activates for: index repo, project structure, codebase map."
 delegates-to: research
 operation: index
 argument-hint: "[path] [--depth shallow|deep] [--output <file>]"
@@ -82,6 +82,21 @@ index src/ --depth deep            # Deep analysis of src
 index --output docs/INDEX.md       # Save to file
 index --type api                   # Focus on API structure
 ```
+
+## Boundaries
+
+**Will:**
+
+- Scan directory structure and identify patterns
+- Map key files (README, configs, entry points)
+- Summarize module purposes
+- Generate navigable documentation
+
+**Will Not:**
+
+- Modify source code during indexing
+- Index sensitive files (.env contents, credentials)
+- Make architectural recommendations (use architect agent)
 
 ## Related
 

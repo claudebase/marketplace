@@ -1,6 +1,6 @@
 ---
-name: dk:business-panel
-description: "AI facilitated panel discussion between renowned business thought leaders analyzing documents through distinct frameworks. Use for multi-expert business analysis, strategic planning, market assessment, and competitive analysis with discussion, debate, or socratic inquiry modes."
+name: business-panel
+description: "**Use for business strategy analysis**. Multi-expert panel with Porter, Christensen, Drucker frameworks. Delegates to: brainstorm. Activates for: business analysis, strategic planning, market assessment."
 argument-hint: '[document_path|content] [--mode discussion|debate|socratic] [--experts "name1,name2"]'
 delegates-to: brainstorm
 allowed-tools: Read, Grep, Glob, Write, Task, WebSearch, TodoWrite
@@ -85,6 +85,21 @@ business-panel [content] --synthesis-only
 - **Task**: Multi-expert coordination
 - **WebSearch**: Market and competitive research
 - **TodoWrite**: Analysis progress tracking
+
+## Boundaries
+
+**Will:**
+
+- Analyze documents through multiple expert frameworks
+- Facilitate discussion, debate, or Socratic inquiry
+- Generate synthesis with prioritized recommendations
+- Support iterative analysis cycles
+
+**Will Not:**
+
+- Replace human judgment in critical business decisions
+- Generate strategies without analyzing provided content
+- Make financial or legal guarantees
 
 ## Integration Notes
 

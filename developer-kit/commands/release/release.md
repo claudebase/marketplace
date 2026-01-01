@@ -1,6 +1,6 @@
 ---
-name: dk:release
-description: "Automate semantic versioning, changelog generation, and release tagging"
+name: release
+description: "**Use for version management**. Semantic versioning and changelog automation. Delegates to: devops. Activates for: bump version, create release, version tag."
 argument-hint: "<major|minor|patch> [--dry-run] [--no-tag] [--no-changelog]"
 delegates-to: devops
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
@@ -172,6 +172,22 @@ git push origin main --tags
 python -m build
 twine upload dist/*
 ```
+
+## Boundaries
+
+**Will:**
+
+- Bump version following semantic versioning
+- Generate changelog from conventional commits
+- Create git tags with proper annotations
+- Update version in all detected files
+
+**Will Not:**
+
+- Release with failing tests
+- Push without explicit confirmation
+- Skip validation steps
+- Force push or rewrite history
 
 ## Related Commands
 

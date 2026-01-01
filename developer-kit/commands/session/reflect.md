@@ -1,6 +1,6 @@
 ---
-name: dk:reflect
-description: Reflect on session progress and capture learnings
+name: reflect
+description: "**Use at session end**. Capture progress, decisions, and learnings for continuity. Delegates to: document. Activates for: session summary, capture learnings, document decisions."
 delegates-to: document
 operation: reflect
 argument-hint: "[--summary] [--decisions] [--next] [--save <path>]"
@@ -101,6 +101,21 @@ reflect --summary                    # Just work summary
 reflect --decisions                  # Focus on decisions
 reflect --save docs/session/day1.md  # Save to file
 ```
+
+## Boundaries
+
+**Will:**
+
+- Summarize work completed in session
+- Document key decisions with rationale
+- Capture lessons learned and insights
+- Identify follow-up items and next steps
+
+**Will Not:**
+
+- Fabricate progress not actually made
+- Skip documenting challenges encountered
+- Overwrite existing session context without confirmation
 
 ## Related
 

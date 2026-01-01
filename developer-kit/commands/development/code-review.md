@@ -1,6 +1,6 @@
 ---
-name: dk:code-review
-description: Comprehensive code review for PRs or local changes
+name: code-review
+description: "**MUST BE USED after writing code**. Confidence-based review for PRs and local changes. Delegates to: code-reviewer. Activates for: review code, check changes, PR review."
 argument-hint: "<pr-url|pr-number|path> [--strict] [--focus security|bugs|style]"
 delegates-to: code-reviewer
 allowed-tools: Bash(gh:*), Read, Grep, Glob, Task

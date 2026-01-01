@@ -1,6 +1,6 @@
 ---
-name: dk:estimate
-description: "Estimate implementation effort for tasks, features, or projects"
+name: estimate
+description: "**Use for effort estimation**. Data-driven estimates with confidence intervals. Delegates to: orchestration. Activates for: estimate effort, how long, complexity assessment."
 delegates-to: orchestration
 operation: estimate
 argument-hint: "<task-description|issue-url> [--method pert|tshirt|points] [--breakdown]"

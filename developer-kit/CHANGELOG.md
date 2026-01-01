@@ -9,6 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.3.0] - 2026-01-01
+
+### Changed
+
+- **Command Names**: Removed `dk:` prefix from all 21 commands for cleaner invocation
+  - Commands now invoked directly: `analyze`, `check`, `ship` instead of `dk:analyze`, etc.
+  - Reverts v5.1.0 namespace change based on simplicity preference
+
+- **Documentation**: Updated all docs to reflect skill-centric architecture (v5.2.0 design)
+  - `ARCHITECTURE.md` - Added skill-centric hierarchy diagram and component size targets
+  - `FRONTMATTER-SPEC.md` - Added emphatic trigger pattern documentation
+  - `GETTING-STARTED.md` - Added architecture context and component layer explanations
+  - `COMMANDS.md` - Updated with interface layer framing
+  - `SKILLS.md` - Added primary business logic layer context
+  - `AGENTS.md` - Added orchestration layer context and skill composition explanation
+
+- **Agent Formatting**: Reformatted all 14 agents with consistent markdown structure
+
+### Removed
+
+- Deleted obsolete planning documents:
+  - `docs/IMPLEMENTATION-PLAN.md`
+  - `docs/MIGRATION-PROGRESS.md`
+  - `docs/SKILL-CENTRIC-ARCHITECTURE-REDESIGN.md`
+  - `docs/SKILL-DESCRIPTION-UPGRADE-PLAN.md`
+
+---
+
 ## [5.2.0] - 2026-01-01
 
 ### Changed

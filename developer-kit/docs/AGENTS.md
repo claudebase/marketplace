@@ -1,15 +1,21 @@
 # Agents Guide
 
-Agents are specialized domain experts that handle complex tasks requiring deep expertise. The Developer Kit includes 14 agents.
+Agents are the **orchestration layer** in Developer Kit's skill-centric architecture. They are specialized domain experts (200-300 lines each) that compose skills and handle complex tasks requiring deep expertise.
+
+> **Architecture**: Agents provide domain expertise and orchestrate multiple skills. Skills contain the core business logic; Agents coordinate their use.
+
+The Developer Kit includes 14 agents.
 
 ---
 
 ## How Agents Work
 
-1. **Delegation**: Claude delegates to agents for domain-specific tasks
-2. **Separate Context**: Agents run with their own tool access and context
-3. **Skill Integration**: Agents can preload skills for specialized capabilities
-4. **Model Selection**: Each agent specifies its preferred model
+1. **Orchestration Layer**: Agents compose and coordinate multiple skills
+2. **Domain Expertise**: Each agent brings specialized knowledge to complex tasks
+3. **Delegation**: Claude delegates to agents for domain-specific tasks
+4. **Separate Context**: Agents run with their own tool access and context
+5. **Skill Composition**: Agents reference skills for specialized capabilities
+6. **Model Selection**: Each agent specifies its preferred model (sonnet, opus, haiku)
 
 ### When Agents Activate
 
@@ -20,6 +26,7 @@ Claude thinks:
 - Complex architecture task
 - Requires domain expertise
 - Delegates to: architect agent
+- Agent uses: design, analyze, security skills
 ```
 
 ### Explicit Invocation
@@ -32,14 +39,14 @@ Claude thinks:
 
 ## Agent Categories
 
-| Category | Agents | Focus |
-|----------|--------|-------|
-| [Architecture](#architecture-agents) | 2 | System design, code exploration |
-| [Development](#development-agents) | 3 | Code review, Python, security |
-| [Data & Ops](#data--ops-agents) | 2 | Database, observability |
-| [Documentation](#documentation-agents) | 3 | Writing, requirements, indexing |
-| [Learning](#learning-agents) | 2 | Teaching, mentoring |
-| [Business](#business-agents) | 2 | Strategy, session management |
+| Category                               | Agents | Focus                           |
+| -------------------------------------- | ------ | ------------------------------- |
+| [Architecture](#architecture-agents)   | 2      | System design, code exploration |
+| [Development](#development-agents)     | 3      | Code review, Python, security   |
+| [Data & Ops](#data--ops-agents)        | 2      | Database, observability         |
+| [Documentation](#documentation-agents) | 3      | Writing, requirements, indexing |
+| [Learning](#learning-agents)           | 2      | Teaching, mentoring             |
+| [Business](#business-agents)           | 2      | Strategy, session management    |
 
 ---
 
@@ -51,36 +58,42 @@ Claude thinks:
 
 **Domain Modes**:
 
-| Mode | Triggers | Focus |
-|------|----------|-------|
-| Code | "design feature", "implementation blueprint" | Codebase patterns, component design |
-| Backend | "API design", "database schema" | Data integrity, security, reliability |
-| Frontend | "UI architecture", "component design" | UX, accessibility, Core Web Vitals |
-| System | "system architecture", "scalability" | Component boundaries, 10x growth |
-| DevOps | "CI/CD", "infrastructure" | Automation, observability |
+| Mode     | Triggers                                     | Focus                                 |
+| -------- | -------------------------------------------- | ------------------------------------- |
+| Code     | "design feature", "implementation blueprint" | Codebase patterns, component design   |
+| Backend  | "API design", "database schema"              | Data integrity, security, reliability |
+| Frontend | "UI architecture", "component design"        | UX, accessibility, Core Web Vitals    |
+| System   | "system architecture", "scalability"         | Component boundaries, 10x growth      |
+| DevOps   | "CI/CD", "infrastructure"                    | Automation, observability             |
 
 **Process**:
+
 1. Analyze context (existing patterns, tech stack)
 2. Design architecture (decisive choices, trade-offs)
 3. Deliver blueprint (components, phases, operations)
 
 **Output Format**:
+
 ```markdown
 ## Architecture Blueprint
 
 ### Context Analysis
+
 - Existing patterns found
 - Technology stack and constraints
 
 ### Architecture Decision
+
 - Chosen approach with rationale
 - Trade-offs accepted
 
 ### Component Design
+
 - File paths and locations
 - Responsibilities and interfaces
 
 ### Implementation Plan
+
 - [ ] Phase 1: Foundation
 - [ ] Phase 2: Core implementation
 - [ ] Phase 3: Integration
@@ -97,18 +110,21 @@ Claude thinks:
 **Purpose**: Deep analysis of existing codebase features.
 
 **Capabilities**:
+
 - Execution path tracing
 - Architecture layer mapping
 - Pattern and abstraction identification
 - Dependency documentation
 
 **When to Use**:
+
 - Understanding unfamiliar codebases
 - Tracing feature implementations
 - Mapping component relationships
 - Preparing for modifications
 
 **Example**:
+
 ```
 "Explore how the authentication system works in this codebase"
 ```
@@ -126,19 +142,21 @@ Claude thinks:
 **Key Feature**: Only reports issues with **≥80% confidence** to minimize false positives.
 
 **Review Scope**:
+
 - Default: `git diff` (unstaged changes)
 - Options: PR URL, specific files, `--strict` (90% threshold)
 
 **Confidence Scoring**:
 
-| Score | Meaning |
-|-------|---------|
-| 0-25 | Likely false positive |
-| 26-50 | Real but minor |
-| 51-75 | Important issue |
-| 76-100 | Critical, verified |
+| Score  | Meaning               |
+| ------ | --------------------- |
+| 0-25   | Likely false positive |
+| 26-50  | Real but minor        |
+| 51-75  | Important issue       |
+| 76-100 | Critical, verified    |
 
 **What It Checks**:
+
 - Project guidelines compliance
 - Logic errors and bugs
 - Security vulnerabilities
@@ -146,6 +164,7 @@ Claude thinks:
 - Test coverage
 
 **Output Format**:
+
 ```markdown
 ### Code Review
 
@@ -171,6 +190,7 @@ Found 2 issues:
 **Purpose**: Production-ready Python development following SOLID principles.
 
 **Expertise**:
+
 - Modern Python best practices
 - Type annotations and validation
 - Testing strategies (pytest)
@@ -178,6 +198,7 @@ Found 2 issues:
 - Security considerations
 
 **When to Use**:
+
 - Python-specific implementation
 - Code review for Python projects
 - Performance optimization
@@ -192,6 +213,7 @@ Found 2 issues:
 **Purpose**: Security implementation and hardening. **CAN modify code** (unlike security skill).
 
 **Capabilities**:
+
 - Implement security fixes
 - Add authentication/authorization
 - Harden configurations
@@ -200,12 +222,13 @@ Found 2 issues:
 
 **Difference from Security Skill**:
 
-| Component | Can Modify Code | Use For |
-|-----------|-----------------|---------|
-| `security` skill | No (read-only) | Auditing, finding issues |
-| `security-expert` agent | **Yes** | Fixing vulnerabilities |
+| Component               | Can Modify Code | Use For                  |
+| ----------------------- | --------------- | ------------------------ |
+| `security` skill        | No (read-only)  | Auditing, finding issues |
+| `security-expert` agent | **Yes**         | Fixing vulnerabilities   |
 
 **When to Use**:
+
 ```
 # First: Audit with skill
 "security audit the authentication module"
@@ -225,6 +248,7 @@ Found 2 issues:
 **Purpose**: Expert database administration for schema design, query optimization, and operations.
 
 **Expertise**:
+
 - Schema design patterns
 - Query optimization
 - Index strategies
@@ -232,6 +256,7 @@ Found 2 issues:
 - Performance tuning
 
 **Database Support**:
+
 - PostgreSQL
 - MySQL
 - MongoDB
@@ -239,6 +264,7 @@ Found 2 issues:
 - SQLite
 
 **When to Use**:
+
 - Complex schema design
 - Query performance issues
 - Migration planning
@@ -253,6 +279,7 @@ Found 2 issues:
 **Purpose**: Logging, monitoring, alerting, and distributed tracing.
 
 **Expertise**:
+
 - Structured logging
 - Metrics collection
 - Alert rule design
@@ -260,6 +287,7 @@ Found 2 issues:
 - Distributed tracing
 
 **Stack Knowledge**:
+
 - Prometheus/Grafana
 - ELK Stack
 - OpenTelemetry
@@ -267,6 +295,7 @@ Found 2 issues:
 - CloudWatch
 
 **When to Use**:
+
 - Setting up monitoring
 - Creating dashboards
 - Designing alert strategies
@@ -283,6 +312,7 @@ Found 2 issues:
 **Purpose**: Clear, comprehensive technical documentation.
 
 **Document Types**:
+
 - API documentation
 - User guides
 - Technical specifications
@@ -290,12 +320,14 @@ Found 2 issues:
 - Architecture docs
 
 **Approach**:
+
 - Audience-focused writing
 - Clear structure
 - Practical examples
 - Accessibility considerations
 
 **When to Use**:
+
 - Creating new documentation
 - Improving existing docs
 - API documentation
@@ -310,6 +342,7 @@ Found 2 issues:
 **Purpose**: Transform ambiguous ideas into concrete specifications.
 
 **Capabilities**:
+
 - Requirements gathering
 - Specification writing
 - Scope definition
@@ -317,12 +350,14 @@ Found 2 issues:
 - PRD creation
 
 **Output**:
+
 - Product Requirements Documents
 - User stories
 - Acceptance criteria
 - Scope definitions
 
 **When to Use**:
+
 - Starting new projects
 - Defining features
 - Clarifying requirements
@@ -337,18 +372,21 @@ Found 2 issues:
 **Purpose**: Repository indexing and codebase briefing.
 
 **Capabilities**:
+
 - Project structure analysis
 - Codebase exploration
 - Index generation
 - Component cataloging
 
 **Output**:
+
 - Project structure overview
 - Component relationships
 - Entry point identification
 - Technology stack summary
 
 **When to Use**:
+
 - Onboarding to new codebase
 - Creating project documentation
 - Understanding large codebases
@@ -364,12 +402,14 @@ Found 2 issues:
 **Purpose**: Educational guidance through Socratic questioning.
 
 **Approach**:
+
 - Strategic questioning
 - Discovery learning
 - Guided exploration
 - No direct answers (leads to understanding)
 
 **When to Use**:
+
 - Learning new concepts
 - Understanding code deeply
 - Developing problem-solving skills
@@ -384,18 +424,21 @@ Found 2 issues:
 **Purpose**: Teaching programming concepts with focus on understanding.
 
 **Capabilities**:
+
 - Tutorial creation
 - Concept explanations
 - Learning path design
 - Practical examples
 
 **Approach**:
+
 - Progressive complexity
 - Hands-on examples
 - Clear explanations
 - Practice exercises
 
 **When to Use**:
+
 - Learning new technologies
 - Understanding concepts
 - Skill development
@@ -413,24 +456,26 @@ Found 2 issues:
 
 **Expert Perspectives**:
 
-| Expert | Framework |
-|--------|-----------|
-| Clayton Christensen | Disruptive Innovation |
-| Michael Porter | Competitive Strategy |
-| Peter Drucker | Management Principles |
-| Seth Godin | Marketing & Remarkability |
-| Kim & Mauborgne | Blue Ocean Strategy |
-| Jim Collins | Good to Great |
-| Nassim Taleb | Antifragility |
-| Donella Meadows | Systems Thinking |
-| Jean-luc Doumont | Communication Clarity |
+| Expert              | Framework                 |
+| ------------------- | ------------------------- |
+| Clayton Christensen | Disruptive Innovation     |
+| Michael Porter      | Competitive Strategy      |
+| Peter Drucker       | Management Principles     |
+| Seth Godin          | Marketing & Remarkability |
+| Kim & Mauborgne     | Blue Ocean Strategy       |
+| Jim Collins         | Good to Great             |
+| Nassim Taleb        | Antifragility             |
+| Donella Meadows     | Systems Thinking          |
+| Jean-luc Doumont    | Communication Clarity     |
 
 **Modes**:
+
 - Discussion: Multiple perspectives
 - Debate: Contrasting viewpoints
 - Socratic: Guided inquiry
 
 **When to Use**:
+
 - Strategic planning
 - Market analysis
 - Business model evaluation
@@ -445,18 +490,21 @@ Found 2 issues:
 **Purpose**: Session management and knowledge base maintenance.
 
 **Capabilities**:
+
 - Session tracking
 - Learning capture
 - Progress documentation
 - PDCA workflow execution
 
 **Features**:
+
 - Cross-session memory (via Memory MCP)
 - Pattern retention
 - Decision logging
 - Progress tracking
 
 **When to Use**:
+
 - Long-running projects
 - Knowledge management
 - Session continuity
@@ -470,29 +518,29 @@ Found 2 issues:
 
 ### By Capability
 
-| Agent | Can Write Code | Domain |
-|-------|---------------|--------|
-| architect | Yes | Architecture |
-| code-reviewer | No (reviews only) | Quality |
-| security-expert | **Yes** | Security |
-| database-admin | Yes | Data |
-| python-expert | Yes | Python |
-| technical-writer | Yes (docs) | Documentation |
-| code-explorer | No (analysis) | Understanding |
+| Agent            | Can Write Code    | Domain        |
+| ---------------- | ----------------- | ------------- |
+| architect        | Yes               | Architecture  |
+| code-reviewer    | No (reviews only) | Quality       |
+| security-expert  | **Yes**           | Security      |
+| database-admin   | Yes               | Data          |
+| python-expert    | Yes               | Python        |
+| technical-writer | Yes (docs)        | Documentation |
+| code-explorer    | No (analysis)     | Understanding |
 
 ### By Use Case
 
-| Need | Agent |
-|------|-------|
-| Design system architecture | architect |
-| Review code changes | code-reviewer |
-| Fix security vulnerabilities | security-expert |
-| Optimize database queries | database-admin |
-| Write Python code | python-expert |
-| Create documentation | technical-writer |
-| Understand codebase | code-explorer |
-| Learn new concepts | learning-guide |
-| Strategic analysis | business-panel-experts |
+| Need                         | Agent                  |
+| ---------------------------- | ---------------------- |
+| Design system architecture   | architect              |
+| Review code changes          | code-reviewer          |
+| Fix security vulnerabilities | security-expert        |
+| Optimize database queries    | database-admin         |
+| Write Python code            | python-expert          |
+| Create documentation         | technical-writer       |
+| Understand codebase          | code-explorer          |
+| Learn new concepts           | learning-guide         |
+| Strategic analysis           | business-panel-experts |
 
 ---
 
@@ -507,7 +555,6 @@ description: "What this agent does and when to invoke it"
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
-
 # My Agent
 
 Agent instructions and methodology...
@@ -524,6 +571,7 @@ Agent instructions and methodology...
    - `skills`: Comma-separated skill names
 
 4. Validate:
+
 ```bash
 ./scripts/validate-agent-fields.sh
 ```
@@ -532,8 +580,8 @@ Agent instructions and methodology...
 
 ## Agent vs Skill vs Command
 
-| Component | Invocation | Context | Best For |
-|-----------|------------|---------|----------|
-| **Skill** | Automatic | Shared | Core capabilities |
-| **Agent** | Delegated | Separate | Domain expertise |
-| **Command** | Explicit | Shared | Quick workflows |
+| Component   | Invocation | Context  | Best For          |
+| ----------- | ---------- | -------- | ----------------- |
+| **Skill**   | Automatic  | Shared   | Core capabilities |
+| **Agent**   | Delegated  | Separate | Domain expertise  |
+| **Command** | Explicit   | Shared   | Quick workflows   |

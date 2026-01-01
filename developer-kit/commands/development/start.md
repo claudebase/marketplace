@@ -1,6 +1,6 @@
 ---
-name: dk:start
-description: "Start new feature development: create branch, setup todos, initialize session tracking"
+name: start
+description: "**Use at feature start**. Create branch, setup todos, initialize session tracking. Delegates to: orchestration. Activates for: start feature, new branch, begin development."
 argument-hint: "<feature-name> [--no-branch] [--from <branch>] [--type feature|bugfix|hotfix]"
 delegates-to: orchestration
 operation: feature-start

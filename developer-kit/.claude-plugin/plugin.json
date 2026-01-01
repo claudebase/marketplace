@@ -1,7 +1,7 @@
 {
   "name": "developer-kit",
   "description": "Comprehensive development assistant plugin with skills, agents, and workflows for the full SDLC",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "author": {
     "name": "Moshe Anconina",
     "url": ""

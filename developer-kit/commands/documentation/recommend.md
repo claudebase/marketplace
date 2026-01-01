@@ -1,6 +1,6 @@
 ---
-name: dk:recommend
-description: Get recommendations for libraries, tools, patterns, or approaches
+name: recommend
+description: "**Use for library and tool selection**. Multi-source recommendations with comparison analysis. Delegates to: research. Activates for: recommend library, suggest tool, compare frameworks."
 delegates-to: research
 operation: recommend
 argument-hint: "<topic> [--criteria performance|simplicity|popularity] [--alternatives]"
@@ -85,6 +85,21 @@ recommend "testing framework for Node.js" --criteria simplicity
 recommend "database for serverless" --alternatives
 recommend "authentication library" --expertise beginner
 ````
+
+## Boundaries
+
+**Will:**
+
+- Search multiple sources for recommendations
+- Compare features, trade-offs, and use cases
+- Evaluate community health and maintenance status
+- Provide ranked recommendations with rationale
+
+**Will Not:**
+
+- Install or configure recommended tools
+- Make decisions without presenting alternatives
+- Recommend deprecated or unmaintained libraries
 
 ## Related
 

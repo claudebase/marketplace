@@ -4,45 +4,56 @@ This document covers the Developer Kit plugin architecture, conventions, and gui
 
 ---
 
-## Plugin Architecture
+## Skill-Centric Architecture
+
+> **Core Principle**: Skills are the primary business logic layer. Agents and Commands are thin orchestration/interface layers that delegate to Skills.
 
 ### Component Hierarchy
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    User Request                              │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Commands (21)                             │
-│   Direct user invocation: analyze, check, ship, etc.        │
-└─────────────────────────────────────────────────────────────┘
-                              │ delegates to
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     Skills (24)                              │
-│   Core capabilities: analyze, implement, debug, etc.        │
-│   Auto-activate based on context                            │
-└─────────────────────────────────────────────────────────────┘
-                              │ uses
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   MCP Servers (7)                            │
-│   Extended tools: sequential-thinking, context7, etc.       │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        SKILL-CENTRIC HIERARCHY                           │
+└──────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────┐
-│                     Agents (14)                              │
-│   Specialized experts: architect, code-reviewer, etc.       │
-│   Run in separate context with own tools                    │
-└─────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│                      Hooks (4)                               │
-│   Event automation: PostToolUse, PreToolUse, etc.           │
-└─────────────────────────────────────────────────────────────┘
+                    ┌─────────────────────────────────────┐
+                    │        INTERFACE LAYER              │
+                    │  Commands (21) - 20-80 lines each   │
+                    │  • Route user intent                │
+                    │  • Parse arguments                  │
+                    │  • Delegate to skills/agents        │
+                    └─────────────────┬───────────────────┘
+                                      │
+                    ┌─────────────────┴───────────────────┐
+                    │                                     │
+                    ▼                                     ▼
+    ┌───────────────────────────────┐   ┌───────────────────────────────┐
+    │      ORCHESTRATION LAYER      │   │        SKILL LAYER            │
+    │   Agents (14) - 200-300 lines │   │   Skills (24) - 50-100 lines  │
+    │   • Domain expertise          │   │   • Core business logic       │
+    │   • Multi-skill composition   │   │   • Tool restrictions         │
+    │   • Isolated context          │   │   • Progressive disclosure    │
+    │   • Complex task handling     │   │   • Reusable capabilities     │
+    └───────────────┬───────────────┘   └───────────────┬───────────────┘
+                    │                                   │
+                    └─────────────────┬─────────────────┘
+                                      │
+                    ┌─────────────────┴───────────────────┐
+                    │          CAPABILITY LAYER           │
+                    │   MCP Servers (7) + Hooks (4)       │
+                    │   • External integrations           │
+                    │   • Event automation                │
+                    │   • Browser automation              │
+                    │   • Web research                    │
+                    └─────────────────────────────────────┘
 ```
+
+### Component Size Targets
+
+| Component | Max Lines | Purpose                                         |
+| --------- | --------- | ----------------------------------------------- |
+| SKILL.md  | 100       | Core business logic with progressive disclosure |
+| Agent     | 300       | Domain expertise, skill composition             |
+| Command   | 80        | Thin wrapper, delegation to skills              |
 
 ### Directory Structure
 
@@ -138,6 +149,7 @@ agents/
 ### 3. Required Frontmatter
 
 **Skills** - must have `name` and `description`:
+
 ```yaml
 ---
 name: skill-name
@@ -146,6 +158,7 @@ description: "Purpose. Activates for: 'trigger1', 'trigger2'..."
 ```
 
 **Agents** - must have `name`, `description`, `tools`:
+
 ```yaml
 ---
 name: agent-name
@@ -155,20 +168,40 @@ tools: Read, Grep, Glob
 ```
 
 **Commands** - must have `description`:
+
 ```yaml
 ---
 description: "What this command does"
 ---
 ```
 
-### 4. Skill Descriptions Must Include Triggers
+### 4. Description Patterns (Emphatic Triggers)
+
+**Skills**:
 
 ```yaml
-# ✅ CORRECT
-description: "Security audit. Activates for: 'security audit', 'OWASP', 'vulnerabilities'"
+# ✅ CORRECT - Emphatic trigger pattern
+description: "**PROACTIVELY activate for security concerns**. OWASP-based audit methodology. Activates for: 'security', 'vulnerabilities', 'OWASP', 'is this secure'."
 
-# ❌ WRONG
-description: "Security audit and vulnerability scanning"  # No triggers!
+# ❌ WRONG - No emphatic trigger, no activation phrases
+description: "Security audit and vulnerability scanning"
+```
+
+**Commands**:
+
+```yaml
+# ✅ CORRECT - Emphatic trigger with delegation
+description: "**Use for release shipping**. Full workflow: validate, version, changelog, tag. Delegates to: orchestration. Activates for: ship release, deploy."
+
+# ❌ WRONG - Missing emphatic trigger
+description: "Ship a release with version bump and changelog"
+```
+
+**Agents**:
+
+```yaml
+# ✅ CORRECT - Purpose with triggers
+description: "**Session controller**. Orchestrates investigation, implementation, and review. Delegates to: orchestration. Activates for: complex task, multi-phase workflow."
 ```
 
 ### 5. No Hardcoded Secrets
@@ -191,33 +224,33 @@ description: "Security audit and vulnerability scanning"  # No triggers!
 
 ### Skill Frontmatter
 
-| Field | Required | Type | Description |
-|-------|----------|------|-------------|
-| `name` | Yes | string | Kebab-case identifier |
-| `description` | Yes | string | Purpose + "Activates for:" triggers |
-| `allowed-tools` | No | array | Tool restrictions |
-| `model` | No | string | Model override |
-| `license` | No | string | License reference |
+| Field           | Required | Type   | Description                         |
+| --------------- | -------- | ------ | ----------------------------------- |
+| `name`          | Yes      | string | Kebab-case identifier               |
+| `description`   | Yes      | string | Purpose + "Activates for:" triggers |
+| `allowed-tools` | No       | array  | Tool restrictions                   |
+| `model`         | No       | string | Model override                      |
+| `license`       | No       | string | License reference                   |
 
 ### Agent Frontmatter
 
-| Field | Required | Type | Description |
-|-------|----------|------|-------------|
-| `name` | Yes | string | Unique identifier |
-| `description` | Yes | string | Purpose and when to invoke |
-| `tools` | Yes | string | Comma-separated tool list |
-| `model` | No | string | sonnet, opus, haiku |
-| `permissionMode` | No | string | default, plan, acceptEdits |
-| `skills` | No | string | Comma-separated skill names |
+| Field            | Required | Type   | Description                 |
+| ---------------- | -------- | ------ | --------------------------- |
+| `name`           | Yes      | string | Unique identifier           |
+| `description`    | Yes      | string | Purpose and when to invoke  |
+| `tools`          | Yes      | string | Comma-separated tool list   |
+| `model`          | No       | string | sonnet, opus, haiku         |
+| `permissionMode` | No       | string | default, plan, acceptEdits  |
+| `skills`         | No       | string | Comma-separated skill names |
 
 ### Command Frontmatter
 
-| Field | Required | Type | Description |
-|-------|----------|------|-------------|
-| `description` | Yes | string | What command does |
-| `argument-hint` | No | string | Usage hint for /help |
-| `delegates-to` | No | string | Skill delegation |
-| `operation` | No | string | Operation mode |
+| Field           | Required | Type   | Description          |
+| --------------- | -------- | ------ | -------------------- |
+| `description`   | Yes      | string | What command does    |
+| `argument-hint` | No       | string | Usage hint for /help |
+| `delegates-to`  | No       | string | Skill delegation     |
+| `operation`     | No       | string | Operation mode       |
 
 ---
 
@@ -226,12 +259,14 @@ description: "Security audit and vulnerability scanning"  # No triggers!
 ### Adding a New Skill
 
 1. **Create directory and file**:
+
 ```bash
 mkdir skills/my-skill
 cp templates/skill-template/SKILL.md skills/my-skill/SKILL.md
 ```
 
 2. **Edit frontmatter**:
+
 ```yaml
 ---
 name: my-skill
@@ -244,31 +279,38 @@ allowed-tools:
 ```
 
 3. **Add content**:
+
 ```markdown
 # My Skill
 
 ## Purpose
+
 What this skill does...
 
 ## When to Use
+
 - Condition 1
 - Condition 2
 
 ## Methodology
+
 1. Step 1
 2. Step 2
 
 ## Output Format
+
 ...
 ```
 
 4. **Add references** (optional):
+
 ```bash
 mkdir skills/my-skill/references
 # Add supporting documentation
 ```
 
 5. **Validate**:
+
 ```bash
 ./scripts/validate-skill-descriptions.sh
 ```
@@ -276,11 +318,13 @@ mkdir skills/my-skill/references
 ### Adding a New Agent
 
 1. **Create file**:
+
 ```bash
 cp templates/agent-template.md agents/my-agent.md
 ```
 
 2. **Edit frontmatter**:
+
 ```yaml
 ---
 name: my-agent
@@ -291,23 +335,28 @@ model: sonnet
 ```
 
 3. **Add content**:
+
 ```markdown
 # My Agent
 
 Purpose and methodology...
 
 ## Capabilities
+
 - Capability 1
 - Capability 2
 
 ## When to Use
+
 ...
 
 ## Output Format
+
 ...
 ```
 
 4. **Validate**:
+
 ```bash
 ./scripts/validate-agent-fields.sh
 ```
@@ -315,12 +364,14 @@ Purpose and methodology...
 ### Adding a New Command
 
 1. **Create file**:
+
 ```bash
 # Choose appropriate category
 touch commands/development/my-command.md
 ```
 
 2. **Edit content**:
+
 ```yaml
 ---
 description: "What this command does"
@@ -347,6 +398,7 @@ my-command --flag value
 ```
 
 3. **Validate**:
+
 ```bash
 ./scripts/check-frontmatter.sh
 ```
@@ -362,6 +414,7 @@ my-command --flag value
 ```
 
 Runs 89+ tests covering:
+
 - Structure validation
 - Skill validation
 - Agent validation
@@ -405,6 +458,7 @@ echo '{}' | python3 hooks/security_reminder_hook.py
 When releasing a new version:
 
 1. **Update plugin.json**:
+
 ```json
 {
   "version": "4.1.0"
@@ -412,28 +466,34 @@ When releasing a new version:
 ```
 
 2. **Update hooks.json SessionStart**:
+
 ```json
 "command": "echo 'Developer Kit v4.1.0 | Skills: 24 | Agents: 14'"
 ```
 
 3. **Update CHANGELOG.md**:
+
 ```markdown
 ## [4.1.0] - YYYY-MM-DD
 
 ### Added
+
 - New feature...
 
 ### Changed
+
 - Updated...
 ```
 
 4. **Update test expectations** (if counts changed):
+
 ```bash
 # In test-components.sh
 EXPECTED_SKILLS=25  # if added skill
 ```
 
 5. **Run full validation**:
+
 ```bash
 ./scripts/test-components.sh
 ```
@@ -444,25 +504,26 @@ EXPECTED_SKILLS=25  # if added skill
 
 ### Skill Files
 
-- Keep `SKILL.md` under 500 lines
-- Use progressive disclosure (reference files)
-- Include clear "When to Use" section
-- Include "Output Format" examples
+- Keep `SKILL.md` under 100 lines (target: 50-100)
+- Use progressive disclosure (reference files for detailed content)
+- Include clear "When to Use" and "When NOT to Use" sections
+- Include "Quick Workflow" (3-5 steps)
 - Cross-reference related skills/agents
 
 ### Agent Files
 
-- Focus on expertise and methodology
-- Include clear invocation triggers
-- Document tool usage patterns
-- Provide output format examples
+- Keep agents under 300 lines (target: 200-300)
+- Focus on domain expertise and skill composition
+- Include clear invocation triggers in description
+- Reference shared MCP resources (don't embed tables)
+- Include Boundaries (Will/Will Not sections)
 
 ### Command Files
 
-- Include usage syntax
-- Document all options
-- Provide practical examples
-- Show expected output
+- Keep commands under 80 lines (target: 20-80)
+- Commands are thin wrappers that delegate to skills
+- Include usage syntax and examples
+- Use emphatic trigger in description
 
 ### Scripts
 
@@ -493,6 +554,7 @@ Before submitting:
 ### Skill Delegation
 
 Commands delegate to skills:
+
 ```yaml
 ---
 description: "Run security audit"
@@ -504,6 +566,7 @@ operation: audit
 ### MCP Tool Usage
 
 In skills:
+
 ```yaml
 allowed-tools:
   - mcp__sequential-thinking__sequentialthinking
@@ -511,6 +574,7 @@ allowed-tools:
 ```
 
 In agents:
+
 ```yaml
 tools: Read, Grep, mcp__playwright__browser_navigate
 ```
@@ -518,6 +582,7 @@ tools: Read, Grep, mcp__playwright__browser_navigate
 ### Read-Only Skills
 
 For analysis-only skills:
+
 ```yaml
 allowed-tools:
   - Read
@@ -527,6 +592,7 @@ allowed-tools:
 ```
 
 Note in description:
+
 ```yaml
 description: "Security audit (READ-ONLY). Activates for:..."
 ```
@@ -534,6 +600,7 @@ description: "Security audit (READ-ONLY). Activates for:..."
 ### Reference Files
 
 Structure supporting documentation:
+
 ```
 skills/my-skill/
 ├── SKILL.md
@@ -544,8 +611,10 @@ skills/my-skill/
 ```
 
 Reference in SKILL.md:
+
 ```markdown
 ## References
+
 - `references/patterns.md` - Common patterns
 - `references/checklist.md` - Validation checklist
 ```

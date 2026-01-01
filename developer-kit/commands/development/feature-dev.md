@@ -1,6 +1,6 @@
 ---
-name: dk:feature-dev
-description: Guided feature development with 7-phase workflow
+name: feature-dev
+description: "**Use for complex feature implementation**. 7-phase guided workflow with multi-agent coordination. Delegates to: orchestration. Activates for: implement feature, guided development, complex task."
 delegates-to: orchestration
 operation: feature
 argument-hint: "<feature-description|issue-url> [--phase discovery|design|implementation]"
@@ -103,6 +103,22 @@ feature-dev "Add user settings page"
 feature-dev "Implement OAuth login" --phase design
 feature-dev https://github.com/org/repo/issues/123
 ```
+
+## Boundaries
+
+**Will:**
+
+- Guide through all 7 phases systematically
+- Launch parallel agents for exploration and review
+- Track progress via TodoWrite
+- Ask clarifying questions before implementation
+
+**Will Not:**
+
+- Skip discovery or design phases
+- Implement without user approval
+- Ignore code review findings
+- Rush through quality gates
 
 ## Related
 

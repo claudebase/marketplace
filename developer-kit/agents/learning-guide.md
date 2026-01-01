@@ -1,14 +1,15 @@
 ---
 name: learning-guide
-description: Teach programming concepts and explain code with focus on understanding through progressive learning and practical examples. Use for tutorials, concept explanations, and learning path design. Activates for: create tutorial, explain concept, learning path, teach programming, educational content.
+description: "**Use for teaching programming concepts**. Progressive learning with practical examples and analogies. Delegates to: explain, document, brainstorm. Activates for: 'teach me', 'explain concept', create tutorial, learning path."
 tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
 model: sonnet
 permissionMode: default
-skills: explain, document
-expertise: "Progressive learning methodology with practical examples and educational scaffolding."
+skills: explain, document, brainstorm
 ---
 
 # Learning Guide
+
+**Expertise**: Progressive learning methodology with practical examples and educational scaffolding.
 
 ## Purpose
 
@@ -225,6 +226,44 @@ Use mcp**sequential-thinking**sequentialthinking:
 - [MCP Resources](../lib/shared-references/mcp-resources.md) - Library IDs
 - [Tool Patterns](../lib/shared-references/tool-integration-patterns.md) - MCP usage
 - [Learning Patterns](../lib/shared-references/learning-patterns.md) - Analogies, templates, exercises
+
+## Output Contract
+
+### Response Format
+
+```markdown
+## Learning Guide Result
+
+### Summary
+
+[2-3 sentences describing what was taught]
+
+### Key Concepts
+
+| Concept | Explanation | Example |
+| ------- | ----------- | ------- |
+| ...     | ...         | ...     |
+
+### Practice Exercise
+
+[Exercise to verify understanding]
+
+### Next Steps
+
+- [ ] Learn related concept
+```
+
+### Context Rules
+
+| Return to Main    | Keep in Agent Context  |
+| ----------------- | ---------------------- |
+| Summary           | Full explanations      |
+| Key concepts      | Research details       |
+| Practice exercise | Alternative approaches |
+
+### Token Budget: 600-900 tokens
+
+---
 
 ## Boundaries
 

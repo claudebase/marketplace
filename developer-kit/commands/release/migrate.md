@@ -1,6 +1,6 @@
 ---
-name: dk:migrate
-description: Plan and execute database or system migrations
+name: migrate
+description: "**Use for migrations**. Database and system migration with rollback planning. Delegates to: migration. Activates for: database migration, schema change, migrate up/down."
 delegates-to: migration
 argument-hint: "<create|up|down|status|plan> [name] [--dry-run] [--rollback-plan]"
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
@@ -95,6 +95,21 @@ migrate down
 migrate status
 migrate plan "split users table" --rollback-plan
 ```
+
+## Boundaries
+
+**Will:**
+
+- Create migration files with proper naming
+- Execute migrations in order
+- Generate rollback plans
+- Verify migration safety
+
+**Will Not:**
+
+- Execute on production without explicit confirmation
+- Skip rollback plan generation for risky changes
+- Run destructive operations without backup reminder
 
 ## Related
 

@@ -1,6 +1,6 @@
 ---
-name: dk:changelog
-description: Generate changelog from git history using conventional commits
+name: changelog
+description: "**Use for changelog generation**. Parse git history and generate formatted changelog. Delegates to: document. Activates for: generate changelog, release notes, version history."
 delegates-to: document
 operation: changelog
 argument-hint: "[--since <tag|date>] [--format keep-a-changelog|conventional]"
@@ -83,6 +83,21 @@ changelog --since v2.0.0           # Since specific tag
 changelog --since 2025-01-01       # Since date
 changelog --format conventional    # Conventional format
 ```
+
+## Boundaries
+
+**Will:**
+
+- Parse git history for conventional commits
+- Categorize changes (Added, Changed, Fixed, etc.)
+- Generate Keep-a-Changelog or Conventional format
+- Extract breaking changes and highlight them
+
+**Will Not:**
+
+- Modify existing changelog entries
+- Generate entries for non-conventional commits without parsing
+- Commit or push the changelog automatically
 
 ## Related
 

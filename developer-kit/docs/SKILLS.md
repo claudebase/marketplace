@@ -1,15 +1,32 @@
 # Skills Guide
 
-Skills are context-aware capabilities that auto-activate based on your request. The Developer Kit includes 24 skills organized into logical categories.
+Skills are the **primary business logic layer** in Developer Kit's skill-centric architecture. They auto-activate based on trigger phrases and contain core capabilities (50-100 lines each).
+
+> **Architecture**: Skills are the core layer. Agents and Commands are thin orchestration/interface layers that delegate to Skills.
 
 ---
 
 ## How Skills Work
 
-1. **Automatic Activation**: Claude analyzes your request and activates relevant skills
-2. **Trigger Phrases**: Each skill has specific phrases that trigger activation
-3. **Tool Restrictions**: Skills may have restricted tool access for safety
-4. **Progressive Disclosure**: Skills load reference files as needed
+1. **Primary Logic Layer**: Skills contain the core business logic and methodology
+2. **Automatic Activation**: Claude analyzes your request and activates relevant skills
+3. **Emphatic Triggers**: Each skill uses bold trigger phrases for clear activation
+4. **Tool Restrictions**: Skills may have restricted tool access for safety
+5. **Progressive Disclosure**: Skills load reference files as needed (keeping core under 100 lines)
+
+### Emphatic Trigger Pattern
+
+Skills use this description pattern for reliable activation:
+
+```
+**EMPHATIC TRIGGER**. Core purpose. Activates for: 'trigger1', 'trigger2', 'trigger3'.
+```
+
+Example:
+
+```yaml
+description: "**MUST USE for bug fixing**. Tiered debugging from quick fix to deep RCA. Activates for: 'fix this bug', 'debug this', 'why is failing'."
+```
 
 ### Activation Example
 
@@ -33,13 +50,13 @@ Claude thinks:
 
 ## Skill Categories
 
-| Category | Skills | Focus |
-|----------|--------|-------|
-| [Analysis](#analysis-skills) | 6 | Code review, security, performance, testing |
-| [Implementation](#implementation-skills) | 6 | Building features, UI, databases, debugging |
-| [Research & Planning](#research--planning-skills) | 5 | Discovery, architecture, documentation |
-| [Infrastructure](#infrastructure-skills) | 4 | DevOps, observability, migrations |
-| [Meta](#meta-skills) | 3 | Orchestration, reasoning, accessibility |
+| Category                                          | Skills | Focus                                       |
+| ------------------------------------------------- | ------ | ------------------------------------------- |
+| [Analysis](#analysis-skills)                      | 6      | Code review, security, performance, testing |
+| [Implementation](#implementation-skills)          | 6      | Building features, UI, databases, debugging |
+| [Research & Planning](#research--planning-skills) | 5      | Discovery, architecture, documentation      |
+| [Infrastructure](#infrastructure-skills)          | 4      | DevOps, observability, migrations           |
+| [Meta](#meta-skills)                              | 3      | Orchestration, reasoning, accessibility     |
 
 ---
 
@@ -52,6 +69,7 @@ Claude thinks:
 **Triggers**: "analyze this code", "review for bugs", "check code quality", "assess architecture", "what's wrong with this code"
 
 **Capabilities**:
+
 - Code smell detection
 - Complexity metrics
 - Pattern matching
@@ -59,11 +77,13 @@ Claude thinks:
 - Severity-rated findings
 
 **Example**:
+
 ```
 analyze src/api/ for code quality issues
 ```
 
 **Output Format**:
+
 ```
 ## Analysis Summary
 - Files analyzed: 15
@@ -87,6 +107,7 @@ analyze src/api/ for code quality issues
 **Triggers**: "security audit", "find vulnerabilities", "OWASP check", "threat model", "is this secure"
 
 **Capabilities**:
+
 - OWASP Top 10 scanning
 - Authentication/authorization review
 - Input validation checks
@@ -94,11 +115,13 @@ analyze src/api/ for code quality issues
 - Threat modeling
 
 **Example**:
+
 ```
 security audit the payment processing module
 ```
 
 **Output Format**:
+
 ```
 ## Security Audit Report
 
@@ -125,6 +148,7 @@ security audit the payment processing module
 **Triggers**: "why is this slow", "find bottlenecks", "profile performance", "optimize speed", "improve response time"
 
 **Capabilities**:
+
 - Algorithmic complexity analysis
 - N+1 query detection
 - Memory leak patterns
@@ -132,6 +156,7 @@ security audit the payment processing module
 - Resource usage assessment
 
 **Example**:
+
 ```
 why is the user search endpoint slow?
 ```
@@ -149,6 +174,7 @@ why is the user search endpoint slow?
 **Triggers**: "design tests for", "test strategy", "improve coverage", "what tests needed", "how should I test"
 
 **Capabilities**:
+
 - Coverage analysis
 - Test strategy recommendations
 - Edge case identification
@@ -156,6 +182,7 @@ why is the user search endpoint slow?
 - Gap analysis
 
 **Example**:
+
 ```
 what tests are missing for the authentication module?
 ```
@@ -171,6 +198,7 @@ what tests are missing for the authentication module?
 **Triggers**: "run tests", "test coverage", "what tests are missing", "check tests", "run test suite"
 
 **Capabilities**:
+
 - Framework detection (Jest, Vitest, Pytest, Go, Rust, etc.)
 - Test execution
 - Coverage reporting
@@ -178,6 +206,7 @@ what tests are missing for the authentication module?
 - Test gap suggestions
 
 **Example**:
+
 ```
 run tests for the user module and show coverage
 ```
@@ -193,15 +222,18 @@ run tests for the user module and show coverage
 **Triggers**: "verify this works", "prove it's fixed", "check before commit", "confirm implementation", "ready to commit"
 
 **Modes**:
+
 - `--review`: Pre-commit checklist
 - `--complete`: Full verification (Iron Law)
 
 **Example**:
+
 ```
 verify my changes are ready to commit
 ```
 
 **Verification Pattern**:
+
 ```
 1. IDENTIFY: What proves this claim?
 2. RUN: Execute verification command
@@ -223,12 +255,14 @@ verify my changes are ready to commit
 **Triggers**: "implement", "create", "build feature", "add functionality", "code this", "make a"
 
 **Capabilities**:
+
 - Context-based approach selection
 - Framework pattern lookup (via Context7)
 - Multi-component coordination
 - Testing integration
 
 **Example**:
+
 ```
 implement a user registration form with validation
 ```
@@ -244,6 +278,7 @@ implement a user registration form with validation
 **Triggers**: "create component", "build UI", "design interface", "React component", "Vue component", "landing page", "dashboard"
 
 **Design Philosophy**:
+
 - Bold aesthetic choices
 - Distinctive typography (avoid generic fonts)
 - Thoughtful color palettes
@@ -251,6 +286,7 @@ implement a user registration form with validation
 - Spatial composition
 
 **Example**:
+
 ```
 create a pricing page with a bold, modern design
 ```
@@ -266,6 +302,7 @@ create a pricing page with a bold, modern design
 **Triggers**: "design database schema", "optimize query", "create migration", "SQL help", "PostgreSQL", "MySQL", "MongoDB"
 
 **Capabilities**:
+
 - Schema design patterns
 - Query optimization
 - Index recommendations
@@ -273,6 +310,7 @@ create a pricing page with a bold, modern design
 - Connection management
 
 **Example**:
+
 ```
 design a database schema for a multi-tenant SaaS application
 ```
@@ -290,6 +328,7 @@ design a database schema for a multi-tenant SaaS application
 **Triggers**: "create Dockerfile", "docker compose", "containerize app", "Kubernetes manifest", "k8s deployment", "Helm chart"
 
 **Capabilities**:
+
 - Multi-stage Dockerfiles
 - Docker Compose configurations
 - Kubernetes manifests
@@ -297,6 +336,7 @@ design a database schema for a multi-tenant SaaS application
 - Security best practices
 
 **Example**:
+
 ```
 create a Dockerfile for this Node.js application with multi-stage build
 ```
@@ -313,18 +353,20 @@ create a Dockerfile for this Node.js application with multi-stage build
 
 **Tiers**:
 
-| Tier | When | Approach |
-|------|------|----------|
-| 1: Quick Fix | Simple bugs, clear errors | Read error → Identify → Fix → Verify |
-| 2: Systematic | Multi-component, unclear errors | 4-phase investigation |
-| 3: Deep RCA | Recurring issues, 3+ failed fixes | Scientific method, 5 Whys |
+| Tier          | When                              | Approach                             |
+| ------------- | --------------------------------- | ------------------------------------ |
+| 1: Quick Fix  | Simple bugs, clear errors         | Read error → Identify → Fix → Verify |
+| 2: Systematic | Multi-component, unclear errors   | 4-phase investigation                |
+| 3: Deep RCA   | Recurring issues, 3+ failed fixes | Scientific method, 5 Whys            |
 
 **Iron Law** (Tier 2+):
+
 ```
 NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 ```
 
 **Example**:
+
 ```
 debug why the tests are failing in CI but passing locally
 ```
@@ -340,6 +382,7 @@ debug why the tests are failing in CI but passing locally
 **Triggers**: "improve this code", "optimize this", "refactor", "make this better", "enhance performance", "clean up code"
 
 **Capabilities**:
+
 - SOLID principle application
 - Code smell removal
 - Performance optimization
@@ -347,6 +390,7 @@ debug why the tests are failing in CI but passing locally
 - Pattern application
 
 **Example**:
+
 ```
 refactor this function to be more maintainable
 ```
@@ -366,16 +410,19 @@ refactor this function to be more maintainable
 **Triggers**: "research [topic]", "find information about", "look up", "search for", "find docs for [library]"
 
 **Depth Levels**:
+
 - `--quick`: Fast surface search
 - `--standard`: Moderate exploration (default)
 - `--deep`: Comprehensive research
 - `--exhaustive`: Leave no stone unturned
 
 **Modes**:
+
 - `--web`: General web search
 - `--docs`: Documentation-focused
 
 **Example**:
+
 ```
 research best practices for React error boundaries --deep
 ```
@@ -391,12 +438,14 @@ research best practices for React error boundaries --deep
 **Triggers**: "I want to build", "thinking about", "maybe we could", "not sure how to", "explore ideas", "help me figure out"
 
 **Approach**:
+
 - Exploratory questioning
 - Assumption challenging
 - Scope refinement
 - Trade-off discussion
 
 **Example**:
+
 ```
 I want to build a real-time collaboration feature, help me think through it
 ```
@@ -412,12 +461,14 @@ I want to build a real-time collaboration feature, help me think through it
 **Triggers**: "what does this do", "how does this work", "explain this code", "teach me about", "help me understand"
 
 **Capabilities**:
+
 - Code walkthroughs
 - Concept explanations
 - Analogy generation
 - Progressive complexity
 
 **Example**:
+
 ```
 explain how this authentication middleware works
 ```
@@ -435,6 +486,7 @@ explain how this authentication middleware works
 **Triggers**: "design a system", "architect this", "create API spec", "design database", "component design", "plan architecture"
 
 **Deliverables**:
+
 - Architecture diagrams (text-based)
 - API specifications
 - Database schemas
@@ -442,6 +494,7 @@ explain how this authentication middleware works
 - Trade-off analysis
 
 **Example**:
+
 ```
 design a notification system that supports email, SMS, and push
 ```
@@ -459,6 +512,7 @@ design a notification system that supports email, SMS, and push
 **Requirement**: ≥90% confidence to proceed
 
 **Checks**:
+
 1. No duplicate implementations? (25%)
 2. Architecture compliance? (25%)
 3. Official documentation verified? (20%)
@@ -466,11 +520,13 @@ design a notification system that supports email, SMS, and push
 5. Root cause identified? (15%)
 
 **Example**:
+
 ```
 am I ready to implement OAuth integration?
 ```
 
 **Output**:
+
 ```
 📋 Confidence Checks:
    ✅ No duplicate implementations found
@@ -494,6 +550,7 @@ am I ready to implement OAuth integration?
 **Triggers**: "build", "test", "run tests", "commit", "git status", "cleanup", "CI/CD"
 
 **Operations**:
+
 - Build execution
 - Test running
 - Git operations
@@ -501,6 +558,7 @@ am I ready to implement OAuth integration?
 - CI/CD configuration
 
 **Example**:
+
 ```
 run the build and fix any errors
 ```
@@ -516,6 +574,7 @@ run the build and fix any errors
 **Triggers**: "add logging", "setup monitoring", "create alerts", "add metrics", "distributed tracing", "build dashboard"
 
 **Capabilities**:
+
 - Structured logging patterns
 - Prometheus/Grafana setup
 - Alert rule configuration
@@ -523,6 +582,7 @@ run the build and fix any errors
 - OpenTelemetry integration
 
 **Example**:
+
 ```
 add structured logging to the API layer
 ```
@@ -538,12 +598,14 @@ add structured logging to the API layer
 **Triggers**: "migrate database", "data migration", "upgrade API", "deprecate endpoint", "breaking change", "zero-downtime"
 
 **Patterns**:
+
 - Expand-contract migrations
 - Blue-green deployments
 - API versioning strategies
 - Data backfill approaches
 
 **Example**:
+
 ```
 plan a zero-downtime migration to add a new required column
 ```
@@ -559,6 +621,7 @@ plan a zero-downtime migration to add a new required column
 **Triggers**: "accessibility", "a11y", "WCAG", "screen reader", "keyboard navigation", "color contrast"
 
 **Checks**:
+
 - WCAG 2.1 Level AA criteria
 - Color contrast ratios
 - Keyboard navigation
@@ -566,6 +629,7 @@ plan a zero-downtime migration to add a new required column
 - ARIA usage
 
 **Example**:
+
 ```
 audit this form for accessibility issues
 ```
@@ -583,12 +647,14 @@ audit this form for accessibility issues
 **Triggers**: "spawn", "orchestrate", "break down", "coordinate", "manage tasks", "multi-step operations"
 
 **Capabilities**:
+
 - Task decomposition
 - Dependency mapping
 - Parallel execution planning
 - Progress tracking
 
 **Example**:
+
 ```
 break down this feature into implementable tasks
 ```
@@ -602,6 +668,7 @@ break down this feature into implementable tasks
 **Triggers**: "document this", "create API docs", "generate README", "add documentation", "write JSDoc"
 
 **Output Types**:
+
 - README files
 - API documentation
 - JSDoc/docstrings
@@ -609,6 +676,7 @@ break down this feature into implementable tasks
 - Technical specs
 
 **Example**:
+
 ```
 create API documentation for the user endpoints
 ```
@@ -624,6 +692,7 @@ create API documentation for the user endpoints
 **Triggers**: "think through this", "step by step", "break down problem", "analyze systematically", "complex reasoning"
 
 **Capabilities**:
+
 - Iterative reasoning
 - Dynamic scope adjustment
 - Revision tracking
@@ -632,6 +701,7 @@ create API documentation for the user endpoints
 **MCP Tool**: `mcp__sequential-thinking__sequentialthinking`
 
 **Example**:
+
 ```
 think through the implications of changing our authentication system step by step
 ```
@@ -644,34 +714,36 @@ think through the implications of changing our authentication system step by ste
 
 These skills analyze but never modify code:
 
-| Skill | Safe For | Use This for Fixes |
-|-------|----------|-------------------|
-| `security` | Auditing any codebase | `security-expert` agent |
-| `performance` | Measuring without changes | `improve` skill |
-| `quality` | Assessing test coverage | `implement` skill |
-| `verify` | Validating claims | - |
-| `explain` | Educational purposes | - |
-| `confidence-check` | Pre-implementation gates | - |
-| `a11y` | Accessibility audits | `improve` skill |
+| Skill              | Safe For                  | Use This for Fixes      |
+| ------------------ | ------------------------- | ----------------------- |
+| `security`         | Auditing any codebase     | `security-expert` agent |
+| `performance`      | Measuring without changes | `improve` skill         |
+| `quality`          | Assessing test coverage   | `implement` skill       |
+| `verify`           | Validating claims         | -                       |
+| `explain`          | Educational purposes      | -                       |
+| `confidence-check` | Pre-implementation gates  | -                       |
+| `a11y`             | Accessibility audits      | `improve` skill         |
 
 ### Skill vs Agent vs Command
 
-| Type | Invocation | Best For |
-|------|------------|----------|
-| Skill | Automatic | Core capabilities |
-| Agent | Delegated or explicit | Domain expertise |
-| Command | User types name | Quick workflows |
+| Type    | Invocation            | Best For          |
+| ------- | --------------------- | ----------------- |
+| Skill   | Automatic             | Core capabilities |
+| Agent   | Delegated or explicit | Domain expertise  |
+| Command | User types name       | Quick workflows   |
 
 ---
 
 ## Adding New Skills
 
 1. Copy template:
+
 ```bash
 cp -r templates/skill-template skills/my-skill
 ```
 
 2. Edit `skills/my-skill/SKILL.md`:
+
 ```yaml
 ---
 name: my-skill
@@ -686,6 +758,7 @@ allowed-tools:
 3. Add reference files as needed in `skills/my-skill/references/`
 
 4. Validate:
+
 ```bash
 ./scripts/validate-skill-descriptions.sh
 ```

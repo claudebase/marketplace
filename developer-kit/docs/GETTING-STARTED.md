@@ -2,6 +2,8 @@
 
 This guide walks you through installing, configuring, and using the Developer Kit plugin for Claude Code.
 
+> **Architecture**: Developer Kit uses a skill-centric architecture where **Skills** are the primary business logic layer, with Agents and Commands serving as thin orchestration/interface layers.
+
 ---
 
 ## Prerequisites
@@ -79,11 +81,13 @@ Add your API keys to `~/.claude/settings.json`:
 ### Getting API Keys
 
 #### Tavily API Key
+
 1. Go to [tavily.com](https://tavily.com)
 2. Sign up for a free account
 3. Copy your API key from the dashboard
 
 #### GitHub Token
+
 1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/tokens)
 2. Generate a new token (classic) with these scopes:
    - `repo` (for private repos) or `public_repo` (for public only)
@@ -108,11 +112,13 @@ claude --debug
 ### Check MCP Servers
 
 Inside Claude Code:
+
 ```
 /mcp
 ```
 
 You should see:
+
 - `sequential-thinking` - Active
 - `context7` - Active
 - `playwright` - Active
@@ -179,42 +185,44 @@ prep-pr
 
 ## Understanding Components
 
-### Skills (Auto-Activate)
+Developer Kit uses a **skill-centric architecture** with three layers:
 
-Skills activate automatically based on your request:
+### Skills (Core Business Logic - Auto-Activate)
+
+Skills are the primary business logic layer. They activate automatically based on your request:
 
 ```
 "analyze this code for security issues"
-→ Activates: security skill
+→ Activates: security skill (OWASP methodology)
 
 "why is this function slow?"
-→ Activates: performance skill
+→ Activates: performance skill (bottleneck analysis)
 
 "implement a user registration form"
-→ Activates: implement skill
+→ Activates: implement skill (framework patterns)
 ```
 
-### Agents (Specialized Experts)
+### Agents (Orchestration Layer - Domain Experts)
 
-Agents are invoked for complex domain tasks:
+Agents compose skills and provide domain expertise for complex tasks:
 
 ```
-# Claude automatically uses agents when appropriate
+# Claude automatically delegates to agents when appropriate
 "design the database schema for a blog platform"
-→ May invoke: architect agent, database-admin agent
+→ May invoke: architect agent (composes design + database skills)
 
 # Or explicitly request
 "use the security-expert agent to fix this vulnerability"
 ```
 
-### Commands (Direct Actions)
+### Commands (Interface Layer - Direct Actions)
 
-Commands are invoked by name:
+Commands are thin wrappers that route intent and delegate to skills:
 
 ```
-analyze                    # Run analysis
-check --strict             # Validate project
-ship minor                 # Release new version
+analyze                    # Delegates to analyze skill
+check --strict             # Delegates to devops skill
+ship minor                 # Delegates to orchestration skill
 ```
 
 ---
@@ -257,6 +265,7 @@ code-review PR-123         # Review specific PR
 ### 1. Use Natural Language
 
 Skills activate on natural phrases:
+
 - "check if this code is secure" → security skill
 - "help me understand this function" → explain skill
 - "make this code faster" → improve skill
@@ -264,6 +273,7 @@ Skills activate on natural phrases:
 ### 2. Be Specific
 
 More context = better results:
+
 ```
 # Good
 "analyze the authentication module for SQL injection vulnerabilities"
@@ -275,6 +285,7 @@ More context = better results:
 ### 3. Use Commands for Workflows
 
 Commands provide structured workflows:
+
 ```
 # Instead of manually checking everything
 check
