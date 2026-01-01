@@ -3,10 +3,10 @@ name: Validate Developer Kit Plugin
 on:
   push:
     paths:
-      - 'developer-kit/**'
+      - "developer-kit/**"
   pull_request:
     paths:
-      - 'developer-kit/**'
+      - "developer-kit/**"
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.11']
+        python-version: ["3.11"]
         include:
           - os: ubuntu-latest
             python-cmd: python3
@@ -57,58 +57,9 @@ jobs:
           ${{ matrix.python-cmd }} -m py_compile hooks/validate_env_vars.py
           ${{ matrix.python-cmd }} -m py_compile lib/platform_utils.py
 
-      - name: Test platform detection
+      - name: Run CI tests (platform, hook-io, counts)
         working-directory: developer-kit
-        run: |
-          ${{ matrix.python-cmd }} -c "
-          import sys
-          sys.path.insert(0, 'lib')
-          from platform_utils import PlatformInfo
-          print(f'Platform: {sys.platform}')
-          print(f'is_windows: {PlatformInfo.is_windows()}')
-          print(f'is_macos: {PlatformInfo.is_macos()}')
-          print(f'is_linux: {PlatformInfo.is_linux()}')
-          print(f'is_wsl: {PlatformInfo.is_wsl()}')
-          print(f'python_cmd: {PlatformInfo.get_python_command()}')
-          print(f'temp_dir: {PlatformInfo.get_temp_dir()}')
-          print(f'config_dir: {PlatformInfo.get_user_config_dir()}')
-          "
-
-      - name: Test hook JSON parsing
-        working-directory: developer-kit
-        run: |
-          ${{ matrix.python-cmd }} -c "
-          import sys
-          sys.path.insert(0, 'lib')
-          from platform_utils import HookIO
-
-          # Test JSON parsing
-          test_input = '{\"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"echo hello\"}}'
-          import io
-          sys.stdin = io.StringIO(test_input)
-          data = HookIO.read_input()
-          assert data['tool_name'] == 'Bash', 'Tool name parsing failed'
-          print('HookIO JSON parsing: OK')
-          "
-
-      - name: Component counts
-        working-directory: developer-kit
-        run: |
-          ${{ matrix.python-cmd }} -c "
-          from pathlib import Path
-          skills = len(list(Path('skills').glob('*/SKILL.md')))
-          agents = len(list(Path('agents').glob('*.md')))
-          commands = len(list(Path('commands').rglob('*.md')))
-          refs = len(list(Path('.').rglob('references/*.md')))
-          print(f'Skills: {skills}')
-          print(f'Agents: {agents}')
-          print(f'Commands: {commands}')
-          print(f'Reference files: {refs}')
-
-          import json
-          version = json.load(open('.claude-plugin/plugin.json'))['version']
-          print(f'Plugin version: {version}')
-          "
+        run: ${{ matrix.python-cmd }} scripts/ci_tests.py
 
   # Summary job that requires all matrix jobs to pass
   validation-summary:
