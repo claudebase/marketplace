@@ -12,9 +12,16 @@ Usage:
 """
 
 import argparse
+import io
 import re
 import sys
 from pathlib import Path
+
+# Fix Windows console encoding for Unicode characters
+if sys.platform == "win32":
+    # Force UTF-8 output on Windows
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 # Add lib directory to path for cross-platform utilities
 SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -174,7 +181,7 @@ class TestRunner:
                 refs_dir = skill_dir / "references"
                 if refs_dir.is_dir():
                     ref_count = len(list(refs_dir.glob("*.md")))
-                    self.debug(f"  └── {ref_count} reference file(s) in {skill_name}")
+                    self.debug(f"  +-- {ref_count} reference file(s) in {skill_name}")
             else:
                 self.fail_test(f"Missing SKILL.md in {skill_dir.name}/")
 
