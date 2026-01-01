@@ -1,5 +1,5 @@
 ---
-name: feature-dev
+name: dk:feature-dev
 description: "**Use for complex feature implementation**. 7-phase guided workflow with multi-agent coordination. Delegates to: orchestration. Activates for: implement feature, guided development, complex task."
 delegates-to: orchestration
 operation: feature

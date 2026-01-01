@@ -1,5 +1,5 @@
 ---
-name: cleanup
+name: dk:cleanup
 description: "**Use for dead code removal**. Remove unused code, imports, and files safely. Delegates to: devops. Activates for: cleanup code, remove dead code, clean imports."
 argument-hint: "[target] [--type code|imports|files|all] [--safe|--aggressive]"
 delegates-to: devops

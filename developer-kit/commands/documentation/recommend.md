@@ -1,5 +1,5 @@
 ---
-name: recommend
+name: dk:recommend
 description: "**Use for library and tool selection**. Multi-source recommendations with comparison analysis. Delegates to: research. Activates for: recommend library, suggest tool, compare frameworks."
 delegates-to: research
 operation: recommend

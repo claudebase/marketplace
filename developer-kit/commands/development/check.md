@@ -1,5 +1,5 @@
 ---
-name: check
+name: dk:check
 description: "**Run before commits and PRs**. Comprehensive validation: lint, type-check, test, security scan. Delegates to: devops. Activates for: validate, check code, pre-commit."
 argument-hint: "[--fix] [--quick] [--strict]"
 delegates-to: devops

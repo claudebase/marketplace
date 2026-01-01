@@ -1,5 +1,5 @@
 ---
-name: business-panel
+name: dk:business-panel
 description: "**Use for business strategy analysis**. Multi-expert panel with Porter, Christensen, Drucker frameworks. Delegates to: brainstorm. Activates for: business analysis, strategic planning, market assessment."
 argument-hint: '[document_path|content] [--mode discussion|debate|socratic] [--experts "name1,name2"]'
 delegates-to: brainstorm

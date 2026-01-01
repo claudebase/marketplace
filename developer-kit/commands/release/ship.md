@@ -1,5 +1,5 @@
 ---
-name: ship
+name: dk:ship
 description: "**Use for release shipping**. Full release workflow: validate, version, changelog, tag, deploy. Delegates to: orchestration. Activates for: ship release, deploy, create release."
 argument-hint: "<version|major|minor|patch> [--dry-run] [--no-tag] [--no-push] [--deploy <env>]"
 delegates-to: orchestration

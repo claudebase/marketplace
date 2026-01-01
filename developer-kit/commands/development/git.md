@@ -1,5 +1,5 @@
 ---
-name: git
+name: dk:git
 description: "**Use for Git operations**. Smart commit messages and workflow automation. Delegates to: devops. Activates for: git commit, git push, version control."
 argument-hint: "[operation] [args] [--smart-commit]"
 delegates-to: devops

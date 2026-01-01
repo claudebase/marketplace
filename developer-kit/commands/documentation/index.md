@@ -1,5 +1,5 @@
 ---
-name: index
+name: dk:index
 description: "**Use for codebase indexing**. Directory structure analysis and key file identification. Delegates to: research. Activates for: index repo, project structure, codebase map."
 delegates-to: research
 operation: index

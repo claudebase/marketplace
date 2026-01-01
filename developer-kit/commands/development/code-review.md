@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: dk:code-review
 description: "**MUST BE USED after writing code**. Confidence-based review for PRs and local changes. Delegates to: code-reviewer. Activates for: review code, check changes, PR review."
 argument-hint: "<pr-url|pr-number|path> [--strict] [--focus security|bugs|style]"
 delegates-to: code-reviewer

@@ -1,5 +1,5 @@
 ---
-name: reflect
+name: dk:reflect
 description: "**Use at session end**. Capture progress, decisions, and learnings for continuity. Delegates to: document. Activates for: session summary, capture learnings, document decisions."
 delegates-to: document
 operation: reflect

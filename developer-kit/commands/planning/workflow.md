@@ -1,5 +1,5 @@
 ---
-name: workflow
+name: dk:workflow
 description: "**Use for workflow generation**. PRD-to-implementation workflow with dependency mapping. Delegates to: orchestration. Activates for: generate workflow, implementation plan, PRD analysis."
 argument-hint: "[prd-file|feature-description] [--strategy systematic|agile|enterprise] [--depth shallow|normal|deep]"
 delegates-to: orchestration

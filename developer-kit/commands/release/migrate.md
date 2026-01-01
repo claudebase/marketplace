@@ -1,5 +1,5 @@
 ---
-name: migrate
+name: dk:migrate
 description: "**Use for migrations**. Database and system migration with rollback planning. Delegates to: migration. Activates for: database migration, schema change, migrate up/down."
 delegates-to: migration
 argument-hint: "<create|up|down|status|plan> [name] [--dry-run] [--rollback-plan]"

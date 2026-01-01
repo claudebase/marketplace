@@ -1,5 +1,5 @@
 ---
-name: estimate
+name: dk:estimate
 description: "**Use for effort estimation**. Data-driven estimates with confidence intervals. Delegates to: orchestration. Activates for: estimate effort, how long, complexity assessment."
 delegates-to: orchestration
 operation: estimate

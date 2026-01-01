@@ -1,5 +1,5 @@
 ---
-name: analyze
+name: dk:analyze
 description: "**MUST USE for code analysis**. Unified analysis with mode selection: broad, security, performance, quality, review, explore. Delegates to: analyze. Activates for: analyze code, security scan, performance check."
 argument-hint: "[--mode <type>] [--target <path>] [--output json|text] [--severity <level>]"
 delegates-to: analyze

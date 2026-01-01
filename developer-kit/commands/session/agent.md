@@ -1,5 +1,5 @@
 ---
-name: agent
+name: dk:agent
 description: "**Session controller**. Orchestrates investigation, implementation, and review workflows. Delegates to: orchestration. Activates for: complex task, multi-phase workflow, guided session."
 argument-hint: "[task-description]"
 delegates-to: orchestration

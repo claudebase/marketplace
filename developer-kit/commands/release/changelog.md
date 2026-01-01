@@ -1,5 +1,5 @@
 ---
-name: changelog
+name: dk:changelog
 description: "**Use for changelog generation**. Parse git history and generate formatted changelog. Delegates to: document. Activates for: generate changelog, release notes, version history."
 delegates-to: document
 operation: changelog
