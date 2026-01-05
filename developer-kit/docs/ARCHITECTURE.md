@@ -84,14 +84,20 @@ developer-kit/
 │   └── ...
 │
 ├── hooks/
-│   ├── hooks.json            # Hook configuration
-│   └── security_reminder_hook.py
+│   ├── hooks.json                    # Hook configuration
+│   ├── format_file_hook.sh           # Auto-format files
+│   ├── security_reminder_hook.sh     # Security warnings
+│   ├── validate_bash_command.sh      # Block dangerous commands
+│   ├── session_instructions_hook.sh  # Session setup
+│   ├── validate_env_vars.sh          # Check API keys
+│   ├── restore_session_context.sh    # Restore context
+│   └── save_session_state.sh         # Save state on stop
 │
-├── scripts/                  # Utility scripts
-│   ├── format-file.sh
-│   ├── validate-bash-command.sh
-│   ├── test-components.sh
-│   └── ...
+├── scripts/                  # Validation scripts
+│   ├── validate.sh           # Unified validation
+│   ├── test_components.sh    # Full test suite
+│   ├── validate_delegation.sh
+│   └── ci_tests.sh
 │
 ├── templates/                # Reusable templates
 │   ├── ci-cd/
@@ -388,7 +394,7 @@ mkdir skills/my-skill/references
 5. **Validate**:
 
 ```bash
-./scripts/validate-skill-descriptions.sh
+bash scripts/validate.sh --skills
 ```
 
 ### Adding a New Agent
@@ -434,7 +440,7 @@ Purpose and methodology...
 4. **Validate**:
 
 ```bash
-./scripts/validate-agent-fields.sh
+bash scripts/validate.sh --agents
 ```
 
 ### Adding a New Command
@@ -476,7 +482,7 @@ my-command --flag value
 3. **Validate**:
 
 ```bash
-./scripts/check-frontmatter.sh
+bash scripts/validate.sh --frontmatter
 ```
 
 ---
@@ -486,10 +492,10 @@ my-command --flag value
 ### Full Test Suite
 
 ```bash
-./scripts/test-components.sh
+bash scripts/test_components.sh
 ```
 
-Runs 89+ tests covering:
+Runs 84+ tests covering:
 
 - Structure validation
 - Skill validation
@@ -502,29 +508,34 @@ Runs 89+ tests covering:
 
 ```bash
 # Validate skill descriptions
-./scripts/validate-skill-descriptions.sh
+bash scripts/validate.sh --skills
 
 # Validate agent fields
-./scripts/validate-agent-fields.sh
+bash scripts/validate.sh --agents
 
 # Validate reference links
-./scripts/validate-references.sh
+bash scripts/validate.sh --refs
 
 # Check frontmatter syntax
-./scripts/check-frontmatter.sh
+bash scripts/validate.sh --frontmatter
 
-# Quick component count
-./scripts/validate-components.sh
+# Validate JSON configs
+bash scripts/validate.sh --json
+
+# Run all validations
+bash scripts/validate.sh
 ```
 
 ### Testing Hooks
 
 ```bash
-# Test hook script
-echo '{"tool_name": "Write"}' | ./scripts/format-file.sh
+# Test hook script with sample input
+echo '{"tool_name": "Write", "tool_input": {"file_path": "test.ts"}}' | \
+  bash hooks/format_file_hook.sh
 
-# Test Python hook
-echo '{}' | python3 hooks/security_reminder_hook.py
+# Test security hook
+echo '{"tool_name": "Write", "tool_input": {"content": "test"}}' | \
+  bash hooks/security_reminder_hook.sh
 ```
 
 ---
@@ -537,20 +548,14 @@ When releasing a new version:
 
 ```json
 {
-  "version": "4.1.0"
+  "version": "X.Y.Z"
 }
 ```
 
-2. **Update hooks.json SessionStart**:
-
-```json
-"command": "echo 'Developer Kit v4.1.0 | Skills: 24 | Agents: 14'"
-```
-
-3. **Update CHANGELOG.md**:
+2. **Update CHANGELOG.md**:
 
 ```markdown
-## [4.1.0] - YYYY-MM-DD
+## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
 
@@ -561,17 +566,17 @@ When releasing a new version:
 - Updated...
 ```
 
-4. **Update test expectations** (if counts changed):
+3. **Update test expectations** (if counts changed):
 
 ```bash
-# In test-components.sh
+# In test_components.sh
 EXPECTED_SKILLS=25  # if added skill
 ```
 
-5. **Run full validation**:
+4. **Run full validation**:
 
 ```bash
-./scripts/test-components.sh
+bash scripts/test_components.sh
 ```
 
 ---
@@ -603,7 +608,8 @@ EXPECTED_SKILLS=25  # if added skill
 
 ### Scripts
 
-- Use bash for shell scripts
+- Use Bash for all scripts (hooks and validation)
+- Include `set -euo pipefail` for safety
 - Return JSON from hooks
 - Use proper exit codes (0=success, 2=block)
 - Include error handling
@@ -614,7 +620,7 @@ EXPECTED_SKILLS=25  # if added skill
 
 Before submitting:
 
-- [ ] Run `./scripts/test-components.sh` (all tests pass)
+- [ ] Run `bash scripts/test_components.sh` (all tests pass)
 - [ ] Skill has "Activates for:" in description
 - [ ] Agent has required frontmatter (name, description, tools)
 - [ ] Command has description frontmatter

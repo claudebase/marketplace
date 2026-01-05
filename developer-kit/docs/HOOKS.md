@@ -1,6 +1,6 @@
 # Hooks Guide
 
-Hooks are event-driven automation that execute in response to Claude Code events. The Developer Kit uses hooks for code formatting, security reminders, and session management.
+Hooks are event-driven automation that execute in response to Claude Code events. The Developer Kit uses Bash hooks for code formatting, security reminders, and session management.
 
 ---
 
@@ -8,7 +8,7 @@ Hooks are event-driven automation that execute in response to Claude Code events
 
 1. **Event Trigger**: Claude Code emits an event (e.g., file written)
 2. **Matcher Evaluation**: Hook matchers filter which hooks run
-3. **Hook Execution**: Matching hooks execute (command, prompt, or agent)
+3. **Hook Execution**: Matching hooks execute shell commands
 4. **Result Processing**: Exit codes determine success/blocking
 
 ---
@@ -21,12 +21,10 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
 
 **Trigger**: After successful tool execution
 
-**Configured Hooks**:
-
 | Matcher | Hook | Purpose |
 |---------|------|---------|
-| `Write\|Edit\|MultiEdit` | `format-file.sh` | Auto-format written files |
-| `Write\|Edit\|MultiEdit` | `security_reminder_hook.py` | Security pattern warnings |
+| `Write\|Edit\|MultiEdit` | `format_file_hook.sh` | Auto-format written files |
+| `Write\|Edit\|MultiEdit` | `security_reminder_hook.sh` | Security pattern warnings |
 
 ```json
 {
@@ -36,12 +34,12 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/format-file.sh",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/format_file_hook.sh\"",
           "timeout": 15
         },
         {
           "type": "command",
-          "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.py"
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.sh\""
         }
       ]
     }
@@ -53,11 +51,9 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
 
 **Trigger**: Before tool execution
 
-**Configured Hooks**:
-
 | Matcher | Hook | Purpose |
 |---------|------|---------|
-| `Bash` | `validate-bash-command.sh` | Block dangerous commands |
+| `Bash` | `validate_bash_command.sh` | Block dangerous commands |
 
 ```json
 {
@@ -67,7 +63,7 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/validate-bash-command.sh",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_bash_command.sh\"",
           "timeout": 5
         }
       ]
@@ -86,12 +82,11 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
 
 **Trigger**: When session begins (startup or resume)
 
-**Configured Hooks**:
-
 | Matcher | Hook | Purpose |
 |---------|------|---------|
-| `startup\|resume` | Echo message | Display welcome |
-| `startup\|resume` | `restore-session-context.sh` | Restore context |
+| `startup\|resume` | `session_instructions_hook.sh` | Inject session instructions |
+| `startup\|resume` | `validate_env_vars.sh` | Check required API keys |
+| `startup\|resume` | `restore_session_context.sh` | Restore previous context |
 
 ```json
 {
@@ -101,12 +96,17 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
       "hooks": [
         {
           "type": "command",
-          "command": "echo 'Developer Kit v4.0.0 | Skills: 24 | Agents: 14 | Commands: 21'",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session_instructions_hook.sh\"",
           "timeout": 5
         },
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/restore-session-context.sh",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_env_vars.sh\"",
+          "timeout": 5
+        },
+        {
+          "type": "command",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/restore_session_context.sh\"",
           "timeout": 5
         }
       ]
@@ -119,11 +119,9 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
 
 **Trigger**: When Claude attempts to stop
 
-**Configured Hooks**:
-
 | Hook | Purpose |
 |------|---------|
-| `save-session-state.sh` | Persist session state |
+| `save_session_state.sh` | Persist session state |
 
 ```json
 {
@@ -132,7 +130,7 @@ The Developer Kit configures these hooks in `hooks/hooks.json`:
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/save-session-state.sh",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/save_session_state.sh\"",
           "timeout": 10
         }
       ]
@@ -193,7 +191,7 @@ Execute shell commands:
 ```json
 {
   "type": "command",
-  "command": "${CLAUDE_PLUGIN_ROOT}/scripts/my-script.sh",
+  "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/my-script.sh\"",
   "timeout": 15
 }
 ```
@@ -276,11 +274,11 @@ Hooks should return JSON for rich feedback:
 
 ## Writing Custom Hooks
 
-### Shell Script Hook
+### Bash Hook Template
 
 ```bash
 #!/bin/bash
-# hooks/my-hook.sh
+set -euo pipefail
 
 # Read JSON input
 INPUT=$(cat)
@@ -299,48 +297,18 @@ echo '{"status": "success"}'
 exit 0
 ```
 
-### Python Hook
-
-```python
-#!/usr/bin/env python3
-# hooks/my-hook.py
-
-import sys
-import json
-
-def main():
-    # Read JSON input
-    input_data = json.load(sys.stdin)
-
-    tool_name = input_data.get('tool_name', '')
-    tool_input = input_data.get('tool_input', {})
-
-    # Your logic here
-    if 'password' in str(tool_input).lower():
-        print(json.dumps({
-            "status": "warning",
-            "message": "Detected potential password in code"
-        }))
-        return 0  # Warning, don't block
-
-    print(json.dumps({"status": "success"}))
-    return 0
-
-if __name__ == '__main__':
-    sys.exit(main())
-```
-
 ---
 
 ## Hook Configuration
 
 ### Adding a New Hook
 
-1. Create hook script in `hooks/` or `scripts/`:
+1. Create hook script in `hooks/`:
 
 ```bash
-# scripts/my-custom-hook.sh
+# hooks/my_custom_hook.sh
 #!/bin/bash
+set -euo pipefail
 INPUT=$(cat)
 # ... your logic
 echo '{"status": "success"}'
@@ -349,7 +317,7 @@ exit 0
 
 2. Make executable:
 ```bash
-chmod +x scripts/my-custom-hook.sh
+chmod +x hooks/my_custom_hook.sh
 ```
 
 3. Add to `hooks/hooks.json`:
@@ -361,29 +329,7 @@ chmod +x scripts/my-custom-hook.sh
       "hooks": [
         {
           "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/my-custom-hook.sh",
-          "timeout": 10
-        }
-      ]
-    }
-  ]
-}
-```
-
-### Modifying Existing Hooks
-
-Edit `hooks/hooks.json`:
-
-```json
-{
-  "PostToolUse": [
-    {
-      "matcher": "Write|Edit|MultiEdit",
-      "hooks": [
-        // Existing hooks...
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/new-hook.sh",
+          "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/my_custom_hook.sh\"",
           "timeout": 10
         }
       ]
@@ -394,36 +340,16 @@ Edit `hooks/hooks.json`:
 
 ### Disabling a Hook
 
-Remove or comment out in `hooks/hooks.json`:
-
-```json
-{
-  "PostToolUse": [
-    {
-      "matcher": "Write|Edit|MultiEdit",
-      "hooks": [
-        // Disabled: format-file.sh
-        // {
-        //   "type": "command",
-        //   "command": "${CLAUDE_PLUGIN_ROOT}/scripts/format-file.sh"
-        // },
-        {
-          "type": "command",
-          "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.py"
-        }
-      ]
-    }
-  ]
-}
-```
+Remove or comment out in `hooks/hooks.json`.
 
 ---
 
 ## Included Hook Scripts
 
-### format-file.sh
+All hooks are Bash scripts located in the `hooks/` directory.
 
-**Location**: `scripts/format-file.sh`
+### format_file_hook.sh
+
 **Purpose**: Auto-format files after write operations
 
 **Supported Formatters**:
@@ -432,9 +358,8 @@ Remove or comment out in `hooks/hooks.json`:
 - rustfmt (Rust)
 - gofmt (Go)
 
-### security_reminder_hook.py
+### security_reminder_hook.sh
 
-**Location**: `hooks/security_reminder_hook.py`
 **Purpose**: Warn about security-sensitive patterns
 
 **Detected Patterns**:
@@ -443,9 +368,8 @@ Remove or comment out in `hooks/hooks.json`:
 - eval() usage
 - Unsafe deserialization
 
-### validate-bash-command.sh
+### validate_bash_command.sh
 
-**Location**: `scripts/validate-bash-command.sh`
 **Purpose**: Block dangerous shell commands
 
 **Blocked Patterns**:
@@ -454,16 +378,22 @@ Remove or comment out in `hooks/hooks.json`:
 - `:(){ :|:& };:` (fork bomb)
 - `> /dev/sda`
 
-### restore-session-context.sh
+### session_instructions_hook.sh
 
-**Location**: `scripts/restore-session-context.sh`
+**Purpose**: Inject session instructions at startup
+
+### validate_env_vars.sh
+
+**Purpose**: Check required API keys are configured
+
+### restore_session_context.sh
+
 **Purpose**: Restore session context on startup
 
 **Reads**: `docs/session/current-context.md`
 
-### save-session-state.sh
+### save_session_state.sh
 
-**Location**: `scripts/save-session-state.sh`
 **Purpose**: Save session state on stop
 
 **Writes**: `docs/session/last-session.md`
@@ -477,7 +407,7 @@ Remove or comment out in `hooks/hooks.json`:
 ```bash
 # Test with sample input
 echo '{"tool_name": "Write", "tool_input": {"file_path": "test.ts"}}' | \
-  ./scripts/format-file.sh
+  bash hooks/format_file_hook.sh
 ```
 
 ### Verify Hook Loading
@@ -494,8 +424,8 @@ claude --debug
 
 Hooks log to Claude Code's debug output:
 ```
-[hook] PostToolUse: format-file.sh executed (exit: 0)
-[hook] PostToolUse: security_reminder_hook.py executed (exit: 0)
+[hook] PostToolUse: format_file_hook.sh executed (exit: 0)
+[hook] PostToolUse: security_reminder_hook.sh executed (exit: 0)
 ```
 
 ---
@@ -522,7 +452,7 @@ Increase timeout in hooks.json:
 {
   "type": "command",
   "command": "...",
-  "timeout": 30  // Increase from default
+  "timeout": 30
 }
 ```
 

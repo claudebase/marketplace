@@ -1,6 +1,6 @@
-# Developer Kit v3.1.0 Testing Checklist
+# Developer Kit v7.0.0 Testing Checklist
 
-Manual verification checklist for v3.1.0 release.
+Manual verification checklist for v7.0.0 release.
 
 ## Skills Testing
 
@@ -44,22 +44,27 @@ Manual verification checklist for v3.1.0 release.
 - [ ] `build` executes build workflow
 - [ ] `git` provides git assistance
 - [ ] `release` handles release workflow
+- [ ] `ship` completes release workflow
+- [ ] `start` initializes feature development
+- [ ] `check` runs validation suite
+- [ ] `prep-pr` prepares pull request
 
 ## Hooks Testing
 
 ### SessionStart
-- [ ] Displays "Developer Kit v3.1.0 initialized" message
-- [ ] Shows skill and agent counts
+- [ ] `session_instructions_hook.sh` executes without error
+- [ ] `validate_env_vars.sh` checks for required API keys
+- [ ] `restore_session_context.sh` restores context
 
 ### PostToolUse
-- [ ] Auto-formats code after Write/Edit
-- [ ] Security reminder appears for sensitive files
+- [ ] `format_file_hook.sh` auto-formats code after Write/Edit
+- [ ] `security_reminder_hook.sh` warns about sensitive patterns
 
 ### PreToolUse
-- [ ] Blocks dangerous bash commands (rm -rf /, etc.)
+- [ ] `validate_bash_command.sh` blocks dangerous commands (rm -rf /, etc.)
 
-### UserPromptSubmit
-- [ ] Hook executes without errors
+### Stop
+- [ ] `save_session_state.sh` saves session state
 
 ## Agents Testing
 
@@ -69,11 +74,11 @@ Manual verification checklist for v3.1.0 release.
 
 ### Code Reviewer Agent
 - [ ] Activates on "review this PR"
-- [ ] Uses confidence-based filtering (≥80%)
+- [ ] Uses confidence-based filtering (>=80%)
 
 ### Security Expert Agent
 - [ ] Activates on "security review"
-- [ ] Uses security skill
+- [ ] Can modify code (unlike read-only security skill)
 
 ## Integration Testing
 
@@ -87,14 +92,18 @@ Manual verification checklist for v3.1.0 release.
 
 ## Validation Results
 
-Run `./scripts/validate-components.sh` and verify:
+Run `bash scripts/test_components.sh` and verify:
+
+- [ ] All 84+ tests pass
+- [ ] Skills: 24
+- [ ] Agents: 14
+- [ ] Commands: 21
+- [ ] Hooks: 7 (all executable)
+
+Run `bash scripts/validate.sh` and verify:
 
 - [ ] 0 errors
-- [ ] Skills: 22
-- [ ] Agents: 14
-- [ ] Commands: 16
-- [ ] Hook events: 4
-- [ ] Skills with triggers: 22/22
+- [ ] 0 warnings
 
 ## Sign-off
 
@@ -104,4 +113,4 @@ Run `./scripts/validate-components.sh` and verify:
 
 ---
 
-*Created for v3.1.0 release validation*
+*Updated for v7.0.0 release validation*

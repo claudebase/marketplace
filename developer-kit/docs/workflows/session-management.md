@@ -16,7 +16,7 @@ When Claude Code starts, the Developer Kit:
 
 1. **Displays version info**
    ```
-   Developer Kit v3.4.0 | Skills: 22 | Agents: 14 | Commands: 21
+   Developer Kit v7.0.0 | Skills: 24 | Agents: 14 | Commands: 21
    ```
 
 2. **Restores context** (if available)
