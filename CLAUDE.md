@@ -6,14 +6,13 @@ This repository contains Claude Code plugins. Each plugin has its own CLAUDE.md 
 
 | Plugin | Version | Description |
 |--------|---------|-------------|
-| `developer-kit` | 4.0.0 | 24 skills, 14 agents, 21 commands for software development |
+| `developer-kit` | 7.0.0 | 24 skills, 14 agents, 21 commands for software development |
 
 ## Repository Structure
 
 ```
 marketplace/
 ├── developer-kit/           # Developer Kit plugin
-│   ├── CLAUDE.md            # Plugin-specific instructions (auto-loaded)
 │   ├── .claude-plugin/      # Plugin manifest
 │   ├── skills/              # 24 skills
 │   ├── agents/              # 14 agents

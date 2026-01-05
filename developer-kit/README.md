@@ -2,7 +2,7 @@
 
 > Comprehensive Claude Code plugin with 24 skills, 14 agents, and 21 commands for the full software development lifecycle.
 
-**Version 4.0.0** | [Repository](https://github.com/claudebase/marketplace) | [Changelog](./CHANGELOG.md) | MIT License
+**Version 7.0.0** | [Repository](https://github.com/claudebase/marketplace) | [Changelog](./CHANGELOG.md) | MIT License
 
 **Platform**: macOS, Linux
 
@@ -382,8 +382,8 @@ See [ARCHITECTURE.md](./docs/ARCHITECTURE.md) for:
 
 ## License
 
-MIT - see [LICENSE](./LICENSE)
+MIT - see [LICENSE](../LICENSE)
 
 ---
 
-**Developer Kit v4.0.0** | 24 Skills | 14 Agents | 21 Commands
+**Developer Kit v7.0.0** | 24 Skills | 14 Agents | 21 Commands

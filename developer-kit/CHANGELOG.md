@@ -388,10 +388,8 @@ All 21 commands follow this pattern - simply remove the `/dk:` prefix.
 
 #### Hook Scripts
 
-- **`run-affected-tests.sh`** - Optional PostToolUse hook for running affected tests
-  - Detects test files for modified source files
-  - Supports JS/TS, Python, Go, Rust, Ruby
-  - Returns JSON status per Claude Code spec
+- **`run-affected-tests.sh`** - Optional PostToolUse hook for running affected tests (planned, not implemented)
+  - *Note: This hook was planned but not implemented in this release*
 
 ### Changed
 
@@ -735,8 +733,18 @@ Commands now delegate to skills for DRY implementation:
 
 | Version | Skills | Agents | Commands | Templates | Reference Files |
 | ------- | ------ | ------ | -------- | --------- | --------------- |
+| 7.0.0   | 24     | 14     | 21       | 10+       | 106             |
+| 6.0.0   | 24     | 14     | 21       | 10+       | 106             |
+| 5.0.0   | 24     | 14     | 21       | 10+       | 71+             |
+| 4.0.0   | 24     | 14     | 21       | 10        | 71+             |
+| 3.0.0   | 22     | 14     | 17       | 10        | 69              |
 | 2.0.0   | 22     | 15     | 15       | 10        | 60+             |
 | 1.8.0   | 18     | 12     | 12       | 0         | 54              |
 
+[7.0.0]: https://github.com/claudebase/marketplace/compare/v6.0.0...v7.0.0
+[6.0.0]: https://github.com/claudebase/marketplace/compare/v5.0.0...v6.0.0
+[5.0.0]: https://github.com/claudebase/marketplace/compare/v4.0.0...v5.0.0
+[4.0.0]: https://github.com/claudebase/marketplace/compare/v3.0.0...v4.0.0
+[3.0.0]: https://github.com/claudebase/marketplace/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/claudebase/marketplace/compare/v1.8.0...v2.0.0
 [1.8.0]: https://github.com/claudebase/marketplace/releases/tag/v1.8.0
