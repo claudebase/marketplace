@@ -220,28 +220,27 @@ validate_frontmatter() {
         [[ ! -f "$skill_file" ]] && continue
 
         skill_name=$(basename "$skill_dir")
-        content=$(cat "$skill_file")
 
-        if ! echo "$content" | head -1 | grep -q "^---$"; then
+        if ! head -1 "$skill_file" | grep -q "^---$"; then
             print_error "skills/$skill_name/SKILL.md - Missing frontmatter"
             ((errors++)) || true
             continue
         fi
 
-        if ! echo "$content" | grep -q "^name:"; then
+        if ! grep -q "^name:" "$skill_file" 2>/dev/null; then
             print_error "skills/$skill_name - Missing 'name' field"
             ((errors++)) || true
         fi
 
-        if ! echo "$content" | grep -q "^description:"; then
+        if ! grep -q "^description:" "$skill_file" 2>/dev/null; then
             print_error "skills/$skill_name - Missing 'description' field"
             ((errors++)) || true
         fi
 
         # Check for deprecated fields
-        frontmatter=$(echo "$content" | sed -n '/^---$/,/^---$/p' | sed '1d;$d')
+        frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill_file" | sed '1d;$d')
         for deprecated in when_to_use version languages; do
-            if echo "$frontmatter" | grep -q "^$deprecated:"; then
+            if echo "$frontmatter" | grep -q "^$deprecated:" 2>/dev/null; then
                 print_warning "skills/$skill_name - Has deprecated '$deprecated' field"
                 ((warnings++)) || true
             fi
@@ -255,23 +254,22 @@ validate_frontmatter() {
         [[ ! -f "$agent_file" ]] && continue
 
         agent_name=$(basename "$agent_file" .md)
-        content=$(cat "$agent_file")
 
-        if ! echo "$content" | head -1 | grep -q "^---$"; then
+        if ! head -1 "$agent_file" | grep -q "^---$"; then
             print_error "agents/$agent_name.md - Missing frontmatter"
             ((errors++)) || true
             continue
         fi
 
         for field in name description; do
-            if ! echo "$content" | grep -q "^$field:"; then
+            if ! grep -q "^$field:" "$agent_file" 2>/dev/null; then
                 print_error "agents/$agent_name - Missing '$field' field"
                 ((errors++)) || true
             fi
         done
 
         for field in tools model; do
-            if ! echo "$content" | grep -q "^$field:"; then
+            if ! grep -q "^$field:" "$agent_file" 2>/dev/null; then
                 print_warning "agents/$agent_name - Missing '$field' field"
                 ((warnings++)) || true
             fi
@@ -283,15 +281,14 @@ validate_frontmatter() {
     echo "Checking commands..."
     while IFS= read -r -d '' cmd_file; do
         cmd_name=$(basename "$cmd_file" .md)
-        content=$(cat "$cmd_file")
 
-        if ! echo "$content" | head -1 | grep -q "^---$"; then
+        if ! head -1 "$cmd_file" | grep -q "^---$"; then
             print_error "commands/$cmd_name.md - Missing frontmatter"
             ((errors++)) || true
             continue
         fi
 
-        if ! echo "$content" | grep -q "^description:"; then
+        if ! grep -q "^description:" "$cmd_file" 2>/dev/null; then
             print_error "commands/$cmd_name - Missing 'description' field"
             ((errors++)) || true
         fi
