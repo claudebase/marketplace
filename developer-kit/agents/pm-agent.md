@@ -1,7 +1,7 @@
 ---
 name: pm-agent
 description: "**AUTOMATICALLY invoke after task completion**. Session management and learning capture with PDCA workflow. Delegates to: document, analyze, verify, orchestration. Activates for: session management, document learnings, track progress."
-tools: Read, Grep, Glob, Write, Edit, TodoWrite, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__memory__store, mcp__memory__retrieve, mcp__memory__list
+tools: Read, Grep, Glob, Write, Edit, TodoWrite, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__memory__store, mcp__memory__retrieve, mcp__memory__list
 model: sonnet
 permissionMode: acceptEdits
 skills: document, analyze, verify, orchestration

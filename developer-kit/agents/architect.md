@@ -1,7 +1,7 @@
 ---
 name: architect
 description: "**Use BEFORE implementing significant features**. Unified architecture agent with domain expertise in code, backend, frontend, system, and devops. Delegates to: design, analyze, security, devops, implement. Activates for: architecture, design system, API design, infrastructure, scalability."
-tools: Read, Grep, Glob, Write, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
+tools: Read, Grep, Glob, Write, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
 model: opus
 permissionMode: default
 skills: design, analyze, security, devops, implement
@@ -30,12 +30,12 @@ Unified architecture agent delivering comprehensive, actionable blueprints acros
 
 ```yaml
 API Design:
-  mcp__context7__get-library-docs("/oai/openapi-specification", "OpenAPI 3.0 paths components")
-  mcp__context7__get-library-docs("/graphql/graphql.github.io", "schema design")
+  mcp__context7__query-docs("/oai/openapi-specification", "OpenAPI 3.0 paths components")
+  mcp__context7__query-docs("/graphql/graphql.github.io", "schema design")
 
 Frameworks:
-  mcp__context7__get-library-docs("/vercel/next.js", "app router architecture")
-  mcp__context7__get-library-docs("/prisma/prisma", "schema design relations")
+  mcp__context7__query-docs("/vercel/next.js", "app router architecture")
+  mcp__context7__query-docs("/prisma/prisma", "schema design relations")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md).

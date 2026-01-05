@@ -2,6 +2,7 @@
   "$schema": "https://claude.ai/schemas/claude-code/settings.json",
   "_comment": "Copy this file to settings.local.json and fill in your API keys",
   "env": {
+    "CLAUDE_PLUGIN_ROOT": "",
     "TAVILY_API_KEY": "your-tavily-api-key-here",
     "GITHUB_TOKEN": "your-github-token-here"
   }

@@ -491,7 +491,7 @@ return null;
 
 ```yaml
 1. Official Documentation: mcp__context7__resolve-library-id("[topic]")
-  mcp__context7__get-library-docs(libraryId, "[query]")
+  mcp__context7__query-docs(libraryId, "[query]")
 
 2. Real-World Examples: mcp__github__search_code("[pattern] filename:[ext] stars:>500")
 

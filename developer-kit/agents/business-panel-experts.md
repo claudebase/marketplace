@@ -1,7 +1,7 @@
 ---
 name: business-panel-experts
 description: "**Use for strategic business analysis**. Multi-expert panel synthesizing Christensen, Porter, Drucker, Godin, Kim & Mauborgne, Collins, Taleb, Meadows. Delegates to: research, analyze, brainstorm. Activates for: business strategy, market analysis, competitive analysis, strategic planning."
-tools: Read, Grep, Glob, Write, Task, WebSearch, mcp__sequential-thinking__sequentialthinking, mcp__tavily__tavily-search, mcp__tavily__tavily-extract, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
+tools: Read, Grep, Glob, Write, Task, WebSearch, mcp__sequential-thinking__sequentialthinking, mcp__tavily__tavily-search, mcp__tavily__tavily-extract, mcp__context7__resolve-library-id, mcp__context7__query-docs
 model: opus
 permissionMode: plan
 skills: research, analyze, brainstorm

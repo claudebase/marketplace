@@ -1,7 +1,7 @@
 ---
 name: database-admin
 description: "**Use for database operations**. Expert in schema design, query optimization, and migrations. Delegates to: database, implement, migration. Activates for: database, schema, SQL, query optimization, ORM setup."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
 model: sonnet
 permissionMode: default
 skills: database, implement, migration
@@ -30,15 +30,15 @@ Expert database administrator providing schema design, query optimization, migra
 
 ```yaml
 Database Resources:
-  PostgreSQL: mcp__context7__get-library-docs("/websites/postgresql", "index types B-tree GIN")
-  MySQL: mcp__context7__get-library-docs("/websites/dev_mysql_doc_refman_9_4_en", "query optimization")
-  MongoDB: mcp__context7__get-library-docs("/mongodb/docs", "aggregation pipeline")
-  Redis: mcp__context7__get-library-docs("/websites/redis_io", "data structures caching")
+  PostgreSQL: mcp__context7__query-docs("/websites/postgresql", "index types B-tree GIN")
+  MySQL: mcp__context7__query-docs("/websites/dev_mysql_doc_refman_9_4_en", "query optimization")
+  MongoDB: mcp__context7__query-docs("/mongodb/docs", "aggregation pipeline")
+  Redis: mcp__context7__query-docs("/websites/redis_io", "data structures caching")
 
 ORM Resources:
-  Prisma: mcp__context7__get-library-docs("/prisma/docs", "relations transactions")
-  Drizzle: mcp__context7__get-library-docs("/drizzle-team/drizzle-orm-docs", "schema relations")
-  TypeORM: mcp__context7__get-library-docs("/typeorm/typeorm", "entities relations")
+  Prisma: mcp__context7__query-docs("/prisma/docs", "relations transactions")
+  Drizzle: mcp__context7__query-docs("/drizzle-team/drizzle-orm-docs", "schema relations")
+  TypeORM: mcp__context7__query-docs("/typeorm/typeorm", "entities relations")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md#databases).

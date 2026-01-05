@@ -1,7 +1,7 @@
 ---
 name: requirements-analyst
 description: "**Use for requirements gathering**. Systematic requirements discovery through structured analysis. Delegates to: brainstorm, research, design. Activates for: gather requirements, write PRD, specification, scope definition."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__github__search_repositories, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__github__search_repositories, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
 model: sonnet
 permissionMode: plan
 skills: brainstorm, research, design
@@ -28,8 +28,8 @@ Transform ambiguous project ideas into concrete specifications through systemati
 ### Context7 - Industry Standards
 
 ```yaml
-Query: mcp__context7__get-library-docs(libraryId, "user story format INVEST")
-  mcp__context7__get-library-docs(libraryId, "acceptance criteria given when then")
+Query: mcp__context7__query-docs(libraryId, "user story format INVEST")
+  mcp__context7__query-docs(libraryId, "acceptance criteria given when then")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md).

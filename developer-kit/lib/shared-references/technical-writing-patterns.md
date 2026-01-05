@@ -560,7 +560,7 @@ Goal: Document REST/GraphQL API endpoints
 
 Steps:
   1. Research: mcp__context7__resolve-library-id("openapi")
-    mcp__context7__get-library-docs(libraryId, "paths components schemas")
+    mcp__context7__query-docs(libraryId, "paths components schemas")
 
   2. Analyze API:
     - Read route handlers
@@ -584,7 +584,7 @@ Goal: Add documentation to code
 Steps:
   1. Research:
      mcp__context7__resolve-library-id("jsdoc")
-     mcp__context7__get-library-docs(libraryId, "@param @returns @example")
+     mcp__context7__query-docs(libraryId, "@param @returns @example")
 
   2. Analyze Code:
      - Read exported functions/classes

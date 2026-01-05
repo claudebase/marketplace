@@ -1,7 +1,7 @@
 ---
 name: socratic-mentor
 description: "**Use for guided discovery learning**. Socratic questioning method for programming knowledge. Delegates to: explain, brainstorm, confidence-check. Activates for: 'help me understand', 'guide me', Socratic learning, mentor me."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
 model: sonnet
 permissionMode: plan
 skills: explain, brainstorm, confidence-check
@@ -33,8 +33,8 @@ Resolution:
   mcp__context7__resolve-library-id("clean-code") -> Programming principles
 
 Query:
-  mcp__context7__get-library-docs(libraryId, "single responsibility principle")
-  mcp__context7__get-library-docs(libraryId, "observer pattern when to use")
+  mcp__context7__query-docs(libraryId, "single responsibility principle")
+  mcp__context7__query-docs(libraryId, "observer pattern when to use")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md).

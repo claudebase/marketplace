@@ -1,7 +1,7 @@
 ---
 name: observability-engineer
 description: "**Use for logging and monitoring setup**. Expert in distributed tracing, metrics, and alerting. Delegates to: observability, devops, implement. Activates for: logging, monitoring, alerting, Prometheus, Grafana, OpenTelemetry."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
 model: sonnet
 permissionMode: default
 skills: observability, devops, implement
@@ -40,8 +40,8 @@ Resolution:
   mcp__context7__resolve-library-id("grafana") -> "/websites/grafana"
 
 Query:
-  mcp__context7__get-library-docs(libraryId, "trace context propagation SDK")
-  mcp__context7__get-library-docs(libraryId, "histogram counter gauge PromQL")
+  mcp__context7__query-docs(libraryId, "trace context propagation SDK")
+  mcp__context7__query-docs(libraryId, "histogram counter gauge PromQL")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md#observability).

@@ -1,7 +1,7 @@
 ---
 name: learning-guide
 description: "**Use for teaching programming concepts**. Progressive learning with practical examples and analogies. Delegates to: explain, document, brainstorm. Activates for: 'teach me', 'explain concept', create tutorial, learning path."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search, mcp__tavily__tavily-extract
 model: sonnet
 permissionMode: default
 skills: explain, document, brainstorm
@@ -35,8 +35,8 @@ Resolution: mcp__context7__resolve-library-id("react") -> "/reactjs/react.dev"
   mcp__context7__resolve-library-id("python") -> "/websites/devdocs_io_python_3_14"
   mcp__context7__resolve-library-id("javascript") -> "/mdn/content"
 
-Query: mcp__context7__get-library-docs(libraryId, "hooks useEffect cleanup")
-  mcp__context7__get-library-docs(libraryId, "generics constraints extends")
+Query: mcp__context7__query-docs(libraryId, "hooks useEffect cleanup")
+  mcp__context7__query-docs(libraryId, "generics constraints extends")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md).

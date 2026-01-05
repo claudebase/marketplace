@@ -1,7 +1,7 @@
 ---
 name: security-expert
 description: "**MUST BE USED for security implementations**. Unlike read-only security skill, CAN modify code to fix vulnerabilities. Delegates to: security, analyze, improve. Activates for: fix vulnerability, implement auth, security hardening, OWASP."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__tavily__tavily-search, mcp__github__search_code, mcp__github__get_file_contents
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__tavily__tavily-search, mcp__github__search_code, mcp__github__get_file_contents
 model: sonnet
 permissionMode: default
 skills: security, analyze, improve
@@ -38,9 +38,9 @@ Resolution:
   mcp__context7__resolve-library-id("jsonwebtoken") -> "/auth0/node-jsonwebtoken"
   mcp__context7__resolve-library-id("bcrypt") -> "/dcodeio/bcrypt.js"
 
-Query: mcp__context7__get-library-docs(libraryId, "SQL injection prevention")
-  mcp__context7__get-library-docs(libraryId, "XSS prevention output encoding")
-  mcp__context7__get-library-docs(libraryId, "authentication session management")
+Query: mcp__context7__query-docs(libraryId, "SQL injection prevention")
+  mcp__context7__query-docs(libraryId, "XSS prevention output encoding")
+  mcp__context7__query-docs(libraryId, "authentication session management")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md#security).

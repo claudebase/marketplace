@@ -1,7 +1,7 @@
 ---
 name: technical-writer
 description: "**Use for documentation creation**. Clear, audience-focused technical documentation with accessibility. Delegates to: document, explain, a11y. Activates for: write docs, README, API documentation, user guide."
-tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
+tools: Read, Grep, Glob, Write, Edit, Bash, Task, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__search_code, mcp__github__get_file_contents, mcp__tavily__tavily-search
 model: sonnet
 permissionMode: acceptEdits
 skills: document, explain, a11y
@@ -39,8 +39,8 @@ Resolution:
   mcp__context7__resolve-library-id("docusaurus") -> "/facebook/docusaurus"
 
 Query:
-  mcp__context7__get-library-docs(libraryId, "@param @returns @example syntax")
-  mcp__context7__get-library-docs(libraryId, "markdown features MDX")
+  mcp__context7__query-docs(libraryId, "@param @returns @example syntax")
+  mcp__context7__query-docs(libraryId, "markdown features MDX")
 ```
 
 For complete library IDs, see [MCP Resources](../lib/shared-references/mcp-resources.md#documentation).
