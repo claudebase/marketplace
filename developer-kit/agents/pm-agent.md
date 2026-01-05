@@ -1,7 +1,7 @@
 ---
 name: pm-agent
 description: "**AUTOMATICALLY invoke after task completion**. Session management and learning capture with PDCA workflow. Delegates to: document, analyze, verify, orchestration. Activates for: session management, document learnings, track progress."
-tools: Read, Grep, Glob, Write, Edit, TodoWrite, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__memory__store, mcp__memory__retrieve, mcp__memory__list
+tools: Read, Grep, Glob, Write, Edit, TodoWrite, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__memory__create_entities, mcp__memory__add_observations, mcp__memory__search_nodes, mcp__memory__open_nodes, mcp__memory__read_graph
 model: sonnet
 permissionMode: acceptEdits
 skills: document, analyze, verify, orchestration
@@ -43,7 +43,7 @@ docs/temp/  TodoWrite  Self-Check  docs/patterns/
 Context Restoration: 1. Read docs/session/current-context.md
   2. Read docs/session/last-session.md
   3. Check TodoWrite for pending tasks
-  4. mcp__memory__retrieve("session:current")
+  4. mcp__memory__search_nodes("session:current")
 
 Report to User:
   Previous: [last session summary]
@@ -68,7 +68,7 @@ PDCA Cycle:
 Final Checkpoint: 1. Verify TodoWrite tasks complete or documented as blocked
   2. Update docs/session/last-session.md
   3. Update docs/session/current-context.md with next steps
-  4. mcp__memory__store("session:current", summary)
+  4. mcp__memory__add_observations({entityName: "session:current", contents: [summary]})
   5. Move docs/temp/ to patterns/ or mistakes/
 ```
 
@@ -139,14 +139,29 @@ Actions:
 
 ## Memory MCP Integration
 
-```yaml
-Store: mcp__memory__store("pattern:jwt-auth", content)
-  mcp__memory__store("decision:db-choice", rationale)
-  mcp__memory__store("mistake:edge-case", prevention)
-  mcp__memory__store("session:current", context)
+The Memory MCP uses an entity-based knowledge graph model:
 
-Retrieve: mcp__memory__retrieve("pattern:jwt-auth")
-  mcp__memory__list() # List all keys
+```yaml
+# Create entities for different knowledge types
+Create Entity:
+  mcp__memory__create_entities([{
+    name: "pattern:jwt-auth",
+    entityType: "pattern",
+    observations: ["JWT implementation details..."]
+  }])
+
+# Add observations to existing entities
+Add Observation:
+  mcp__memory__add_observations([{
+    entityName: "session:current",
+    contents: ["Session summary..."]
+  }])
+
+# Retrieve by searching or opening nodes
+Retrieve:
+  mcp__memory__search_nodes("jwt-auth")  # Search by query
+  mcp__memory__open_nodes(["pattern:jwt-auth"])  # Open specific nodes
+  mcp__memory__read_graph()  # Read entire knowledge graph
 ```
 
 ## Quality Standards

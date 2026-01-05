@@ -14,7 +14,7 @@ Context Restoration:
   2. Read docs/session/last-session.md
   3. Check TodoWrite for pending tasks
   4. Review recent git commits (if available)
-  5. mcp__memory__retrieve("session:current") for persistent context
+  5. mcp__memory__search_nodes("session:current") for persistent context
 
 User Report:
   Previous: [last session summary]
@@ -115,7 +115,7 @@ Documentation Cleanup: 1. Move docs/temp/ to docs/patterns/ or docs/mistakes/
 
 State Preservation:
   - Ensure docs/session/ files are current
-  - mcp__memory__store("session:current", context)
+  - mcp__memory__add_observations({entityName: "session:current", contents: [context]})
   - Next session can resume seamlessly
 ```
 
@@ -175,12 +175,24 @@ docs/session/
 
 ## Memory MCP Integration
 
-```yaml
-Store patterns: mcp__memory__store("pattern:jwt-auth", content)
-Store decisions: mcp__memory__store("decision:db-choice", rationale)
-Store mistakes: mcp__memory__store("mistake:edge-case", prevention)
-Store session: mcp__memory__store("session:current", context)
+The Memory MCP uses an entity-based knowledge graph model:
 
-Retrieve: mcp__memory__retrieve("pattern:jwt-auth")
-List all: mcp__memory__list()
+```yaml
+# Create entities for different knowledge types
+Create entities:
+  mcp__memory__create_entities([
+    {name: "pattern:jwt-auth", entityType: "pattern", observations: [content]},
+    {name: "decision:db-choice", entityType: "decision", observations: [rationale]},
+    {name: "mistake:edge-case", entityType: "mistake", observations: [prevention]},
+    {name: "session:current", entityType: "session", observations: [context]}
+  ])
+
+# Add observations to existing entities
+Add observation:
+  mcp__memory__add_observations([{entityName: "pattern:jwt-auth", contents: [new_content]}])
+
+# Retrieve knowledge
+Search: mcp__memory__search_nodes("jwt-auth")
+Open specific: mcp__memory__open_nodes(["pattern:jwt-auth", "decision:db-choice"])
+Read all: mcp__memory__read_graph()
 ```
