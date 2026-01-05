@@ -19,7 +19,7 @@ claude plugin install ./developer-kit
 | Skills | 24 | Focused capabilities (implement, debug, test, etc.) |
 | Agents | 14 | Specialized assistants (code-reviewer, architect, etc.) |
 | Commands | 21 | Slash commands for common workflows |
-| Hooks | 7 | Automated behaviors (format, security checks) |
+| Hooks | 6 | Automated behaviors (format, security checks) |
 
 ## Skills
 
@@ -124,7 +124,6 @@ Hooks automate common tasks:
 | format_file_hook.sh | PostToolUse (Write/Edit) | Auto-format files |
 | security_reminder_hook.sh | PostToolUse (Write/Edit) | Security pattern detection |
 | validate_bash_command.sh | PreToolUse (Bash) | Block dangerous commands |
-| session_instructions_hook.sh | SessionStart | Output instructions |
 | validate_env_vars.sh | SessionStart | Check API keys |
 | restore_session_context.sh | SessionStart | Restore session state |
 | save_session_state.sh | Stop | Save session state |

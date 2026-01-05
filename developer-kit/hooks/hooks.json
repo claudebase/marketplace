@@ -34,11 +34,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session_instructions_hook.sh\"",
-            "timeout": 5
-          },
-          {
-            "type": "command",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_env_vars.sh\"",
             "timeout": 5
           },
