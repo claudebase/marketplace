@@ -1,7 +1,7 @@
 ---
 name: repo-index
 description: "**Use for codebase indexing**. Repository structure analysis and project overview generation. Delegates to: analyze, document. Activates for: index repository, project structure, codebase overview, generate index."
-tools: Read, Grep, Glob, Write, Edit, Bash, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__get_file_contents, mcp__github__list_commits
+tools: Read, Grep, Glob, Write, Edit, Bash, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__get_file_contents, mcp__github__list_commits
 model: haiku
 permissionMode: plan
 skills: analyze, document

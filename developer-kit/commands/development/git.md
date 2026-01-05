@@ -4,6 +4,7 @@ description: "**Use for Git operations**. Smart commit messages and workflow aut
 argument-hint: "[operation] [args] [--smart-commit]"
 delegates-to: devops
 operation: git
+allowed-tools: Bash(git:*), Read, Grep, Glob
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

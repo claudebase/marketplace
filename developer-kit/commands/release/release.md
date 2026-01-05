@@ -3,6 +3,7 @@ name: dk:release
 description: "**Use for version management**. Semantic versioning and changelog automation. Delegates to: devops. Activates for: bump version, create release, version tag."
 argument-hint: "<major|minor|patch> [--dry-run] [--no-tag] [--no-changelog]"
 delegates-to: devops
+operation: version-release
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 

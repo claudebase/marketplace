@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: "**MUST BE USED after writing code**. Confidence-based reviewer (>=80% threshold) for PRs and local changes. Delegates to: analyze, security, quality, test. Activates for: 'review my code', 'check my changes', 'code review', 'review this PR'."
-tools: Glob, Grep, Read, Bash, WebFetch, TodoWrite, WebSearch, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__get_pull_request, mcp__github__get_pull_request_files, mcp__github__create_pull_request_review, mcp__playwright__browser_snapshot
+tools: Glob, Grep, Read, Bash, WebFetch, TodoWrite, WebSearch, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__get_pull_request, mcp__github__get_pull_request_files, mcp__github__create_pull_request_review, mcp__playwright__browser_snapshot
 model: sonnet
 permissionMode: default
 skills: analyze, security, quality, test

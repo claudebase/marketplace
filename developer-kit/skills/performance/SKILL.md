@@ -1,6 +1,8 @@
 ---
 name: performance
 description: "Analyzes performance through measurement, profiling, and benchmarking to identify bottlenecks and optimization opportunities. Use when the user reports slowness, wants to find performance issues, or needs to optimize response times. Triggers on requests like 'why is this slow', 'find the bottleneck', 'profile this code', 'benchmark this', 'improve performance', 'check latency', 'optimize speed', 'this is taking too long', or 'performance analysis'. This skill is READ-ONLY for analysis - for implementing optimizations, use improve skill."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep
@@ -14,8 +16,6 @@ allowed-tools:
   - mcp__playwright__browser_navigate
   - mcp__playwright__browser_snapshot
   - mcp__sequential-thinking__sequentialthinking
-composable: true
-mode: read-only
 ---
 
 # Performance Skill

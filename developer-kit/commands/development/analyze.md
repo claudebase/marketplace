@@ -4,6 +4,7 @@ description: "**MUST USE for code analysis**. Unified analysis with mode selecti
 argument-hint: "[--mode <type>] [--target <path>] [--output json|text] [--severity <level>]"
 delegates-to: analyze
 operation: unified-analysis
+allowed-tools: Read, Grep, Glob, Task
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

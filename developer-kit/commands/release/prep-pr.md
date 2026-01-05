@@ -4,6 +4,7 @@ description: "**Use before creating PRs**. Validate, review, and generate PR des
 argument-hint: "[--base <branch>] [--draft] [--skip-review] [--create]"
 delegates-to: orchestration
 operation: pr-preparation
+allowed-tools: Bash(gh:*), Read, Grep, Glob, Task, Write
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

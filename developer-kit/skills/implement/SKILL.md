@@ -1,6 +1,8 @@
 ---
 name: implement
 description: "Implements features, components, and functionality following framework-specific patterns and best practices. Use when the user wants to add new functionality, create components, build APIs, or write new code. Triggers on requests like 'implement X', 'create a component for Y', 'build this feature', 'add a function that', 'write code to', 'develop this', 'code this for me', 'make a new endpoint', or 'add this functionality'. NOT for fixing bugs (use debug) or improving existing code (use improve)."
+composable: true
+mode: read-write
 allowed-tools:
   - Read
   - Grep
@@ -21,8 +23,6 @@ allowed-tools:
   - mcp__playwright__browser_navigate
   - mcp__playwright__browser_snapshot
   - mcp__sequential-thinking__sequentialthinking
-composable: true
-mode: read-write
 ---
 
 # Implement Skill

@@ -3,7 +3,8 @@ name: dk:spec-panel
 description: "**Use for specification review**. Multi-expert panel analysis with quality scoring. Delegates to: brainstorm. Activates for: review spec, validate requirements, improve PRD."
 argument-hint: '[specification_content|@file] [--mode discussion|critique|socratic] [--experts "name1,name2"]'
 delegates-to: brainstorm
-allowed-tools: Read, Grep, Glob, Write, TodoWrite
+operation: specification-review
+allowed-tools: Read, Grep, Glob, Write, Task, WebSearch, TodoWrite
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

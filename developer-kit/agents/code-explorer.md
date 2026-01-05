@@ -1,7 +1,7 @@
 ---
 name: code-explorer
 description: "**PROACTIVELY use for codebase exploration**. Traces execution paths, maps architecture layers, understands patterns. Delegates to: analyze, explain, research. Activates for: 'how does X work', explore codebase, architecture analysis."
-tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__github__get_file_contents, mcp__github__search_code
+tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput, mcp__sequential-thinking__sequentialthinking, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__github__get_file_contents, mcp__github__search_code
 model: haiku
 permissionMode: plan
 skills: analyze, explain, research

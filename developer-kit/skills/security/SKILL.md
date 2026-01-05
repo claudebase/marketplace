@@ -1,6 +1,8 @@
 ---
 name: security
 description: "Performs OWASP-based security audits to identify vulnerabilities, authentication issues, and security risks without modifying code. Use when the user is concerned about security, wants to check for vulnerabilities, or needs a security review before deployment. Triggers on requests like 'check for security issues', 'is this secure', 'find vulnerabilities', 'security audit', 'check for XSS', 'look for injection risks', 'review authentication', 'is this safe', or 'security review this code'. This skill is READ-ONLY - for implementing security fixes, use implement or improve skills."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep
@@ -12,8 +14,6 @@ allowed-tools:
   - mcp__context7__resolve-library-id
   - mcp__context7__query-docs
   - mcp__sequential-thinking__sequentialthinking
-composable: true
-mode: read-only
 ---
 
 # Security Skill

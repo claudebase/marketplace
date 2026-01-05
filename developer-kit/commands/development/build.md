@@ -4,6 +4,7 @@ description: "**Use for project builds**. Auto-detect build system, compile, and
 argument-hint: "[target] [--type dev|prod|test] [--clean] [--optimize] [--ci]"
 delegates-to: devops
 operation: build
+allowed-tools: Read, Bash, Glob
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

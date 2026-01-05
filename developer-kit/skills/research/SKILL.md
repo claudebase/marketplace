@@ -1,6 +1,8 @@
 ---
 name: research
 description: "Performs comprehensive web research on ANY topic with multi-source verification and structured analysis. Use for ALL research requests regardless of domain - technical documentation, market analysis, product comparisons, industry trends, financial research, competitive analysis, or learning about unfamiliar concepts. Triggers on: 'research [topic]', 'deep research', 'find information about', 'look up', 'what is X', 'how does Y work', 'what's the latest on', 'analyze [topic]', 'compare X vs Y'. This is the DEFAULT skill for any research or information gathering task."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep
@@ -17,8 +19,6 @@ allowed-tools:
   - mcp__sequential-thinking__sequentialthinking
   - mcp__github__search_code
   - mcp__github__search_repositories
-composable: true
-mode: read-only
 ---
 
 # Research Skill

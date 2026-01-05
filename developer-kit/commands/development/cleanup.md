@@ -4,6 +4,7 @@ description: "**Use for dead code removal**. Remove unused code, imports, and fi
 argument-hint: "[target] [--type code|imports|files|all] [--safe|--aggressive]"
 delegates-to: devops
 operation: cleanup
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

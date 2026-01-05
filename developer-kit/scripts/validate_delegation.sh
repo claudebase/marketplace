@@ -20,11 +20,12 @@ get_all_skills() {
     done
 }
 
-# Get all agent names from frontmatter
+# Get all agent names from frontmatter (only from YAML header, not body)
 get_all_agents() {
     for agent_file in "$PLUGIN_DIR/agents"/*.md; do
         [[ ! -f "$agent_file" ]] && continue
-        grep "^name:" "$agent_file" 2>/dev/null | sed 's/^name:[[:space:]]*//' | tr -d ' '
+        # Extract only the frontmatter section (between first two ---) and get name
+        sed -n '1,/^---$/p' "$agent_file" | grep "^name:" 2>/dev/null | head -1 | sed 's/^name:[[:space:]]*//' | tr -d ' '
     done
 }
 

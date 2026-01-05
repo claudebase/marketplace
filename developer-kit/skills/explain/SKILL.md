@@ -1,6 +1,8 @@
 ---
 name: explain
 description: "Provides clear, educational explanations of code, concepts, and system behavior with examples and analogies. Use when the user wants to understand how something works, learn about a concept, or needs clarification on code behavior. Triggers on requests like 'explain this code', 'what does this do', 'how does this work', 'teach me about', 'help me understand', 'walk me through', 'what is the purpose of', 'why is this written this way', or 'can you clarify'. NOT for creating documentation files (use document) or analyzing code quality (use analyze)."
+composable: true
+mode: read-only
 allowed-tools:
   - Read
   - Grep
@@ -12,8 +14,6 @@ allowed-tools:
   - mcp__tavily__tavily-search
   - mcp__tavily__tavily-extract
   - mcp__sequential-thinking__sequentialthinking
-composable: true
-mode: read-only
 ---
 
 # Explain Skill

@@ -4,6 +4,7 @@ description: "**Use at feature start**. Create branch, setup todos, initialize s
 argument-hint: "<feature-name> [--no-branch] [--from <branch>] [--type feature|bugfix|hotfix]"
 delegates-to: orchestration
 operation: feature-start
+allowed-tools: Bash(git:*), Read, Write, TodoWrite, Glob
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

@@ -4,6 +4,7 @@ description: "**Run before commits and PRs**. Comprehensive validation: lint, ty
 argument-hint: "[--fix] [--quick] [--strict]"
 delegates-to: devops
 operation: validate
+allowed-tools: Read, Bash, Glob
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════

@@ -4,6 +4,7 @@ description: "**Use for release shipping**. Full release workflow: validate, ver
 argument-hint: "<version|major|minor|patch> [--dry-run] [--no-tag] [--no-push] [--deploy <env>]"
 delegates-to: orchestration
 operation: release-ship
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite
 ---
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
