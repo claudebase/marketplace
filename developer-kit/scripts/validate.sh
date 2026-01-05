@@ -54,7 +54,7 @@ validate_skill_descriptions() {
         [[ ! -f "$skill_file" ]] && continue
 
         skill_name=$(basename "$skill_dir")
-        ((checked++))
+        ((checked++)) || true
 
         content=$(cat "$skill_file")
 
@@ -64,13 +64,13 @@ validate_skill_descriptions() {
         # Check for name field
         if ! echo "$frontmatter" | grep -q "^name:"; then
             print_error "$skill_name - Missing 'name' field"
-            ((errors++))
+            ((errors++)) || true
         fi
 
         # Check for description field
         if ! echo "$frontmatter" | grep -q "^description:"; then
             print_error "$skill_name - Missing 'description' field"
-            ((errors++))
+            ((errors++)) || true
             continue
         fi
 
@@ -78,7 +78,7 @@ validate_skill_descriptions() {
         content_lower=$(echo "$content" | tr '[:upper:]' '[:lower:]')
         if ! echo "$content_lower" | grep -qE "activates for:|triggers on|use when"; then
             print_warning "$skill_name - Missing trigger phrases (Activates for/Triggers on/Use when)"
-            ((warnings++))
+            ((warnings++)) || true
         else
             print_ok "$skill_name"
         fi
@@ -105,7 +105,7 @@ validate_agent_fields() {
         [[ ! -f "$agent_file" ]] && continue
 
         agent_name=$(basename "$agent_file" .md)
-        ((checked++))
+        ((checked++)) || true
 
         content=$(cat "$agent_file")
         frontmatter=$(echo "$content" | sed -n '/^---$/,/^---$/p' | sed '1d;$d')
@@ -117,7 +117,7 @@ validate_agent_fields() {
         for field in name description tools model; do
             if ! echo "$frontmatter" | grep -q "^$field:"; then
                 print_error "$agent_name - Missing required field '$field'"
-                ((agent_errors++))
+                ((agent_errors++)) || true
             fi
         done
 
@@ -126,7 +126,7 @@ validate_agent_fields() {
         if [[ -n "$model_value" ]]; then
             if ! echo "$valid_models" | grep -qw "$model_value"; then
                 print_warning "$agent_name - Invalid model '$model_value' (expected: sonnet, opus, haiku)"
-                ((agent_warnings++))
+                ((agent_warnings++)) || true
             fi
         fi
 
@@ -161,7 +161,7 @@ validate_references() {
         [[ ! -f "$skill_file" ]] && continue
 
         skill_name=$(basename "$skill_dir")
-        ((skills_checked++))
+        ((skills_checked++)) || true
 
         # Remove code blocks before checking refs (to avoid false positives)
         content=$(cat "$skill_file" | sed '/```/,/```/d')
@@ -176,16 +176,16 @@ validate_references() {
             # Skip external URLs
             [[ "$ref" == http* ]] && continue
 
-            ((refs_checked++))
+            ((refs_checked++)) || true
 
             # Resolve path relative to skill directory
             ref_path="$skill_dir/$ref"
 
             if [[ ! -f "$ref_path" ]]; then
                 print_error "$skill_name - Missing reference file: $ref"
-                ((skill_errors++))
+                ((skill_errors++)) || true
             else
-                ((valid_refs++))
+                ((valid_refs++)) || true
             fi
         done
 
@@ -224,18 +224,18 @@ validate_frontmatter() {
 
         if ! echo "$content" | head -1 | grep -q "^---$"; then
             print_error "skills/$skill_name/SKILL.md - Missing frontmatter"
-            ((errors++))
+            ((errors++)) || true
             continue
         fi
 
         if ! echo "$content" | grep -q "^name:"; then
             print_error "skills/$skill_name - Missing 'name' field"
-            ((errors++))
+            ((errors++)) || true
         fi
 
         if ! echo "$content" | grep -q "^description:"; then
             print_error "skills/$skill_name - Missing 'description' field"
-            ((errors++))
+            ((errors++)) || true
         fi
 
         # Check for deprecated fields
@@ -243,7 +243,7 @@ validate_frontmatter() {
         for deprecated in when_to_use version languages; do
             if echo "$frontmatter" | grep -q "^$deprecated:"; then
                 print_warning "skills/$skill_name - Has deprecated '$deprecated' field"
-                ((warnings++))
+                ((warnings++)) || true
             fi
         done
     done
@@ -259,21 +259,21 @@ validate_frontmatter() {
 
         if ! echo "$content" | head -1 | grep -q "^---$"; then
             print_error "agents/$agent_name.md - Missing frontmatter"
-            ((errors++))
+            ((errors++)) || true
             continue
         fi
 
         for field in name description; do
             if ! echo "$content" | grep -q "^$field:"; then
                 print_error "agents/$agent_name - Missing '$field' field"
-                ((errors++))
+                ((errors++)) || true
             fi
         done
 
         for field in tools model; do
             if ! echo "$content" | grep -q "^$field:"; then
                 print_warning "agents/$agent_name - Missing '$field' field"
-                ((warnings++))
+                ((warnings++)) || true
             fi
         done
     done
@@ -287,13 +287,13 @@ validate_frontmatter() {
 
         if ! echo "$content" | head -1 | grep -q "^---$"; then
             print_error "commands/$cmd_name.md - Missing frontmatter"
-            ((errors++))
+            ((errors++)) || true
             continue
         fi
 
         if ! echo "$content" | grep -q "^description:"; then
             print_error "commands/$cmd_name - Missing 'description' field"
-            ((errors++))
+            ((errors++)) || true
         fi
     done < <(find "$PLUGIN_DIR/commands" -name "*.md" -print0)
 
@@ -327,10 +327,10 @@ validate_json_configs() {
         if [[ ! -f "$full_path" ]]; then
             if [[ "$required" == "true" ]]; then
                 print_error "$json_path not found"
-                ((errors++))
+                ((errors++)) || true
             else
                 print_warning "$json_path not found (optional)"
-                ((warnings++))
+                ((warnings++)) || true
             fi
             continue
         fi
@@ -339,7 +339,7 @@ validate_json_configs() {
             print_ok "$json_path is valid JSON"
         else
             print_error "$json_path is invalid JSON"
-            ((errors++))
+            ((errors++)) || true
         fi
     done
 
@@ -349,11 +349,11 @@ validate_json_configs() {
         content=$(cat "$mcp_json")
         if echo "$content" | grep -q "tvly-"; then
             print_error ".mcp.json contains hardcoded Tavily API key"
-            ((errors++))
+            ((errors++)) || true
         fi
         if echo "$content" | grep -qE "ghp_[a-zA-Z0-9]{36}"; then
             print_error ".mcp.json contains hardcoded GitHub token"
-            ((errors++))
+            ((errors++)) || true
         fi
     fi
 
