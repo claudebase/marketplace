@@ -48,7 +48,7 @@ AGENT_FILE_COUNT=0
 # Validate commands
 echo "Validating command delegation..."
 while IFS= read -r -d '' cmd_file; do
-    ((CMD_COUNT++))
+    ((CMD_COUNT++)) || true
 
     content=$(cat "$cmd_file")
     relative_path="${cmd_file#$PLUGIN_DIR/}"
@@ -92,7 +92,7 @@ done < <(find "$PLUGIN_DIR/commands" -name "*.md" -print0)
 echo "Validating agent skill composition..."
 for agent_file in "$PLUGIN_DIR/agents"/*.md; do
     [[ ! -f "$agent_file" ]] && continue
-    ((AGENT_FILE_COUNT++))
+    ((AGENT_FILE_COUNT++)) || true
 
     content=$(cat "$agent_file")
     relative_path="${agent_file#$PLUGIN_DIR/}"
@@ -149,7 +149,7 @@ if [[ ${#PHASE2_ERRORS[@]} -gt 0 ]]; then
     echo "${#PHASE2_ERRORS[@]} Phase 2 pending (command directives):"
     count=0
     for error in "${PHASE2_ERRORS[@]}"; do
-        ((count++))
+        ((count++)) || true
         [[ $count -gt 5 ]] && break
         echo "  - $error"
     done
@@ -163,7 +163,7 @@ if [[ ${#PHASE3_ERRORS[@]} -gt 0 ]]; then
     echo "${#PHASE3_ERRORS[@]} Phase 3 pending (agent composition):"
     count=0
     for error in "${PHASE3_ERRORS[@]}"; do
-        ((count++))
+        ((count++)) || true
         [[ $count -gt 5 ]] && break
         echo "  - $error"
     done
