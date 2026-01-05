@@ -126,13 +126,12 @@ test_skills() {
 
         if [[ -f "$skill_file" ]]; then
             ((++skill_count)) || true
-            local content=$(cat "$skill_file")
 
             # Check frontmatter
-            if echo "$content" | head -1 | grep -q "^---$"; then
-                local has_name=$(echo "$content" | grep -c "^name:" || echo "0")
-                local has_desc=$(echo "$content" | grep -c "^description:" || echo "0")
-                local has_tools=$(echo "$content" | grep -c "^allowed-tools:" || echo "0")
+            if head -1 "$skill_file" | grep -q "^---$"; then
+                local has_name=$(grep -c "^name:" "$skill_file" 2>/dev/null || echo "0")
+                local has_desc=$(grep -c "^description:" "$skill_file" 2>/dev/null || echo "0")
+                local has_tools=$(grep -c "^allowed-tools:" "$skill_file" 2>/dev/null || echo "0")
 
                 if [[ $has_name -gt 0 ]] && [[ $has_desc -gt 0 ]] && [[ $has_tools -gt 0 ]]; then
                     pass_test "Skill valid: $skill_name"
@@ -186,14 +185,13 @@ test_agents() {
         ((++agent_count)) || true
 
         local agent_name=$(basename "$agent_file" .md)
-        local content=$(cat "$agent_file")
 
         # Check frontmatter
-        if echo "$content" | head -1 | grep -q "^---$"; then
-            local has_name=$(echo "$content" | grep -c "^name:" || echo "0")
-            local has_desc=$(echo "$content" | grep -c "^description:" || echo "0")
-            local has_tools=$(echo "$content" | grep -c "^tools:" || echo "0")
-            local has_model=$(echo "$content" | grep -c "^model:" || echo "0")
+        if head -1 "$agent_file" | grep -q "^---$"; then
+            local has_name=$(grep -c "^name:" "$agent_file" 2>/dev/null || echo "0")
+            local has_desc=$(grep -c "^description:" "$agent_file" 2>/dev/null || echo "0")
+            local has_tools=$(grep -c "^tools:" "$agent_file" 2>/dev/null || echo "0")
+            local has_model=$(grep -c "^model:" "$agent_file" 2>/dev/null || echo "0")
 
             if [[ $has_name -gt 0 ]] && [[ $has_desc -gt 0 ]] && [[ $has_tools -gt 0 ]] && [[ $has_model -gt 0 ]]; then
                 pass_test "Agent valid: $agent_name"
@@ -227,10 +225,9 @@ test_commands() {
     while IFS= read -r -d '' cmd_file; do
         ((++cmd_count)) || true
         local cmd_name=$(basename "$cmd_file" .md)
-        local content=$(cat "$cmd_file")
 
-        if echo "$content" | head -1 | grep -q "^---$"; then
-            if echo "$content" | grep -q "^description:"; then
+        if head -1 "$cmd_file" | grep -q "^---$"; then
+            if grep -q "^description:" "$cmd_file" 2>/dev/null; then
                 pass_test "Command valid: $cmd_name"
             else
                 fail_test "Command missing description: $cmd_name"
