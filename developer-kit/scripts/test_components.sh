@@ -46,17 +46,17 @@ done
 
 pass_test() {
     echo -e "${GREEN}PASS${NC}: $1"
-    ((TESTS_PASSED++))
+    ((++TESTS_PASSED)) || true
 }
 
 fail_test() {
     echo -e "${RED}FAIL${NC}: $1"
-    ((TESTS_FAILED++))
+    ((++TESTS_FAILED)) || true
 }
 
 warn_test() {
     echo -e "${YELLOW}WARN${NC}: $1"
-    ((TESTS_WARNED++))
+    ((++TESTS_WARNED)) || true
 }
 
 info() {
@@ -125,7 +125,7 @@ test_skills() {
         local skill_name=$(basename "$skill_dir")
 
         if [[ -f "$skill_file" ]]; then
-            ((skill_count++))
+            ((++skill_count)) || true
             local content=$(cat "$skill_file")
 
             # Check frontmatter
@@ -183,7 +183,7 @@ test_agents() {
 
     for agent_file in "$PLUGIN_DIR/agents"/*.md; do
         [[ ! -f "$agent_file" ]] && continue
-        ((agent_count++))
+        ((++agent_count)) || true
 
         local agent_name=$(basename "$agent_file" .md)
         local content=$(cat "$agent_file")
@@ -225,7 +225,7 @@ test_commands() {
     local cmd_count=0
 
     while IFS= read -r -d '' cmd_file; do
-        ((cmd_count++))
+        ((++cmd_count)) || true
         local cmd_name=$(basename "$cmd_file" .md)
         local content=$(cat "$cmd_file")
 
