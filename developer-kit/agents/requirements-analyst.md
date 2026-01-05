@@ -86,14 +86,14 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Competitor Analysis** - mcp**tavily**tavily-search
-2. **Existing Solutions** - mcp**github**search_repositories
-3. **Industry Patterns** - mcp**context7**get-library-docs
-4. **PRD Examples** - mcp**github**search_code
+1. **Competitor Analysis** - mcp__tavily__tavily-search
+2. **Existing Solutions** - mcp__github__search_repositories
+3. **Industry Patterns** - mcp__context7__query-docs
+4. **PRD Examples** - mcp__github__search_code
 
 ### Phase 3: ANALYZE
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Define functional requirements (Must/Should/Could/Won't)
 2. Define non-functional requirements (Performance, Security, Scalability)

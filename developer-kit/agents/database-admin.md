@@ -88,13 +88,13 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **ORM Documentation** - mcp**context7**get-library-docs
-2. **Similar Schemas** - mcp**github**search_code
-3. **Best Practices** - mcp**tavily**tavily-search
+1. **ORM Documentation** - mcp__context7__query-docs
+2. **Similar Schemas** - mcp__github__search_code
+3. **Best Practices** - mcp__tavily__tavily-search
 
 ### Phase 3: DESIGN
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Choose normalization level (1NF, 2NF, 3NF, BCNF)
 2. Design primary keys (UUID vs SERIAL)

@@ -95,13 +95,13 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Framework Documentation** - mcp**context7**resolve-library-id
-2. **Pattern Research** - mcp**github**search_code for alerting rules
-3. **Best Practices** - mcp**tavily**tavily-search for SRE patterns
+1. **Framework Documentation** - mcp__context7__resolve-library-id
+2. **Pattern Research** - mcp__github__search_code for alerting rules
+3. **Best Practices** - mcp__tavily__tavily-search for SRE patterns
 
 ### Phase 3: DESIGN
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Define SLIs (latency, error rate, availability)
 2. Set SLO targets (99.9%, p95 < 200ms)

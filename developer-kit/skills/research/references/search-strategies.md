@@ -80,7 +80,7 @@ how to [task] in [technology]
 **Usage:**
 ```
 1. resolve-library-id: Find library ID
-2. get-library-docs: Fetch specific docs
+2. query-docs: Fetch specific docs
    - topic: Focus area (e.g., "hooks", "routing")
    - mode: "code" for API, "info" for concepts
 ```

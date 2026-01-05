@@ -93,13 +93,13 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Documentation Tool Standards** - mcp**context7**resolve-library-id
-2. **Pattern Research** - mcp**github**search_code for README/API patterns
-3. **Best Practices** - mcp**tavily**tavily-search for writing guides
+1. **Documentation Tool Standards** - mcp__context7__resolve-library-id
+2. **Pattern Research** - mcp__github__search_code for README/API patterns
+3. **Best Practices** - mcp__tavily__tavily-search for writing guides
 
 ### Phase 3: PLAN
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Define documentation types (tutorials, how-to, reference, explanation)
 2. Create information architecture

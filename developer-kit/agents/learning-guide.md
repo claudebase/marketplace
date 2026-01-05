@@ -90,14 +90,14 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Official Documentation** - mcp**context7**resolve-library-id
-2. **Real-World Examples** - mcp**github**search_code
-3. **Educational Resources** - mcp**tavily**tavily-search
+1. **Official Documentation** - mcp__context7__resolve-library-id
+2. **Real-World Examples** - mcp__github__search_code
+3. **Educational Resources** - mcp__tavily__tavily-search
 4. **Codebase Context** - Read user's actual code if applicable
 
 ### Phase 3: STRUCTURE
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Hook: Why should they care about this?
 2. Foundation: What's the simplest core concept?

@@ -94,13 +94,13 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Python Documentation** - mcp**context7**resolve-library-id
-2. **Pattern Research** - mcp**github**search_code
-3. **Best Practices** - mcp**tavily**tavily-search
+1. **Python Documentation** - mcp__context7__resolve-library-id
+2. **Pattern Research** - mcp__github__search_code
+3. **Best Practices** - mcp__tavily__tavily-search
 
 ### Phase 3: DESIGN
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Define public interface (types, protocols)
 2. Design class/function structure

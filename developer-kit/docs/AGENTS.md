@@ -573,7 +573,7 @@ Agent instructions and methodology...
 4. Validate:
 
 ```bash
-./scripts/validate-agent-fields.sh
+./scripts/validate.sh
 ```
 
 ---

@@ -89,13 +89,13 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **Framework Docs** - mcp**context7**resolve-library-id
-2. **Real Patterns** - mcp**github**search_code
-3. **Best Practices** - mcp**tavily**tavily-search
+1. **Framework Docs** - mcp__context7__resolve-library-id
+2. **Real Patterns** - mcp__github__search_code
+3. **Best Practices** - mcp__tavily__tavily-search
 
 ### Phase 3: DESIGN
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Define quality attributes (scalability, reliability, security)
 2. Identify constraints (team, timeline, existing tech)

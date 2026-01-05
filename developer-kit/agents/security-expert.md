@@ -97,14 +97,14 @@ When to Use:
 
 ### Phase 2: RESEARCH
 
-1. **OWASP Guidance** - mcp**context7**get-library-docs for cheat sheets
-2. **CVE Research** - mcp**tavily**tavily-search for specific vulnerabilities
-3. **Pattern Research** - mcp**github**search_code for implementations
+1. **OWASP Guidance** - mcp__context7__query-docs for cheat sheets
+2. **CVE Research** - mcp__tavily__tavily-search for specific vulnerabilities
+3. **Pattern Research** - mcp__github__search_code for implementations
 4. **Framework Docs** - Library-specific security features
 
 ### Phase 3: IMPLEMENT
 
-Use mcp**sequential-thinking**sequentialthinking:
+Use mcp__sequential-thinking__sequentialthinking:
 
 1. Map attack surface and vulnerable components
 2. Design security controls layer by layer
