@@ -9,6 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.0.0] - 2026-01-05
+
+### Fixed
+
+- **Bash Script Arithmetic**: Fixed `((var++))` arithmetic increment causing premature exit with `set -e`
+  - In bash, post-increment returns the old value, so `((var++))` when `var=0` returns 0 (falsy)
+  - With `set -e`, this causes immediate script termination
+  - Fixed in all 4 validation scripts:
+    - `test_components.sh` (6 occurrences)
+    - `validate.sh` (25 occurrences)
+    - `ci_tests.sh` (5 occurrences)
+    - `validate_delegation.sh` (4 occurrences)
+
+### Changed
+
+- **CI Workflow**: All validation scripts now pass on GitHub Actions
+- **Version Bump**: Major version bump to signify stable Bash-only release
+
+### Technical Notes
+
+- Fix pattern: `((var++))` changed to `((var++)) || true`
+- All scripts maintain `set -euo pipefail` for safety
+- No functional changes to validation logic
+
+---
+
 ## [6.0.0] - 2026-01-05
 
 ### BREAKING CHANGES
