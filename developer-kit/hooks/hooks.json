@@ -6,12 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/format_file_hook.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/format_file_hook.sh\"",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/security_reminder_hook.py\""
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/security_reminder_hook.sh\""
           }
         ]
       }
@@ -22,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_bash_command.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/validate_bash_command.sh\"",
             "timeout": 5
           }
         ]
@@ -34,17 +34,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/platform_instructions_hook.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/session_instructions_hook.sh\"",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/validate_env_vars.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/validate_env_vars.sh\"",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/restore_session_context.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/restore_session_context.sh\"",
             "timeout": 5
           }
         ]
@@ -55,7 +55,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/runner.js\" \"${CLAUDE_PLUGIN_ROOT}/hooks/save_session_state.py\"",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/save_session_state.sh\"",
             "timeout": 10
           }
         ]

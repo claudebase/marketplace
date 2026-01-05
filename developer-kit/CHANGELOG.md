@@ -9,6 +9,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.0] - 2026-01-05
+
+### BREAKING CHANGES
+
+- **Removed Multi-Platform Support**: The plugin now targets Unix-like systems only (macOS and Linux)
+  - Removed Windows and WSL-specific code paths and detection
+  - Removed platform-specific settings templates (windows-settings.json, wsl-settings.json)
+  - Renamed unix-settings.json to settings.json
+
+### Changed
+
+- **Hooks Rewritten in Bash**: All 7 Python hooks have been converted to Bash scripts
+  - `platform_instructions_hook.py` -> `session_instructions_hook.sh`
+  - `validate_bash_command.py` -> `validate_bash_command.sh`
+  - `security_reminder_hook.py` -> `security_reminder_hook.sh`
+  - `format_file_hook.py` -> `format_file_hook.sh`
+  - `validate_env_vars.py` -> `validate_env_vars.sh`
+  - `restore_session_context.py` -> `restore_session_context.sh`
+  - `save_session_state.py` -> `save_session_state.sh`
+
+- **Validation Scripts Rewritten in Bash**: All 4 Python validation scripts converted to Bash
+  - `validate.py` -> `validate.sh`
+  - `validate_delegation.py` -> `validate_delegation.sh`
+  - `test_components.py` -> `test_components.sh`
+  - `ci_tests.py` -> `ci_tests.sh`
+
+- **hooks.json Updated**: Hook commands now invoke Bash scripts directly instead of using Node.js runner
+
+### Removed
+
+- **Cross-Platform Utilities Library**: Deleted `lib/` directory containing:
+  - `platform_utils.py` (899 lines of cross-platform abstractions)
+  - `__init__.py`
+
+- **Node.js Hook Runner**: Deleted `hooks/runner.js` (no longer needed)
+
+- **Platform-Specific Documentation**: Removed Windows/WSL sections from README and CLAUDE.md
+
+### Technical Notes
+
+- All Bash scripts require `jq` for JSON parsing (standard on macOS/Linux)
+- Scripts use `#!/bin/bash` with `set -euo pipefail` for safer execution
+- Total lines of code reduced by approximately 2,700 lines
+
+---
+
 ## [5.5.8] - 2026-01-01
 
 ### Changed

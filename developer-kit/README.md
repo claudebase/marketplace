@@ -4,7 +4,7 @@
 
 **Version 4.0.0** | [Repository](https://github.com/claudebase/marketplace) | [Changelog](./CHANGELOG.md) | MIT License
 
-**Multi-Platform Support**: Windows, macOS, Linux, WSL
+**Platform**: macOS, Linux
 
 ---
 
@@ -23,25 +23,11 @@ claude plugin install ./marketplace/developer-kit
 
 ### Environment Setup
 
-Configure API keys in your platform-specific settings file:
-
-| Platform | Settings Location |
-|----------|------------------|
-| **macOS/Linux** | `~/.claude/settings.json` |
-| **Windows** | `%APPDATA%\.claude\settings.json` |
-| **WSL** | `~/.claude/settings.json` (inside WSL) |
-
-Use the appropriate template from `templates/settings/`:
+Configure API keys in your settings file at `~/.claude/settings.json`:
 
 ```bash
-# macOS/Linux
-cp templates/settings/unix-settings.json ~/.claude/settings.json
-
-# Windows PowerShell
-copy templates\settings\windows-settings.json $env:APPDATA\.claude\settings.json
-
-# WSL
-cp templates/settings/wsl-settings.json ~/.claude/settings.json
+# Copy the template
+cp templates/settings/settings.json ~/.claude/settings.json
 ```
 
 **Minimal required configuration:**
@@ -67,13 +53,6 @@ Get your API keys:
 ```bash
 claude --debug  # Check for loading errors
 ```
-
-### Windows-Specific Notes
-
-- Ensure Python 3.8+ is installed and in your PATH
-- The plugin automatically detects Windows and uses PowerShell-compatible commands
-- All hooks use Python scripts for cross-platform compatibility
-- WSL is auto-detected; Unix commands work seamlessly in WSL environments
 
 ---
 
@@ -272,21 +251,20 @@ developer-kit/
 │   └── plugin.json          # Plugin manifest
 ├── .mcp.json                 # MCP server configuration
 ├── .lsp.json                 # LSP server configuration
-├── hooks/                    # Event-driven automation
+├── hooks/                    # Event-driven automation (Bash)
 │   ├── hooks.json            # Hook definitions
-│   ├── platform_instructions_hook.py  # Platform detection
-│   ├── validate_bash_command.py
-│   ├── format_file_hook.py
-│   ├── security_reminder_hook.py
-│   ├── validate_env_vars.py
-│   ├── restore_session_context.py
-│   └── save_session_state.py
-├── lib/                      # Cross-platform utilities
-│   ├── __init__.py
-│   └── platform_utils.py     # PlatformInfo, CommandRunner, FileUtils
-├── scripts/                  # Validation scripts (Python)
-│   ├── test_components.py    # Full test suite (124 tests)
-│   └── validate.py           # Unified validation
+│   ├── session_instructions_hook.sh
+│   ├── validate_bash_command.sh
+│   ├── format_file_hook.sh
+│   ├── security_reminder_hook.sh
+│   ├── validate_env_vars.sh
+│   ├── restore_session_context.sh
+│   └── save_session_state.sh
+├── scripts/                  # Validation scripts (Bash)
+│   ├── test_components.sh    # Full test suite
+│   ├── validate.sh           # Unified validation
+│   ├── validate_delegation.sh
+│   └── ci_tests.sh
 ├── commands/                 # 21 commands by category
 │   ├── development/
 │   ├── planning/
@@ -303,10 +281,8 @@ developer-kit/
 │   ├── docker/
 │   ├── kubernetes/
 │   ├── adr/
-│   └── settings/             # Platform-specific settings
-│       ├── windows-settings.json
-│       ├── unix-settings.json
-│       └── wsl-settings.json
+│   └── settings/
+│       └── settings.json     # Settings template
 └── docs/                     # Documentation
     └── workflows/            # Workflow guides
 ```
@@ -319,43 +295,43 @@ The plugin includes automated hooks that run on specific events:
 
 | Event | Hook | Action |
 |-------|------|--------|
-| `SessionStart` | `platform_instructions_hook.py` | Injects platform-specific instructions |
-| `SessionStart` | `validate_env_vars.py` | Checks required API keys |
-| `SessionStart` | `restore_session_context.py` | Restores previous session context |
-| `PostToolUse` | `format_file_hook.py` | Auto-formats edited files |
-| `PostToolUse` | `security_reminder_hook.py` | Warns about security patterns |
-| `PreToolUse` | `validate_bash_command.py` | Blocks dangerous commands |
-| `Stop` | `save_session_state.py` | Saves session state |
-
-### Platform Detection
-
-At session start, the plugin automatically detects your platform (Windows/macOS/Linux/WSL) and injects appropriate instructions for Claude to use the correct commands.
+| `SessionStart` | `session_instructions_hook.sh` | Injects session instructions |
+| `SessionStart` | `validate_env_vars.sh` | Checks required API keys |
+| `SessionStart` | `restore_session_context.sh` | Restores previous session context |
+| `PostToolUse` | `format_file_hook.sh` | Auto-formats edited files |
+| `PostToolUse` | `security_reminder_hook.sh` | Warns about security patterns |
+| `PreToolUse` | `validate_bash_command.sh` | Blocks dangerous commands |
+| `Stop` | `save_session_state.sh` | Saves session state |
 
 ---
 
 ## Validation
 
-All validation scripts are Python-based for cross-platform compatibility:
+All validation scripts are Bash-based:
 
 ```bash
-# Full test suite (99+ tests)
-python3 scripts/test_components.py
+# Full test suite
+bash scripts/test_components.sh
 
 # With verbose output
-python3 scripts/test_components.py --verbose
+bash scripts/test_components.sh --verbose
 
 # Quick validation (all checks)
-python3 scripts/validate.py
+bash scripts/validate.sh
 
 # Individual validators
-python3 scripts/validate.py --skills      # Skill descriptions
-python3 scripts/validate.py --agents      # Agent fields
-python3 scripts/validate.py --refs        # Reference files
-python3 scripts/validate.py --frontmatter # Frontmatter syntax
-python3 scripts/validate.py --json        # JSON configs
-```
+bash scripts/validate.sh --skills      # Skill descriptions
+bash scripts/validate.sh --agents      # Agent fields
+bash scripts/validate.sh --refs        # Reference files
+bash scripts/validate.sh --frontmatter # Frontmatter syntax
+bash scripts/validate.sh --json        # JSON configs
 
-**Windows users**: Use `python` instead of `python3` if `python3` is not in PATH.
+# Delegation validation
+bash scripts/validate_delegation.sh
+
+# CI tests
+bash scripts/ci_tests.sh
+```
 
 ---
 
@@ -391,35 +367,6 @@ claude plugin list  # Verify enabled
 - Use explicit trigger phrases: "use the security skill to..."
 - Check skill descriptions for activation triggers
 - See [TRIGGER-REFERENCE.md](./skills/TRIGGER-REFERENCE.md)
-
-### Windows-Specific Issues
-
-**Python not found:**
-```powershell
-# Check Python installation
-python --version
-# Or try python3
-python3 --version
-
-# Install Python from https://www.python.org/downloads/
-# Ensure "Add Python to PATH" is checked during installation
-```
-
-**Hooks not executing:**
-```powershell
-# Verify hooks.json uses Python commands
-# Check that CLAUDE_PLUGIN_ROOT is set correctly
-echo $env:CLAUDE_PLUGIN_ROOT
-```
-
-**Path issues:**
-- Use forward slashes `/` or escaped backslashes `\\` in paths
-- Avoid spaces in directory names
-- Settings file: `%APPDATA%\.claude\settings.json`
-
-**WSL Detection:**
-- The plugin auto-detects WSL and uses Unix commands
-- To force Windows mode, set `WSL_INTEROP=0` in settings.json
 
 ---
 

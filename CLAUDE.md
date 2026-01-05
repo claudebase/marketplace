@@ -18,8 +18,7 @@ marketplace/
 │   ├── skills/              # 24 skills
 │   ├── agents/              # 14 agents
 │   ├── commands/            # 21 commands
-│   ├── hooks/               # Python hooks
-│   ├── lib/                 # Cross-platform utilities
+│   ├── hooks/               # Bash hooks
 │   └── scripts/             # Validation scripts
 └── .github/                 # CI workflows
 ```
@@ -35,8 +34,6 @@ git clone https://github.com/claudebase/marketplace.git
 claude plugin install ./marketplace/developer-kit
 ```
 
-## Multi-Platform Support
+## Platform Support
 
-All plugins in this marketplace are cross-platform compatible (Windows, macOS, Linux, WSL).
-
-See individual plugin CLAUDE.md files for platform-specific instructions.
+All plugins in this marketplace support Unix-like systems (macOS and Linux).

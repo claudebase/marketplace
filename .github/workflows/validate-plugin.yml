@@ -16,54 +16,63 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.11"]
-        include:
-          - os: ubuntu-latest
-            python-cmd: python3
-          - os: macos-latest
-            python-cmd: python3
-          - os: windows-latest
-            python-cmd: python
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+      - name: Install jq (if needed)
+        run: |
+          if ! command -v jq &> /dev/null; then
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+              brew install jq
+            else
+              sudo apt-get update && sudo apt-get install -y jq
+            fi
+          fi
+          jq --version
 
-      - name: Display Python version
-        run: ${{ matrix.python-cmd }} --version
+      - name: Display shell version
+        run: bash --version
+
+      - name: Validate Bash script syntax
+        working-directory: developer-kit
+        run: |
+          for script in hooks/*.sh scripts/*.sh; do
+            echo "Checking $script..."
+            bash -n "$script"
+          done
+          echo "All scripts have valid syntax"
 
       - name: Run comprehensive test suite
         working-directory: developer-kit
-        run: ${{ matrix.python-cmd }} scripts/test_components.py --verbose
+        run: bash scripts/test_components.sh --verbose
 
       - name: Run unified validation
         working-directory: developer-kit
-        run: ${{ matrix.python-cmd }} scripts/validate.py
+        run: bash scripts/validate.sh
 
-      - name: Validate Python hook syntax
+      - name: Run CI tests
         working-directory: developer-kit
-        run: |
-          ${{ matrix.python-cmd }} -m py_compile hooks/validate_bash_command.py
-          ${{ matrix.python-cmd }} -m py_compile hooks/format_file_hook.py
-          ${{ matrix.python-cmd }} -m py_compile hooks/restore_session_context.py
-          ${{ matrix.python-cmd }} -m py_compile hooks/save_session_state.py
-          ${{ matrix.python-cmd }} -m py_compile hooks/security_reminder_hook.py
-          ${{ matrix.python-cmd }} -m py_compile hooks/validate_env_vars.py
-          ${{ matrix.python-cmd }} -m py_compile lib/platform_utils.py
-
-      - name: Run CI tests (platform, hook-io, counts)
-        working-directory: developer-kit
-        run: ${{ matrix.python-cmd }} scripts/ci_tests.py
+        run: bash scripts/ci_tests.sh
 
       - name: Validate delegation compliance
         working-directory: developer-kit
-        run: ${{ matrix.python-cmd }} scripts/validate_delegation.py
+        run: bash scripts/validate_delegation.sh
+
+      - name: Validate JSON configuration files
+        working-directory: developer-kit
+        run: |
+          echo "Validating .mcp.json..."
+          jq empty .mcp.json
+          echo "Validating .lsp.json..."
+          jq empty .lsp.json
+          echo "Validating hooks/hooks.json..."
+          jq empty hooks/hooks.json
+          echo "Validating .claude-plugin/plugin.json..."
+          jq empty .claude-plugin/plugin.json
+          echo "All JSON files are valid"
 
   # Summary job that requires all matrix jobs to pass
   validation-summary:

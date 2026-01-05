@@ -21,6 +21,10 @@ npm-debug.log*
 # Logs
 logs/
 *.log
-.claude/
+
+# Claude Code local settings (contains API keys)
+.claude/settings.local.json
+
+# Python cache
 __pycache__/
 .ruff_cache/

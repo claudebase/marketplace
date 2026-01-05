@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(git:*)",
+      "Bash(jq:*)",
+      "Bash(bash:*)",
+      "mcp__*"
+    ],
+    "deny": []
+  },
+  "env": {
+    "TAVILY_API_KEY": "${TAVILY_API_KEY}",
+    "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+  }
+}
