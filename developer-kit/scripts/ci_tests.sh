@@ -71,17 +71,17 @@ test_component_counts() {
 
     if [[ $skills -lt 20 ]]; then
         echo "ERROR: Expected at least 20 skills, got $skills"
-        ((errors++))
+        ((errors++)) || true
     fi
 
     if [[ $agents -lt 10 ]]; then
         echo "ERROR: Expected at least 10 agents, got $agents"
-        ((errors++))
+        ((errors++)) || true
     fi
 
     if [[ $commands -lt 15 ]]; then
         echo "ERROR: Expected at least 15 commands, got $commands"
-        ((errors++))
+        ((errors++)) || true
     fi
 
     if [[ $errors -gt 0 ]]; then
@@ -209,10 +209,10 @@ for i in "${!TEST_NAMES[@]}"; do
 
     if [[ $result -eq 0 ]]; then
         echo "  PASS: $name"
-        ((passed++))
+        ((passed++)) || true
     else
         echo "  FAIL: $name"
-        ((failed++))
+        ((failed++)) || true
     fi
 done
 
